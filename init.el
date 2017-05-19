@@ -74,6 +74,7 @@ If argument INTERACTIVE-P is set, log additional information."
 
 
 ;; Load features.
+(use-package jp-ivy)
 
 ;;; Print overall startup time.
 
