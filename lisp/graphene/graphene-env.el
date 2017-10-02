@@ -34,27 +34,6 @@
 
 ;;; Code:
 
-
-;; Use smex to complete interactive commands
-(require 'smex)
-(smex-initialize)
-
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-;; Use ido for general completion
-(ido-mode 1)
-(ido-everywhere 1)
-(require 'ido-completing-read+)
-(ido-ubiquitous-mode t)
-(put 'ido-complete 'disabled nil)
-(put 'ido-exit-minibuffer 'disabled nil)
-(setq ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess)
-
-
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)

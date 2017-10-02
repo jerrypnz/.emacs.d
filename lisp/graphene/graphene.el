@@ -39,7 +39,7 @@
 (require 'graphene-helper-functions)
 (require 'graphene-editing)
 (require 'graphene-env)
-(require 'graphene-projects)
+(require 'graphene-meta-theme)
 (require 'graphene-look)
 
 (provide 'graphene)
