@@ -1,3 +1,4 @@
 elpa/
 auto-save-list/
 *.elc
+.graphene-geometry

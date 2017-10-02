@@ -15,3 +15,4 @@ git subtree pull --squash --prefix lisp/smartparens https://github.com/Fuco1/sma
 git subtree pull --squash --prefix lisp/web-mode https://github.com/fxbois/web-mode.git master
 git subtree pull --squash --prefix lisp/dash.el https://github.com/magnars/dash.el.git master
 git subtree pull --squash --prefix lisp/sr-speedbar https://github.com/emacsorphanage/sr-speedbar.git master
+git subtree pull --squash --prefix lisp/exec-path-from-shell https://github.com/purcell/exec-path-from-shell.git master
