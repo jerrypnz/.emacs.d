@@ -1,10 +1,13 @@
 ;;; init.el --- Startup file for Emacs.  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2016  Chris Barrett
+;; Copyright (C) 2017 Jerry Peng
 
-;; Author: Chris Barrett <chris+emacs@walrus.cool>
+;; Author: Jerry Peng <pr2jerry@gmail.com>
 
 ;;; Commentary:
+
+;; The init system and the config structure are based on Chris
+;; Barrett's amazing work: https://github.com/chrisbarrett/.emacs.d
 
 ;; Declares some variables and bootstraps the rest of the configuration.
 ;;
