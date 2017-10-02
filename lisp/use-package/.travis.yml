@@ -1,0 +1,12 @@
+language: generic
+dist: trusty
+addons:
+  apt:
+    packages:
+      - emacs
+script: >
+  emacs -batch
+  -l bind-key.el
+  -l use-package.el
+  -l use-package-tests.el
+  -f ert-run-tests-batch-and-exit
