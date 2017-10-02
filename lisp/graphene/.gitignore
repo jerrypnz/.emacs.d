@@ -1,0 +1,9 @@
+*.elc
+TAGS
+.DS_Store
+.emacs*
+.cask
+/.#*
+/flycheck-*
+dist/
+tmp/
