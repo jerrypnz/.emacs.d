@@ -98,7 +98,7 @@ Q: How do I enter an input that matches one of the candidates instead
    of this candidate? Example: create a file `bar` when a file
    `barricade` exists in the current directory.
 
-A: Press <kbd>C-M-j</kbd>.
+A: Press <kbd>C-M-j</kbd>. Alternatively, you can make the prompt line selectable with `(setq ivy-use-selectable-prompt t)`.
 
 # Contributing
 
@@ -112,6 +112,6 @@ The copyright assignment isn't a big deal, it just says that the copyright for y
 
 The basic code style guide is to use `(setq indent-tabs-mode nil)`. It is provided for you in [.dir-locals.el](https://github.com/abo-abo/swiper/blob/master/.dir-locals.el), please obey it.
 
-Before submitting the change, run `make compile` and `make test` to make sure that it doesn't introduce new compile warnings or test failures. Also run <kbd>M-x</kbd> `checkdoc` to see that your changes obey the documentation guidelines.
+Before submitting the change, run `make compile` and `make test` to make sure that it doesn't introduce new compile warnings or test failures. Also run `make checkdoc` to see that your changes obey the documentation guidelines.
 
 Use your own judgment for the commit messages, I recommend a verbose style using `magit-commit-add-log`.
