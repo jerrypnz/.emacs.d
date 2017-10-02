@@ -4,12 +4,17 @@
 
 ### New Features
 
+* [#1166](https://github.com/bbatsov/projectile/pull/1168): Add CMake and Meson project support.
+* [#1159](https://github.com/bbatsov/projectile/pull/1159) Add [nix](http://nixos.org) project support.
+* [#1166](https://github.com/bbatsov/projectile/pull/1166): Add `-other-frame` versions of commands that had `-other-window` versions.
 * Consider Ensime configuration file as root marker, `.ensime`.
 * [#1057](https://github.com/bbatsov/projectile/issues/1057): Make it possible to disable automatic project tracking via `projectile-track-known-projects-automatically`.
 * Added ability to specify test files suffix and prefix at the project registration.
+* [#1154](https://github.com/bbatsov/projectile/pull/1154) Use npm install instead of build.
 
 ### Changes
 
+* Cache the root of the current project to increase performance
 * [#1129](https://github.com/bbatsov/projectile/pull/1129): Fix TRAMP issues.
 * Add R DESCRIPTION file to `projectile-project-root-files`.
 * Ignore backup files in `projectile-get-other-files`.
@@ -21,6 +26,8 @@
 * Cache the name of the current project for mode-line display of the project name.
 * [#1078](https://github.com/bbatsov/projectile/issues/1078): For projectile-grep/ag use default value like grep/rgrep/ag.
 * Don't treat `package.json` as a project marker.
+* [#987](https://github.com/bbatsov/projectile/issues/987): projectile-ag ignores ag-ignore-list when projectile-project-vcs is git
+* [#1119](https://github.com/bbatsov/projectile/issues/1119): File search ignores non-root dirs if prefixed with "*"
 
 ### Bugs fixed
 
