@@ -1,8 +1,6 @@
-;;; jp-ivy.el --- Configuration for Ivy.  -*- lexical-binding: t; -*-
+;;; jp-ivy.el --- Ivy configuration.  -*- lexical-binding: t; -*-
 
-(eval-when-compile
-  (require 'use-package))
-
+;; ivy
 (use-package ivy
   :config
   (progn
@@ -24,4 +22,3 @@
   (("C-s" . swiper)))
 
 (provide 'jp-ivy)
-

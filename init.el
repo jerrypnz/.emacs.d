@@ -77,8 +77,10 @@ If argument INTERACTIVE-P is set, log additional information."
 
 
 ;; Load features.
-(use-package jp-defaults)
+(use-package jp-base)
+(use-package jp-smartparens)
 (use-package jp-ivy)
+(use-package jp-company)
 (use-package jp-flycheck)
 
 ;;; Print overall startup time.
