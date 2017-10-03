@@ -10,7 +10,6 @@ git subtree pull --squash --prefix lisp/avy https://github.com/abo-abo/avy.git m
 git subtree pull --squash --prefix lisp/counsel-projectile https://github.com/ericdanan/counsel-projectile.git master
 git subtree pull --squash --prefix lisp/company https://github.com/company-mode/company-mode master
 git subtree pull --squash --prefix lisp/graphene-meta-theme https://github.com/rdallasgray/graphene-meta-theme.git master
-git subtree pull --squash --prefix lisp/graphene https://github.com/rdallasgray/graphene.git master
 git subtree pull --squash --prefix lisp/smartparens https://github.com/Fuco1/smartparens.git master
 git subtree pull --squash --prefix lisp/web-mode https://github.com/fxbois/web-mode.git master
 git subtree pull --squash --prefix lisp/dash.el https://github.com/magnars/dash.el.git master

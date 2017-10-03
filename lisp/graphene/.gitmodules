@@ -1,3 +1,0 @@
-[submodule "el.mk"]
-	path = el.mk
-	url = https://github.com/rdallasgray/el.mk.git
