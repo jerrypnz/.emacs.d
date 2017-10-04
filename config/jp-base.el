@@ -1,6 +1,3 @@
-;;; jp-base.el --- Base configuration for look and feel, editting and programming.  -*- lexical-binding: t; -*-
-
-
 (eval-when-compile
   (require 'use-package))
 

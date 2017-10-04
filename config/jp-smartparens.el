@@ -1,5 +1,3 @@
-;;; jp-smartparens.el --- Smartparens config
-
 (eval-when-compile
   (require 'use-package))
 

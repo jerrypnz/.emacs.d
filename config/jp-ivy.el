@@ -1,5 +1,3 @@
-;;; jp-ivy.el --- Ivy configuration.  -*- lexical-binding: t; -*-
-
 ;; ivy
 (use-package ivy
   :config

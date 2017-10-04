@@ -1,5 +1,3 @@
-;;; jp-projectile.el --- Projectile config.  -*- lexical-binding: t; -*-
-
 (eval-when-compile
   (require 'use-package))
 
