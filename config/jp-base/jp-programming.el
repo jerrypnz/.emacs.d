@@ -36,14 +36,14 @@
 
 (setq linum-format " %4d ")
 
-(autoload 'smartparens-strict-mode "smartparens")
+(autoload 'smartparens-mode "smartparens")
 (autoload 'show-smartparens-mode "smartparens")
 (autoload 'company-mode "company")
 (autoload 'flycheck-mode "flycheck")
 
 ;;; auto-pairing
 (defun jp-pairs ()  
-  (smartparens-strict-mode t))
+  (smartparens-mode t))
 
 (defun jp-show-pairs ()
   (show-paren-mode nil)
