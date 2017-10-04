@@ -30,4 +30,10 @@
          ("M-o"     . start-newline-before)
          ("M-j"     . join-next-line)))
 
+;; expand-region
+(use-package expand-region
+  :bind
+  (("C-=" . er/expand-region)
+   ("C--" . er/contract-region)))
+
 (provide 'jp-base)
