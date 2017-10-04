@@ -83,6 +83,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-company)
 (use-package jp-flycheck)
 (use-package jp-projectile)
+(use-package jp-eyebrowse)
 
 ;;; Print overall startup time.
 
