@@ -4,7 +4,7 @@
 ;; counsel-projectile also loads projectile itself
 (use-package counsel-projectile
   :init
-  (setq projectile-keymap-prefix (kbd "M-p"))
+  (setq projectile-keymap-prefix (kbd "M-m p"))
 
   :commands (counsel-projectile
              counsel-projectile-switch-project
