@@ -1,14 +1,21 @@
-;;; jp-smartparens.el --- Smartparens config
-
 (eval-when-compile
   (require 'use-package))
 
 ;; smartparens
 (use-package smartparens
+  :bind
+  (:map smartparens-mode-map
+        ("M-<right>" . sp-forward-slurp-sexp)
+        ("M-<left>" . sp-forward-barf-sexp)
+        ("M-S-<right>" . sp-backward-slurp-sexp)
+        ("M-S-<left>" . sp-backward-slurp-sexp)
+        ("M-<up>" . sp-raise-sexp)
+        ("C-k" . sp-kill-hybrid-sexp))
+
   :config
   (progn
     (require 'smartparens-config)
-    
+
     (defun jp--sp-pair-on-newline (id action context)
       "Put trailing pair on newline and return to point."
       (save-excursion
@@ -31,8 +38,6 @@
                    :unless '(sp-in-string-p)
                    :actions '(insert wrap))
 
-    (setq sp-highlight-pair-overlay nil)
-    
-    (smartparens-global-mode t)))
+    (setq sp-highlight-pair-overlay nil)))
 
 (provide 'jp-smartparens)

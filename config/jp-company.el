@@ -1,5 +1,3 @@
-;;; jp-company.el --- Company config.  -*- lexical-binding: t; -*-
-
 (eval-when-compile
   (require 'use-package))
 
@@ -20,4 +18,3 @@
     (global-company-mode t)))
 
 (provide 'jp-company)
-

@@ -1,25 +1,3 @@
-;;; jp-programming.el --- Programming related base settings
-;;
-;;; License:
-
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License
-;; as published by the Free Software Foundation; either version 3
-;; of the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
-
-;;; Code:
-
-
 (defvar jp-prog-mode-hook nil
   "A hook to be run on entering a de facto prog mode.")
 
@@ -58,14 +36,14 @@
 
 (setq linum-format " %4d ")
 
-(autoload 'smartparens-strict-mode "smartparens")
+(autoload 'smartparens-mode "smartparens")
 (autoload 'show-smartparens-mode "smartparens")
 (autoload 'company-mode "company")
 (autoload 'flycheck-mode "flycheck")
 
 ;;; auto-pairing
 (defun jp-pairs ()  
-  (smartparens-strict-mode t))
+  (smartparens-mode t))
 
 (defun jp-show-pairs ()
   (show-paren-mode nil)
@@ -118,4 +96,3 @@
 
 (provide 'jp-programming)
 
-;;; jp-programming.el ends here
