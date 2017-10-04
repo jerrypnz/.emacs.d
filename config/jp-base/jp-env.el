@@ -30,6 +30,9 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
+;; M-m is reserved for Spacemacs style prefix key
+(global-unset-key (kbd "M-m"))
+
 ;; better defaults
 (setq save-interprogram-paste-before-kill t
       apropos-do-all t
