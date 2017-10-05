@@ -496,6 +496,7 @@ With a prefix ARG invalidates the cache first."
               (counsel-projectile--buffer-file-list)
               :matcher #'counsel-projectile--matcher
               :require-match t
+              :preselect (buffer-name (other-buffer (current-buffer)))
               :keymap counsel-projectile-map
               :action #'counsel-projectile-action
               :caller 'counsel-projectile)))
