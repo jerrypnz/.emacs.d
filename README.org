@@ -7,11 +7,11 @@ It's still a work-in-progress.
 
 *** Language support
 
-- `go`
-- `scala`
-- `clojure`
-- `scheme/racket`
-- `python`
+- =go=
+- =scala=
+- =clojure=
+- =scheme/racket=
+- =python=
 
 
 *** Look and feel
@@ -22,18 +22,18 @@ It's still a work-in-progress.
 
 *** Tools
 
-- `restclient-mode`
+- =restclient-mode=
 
 *** Org
 
-- `deft`?
+- =deft= 
 - Port my org config from my old repo
 
 *** Misc
 
-- `which-key`
-- `undo-tree`
-- create some useful `hydra`s.
+- =which-key=
+- =undo-tree=
+- create some useful =hydra=.
   - search/replace?
   - window management?
 
