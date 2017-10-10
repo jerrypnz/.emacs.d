@@ -11,7 +11,7 @@
 (add-hook 'jp-prog-mode-hook
           (lambda ()
             (jp-indent)
-            (jp-linum)
+            ;; (jp-linum)
             (jp-pairs)
             (jp-show-pairs)
             (jp-completion)

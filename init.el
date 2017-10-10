@@ -110,7 +110,8 @@ If argument INTERACTIVE-P is set, log additional information."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("7ef2884658a1fed818a11854c232511fa25721c60083a2695e6ea34ce14777ee" default))))
+    ("7ef2884658a1fed818a11854c232511fa25721c60083a2695e6ea34ce14777ee" default)))
+ '(package-selected-packages (quote (flycheck))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
