@@ -41,5 +41,15 @@
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; OS X stuff
+;;; I prefer cmd key for meta
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'super)
+
+;; No ring bell at all.
+(setq ring-bell-function 'ignore)
+
 (provide 'jp-env)
 
