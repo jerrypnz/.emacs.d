@@ -5,9 +5,9 @@
 (use-package jp-look
   :config
   (progn
-    (setq jp-default-font "Source Code Pro-11")
-    (setq jp-variable-pitch-font "Lucida Grande-11")
-    (setq jp-fixed-pitch-font "Source Code Pro-11")))
+    (setq jp-default-font "Source Code Pro-12")
+    (setq jp-variable-pitch-font "Lucida Grande-12")
+    (setq jp-fixed-pitch-font "Source Code Pro-12")))
 
 ;; themes
 (use-package monokai-theme
@@ -17,6 +17,7 @@
 
 (use-package jp-env)
 (use-package jp-programming)
+(use-package jp-modeline)
 
 ;; some useful global commands
 (use-package jp-commands
