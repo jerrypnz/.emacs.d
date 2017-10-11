@@ -13,7 +13,6 @@ git subtree pull --squash --prefix lisp/graphene-meta-theme https://github.com/r
 git subtree pull --squash --prefix lisp/smartparens https://github.com/Fuco1/smartparens.git master
 git subtree pull --squash --prefix lisp/web-mode https://github.com/fxbois/web-mode.git master
 git subtree pull --squash --prefix lisp/dash.el https://github.com/magnars/dash.el.git master
-git subtree pull --squash --prefix lisp/sr-speedbar https://github.com/emacsorphanage/sr-speedbar.git master
 git subtree pull --squash --prefix lisp/exec-path-from-shell https://github.com/purcell/exec-path-from-shell.git master
 git subtree pull --squash --prefix lisp/monokai-emacs https://github.com/oneKelvinSmith/monokai-emacs.git master
 git subtree pull --squash --prefix lisp/expand-region.el https://github.com/magnars/expand-region.el.git master
