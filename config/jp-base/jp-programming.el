@@ -1,3 +1,9 @@
+(autoload 'smartparens-mode "smartparens")
+(autoload 'show-smartparens-mode "smartparens")
+(autoload 'company-mode "company")
+(autoload 'flycheck-mode "flycheck")
+(autoload 'aggressive-indent-mode "aggressive-indent")
+
 (defvar jp-prog-mode-hook nil
   "A hook to be run on entering a de facto prog mode.")
 
@@ -27,7 +33,7 @@
 ;;; indenting
 
 (defun jp-indent ()
-  (electric-indent-mode t))
+  (aggressive-indent-mode))
 
 ;;; line numbering
 ;; TODO Make it a toggle rather than always enabling it
@@ -35,11 +41,6 @@
   (linum-mode t))
 
 (setq linum-format " %4d ")
-
-(autoload 'smartparens-mode "smartparens")
-(autoload 'show-smartparens-mode "smartparens")
-(autoload 'company-mode "company")
-(autoload 'flycheck-mode "flycheck")
 
 ;;; auto-pairing
 (defun jp-pairs ()  

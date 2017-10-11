@@ -7,16 +7,16 @@
   "Kill a buffer only if it is file-based."
   (when (buffer-file-name buf)
     (when (buffer-modified-p buf)
-        (when (y-or-n-p (format "Buffer %s is modified - save it?" (buffer-name buf)))
-            (save-some-buffers nil buf)))
+      (when (y-or-n-p (format "Buffer %s is modified - save it?" (buffer-name buf)))
+        (save-some-buffers nil buf)))
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
 (defun kill-all-buffers ()
-    "Kill all file-based buffers."
-    (interactive)
-    (mapc (lambda (buf) (kill-buffer-if-file buf))
-     (buffer-list)))
+  "Kill all file-based buffers."
+  (interactive)
+  (mapc (lambda (buf) (kill-buffer-if-file buf))
+        (buffer-list)))
 
 (defun kill-buffer-and-window ()
   "Close the current window and kill the buffer it's visiting."
