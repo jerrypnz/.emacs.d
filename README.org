@@ -24,9 +24,15 @@ It's still a work-in-progress.
 
 - =restclient-mode=
 
+*** Editting
+
+- =wgrep=
+- Better search/replace workflow
+- =aggresive-indent=
+
 *** Org
 
-- =deft= 
+- =deft=
 - Port my org config from my old repo
 
 *** Misc
@@ -36,5 +42,3 @@ It's still a work-in-progress.
 - create some useful =hydra=.
   - search/replace?
   - window management?
-
-
