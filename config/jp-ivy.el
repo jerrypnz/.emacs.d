@@ -1,5 +1,8 @@
 ;; ivy
 (use-package ivy
+  :bind
+  ("M-m r" . ivy-resume)
+
   :config
   (progn
     (ivy-mode 1)
@@ -11,12 +14,15 @@
 (use-package counsel
   :bind
   (("M-x"     . counsel-M-x)
+   ("M-y"     . counsel-yank-pop)
+   ("C-s"     . counsel-grep-or-swiper)
    ("C-x C-f" . counsel-find-file)
    ("C-h f"   . counsel-describe-function)
-   ("C-h v"   . counsel-describe-variable)))
+   ("C-h v"   . counsel-describe-variable))
 
-(use-package swiper
-  :bind
-  (("C-s" . swiper)))
+  :config
+  (progn
+    (setq counsel-grep-base-command
+          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
 
 (provide 'jp-ivy)
