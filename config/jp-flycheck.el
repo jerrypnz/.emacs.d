@@ -12,7 +12,10 @@
       (mapc (lambda (err)
               (message "FlyC: %s" (flycheck-error-message err)) (sit-for 1))
             errors))
-    (setq flycheck-highlighting-mode nil
-          flycheck-display-errors-function 'jp--flycheck-display-errors-function)))
+    (setq flycheck-highlighting-mode 'symbols
+          flycheck-indication-mode nil
+          flycheck-display-errors-function 'jp--flycheck-display-errors-function
+          flycheck-emacs-lisp-load-path 'inherit)
+    (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))))
 
 (provide 'jp-flycheck)
