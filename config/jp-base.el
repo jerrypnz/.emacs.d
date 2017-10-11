@@ -38,4 +38,9 @@
   (("C-=" . er/expand-region)
    ("C--" . er/contract-region)))
 
+;; smex
+(use-package smex
+  :defer t
+  :init (setq-default smex-history-length 32))
+
 (provide 'jp-base)
