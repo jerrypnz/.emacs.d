@@ -1,6 +1,12 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "GOPATH")))
+
 (use-package graphene-meta-theme)
 (use-package jp-look
   :config

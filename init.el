@@ -60,9 +60,6 @@ If argument INTERACTIVE-P is set, log additional information."
       (add-to-list 'load-path (concat path "/elisp"))
       (add-to-list 'load-path (concat path "/lisp")))
 
-    ;;(add-to-list 'load-path (concat lisp-dir "/org-mode/contrib/lisp"))
-    ;;(add-to-list 'load-path (concat lisp-dir "/gocode/emacs-company"))
-
     (setq load-path (seq-filter #'file-directory-p load-path))
     (setq Info-default-directory-list (seq-filter #'file-directory-p Info-default-directory-list))
 
@@ -72,6 +69,7 @@ If argument INTERACTIVE-P is set, log additional information."
         (message "No change to load-path")))))
 
 (jp-init/init-load-path)
+
 (defconst use-package-verbose t)
 (require 'use-package)
 
@@ -85,6 +83,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-projectile)
 (use-package jp-eyebrowse)
 (use-package jp-magit)
+(use-package jp-go)
 
 ;;; Print overall startup time.
 
