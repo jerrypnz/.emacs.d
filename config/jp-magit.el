@@ -3,6 +3,7 @@
 
 ;; magit
 (use-package magit
+  :defer 2
   :bind
   ("M-m g s" . magit-status)
 
