@@ -19,3 +19,4 @@ git subtree pull --squash --prefix lisp/expand-region.el https://github.com/magn
 git subtree pull --squash --prefix lisp/magit https://github.com/magit/magit.git 2.11.0
 git subtree pull --squash --prefix lisp/with-editor https://github.com/magit/with-editor v2.7.0
 git subtree pull --squash --prefix lisp/aggressive-indent-mode https://github.com/Malabarba/aggressive-indent-mode.git 1.8.3
+git subtree pull --squash --prefix lisp/wgrep https://github.com/mhayashi1120/Emacs-wgrep.git 2.1.10
