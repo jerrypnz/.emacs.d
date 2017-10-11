@@ -7,7 +7,7 @@ It's still a work-in-progress.
 
 *** Language support
 
-- =go=
+- +=go=+
 - =scala=
 - =clojure=
 - =scheme/racket=
@@ -28,7 +28,7 @@ It's still a work-in-progress.
 
 - =wgrep=
 - Better search/replace workflow
-- =aggresive-indent=
+- +=aggresive-indent=+
 
 *** Org
 

@@ -49,4 +49,11 @@
   :defer t
   :init (setq-default smex-history-length 32))
 
+;; aggressive-indent
+(use-package aggressive-indent
+  :config
+  (progn
+    (global-aggressive-indent-mode 1)
+    (add-to-list 'aggressive-indent-excluded-modes 'go-mode)))
+
 (provide 'jp-base)

@@ -2,7 +2,6 @@
 (autoload 'show-smartparens-mode "smartparens")
 (autoload 'company-mode "company")
 (autoload 'flycheck-mode "flycheck")
-(autoload 'aggressive-indent-mode "aggressive-indent")
 
 (defvar jp-prog-mode-hook nil
   "A hook to be run on entering a de facto prog mode.")
@@ -16,7 +15,6 @@
 ;; Main hook to be run on entering de facto prog modes
 (add-hook 'jp-prog-mode-hook
           (lambda ()
-            (jp-indent)
             (jp-pairs)
             (jp-show-pairs)
             (jp-completion)
@@ -27,12 +25,6 @@
           (lambda ()
             (dolist (hook jp-prog-mode-hooks)
               (add-hook hook (lambda () (run-hooks 'jp-prog-mode-hook))))))
-
-
-;;; indenting
-
-(defun jp-indent ()
-  (aggressive-indent-mode))
 
 ;;; auto-pairing
 (defun jp-pairs ()
