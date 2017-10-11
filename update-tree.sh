@@ -17,4 +17,5 @@ git subtree pull --squash --prefix lisp/sr-speedbar https://github.com/emacsorph
 git subtree pull --squash --prefix lisp/exec-path-from-shell https://github.com/purcell/exec-path-from-shell.git master
 git subtree pull --squash --prefix lisp/monokai-emacs https://github.com/oneKelvinSmith/monokai-emacs.git master
 git subtree pull --squash --prefix lisp/expand-region.el https://github.com/magnars/expand-region.el.git master
-git subtree add --squash --prefix lisp/magit https://github.com/magit/magit.git 2.11.0
+git subtree pull --squash --prefix lisp/magit https://github.com/magit/magit.git 2.11.0
+git subtree pull --squash --prefix lisp/with-editor https://github.com/magit/with-editor v2.7.0
