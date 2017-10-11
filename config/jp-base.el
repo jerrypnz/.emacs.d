@@ -29,7 +29,8 @@
          ("C-M-;"   . comment-current-line-dwim)
          ("C-o"     . start-newline-after)
          ("M-o"     . start-newline-before)
-         ("M-j"     . join-next-line)))
+         ("M-j"     . join-next-line)
+         ("M-m t n" . toggle-linum)))
 
 ;; expand-region
 (use-package expand-region

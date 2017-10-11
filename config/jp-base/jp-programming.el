@@ -8,7 +8,7 @@
   "A hook to be run on entering a de facto prog mode.")
 
 (defvar jp-prog-mode-hooks
-  '(prog-mode-hook    
+  '(prog-mode-hook
     css-mode-hook
     sgml-mode-hook
     html-mode-hook))
@@ -17,7 +17,6 @@
 (add-hook 'jp-prog-mode-hook
           (lambda ()
             (jp-indent)
-            ;; (jp-linum)
             (jp-pairs)
             (jp-show-pairs)
             (jp-completion)
@@ -35,29 +34,22 @@
 (defun jp-indent ()
   (aggressive-indent-mode))
 
-;;; line numbering
-;; TODO Make it a toggle rather than always enabling it
-(defun jp-linum ()
-  (linum-mode t))
-
-(setq linum-format " %4d ")
-
 ;;; auto-pairing
-(defun jp-pairs ()  
+(defun jp-pairs ()
   (smartparens-mode t))
 
 (defun jp-show-pairs ()
   (show-paren-mode nil)
-  (setq blink-matching-paren nil)  
+  (setq blink-matching-paren nil)
   (show-smartparens-mode)
   (setq sp-show-pair-delay 0))
 
 ;;; completion
-(defun jp-completion ()  
+(defun jp-completion ()
   (company-mode t))
 
 ;;; error checking
-(defun jp-errors ()  
+(defun jp-errors ()
   (flycheck-mode))
 
 ;; Delete marked text on typing
@@ -96,4 +88,3 @@
 (setq css-indent-offset 2)
 
 (provide 'jp-programming)
-

@@ -96,5 +96,14 @@
        "tidy -utf8 -xml -i -w 76 --indent-attributes true 2>/dev/null")
      (buffer-name) t)))
 
+;;; line numbering
+(defun toggle-linum ()
+  (interactive)
+  (if (bound-and-true-p linum-mode)
+      (linum-mode -1)
+    (linum-mode t)))
+
+(setq linum-format " %4d ")
+
 (provide 'jp-commonds)
 
