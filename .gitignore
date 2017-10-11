@@ -5,3 +5,4 @@ auto-save-list/
 .jp-geometry
 projectile-bookmarks.eld
 /*.cache
+/smex-items
