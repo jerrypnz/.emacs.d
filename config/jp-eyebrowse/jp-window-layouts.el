@@ -3,12 +3,12 @@
 
 (defhydra jp-window-layouts (:hint nil)
   "
-Layouts   ^^^^      Actions       ^^^^
-──────────^^^^───── ──────────────^^^^────────────────
-[_1_]    [_5_]      [_n_] next    [_p_] previous
-[_2_]    [_6_]      [_o_] other   [_x_] close
-[_3_]    [_7_]      [_r_] rename
-[_4_]    [_8_]      [_q_] quit
+ Layouts^^^^      Actions       ^^^^
+ ───────^^^^───── ──────────────^^^^────────────────
+ [_1_] [_5_]      [_n_] next    [_p_] previous
+ [_2_] [_6_]      [_o_] other   [_x_] close
+ [_3_] [_7_]      [_r_] rename
+ [_4_] [_8_]      [_q_] quit
 
 current: %s(eyebrowse--get 'current-slot)
 "
