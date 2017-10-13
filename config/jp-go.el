@@ -6,8 +6,11 @@
 (defun jp-init-gocode-emacs-path ()
   (let* ((go-path (getenv "GOPATH"))
          (gocode-company-path (concat go-path "/src/github.com/nsf/gocode/emacs-company")))
-    (when (file-directory-p gocode-company-path)
-      (add-to-list 'load-path gocode-company-path))))
+    (if (file-directory-p gocode-company-path)
+        (add-to-list 'load-path gocode-company-path)
+      (progn
+        (message "WARN: company-go not found in $GOPATH")
+        nil))))
 
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode)
