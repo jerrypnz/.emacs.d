@@ -28,7 +28,7 @@
 
 ;; some useful global commands
 (use-package jp-commands
-  :commands (xml-pretty-print rename-file-and-buffer)
+  :commands (xml-pretty-print rename-file-and-buffer macroexpand-point)
   :bind (("C-x k"   . kill-default-buffer)
          ("C-x C-k" . kill-buffer-and-window)
          ("C-c n"   . create-new-buffer)

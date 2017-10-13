@@ -121,5 +121,20 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+;; TODO Consider creating jp-elisp-utils and move this command there
+;; souce: https://stackoverflow.com/questions/5925485/emacs-lisp-macro-stepper
+(defun macroexpand-point (sexp)
+  (interactive (list (sexp-at-point)))
+  (with-output-to-temp-buffer "*el-macroexpansion*"
+    (pp (macroexpand sexp)))
+  (with-current-buffer "*el-macroexpansion*"
+    (emacs-lisp-mode)
+    (define-key
+      (current-local-map)
+      (kbd "q")
+      (lambda ()
+        (interactive)
+        (kill-buffer)))))
+
 (provide 'jp-commonds)
 
