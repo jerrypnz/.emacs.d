@@ -1,7 +1,6 @@
 * New Emacs Config
 
-It's still a work-in-progress.
-
+It's still work-in-progress.
 
 ** TODO
 
@@ -12,7 +11,6 @@ It's still a work-in-progress.
 - =clojure=
 - =scheme/racket=
 - =python=
-
 
 *** Look and feel
 
@@ -26,18 +24,19 @@ It's still a work-in-progress.
 
 *** Editting
 
-- =wgrep=
-- Better search/replace workflow
+- +=wgrep=+
 - +=aggresive-indent=+
+- =multicursor= and/or =iedit=
 
 *** Org
 
 - =deft=
 - Port my org config from my old repo
+- GTD using org
 
 *** Misc
 
-- =which-key=
+- +=which-key=+
 - =undo-tree=
 - create some useful =hydra=.
   - search/replace?
