@@ -64,6 +64,7 @@
   (which-key-add-key-based-replacements
     "M-m /" "search"
     "M-m g" "git"
+    "M-m l" "layouts"
     "M-m p" "projects"
     "M-m t" "toggles"
     "M-m w" "workspace")
