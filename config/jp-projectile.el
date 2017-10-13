@@ -25,6 +25,14 @@
   (("C-x b" . jp-switch-buffer)
    ("M-m /" . jp-search)))
 
+(use-package ibuffer-projectile
+  :config
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
+
 (provide 'jp-projectile)
 
 (require 'counsel-projectile)
