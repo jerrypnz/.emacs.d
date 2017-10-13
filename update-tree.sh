@@ -23,3 +23,4 @@ git subtree pull --squash --prefix lisp/wgrep https://github.com/mhayashi1120/Em
 git subtree pull --squash --prefix lisp/smex https://github.com/nonsequitur/smex.git master
 git subtree pull --squash --prefix lisp/go-mode https://github.com/dominikh/go-mode.el.git v1.5.0
 git subtree pull --squash --prefix lisp/ibuffer-projectile https://github.com/purcell/ibuffer-projectile master
+git subtree pull --squash --prefix lisp/emacs-which-key https://github.com/justbur/emacs-which-key.git v3.0.2

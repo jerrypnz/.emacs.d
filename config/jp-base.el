@@ -57,4 +57,16 @@
     (global-aggressive-indent-mode 1)
     (add-to-list 'aggressive-indent-excluded-modes 'go-mode)))
 
+;; which-key
+(use-package which-key
+  :config
+  (setq which-key-idle-delay 0.3)
+  (which-key-add-key-based-replacements
+    "M-m /" "search"
+    "M-m g" "git"
+    "M-m p" "projects"
+    "M-m t" "toggles"
+    "M-m w" "workspace")
+  (which-key-mode))
+
 (provide 'jp-base)
