@@ -25,3 +25,4 @@ git subtree pull --squash --prefix lisp/go-mode https://github.com/dominikh/go-m
 git subtree pull --squash --prefix lisp/ibuffer-projectile https://github.com/purcell/ibuffer-projectile master
 git subtree pull --squash --prefix lisp/emacs-which-key https://github.com/justbur/emacs-which-key.git v3.0.2
 git subtree pull --squash --prefix lisp/mwim.el https://github.com/alezost/mwim.el.git master
+git subtree pull--squash --prefix lisp/restclient.el https://github.com/pashky/restclient.el.git master

@@ -84,6 +84,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-eyebrowse)
 (use-package jp-magit)
 (use-package jp-go)
+(use-package jp-restclient)
 
 ;;; Print overall startup time.
 
