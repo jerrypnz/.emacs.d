@@ -76,4 +76,10 @@
   (("C-a" . mwim-beginning-of-code-or-line)
    ("C-e" . mwim-end-of-code-or-line)))
 
+;; iedit
+(use-package iedit
+  :init
+  (global-unset-key (kbd "M-r"))
+  (setq iedit-toggle-key-default (kbd "M-r")))
+
 (provide 'jp-base)
