@@ -30,3 +30,4 @@ git subtree pull --squash --prefix lisp/iedit https://github.com/victorhge/iedit
 git subtree pull --squash --prefix lisp/sbt-mode https://github.com/ensime/emacs-sbt-mode.git v0.3
 git subtree pull --squash --prefix lisp/scala-mode https://github.com/ensime/emacs-scala-mode.git v1.0.0
 git subtree pull --squash --prefix lisp/ensime https://github.com/ensime/ensime-emacs v2.0.1
+git subtree pull --squash --prefix lisp/s https://github.com/magnars/s.el.git 1.12.0
