@@ -31,3 +31,4 @@ git subtree pull --squash --prefix lisp/sbt-mode https://github.com/ensime/emacs
 git subtree pull --squash --prefix lisp/scala-mode https://github.com/ensime/emacs-scala-mode.git v1.0.0
 git subtree pull --squash --prefix lisp/ensime https://github.com/ensime/ensime-emacs v2.0.1
 git subtree pull --squash --prefix lisp/s https://github.com/magnars/s.el.git 1.12.0
+git subtree pull --squash --prefix lisp/popup-el https://github.com/auto-complete/popup-el.git master
