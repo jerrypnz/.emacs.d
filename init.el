@@ -83,8 +83,11 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-projectile)
 (use-package jp-eyebrowse)
 (use-package jp-magit)
-(use-package jp-go)
 (use-package jp-restclient)
+
+;; Programming language support
+(use-package jp-go)
+(use-package jp-scala)
 
 ;;; Print overall startup time.
 
