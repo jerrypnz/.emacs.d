@@ -5,6 +5,8 @@
 (use-package sbt-mode)
 
 (use-package ensime
-  :commands (ensime))
+  :commands (ensime)
+  :config
+  (setq ensime-startup-notification nil))
 
 (provide 'jp-scala)

@@ -84,6 +84,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-eyebrowse)
 (use-package jp-magit)
 (use-package jp-restclient)
+(use-package jp-yasnippet)
 
 ;; Programming language support
 (use-package jp-go)
