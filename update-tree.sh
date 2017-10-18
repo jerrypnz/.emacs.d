@@ -33,4 +33,5 @@ git subtree pull --squash --prefix lisp/ensime https://github.com/ensime/ensime-
 git subtree pull --squash --prefix lisp/s https://github.com/magnars/s.el.git 1.12.0
 git subtree pull --squash --prefix lisp/popup-el https://github.com/auto-complete/popup-el.git master
 git subtree pull --squash --prefix lisp/yasnippet https://github.com/joaotavora/yasnippet master
-git subtree pull --squash --prefix snippets/yasnippet-collection https://github.com/AndreaCrotti/yasnippet-snippets.git master
+git subtree pull --squash --prefix lisp/yasnippet-snippets https://github.com/AndreaCrotti/yasnippet-snippets.git master
+git subtree pull --squash --prefix lisp/dockerfile-mode https://github.com/spotify/dockerfile-mode.git master
