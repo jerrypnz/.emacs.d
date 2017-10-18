@@ -70,13 +70,13 @@
  'mode-line nil
  :foreground "gray80" :background "gray20"
  :inverse-video nil
- :box '(:line-width 2 :color "gray20" :style nil))
+ :box '(:line-width 1 :color "gray30" :style nil))
 
 (set-face-attribute
  'mode-line-inactive nil
  :foreground "gray60" :background "gray20"
  :inverse-video nil
- :box '(:line-width 2 :color "gray20" :style nil))
+ :box '(:line-width 1 :color "gray20" :style nil))
 
 (set-face-attribute
  'mode-line-read-only-face nil
