@@ -7,10 +7,14 @@ It's still work-in-progress.
 *** Language support
 
 - +=go=+
-- =scala=
+- +=scala=+
 - =clojure=
 - =scheme/racket=
 - =python=
+- =PHP=
+- =Yaml=
+- =Markdown=
+- =JavaScript/JSON/ES6=
 
 *** Look and feel
 
@@ -20,13 +24,13 @@ It's still work-in-progress.
 
 *** Tools
 
-- =restclient-mode=
+- +=restclient-mode=+
 
 *** Editting
 
 - +=wgrep=+
 - +=aggresive-indent=+
-- =multicursor= and/or =iedit=
+- =multicursor= and/or +=iedit=+
 
 *** Org
 
@@ -40,4 +44,4 @@ It's still work-in-progress.
 - =undo-tree=
 - create some useful =hydra=.
   - search/replace?
-  - window management?
+  - +window layout management+
