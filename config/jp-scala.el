@@ -1,12 +1,43 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package scala-mode)
+(use-package scala-mode
+  :mode ("\\.scala\\'" . scala-mode)
+  :defer t
+  :init
+  (progn
+    (dolist (ext '(".cfe" ".cfs" ".si" ".gen" ".lock"))
+      (add-to-list 'completion-ignored-extensions ext)))
+  :config
+  (progn
+    (require 'jp-scala-editting)
+    (add-hook 'scala-mode-hook
+              (lambda ()
+                ;; Add the hook to the end of the list and use buffer local hooks
+                ;; because we want to enable this hook only in scala-mode.
+                (add-hook 'post-command-hook 'jp-scala-insert-margin-befor-ending-parens t t)))
+
+    (define-key scala-mode-map (kbd "RET") 'jp-scala-newline-and-indent-with-pipe)
+    (define-key scala-mode-map (kbd ">") 'jp-scala-gt)
+    (define-key scala-mode-map (kbd "-") 'jp-scala-hyphen)
+    (define-key scala-mode-map (kbd "M-j") 'jp-scala-join-line)
+
+    ;; Compatibility with `aggressive-indent'
+    (setq scala-indent:align-forms t
+          scala-indent:align-parameters t
+          scala-indent:default-run-on-strategy
+          scala-indent:operator-strategy)))
+
 (use-package sbt-mode)
 
 (use-package ensime
   :commands (ensime)
   :config
-  (setq ensime-startup-notification nil))
+  (progn
+    ;; Disable startup notification
+    (setq ensime-startup-notification nil)
+    ;; Enable Expand Region integration from Ensime.  Ignore load errors to
+    ;; handle older Ensime versions gracefully.
+    (require 'ensime-expand-region nil 'noerror)))
 
 (provide 'jp-scala)
