@@ -87,6 +87,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-yasnippet)
 
 (use-package jp-docker)
+(use-package jp-yaml)
 
 ;; Programming language support
 (use-package jp-go)

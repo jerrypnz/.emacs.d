@@ -35,3 +35,4 @@ git subtree pull --squash --prefix lisp/popup-el https://github.com/auto-complet
 git subtree pull --squash --prefix lisp/yasnippet https://github.com/joaotavora/yasnippet master
 git subtree pull --squash --prefix lisp/yasnippet-snippets https://github.com/AndreaCrotti/yasnippet-snippets.git master
 git subtree pull --squash --prefix lisp/dockerfile-mode https://github.com/spotify/dockerfile-mode.git master
+git subtree pull --squash --prefix lisp/yaml-mode https://github.com/yoshiki/yaml-mode.git master
