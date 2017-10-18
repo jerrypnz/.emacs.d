@@ -18,7 +18,8 @@
             (jp-pairs)
             (jp-show-pairs)
             (jp-completion)
-            (jp-errors)))
+            (jp-errors)
+            (jp-whitespace-cleanup)))
 
 ;; Attach de facto prog mode hooks after loading init file
 (add-hook 'after-init-hook
@@ -43,6 +44,10 @@
 ;;; error checking
 (defun jp-errors ()
   (flycheck-mode))
+
+;;; cleanup whitespace on save
+(defun jp-whitespace-cleanup ()
+  (add-hook 'before-save-hook 'whitespace-cleanup t t))
 
 ;; Delete marked text on typing
 (delete-selection-mode t)
