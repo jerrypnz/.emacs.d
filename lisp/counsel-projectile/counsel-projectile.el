@@ -182,6 +182,7 @@ names as in `ivy--buffer-list'."
   (ivy-read (projectile-prepend-project-name "Switch to buffer: ")
             (counsel-projectile--buffer-list)
             :matcher #'ivy--switch-buffer-matcher
+            :preselect (buffer-name (other-buffer (current-buffer)))
             :require-match t
             :keymap counsel-projectile-map
             :action #'counsel-projectile-switch-to-buffer-action
@@ -213,7 +214,7 @@ names as in `ivy--buffer-list'."
 
 or
 
-    (setq counsel-projectile-ag-initial-input 
+    (setq counsel-projectile-ag-initial-input
           '(thing-at-point 'symbol t))
 
 Note that you can always insert the value of `(ivy-thing-at-point)' by
