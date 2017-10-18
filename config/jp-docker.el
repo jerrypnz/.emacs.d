@@ -2,6 +2,6 @@
   (require 'use-package))
 
 (use-package dockerfile-mode
-  :mode ("Dockerfile\\'" . dockerfile-mode))
+  :mode "Dockerfile\\'")
 
 (provide 'jp-docker)
