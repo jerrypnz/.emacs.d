@@ -5,7 +5,10 @@
 (use-package magit
   :defer 2
   :bind
-  ("M-m g s" . magit-status)
+  (("M-m g s" . magit-status)
+   ("M-m g b" . magit-blame)
+   ("M-m g l" . magit-log-current)
+   ("M-m g L" . magit-log-buffer-file))
 
   :config
   ;; Since we're using git subtree without building it with Make, we
