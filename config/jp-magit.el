@@ -10,7 +10,7 @@
    ("M-m g l" . magit-log-current)
    ("M-m g L" . magit-log-buffer-file))
 
-  :config
+  :init
   ;; Since we're using git subtree without building it with Make, we
   ;; don't have "magit-version.el" file.  Get around it by setting the
   ;; version here explicitly.
