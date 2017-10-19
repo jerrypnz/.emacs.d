@@ -38,3 +38,4 @@ git subtree pull --squash --prefix lisp/dockerfile-mode https://github.com/spoti
 git subtree pull --squash --prefix lisp/yaml-mode https://github.com/yoshiki/yaml-mode.git master
 git subtree pull --squash --prefix lisp/ample-theme https://github.com/jordonbiondo/ample-theme.git master
 git subtree pull --squash --prefix lisp/zenburn https://github.com/bbatsov/zenburn-emacs master
+git subtree pull --squash --prefix lisp/git-timemachine https://github.com/pidu/git-timemachine.git master

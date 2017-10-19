@@ -16,4 +16,9 @@
   ;; version here explicitly.
   (setq magit-version "2.11.0"))
 
+;; git-timemachine
+(use-package git-timemachine
+  :bind
+  (("M-m g t" . git-timemachine)))
+
 (provide 'jp-magit)
