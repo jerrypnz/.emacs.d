@@ -17,12 +17,12 @@
 
 ;; themes
 (use-package ample-theme
-  :init (progn (load-theme 'ample t t)
-               (load-theme 'ample-flat t t)
-               (load-theme 'ample-light t t)
-               (enable-theme 'ample-flat))
-  :defer t
-  :ensure t)
+  :config
+  (progn
+    (load-theme 'ample t t)
+    (load-theme 'ample-flat t t)
+    (load-theme 'ample-light t t)
+    (enable-theme 'ample-flat)))
 
 (use-package jp-env)
 (use-package jp-programming)
