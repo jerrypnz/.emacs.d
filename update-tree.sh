@@ -36,3 +36,5 @@ git subtree pull --squash --prefix lisp/yasnippet https://github.com/joaotavora/
 git subtree pull --squash --prefix lisp/yasnippet-snippets https://github.com/AndreaCrotti/yasnippet-snippets.git master
 git subtree pull --squash --prefix lisp/dockerfile-mode https://github.com/spotify/dockerfile-mode.git master
 git subtree pull --squash --prefix lisp/yaml-mode https://github.com/yoshiki/yaml-mode.git master
+git subtree pull --squash --prefix lisp/ample-theme https://github.com/jordonbiondo/ample-theme.git master
+git subtree pull --squash --prefix lisp/zenburn https://github.com/bbatsov/zenburn-emacs master
