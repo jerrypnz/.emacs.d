@@ -2,7 +2,7 @@
   (require 'use-package))
 
 (use-package scala-mode
-  :mode ("\\.scala\\'" . scala-mode)
+  :mode ("\\.scala\\'" "\\.sbt\\'")
   :defer t
   :init
   (progn

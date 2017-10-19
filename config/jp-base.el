@@ -8,7 +8,6 @@
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-env "GOPATH")))
 
-(use-package graphene-meta-theme)
 (use-package jp-look
   :config
   (progn
@@ -17,10 +16,13 @@
     (setq jp-fixed-pitch-font "Source Code Pro-12")))
 
 ;; themes
-(use-package monokai-theme
-  :config
-  (progn
-    (load-theme 'monokai t)))
+(use-package ample-theme
+  :init (progn (load-theme 'ample t t)
+               (load-theme 'ample-flat t t)
+               (load-theme 'ample-light t t)
+               (enable-theme 'ample-flat))
+  :defer t
+  :ensure t)
 
 (use-package jp-env)
 (use-package jp-programming)
