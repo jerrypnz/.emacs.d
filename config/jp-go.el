@@ -15,7 +15,13 @@
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
-              ("M-." . godef-jump)))
+              ("M-." . godef-jump))
+  :config
+  (progn
+    (setq gofmt-command "goimports")
+    (add-hook 'go-mode-hook
+              (lambda ()
+                (add-hook 'before-save-hook 'gofmt-before-save)))))
 
 (use-package company-go
   :if (jp-init-gocode-emacs-path)
