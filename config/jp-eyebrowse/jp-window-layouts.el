@@ -7,7 +7,7 @@
          (tag (nth 2 window-config))
          (name (cond
                 ((not tag)          "") ; show nothing if it's not created yet
-                ((= (length tag) 0) "workspace") ; default name if there is no tag
+                ((= (length tag) 0) "default") ; default name if there is no tag
                 (t                  tag)))
          (face (if (= slot (eyebrowse--get 'current-slot))
                    '(underline t)
