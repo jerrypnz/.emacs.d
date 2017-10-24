@@ -85,4 +85,9 @@
   (global-unset-key (kbd "M-r"))
   (setq iedit-toggle-key-default (kbd "M-r")))
 
+;; rectangle
+(use-package jp-rect
+  :bind
+  ("C-x r" . jp-rectangle/body))
+
 (provide 'jp-base)
