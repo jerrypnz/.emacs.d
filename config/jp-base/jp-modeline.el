@@ -67,8 +67,10 @@
 
    (:eval (all-the-icons-icon-for-mode major-mode
                                        :height 0.8
-                                       :v-adjust 0.05
-                                       :face 'all-the-icons-white))
+                                       :v-adjust (if (eq major-mode 'emacs-lisp-mode)
+                                                     -0.1
+                                                   0.05)
+                                       :face 'mode-line-mode-icon-face))
    " %["
    (mode-name mode-name)
    "%] "
@@ -102,6 +104,7 @@
 (make-face 'mode-line-position-face)
 (make-face 'mode-line-vc-face)
 (make-face 'mode-line-mode-face)
+(make-face 'mode-line-mode-icon-face)
 (make-face 'mode-line-minor-mode-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
@@ -156,6 +159,10 @@
 (set-face-attribute
  'mode-line-mode-face nil
  :inherit 'mode-line-face
+ :foreground "gray80")
+
+(set-face-attribute
+ 'mode-line-mode-icon-face nil
  :foreground "gray80")
 
 (set-face-attribute
