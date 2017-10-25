@@ -15,6 +15,7 @@
 (defun jp-modeline-active-p ()
   (eq jp-modeline-active-window (get-buffer-window)))
 
+;; TODO Lines/columns don't change when moving cursors, should use standard %l and %c instead
 (defun jp-modeline-position-and-status ()
   (let* ((active (jp-modeline-active-p))
          (status (cond
