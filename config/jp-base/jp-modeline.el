@@ -1,6 +1,8 @@
 ;; Taken from http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html with
 ;; some modifications
 
+(autoload 'all-the-icons-icon-for-mode "all-the-icons")
+(autoload 'all-the-icons-octicon "all-the-icons")
 
 (defvar jp-modeline-active-window nil)
 
@@ -38,9 +40,7 @@
                               (if (>= (current-column) 80)
                                   'mode-line-80col-face
                                 'mode-line-position-face))))
-    (format " %s%4s:%-3s" status lines columns)))
-
-(message (jp-modeline-position-and-status))
+    (format " %s%4s : %-3s" status lines columns)))
 
 ;; Mode line setup
 (setq-default
@@ -49,19 +49,28 @@
    (:eval (jp-modeline-position-and-status))
    "  "
    ;; directory and buffer/file name
-   (:propertize (:eval (shorten-directory default-directory 20))
+   (:propertize (:eval (shorten-directory default-directory 10))
                 face mode-line-folder-face)
    (:propertize "%b"
                 face mode-line-filename-face)
    ;; narrow [default -- keep?]
    " %n "
+
    ;; mode indicators: vc, recursive edit, major mode, process, global
+   (:propertize (:eval (if vc-mode
+                           (all-the-icons-octicon "git-branch" :height 2 :v-adjust 0.05)
+                         ""))
+                face mode-line-vc-face)
    (:propertize (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
                 face mode-line-vc-face)
+   "   "
 
-   "  %["
-   (:propertize mode-name
-                face mode-line-mode-face)
+   (:eval (all-the-icons-icon-for-mode major-mode
+                                       :height 0.8
+                                       :v-adjust 0.05
+                                       :face 'all-the-icons-white))
+   " %["
+   (mode-name mode-name)
    "%] "
    (:propertize mode-line-process
                 face mode-line-process-face)

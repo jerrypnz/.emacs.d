@@ -39,3 +39,6 @@ git subtree pull --squash --prefix lisp/yaml-mode https://github.com/yoshiki/yam
 git subtree pull --squash --prefix lisp/ample-theme https://github.com/jordonbiondo/ample-theme.git master
 git subtree pull --squash --prefix lisp/zenburn https://github.com/bbatsov/zenburn-emacs master
 git subtree pull --squash --prefix lisp/git-timemachine https://github.com/pidu/git-timemachine.git master
+git subtree pull --squash --prefix lisp/emacs-memoize https://github.com/skeeto/emacs-memoize.git master
+git subtree pull --squash --prefix lisp/font-lock-plus https://github.com/emacsmirror/font-lock-plus.git master
+git subtree add --squash --prefix lisp/all-the-icons.el https://github.com/domtronn/all-the-icons.el.git master

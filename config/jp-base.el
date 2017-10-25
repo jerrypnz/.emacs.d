@@ -15,6 +15,8 @@
     (setq jp-variable-pitch-font "Lucida Grande-12")
     (setq jp-fixed-pitch-font "Source Code Pro-12")))
 
+(use-package all-the-icons)
+
 ;; themes
 (use-package ample-theme
   :config
