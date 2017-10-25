@@ -59,7 +59,7 @@
 
    ;; mode indicators: vc, recursive edit, major mode, process, global
    (:propertize (:eval (if vc-mode
-                           (all-the-icons-octicon "git-branch" :height 2 :v-adjust 0.05)
+                           (all-the-icons-octicon "git-branch" :v-adjust 0.05)
                          ""))
                 face mode-line-vc-face)
    (:propertize (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
