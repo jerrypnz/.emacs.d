@@ -40,10 +40,14 @@
                         'mode-line-position-face)))
    "  "
    ;; directory and buffer/file name
-   (:propertize (:eval (shorten-directory default-directory 10))
-                face mode-line-folder-face)
-   (:propertize "%b"
-                face mode-line-filename-face)
+   (:eval (propertize (shorten-directory default-directory 10) 'face
+                      (if (jp-modeline-active-p)
+                          'mode-line-folder-face
+                        'mode-line-folder-inactive-face)))
+   (:eval (propertize "%b" 'face
+                      (if (jp-modeline-active-p)
+                          'mode-line-filename-face
+                        'mode-line-filename-inactive-face)))
    ;; narrow [default -- keep?]
    " %n "
    ;; major mode
@@ -92,7 +96,9 @@
 (make-face 'mode-line-read-write-face)
 (make-face 'mode-line-read-write-inactive-face)
 (make-face 'mode-line-folder-face)
+(make-face 'mode-line-folder-inactive-face)
 (make-face 'mode-line-filename-face)
+(make-face 'mode-line-filename-inactive-face)
 (make-face 'mode-line-position-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
@@ -137,9 +143,20 @@
  :foreground "gray60")
 
 (set-face-attribute
+ 'mode-line-folder-inactive-face nil
+ :inherit 'mode-line-face
+ :foreground "gray40")
+
+(set-face-attribute
  'mode-line-filename-face nil
  :inherit 'mode-line-face
  :foreground "#eab700"
+ :weight 'bold)
+
+(set-face-attribute
+ 'mode-line-filename-inactive-face nil
+ :inherit 'mode-line-face
+ :foreground "#927200"
  :weight 'bold)
 
 (set-face-attribute
