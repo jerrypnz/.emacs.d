@@ -30,7 +30,6 @@
 (setq-default
  mode-line-format
  '(
-   " "
    (:eval (jp-modeline-status))
    " "
    ;; Position, including warning for 80 columns
@@ -39,7 +38,6 @@
                       (if (>= (current-column) 80)
                           'mode-line-80col-face
                         'mode-line-position-face)))
-
    "  "
    ;; directory and buffer/file name
    (:propertize (:eval (shorten-directory default-directory 10))
@@ -48,29 +46,31 @@
                 face mode-line-filename-face)
    ;; narrow [default -- keep?]
    " %n "
-
-   ;; mode indicators: vc, recursive edit, major mode, process, global
-   (:eval (all-the-icons-icon-for-mode major-mode
-                                       :height 0.8
-                                       :v-adjust (if (eq major-mode 'emacs-lisp-mode)
-                                                     -0.1
-                                                   0.05)
-                                       :face 'mode-line-mode-icon-face))
+   ;; major mode
+   (:eval (all-the-icons-icon-for-mode
+           major-mode
+           :height 0.8
+           :v-adjust (if (eq major-mode 'emacs-lisp-mode)
+                         -0.1
+                       0.05)
+           :face (if (jp-modeline-active-p)
+                     'mode-line
+                   'mode-line-inactive)))
    " %["
    (mode-name mode-name)
    "%] "
-
+   ;; vc info
    (:eval (if vc-mode
               (format "| %s"(all-the-icons-octicon "git-branch" :v-adjust 0.05))
             ""))
    (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
    "   "
-
+   ;; process
    (:propertize mode-line-process
                 face mode-line-process-face)
+   ;; global mode string
    (global-mode-string global-mode-string)
-   "    "
-   ))
+   "    "))
 
 ;; Helper function
 (defun shorten-directory (dir max-length)
@@ -94,10 +94,6 @@
 (make-face 'mode-line-folder-face)
 (make-face 'mode-line-filename-face)
 (make-face 'mode-line-position-face)
-(make-face 'mode-line-vc-face)
-(make-face 'mode-line-mode-face)
-(make-face 'mode-line-mode-icon-face)
-(make-face 'mode-line-minor-mode-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
 
@@ -109,7 +105,7 @@
 
 (set-face-attribute
  'mode-line-inactive nil
- :foreground "gray20" :background "gray20"
+ :foreground "gray40" :background "gray20"
  :inverse-video nil
  :box '(:line-width 2 :color "gray20" :style nil))
 
@@ -149,26 +145,6 @@
 (set-face-attribute
  'mode-line-position-face nil
  :inherit 'mode-line-face :height 100)
-
-(set-face-attribute
- 'mode-line-mode-face nil
- :inherit 'mode-line-face
- :foreground "gray80")
-
-(set-face-attribute
- 'mode-line-mode-icon-face nil
- :foreground "gray80")
-
-(set-face-attribute
- 'mode-line-vc-face nil
- :inherit 'mode-line-face
- :foreground "gray80")
-
-(set-face-attribute
- 'mode-line-minor-mode-face nil
- :inherit 'mode-line-mode-face
- :foreground "gray40"
- :height 110)
 
 (set-face-attribute
  'mode-line-process-face nil
