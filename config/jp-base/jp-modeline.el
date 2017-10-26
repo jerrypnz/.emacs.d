@@ -15,39 +15,31 @@
 (defun jp-modeline-active-p ()
   (eq jp-modeline-active-window (get-buffer-window)))
 
-;; TODO Lines/columns don't change when moving cursors, should use standard %l and %c instead
-(defun jp-modeline-position-and-status ()
+(defun jp-modeline-status ()
   (let* ((active (jp-modeline-active-p))
-         (status (cond
-                  (buffer-read-only
-                   (propertize " RO " 'face
-                               (if active
-                                   'mode-line-read-only-face
-                                 'mode-line-read-only-inactive-face)))
-                  ((buffer-modified-p)
-                   (propertize " ** " 'face
-                               (if active
-                                   'mode-line-read-write-face
-                                 'mode-line-read-write-inactive-face)))
-                  (t
-                   (propertize " -- " 'face
-                               (if active
-                                   'mode-line-read-write-face
-                                 'mode-line-read-write-inactive-face)))))
-         (lines (propertize (format "%s" (line-number-at-pos))
-                            'face 'mode-line-position-face))
-         (columns (propertize (format "%s" (current-column))
-                              'face
-                              (if (>= (current-column) 80)
-                                  'mode-line-80col-face
-                                'mode-line-position-face))))
-    (format " %s%4s : %-3s" status lines columns)))
+         (face (if buffer-read-only
+                   (if active 'mode-line-read-only-face 'mode-line-read-only-inactive-face)
+                 (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face))))
+    (propertize
+     (cond (buffer-read-only    " RO ")
+           ((buffer-modified-p) " ** ")
+           (t                   " -- "))
+     'face face)))
 
 ;; Mode line setup
 (setq-default
  mode-line-format
  '(
-   (:eval (jp-modeline-position-and-status))
+   " "
+   (:eval (jp-modeline-status))
+   " "
+   ;; Position, including warning for 80 columns
+   (:propertize "%4l |" face mode-line-position-face)
+   (:eval (propertize "%3c " 'face
+                      (if (>= (current-column) 80)
+                          'mode-line-80col-face
+                        'mode-line-position-face)))
+
    "  "
    ;; directory and buffer/file name
    (:propertize (:eval (shorten-directory default-directory 10))
@@ -58,14 +50,6 @@
    " %n "
 
    ;; mode indicators: vc, recursive edit, major mode, process, global
-   (:propertize (:eval (if vc-mode
-                           (all-the-icons-octicon "git-branch" :v-adjust 0.05)
-                         ""))
-                face mode-line-vc-face)
-   (:propertize (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
-                face mode-line-vc-face)
-   "   "
-
    (:eval (all-the-icons-icon-for-mode major-mode
                                        :height 0.8
                                        :v-adjust (if (eq major-mode 'emacs-lisp-mode)
@@ -75,6 +59,13 @@
    " %["
    (mode-name mode-name)
    "%] "
+
+   (:eval (if vc-mode
+              (format "| %s"(all-the-icons-octicon "git-branch" :v-adjust 0.05))
+            ""))
+   (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
+   "   "
+
    (:propertize mode-line-process
                 face mode-line-process-face)
    (global-mode-string global-mode-string)
@@ -129,7 +120,8 @@
 
 (set-face-attribute
  'mode-line-read-only-face nil
- :inherit 'mode-line-read-only-inactive-face
+ :inherit 'mode-line-face
+ :foreground "gray80" :background "#4271ae"
  :box '(:line-width 2 :color "#4271ae"))
 
 (set-face-attribute
@@ -139,7 +131,8 @@
 
 (set-face-attribute
  'mode-line-read-write-face nil
- :inherit 'mode-line-read-write-inactive-face
+ :inherit 'mode-line-face
+ :foreground "gray80" :background "#c82829"
  :box '(:line-width 2 :color "#c82829"))
 
 (set-face-attribute
