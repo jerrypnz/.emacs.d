@@ -60,7 +60,8 @@
   (progn
     (global-aggressive-indent-mode 1)
     (add-to-list 'aggressive-indent-excluded-modes 'go-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'restclient-mode)))
+    (add-to-list 'aggressive-indent-excluded-modes 'restclient-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)))
 
 ;; which-key
 (use-package which-key

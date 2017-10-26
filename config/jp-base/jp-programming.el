@@ -53,7 +53,7 @@
 (delete-selection-mode t)
 
 ;; Soft-wrap lines
-(global-visual-line-mode t)
+;;(global-visual-line-mode t)
 
 ;; Don't use tabs for indent; replace tabs with two spaces.
 (setq-default tab-width 2)
