@@ -41,4 +41,4 @@ git subtree pull --squash --prefix lisp/zenburn https://github.com/bbatsov/zenbu
 git subtree pull --squash --prefix lisp/git-timemachine https://github.com/pidu/git-timemachine.git master
 git subtree pull --squash --prefix lisp/emacs-memoize https://github.com/skeeto/emacs-memoize.git master
 git subtree pull --squash --prefix lisp/font-lock-plus https://github.com/emacsmirror/font-lock-plus.git master
-git subtree add --squash --prefix lisp/all-the-icons.el https://github.com/domtronn/all-the-icons.el.git master
+git subtree pull --squash --prefix lisp/all-the-icons.el https://github.com/domtronn/all-the-icons.el.git master
