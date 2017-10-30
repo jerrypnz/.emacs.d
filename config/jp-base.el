@@ -101,4 +101,17 @@
    ("M-g w" . avy-goto-word-1)
    ("C-M-g" . avy-goto-word-1)))
 
+;; ace-window
+(use-package ace-window
+  :bind
+  (("M-p" . ace-window))
+  :config
+  (progn
+    (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))))
+
+;; window management hydra
+(use-package jp-window
+  :bind
+  ("C-M-p" . jp-window/body))
+
 (provide 'jp-base)
