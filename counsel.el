@@ -88,10 +88,10 @@
 
 (defun counsel-require-program (program)
   "Check system for PROGRAM, printing error if unfound."
-  (when (and (stringp program)
-             (not (string= program ""))
-             (not (executable-find program)))
-    (user-error "Required program \"%s\" not found in your path" program)))
+  (or (and (stringp program)
+           (not (string= program ""))
+           (executable-find program))
+      (user-error "Required program \"%s\" not found in your path" program)))
 
 ;;* Async Utility
 (defvar counsel--async-time nil
@@ -137,7 +137,8 @@ for handling the output of the process instead of `counsel--async-filter'."
       (delete-process proc))
     (when buff
       (kill-buffer buff))
-    (setq proc (start-process-shell-command
+    (setq buff (generate-new-buffer counsel--process))
+    (setq proc (start-file-process-shell-command
                 counsel--process
                 counsel--process
                 cmd))
@@ -387,29 +388,48 @@ Update the minibuffer with the amount of lines collected every
 (defvar counsel-unicode-char-history nil
   "History for `counsel-unicode-char'.")
 
+(defun counsel--unicode-names ()
+  "Return formatted and sorted list of `ucs-names'.
+The result of `ucs-names' is mostly, but not completely, sorted,
+so this function ensures lexicographic order."
+  (let* (cands
+         (table (ucs-names))            ; Either hash map or alist
+         (fmt   (lambda (name code)     ; Common format function
+                  (push (propertize (format "%06X %-58s %c" code name code)
+                                    'code code)
+                        cands))))
+    (if (not (hash-table-p table))
+        ;; Support `ucs-names' returning an alist in Emacs < 26. The result of
+        ;; `ucs-names' comes pre-reversed so no need to repeat.
+        (dolist (entry table)
+          (funcall fmt (car entry) (cdr entry)))
+      (maphash fmt table)
+      ;; Reverse to speed up sorting
+      (setq cands (nreverse cands)))
+    (sort cands #'string-lessp)))
+
+(defvar counsel--unicode-table
+  (lazy-completion-table counsel--unicode-table counsel--unicode-names)
+  "Lazy completion table for `counsel-unicode-char'.
+Candidates comprise `counsel--unicode-names', which see.")
+
 ;;;###autoload
 (defun counsel-unicode-char (&optional count)
   "Insert COUNT copies of a Unicode character at point.
 COUNT defaults to 1."
   (interactive "p")
-  (let ((minibuffer-allow-text-properties t)
-        (ivy-sort-max-size (expt 256 6)))
+  (let ((ivy-sort-max-size (expt 256 6)))
     (setq ivy-completion-beg (point))
     (setq ivy-completion-end (point))
-    (ivy-read "Unicode name: "
-              (nreverse
-               (mapcar (lambda (x)
-                         (propertize
-                          (format "%06X % -60s%c" (cdr x) (car x) (cdr x))
-                          'result (cdr x)))
-                       (ucs-names)))
-              :action (lambda (char)
+    (ivy-read "Unicode name: " counsel--unicode-table
+              :action (lambda (name)
                         (with-ivy-window
                           (delete-region ivy-completion-beg ivy-completion-end)
                           (setq ivy-completion-beg (point))
-                          (insert-char (get-text-property 0 'result char) count)
+                          (insert-char (get-text-property 0 'code name) count)
                           (setq ivy-completion-end (point))))
               :history 'counsel-unicode-char-history
+              :caller 'counsel-unicode-char
               :sort t)))
 
 ;;* Elisp symbols
@@ -1342,11 +1362,12 @@ When REVERT is non-nil, regenerate the current *ivy-occur* buffer."
                             "\\.\\*\\?" ".*"
                             (if (stringp regex) regex (caar regex))))
          (negative-patterns
-          (mapconcat (lambda (x)
-                       (and (null (cdr x))
-                            (format "| grep -v %s" (car x))))
-                     regex
-                     " "))
+          (if (stringp regex) ""
+            (mapconcat (lambda (x)
+                         (and (null (cdr x))
+                              (format "| grep -v %s" (car x))))
+                       regex
+                       " ")))
          (cmd (concat (format counsel-git-grep-cmd positive-pattern) negative-patterns))
          cands)
     (setq cands (split-string
@@ -1652,13 +1673,27 @@ When INITIAL-INPUT is non-nil, use it in the minibuffer during completion."
             :caller 'counsel-find-file))
 
 (defun counsel-up-directory ()
-  "Go to the parent directory preselecting the current one."
+  "Go to the parent directory preselecting the current one.
+
+If the current directory is remote and it's not possible to go up any
+further, make the remote prefix editable"
   (interactive)
-  (let ((dir-file-name
-         (directory-file-name (expand-file-name ivy--directory))))
-    (ivy--cd (file-name-directory dir-file-name))
-    (setf (ivy-state-preselect ivy-last)
-          (file-name-as-directory (file-name-nondirectory dir-file-name)))))
+  (let* ((cur-dir (directory-file-name (expand-file-name ivy--directory)))
+         (up-dir (file-name-directory cur-dir)))
+    (if (and (file-remote-p cur-dir) (string-equal cur-dir up-dir))
+        (progn
+          ;; make the remote prefix editable
+          (setq ivy--old-cands nil)
+          (setq ivy--old-re nil)
+          (ivy-set-index 0)
+          (setq ivy--directory "")
+          (setq ivy--all-candidates nil)
+          (setq ivy-text "")
+          (delete-minibuffer-contents)
+          (insert up-dir))
+      (ivy--cd up-dir)
+      (setf (ivy-state-preselect ivy-last)
+            (file-name-as-directory (file-name-nondirectory cur-dir))))))
 
 (defun counsel-at-git-issue-p ()
   "When point is at an issue in a Git-versioned file, return the issue string."
@@ -1864,6 +1899,50 @@ INITIAL-INPUT can be given as the initial minibuffer input."
             :unwind #'counsel-delete-process
             :caller 'counsel-locate))
 
+;;** `counsel-fzf'
+(defvar counsel-fzf-cmd "fzf -f %s"
+  "Command for `counsel-fzf'.")
+
+(defvar counsel--fzf-dir nil
+  "Store the base fzf directory.")
+
+(defun counsel-fzf-function (str)
+  (let ((default-directory counsel--fzf-dir))
+    (counsel--async-command
+     (format counsel-fzf-cmd
+             (if (string-equal str "")
+                 "\"\""
+               (counsel-unquote-regex-parens
+                (ivy--regex str))))))
+  nil)
+
+;;;###autoload
+(defun counsel-fzf (&optional initial-input)
+  "Call the \"fzf\" shell command.
+INITIAL-INPUT can be given as the initial minibuffer input."
+  (interactive)
+  (counsel-require-program (car (split-string counsel-fzf-cmd)))
+  (setq counsel--fzf-dir (if (and
+                              (fboundp 'projectile-project-p)
+                              (fboundp 'projectile-project-root)
+                              (projectile-project-p))
+                             (projectile-project-root)
+                           default-directory))
+  (ivy-read "> " #'counsel-fzf-function
+            :initial-input initial-input
+            :dynamic-collection t
+            :action #'counsel-fzf-action
+            :unwind #'counsel-delete-process
+            :caller 'counsel-fzf))
+
+(defun counsel-fzf-action (x)
+  "Find file X in current fzf directory."
+  (with-ivy-window
+    (let ((default-directory counsel--fzf-dir))
+      (find-file x))))
+
+(counsel-set-async-exit-code 'counsel-fzf 1 "Nothing found")
+
 ;;** `counsel-dpkg'
 ;;;###autoload
 (defun counsel-dpkg ()
@@ -1998,7 +2077,7 @@ It applies no filtering to ivy--all-candidates."
     "ag --nocolor --nogroup %s")
   "Format string to use in `counsel-ag-function' to construct the command.
 The %s will be replaced by optional extra ag arguments followed by the
-regex string.  The default is \"ag --nocolor --nogroup %s\"."
+regex string."
   :type 'string
   :group 'ivy)
 
@@ -2029,10 +2108,8 @@ If non-nil, append EXTRA-AG-ARGS to BASE-CMD."
                                      " -- "
                                      (shell-quote-argument regex)
                                      file))))
-        (if (file-remote-p default-directory)
-            (split-string (shell-command-to-string ag-cmd) "\n" t)
-          (counsel--async-command ag-cmd)
-          nil)))))
+        (counsel--async-command ag-cmd)
+        nil))))
 
 ;;;###autoload
 (defun counsel-ag (&optional initial-input initial-directory extra-ag-args ag-prompt)
@@ -2071,9 +2148,31 @@ AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
                       (swiper--cleanup))
             :caller 'counsel-ag))
 
+(defun counsel-grep-like-occur (cmd-template)
+  (unless (eq major-mode 'ivy-occur-grep-mode)
+    (ivy-occur-grep-mode)
+    (setq default-directory counsel--git-dir))
+  (setq ivy-text
+        (and (string-match "\"\\(.*\\)\"" (buffer-name))
+             (match-string 1 (buffer-name))))
+  (let* ((cmd (format cmd-template
+                      (shell-quote-argument
+                       (counsel-unquote-regex-parens
+                        (ivy--regex ivy-text)))))
+         (cands (split-string (shell-command-to-string cmd) "\n" t)))
+    ;; Need precise number of header lines for `wgrep' to work.
+    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
+                    default-directory))
+    (insert (format "%d candidates:\n" (length cands)))
+    (ivy--occur-insert-lines
+     (mapcar
+      (lambda (cand) (concat "./" cand))
+      cands))))
+
 (defun counsel-ag-occur ()
   "Generate a custom occur buffer for `counsel-ag'."
-  (counsel--grep-mode-occur nil))
+  (counsel-grep-like-occur
+   "ag --nocolor --nogroup %s"))
 
 ;;** `counsel-pt'
 (defcustom counsel-pt-base-command "pt --nocolor --nogroup -e %s"
@@ -2114,7 +2213,9 @@ This uses `counsel-ag' with `counsel-ack-base-command' replacing
 
 ;;** `counsel-rg'
 (defcustom counsel-rg-base-command "rg -i --no-heading --line-number --color never %s ."
-  "Alternative to `counsel-ag-base-command' using ripgrep."
+  "Alternative to `counsel-ag-base-command' using ripgrep.
+
+Note: don't use single quotes for the regex."
   :type 'string
   :group 'ivy)
 
@@ -2155,13 +2256,18 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
 
 (defun counsel-rg-occur ()
   "Generate a custom occur buffer for `counsel-rg'."
-  (counsel--grep-mode-occur nil))
+  (counsel-grep-like-occur
+   "rg -i --no-heading --line-number --color never %s ."))
 
 ;;** `counsel-grep'
-(defcustom counsel-grep-base-command "grep -nE '%s' %s"
-  "Format string to use in `cousel-grep-function' to construct the command."
+(defcustom counsel-grep-base-command "grep -nE %s %s"
+  "Format string to use in `cousel-grep-function' to construct the command.
+
+Note: don't use single quotes for either the regex or the file name."
   :type 'string
   :group 'ivy)
+
+(defvar counsel-grep-command nil)
 
 (defun counsel-grep-function (string)
   "Grep in the current directory for STRING."
@@ -2171,8 +2277,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
                   (setq ivy--old-re
                         (ivy--regex string)))))
       (counsel--async-command
-       (format counsel-grep-base-command regex
-               (shell-quote-argument counsel--git-dir)))
+       (format counsel-grep-command (shell-quote-argument regex)))
       nil)))
 
 (defun counsel-grep-action (x)
@@ -2182,7 +2287,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
     (let ((default-directory (file-name-directory counsel--git-dir))
           file-name line-number)
       (when (cond ((string-match "\\`\\([0-9]+\\):\\(.*\\)\\'" x)
-                   (setq file-name counsel--git-dir)
+                   (setq file-name (buffer-file-name (ivy-state-buffer ivy-last)))
                    (setq line-number (match-string-no-properties 1 x)))
                   ((string-match "\\`\\([^:]+\\):\\([0-9]+\\):\\(.*\\)\\'" x)
                    (setq file-name (match-string-no-properties 1 x))
@@ -2212,7 +2317,13 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
 
 (defun counsel-grep-occur ()
   "Generate a custom occur buffer for `counsel-grep'."
-  (counsel--grep-mode-occur t))
+  (counsel-grep-like-occur
+   (format
+    "grep -niE %%s %s /dev/null"
+    (shell-quote-argument
+     (file-name-nondirectory
+      (buffer-file-name
+       (ivy-state-buffer ivy-last)))))))
 
 (ivy-set-occur 'counsel-grep 'counsel-grep-occur)
 (counsel-set-async-exit-code 'counsel-grep 1 "")
@@ -2223,7 +2334,12 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (interactive)
   (counsel-require-program (car (split-string counsel-grep-base-command)))
   (setq counsel-grep-last-line nil)
-  (setq counsel--git-dir (buffer-file-name))
+  (setq counsel--git-dir default-directory)
+  (if (string-match "%s$" counsel-grep-base-command)
+      (setq counsel-grep-command
+            (concat (substring counsel-grep-base-command 0 (match-beginning 0))
+                    (shell-quote-argument (buffer-file-name))))
+    (error "expected `counsel-grep-base-command' to end in %%s"))
   (let ((init-point (point))
         res)
     (unwind-protect
@@ -2960,7 +3076,7 @@ PREFIX is used to create the key."
                                      imenu-auto-rescan-maxout))
          (items (imenu--make-index-alist t))
          (items (delete (assoc "*Rescan*" items) items)))
-    (ivy-read "imenu items:" (counsel-imenu-get-candidates-from items)
+    (ivy-read "imenu items: " (counsel-imenu-get-candidates-from items)
               :preselect (thing-at-point 'symbol)
               :require-match t
               :action (lambda (candidate)
@@ -3232,14 +3348,14 @@ And insert it into the minibuffer.  Useful during `eval-expression'."
 (defcustom counsel-linux-apps-directories
   '("/usr/local/share/applications/" "/usr/share/applications/")
   "Directories in which to search for applications (.desktop files)."
-  :group 'counsel
+  :group 'ivy
   :type '(list directory))
 
 (defcustom counsel-linux-app-format-function 'counsel-linux-app-format-function-default
   "Function to format Linux application names the `counsel-linux-app' menu.
 The format function will be passed the application's name, comment, and command
 as arguments."
-  :group 'counsel
+  :group 'ivy
   :type '(choice
           (const :tag "Command : Name - Comment" counsel-linux-app-format-function-default)
           (const :tag "Name - Comment (Command)" counsel-linux-app-format-function-name-first)
