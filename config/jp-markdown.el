@@ -8,7 +8,7 @@
          ("\\.markdown\\'" . markdown-mode))
   :init
   (progn
-    (setq markdown-command "multimarkdown")
+    (setq markdown-command "marked")
     (add-hook 'markdown-mode-hook #'turn-on-auto-fill)))
 
 (provide 'jp-markdown)
