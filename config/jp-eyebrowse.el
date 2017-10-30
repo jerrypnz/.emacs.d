@@ -18,8 +18,8 @@
     (setq eyebrowse-tagged-slot-format "%s [%t]")
     (eyebrowse-mode t)))
 
-(use-package jp-window-layouts
+(use-package jp-layouts
   :bind
-  ("M-m l" . jp-window-layouts/body))
+  ("M-m l" . jp-layouts/body))
 
 (provide 'jp-eyebrowse)
