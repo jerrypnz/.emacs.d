@@ -11,22 +11,8 @@
 (require 'hydra)
 (require 'ace-window)
 
-(defun jp-ace-split-window-vert ()
-  (interactive)
-  (aw-select " Ace - Split Windows Vertically"
-             #'aw-split-window-vert))
-
-(defun jp-ace-split-window-horz ()
-  (interactive)
-  (aw-select " Ace - Split Windows Horizontally"
-             #'aw-split-window-horz))
-
-(defun jp-ace-split-window-fair ()
-  (interactive)
-  (aw-select " Ace - Split Windows Fairly"
-             #'aw-split-window-fair))
-
 (defun jp-text-scale-reset ()
+  "Reset text scale."
   (interactive)
   (text-scale-increase 0))
 
@@ -34,9 +20,9 @@
   "
  Windows^^        Resize^^   Split        ^^    Zoom
 ──────^^──────── ───────^^─ ──────────────^^── ──────^^───────
- [_x_] delete     [_h_] ←    [_z_] horizontal   [_+_] in
+ [_x_] delete     [_h_] ←    [_b_] horizontal   [_+_] in
  [_m_] maximize   [_j_] ↓    [_v_] vertical     [_-_] out
- [_s_] swap       [_k_] ↑    [_f_] fair         [_0_] default
+ [_s_] swap       [_k_] ↑    ^^                 [_0_] default
  [_a_] select     [_l_] →
  [_o_] cycle
 
@@ -53,9 +39,8 @@
   ("k" enlarge-window)
   ("l" enlarge-window-horizontally)
   ;; split
-  ("z" jp-ace-split-window-horz)
-  ("v" jp-ace-split-window-vert)
-  ("f" jp-ace-split-window-fair)
+  ("b" split-window-right)
+  ("v" split-window-below)
   ;; zoom
   ("+" text-scale-increase)
   ("=" text-scale-increase)
