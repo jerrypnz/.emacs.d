@@ -719,7 +719,7 @@ When ARG is t, exit with current text, ignoring the candidates."
   (let (dir)
     (cond
       ((equal ivy-text "/sudo::")
-       (setq dir (concat ivy-text ivy--directory))
+       (setq dir (concat ivy-text (expand-file-name ivy--directory)))
        (ivy--cd dir)
        (ivy--exhibit))
       ((and
@@ -1465,7 +1465,7 @@ like.")
     (counsel-M-x . "^")
     (counsel-describe-function . "^")
     (counsel-describe-variable . "^")
-    (man . "^")
+    (Man-completion-table . "^")
     (woman . "^"))
   "Command to initial input table.")
 
@@ -1794,6 +1794,8 @@ This is useful for recursive `ivy-read'."
              (setq coll (all-completions "" collection predicate)))
             (t
              (setq coll collection)))
+      (unless (ivy-state-dynamic-collection ivy-last)
+        (setq coll (delete "" coll)))
       (when def
         (cond ((listp def)
                (setq coll (cl-union def coll :test 'equal)))
@@ -2003,36 +2005,53 @@ See `completion-in-region' for further information."
          (ivy--prompts-list (if (window-minibuffer-p)
                                 ivy--prompts-list
                               '(ivy-completion-in-region (lambda nil)))))
-    (if (null comps)
-        (message "No matches")
-      (let ((len (min (ivy-completion-common-length (car comps))
-                      (length str))))
-        (nconc comps nil)
-        (setq ivy-completion-beg (- end len))
-        (setq ivy-completion-end end)
-        (if (null (cdr comps))
-            (if (string= str (car comps))
-                (message "Sole match")
-              (unless (minibuffer-window-active-p (selected-window))
-                (setf (ivy-state-window ivy-last) (selected-window)))
-              (ivy-completion-in-region-action
-               (substring-no-properties
-                (car comps))))
-          (let* ((w (1+ (floor (log (length comps) 10))))
-                 (ivy-count-format (if (string= ivy-count-format "")
-                                       ivy-count-format
-                                     (format "%%-%dd " w)))
-                 (prompt (format "(%s): " str)))
-            (and
-             (ivy-read (if (string= ivy-count-format "")
-                           prompt
-                         (replace-regexp-in-string "%" "%%" prompt))
-                       ;; remove 'completions-first-difference face
-                       (mapcar #'substring-no-properties comps)
-                       :predicate predicate
-                       :action #'ivy-completion-in-region-action
-                       :caller 'ivy-completion-in-region)
-             t)))))))
+    (cond ((null comps)
+           (message "No matches"))
+          ((progn
+             (nconc comps nil)
+             (and (null (cdr comps))
+                  (string= str (car comps))))
+           (message "Sole match"))
+          (t
+           (let* ((len (ivy-completion-common-length (car comps)))
+                  (str-len (length str))
+                  (initial (cond ((= len 0)
+                                  "")
+                                 ((> len str-len)
+                                  (setq len str-len)
+                                  str)
+                                 (t
+                                  (substring str (- len))))))
+             (delete-region (- end len) end)
+             (setq ivy-completion-beg (- end len))
+             (setq ivy-completion-end ivy-completion-beg)
+             (if (null (cdr comps))
+                 (progn
+                   (unless (minibuffer-window-active-p (selected-window))
+                     (setf (ivy-state-window ivy-last) (selected-window)))
+                   (ivy-completion-in-region-action
+                    (substring-no-properties
+                     (car comps))))
+               (let* ((w (1+ (floor (log (length comps) 10))))
+                      (ivy-count-format (if (string= ivy-count-format "")
+                                            ivy-count-format
+                                          (format "%%-%dd " w)))
+                      (prompt (format "(%s): " str)))
+                 (and
+                  (ivy-read (if (string= ivy-count-format "")
+                                prompt
+                              (replace-regexp-in-string "%" "%%" prompt))
+                            ;; remove 'completions-first-difference face
+                            (mapcar #'substring-no-properties comps)
+                            :predicate predicate
+                            :initial-input initial
+                            :action #'ivy-completion-in-region-action
+                            :unwind (lambda ()
+                                      (unless (eq ivy-exit 'done)
+                                        (goto-char ivy-completion-beg)
+                                        (insert initial)))
+                            :caller 'ivy-completion-in-region)
+                  t))))))))
 
 (defcustom ivy-do-completion-in-region t
   "When non-nil `ivy-mode' will set `completion-in-region-function'."
