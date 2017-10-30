@@ -1,3 +1,13 @@
+;;; jp-ivy.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 ;; ivy
 (use-package ivy
   :bind
@@ -26,3 +36,4 @@
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
 
 (provide 'jp-ivy)
+;;; jp-ivy.el ends here

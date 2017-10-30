@@ -1,3 +1,13 @@
+;;; jp-eyebrowse.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -23,3 +33,4 @@
   ("M-m l" . jp-layouts/body))
 
 (provide 'jp-eyebrowse)
+;;; jp-eyebrowse.el ends here

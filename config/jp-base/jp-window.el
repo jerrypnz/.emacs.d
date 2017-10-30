@@ -1,3 +1,13 @@
+;;; jp-window.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (require 'hydra)
 (require 'ace-window)
 
@@ -54,3 +64,4 @@
   ("q" nil))
 
 (provide 'jp-window)
+;;; jp-window.el ends here

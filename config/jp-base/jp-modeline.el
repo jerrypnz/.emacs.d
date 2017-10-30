@@ -1,3 +1,13 @@
+;;; jp-modeline.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Taken from http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html with
 ;; some modifications
 
@@ -181,3 +191,4 @@
  :foreground "black" :background "#eab700")
 
 (provide 'jp-modeline)
+;;; jp-modeline.el ends here

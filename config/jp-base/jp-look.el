@@ -1,3 +1,13 @@
+;;; jp-look.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (defvar jp-default-font nil
   "The universal default font.")
 
@@ -109,3 +119,4 @@
 (add-hook 'after-init-hook 'jp-look-startup-after-init)
 
 (provide 'jp-look)
+;;; jp-look.el ends here

@@ -1,3 +1,13 @@
+;;; jp-scala-editting.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (defun jp-scala-join-line ()
   "Adapt `scala-indent:join-line' to behave more like evil's line join.
 `scala-indent:join-line' acts like the vanilla `join-line',
@@ -111,3 +121,4 @@ the end of your string."
     (jp-scala-insert-margin-on-multiline-string))))
 
 (provide 'jp-scala-editting)
+;;; jp-scala-editting.el ends here

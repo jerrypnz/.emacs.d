@@ -1,3 +1,13 @@
+;;; jp-programming.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (autoload 'smartparens-mode "smartparens")
 (autoload 'show-smartparens-mode "smartparens")
 (autoload 'company-mode "company")
@@ -85,3 +95,4 @@
 (setq css-indent-offset 2)
 
 (provide 'jp-programming)
+;;; jp-programming.el ends here

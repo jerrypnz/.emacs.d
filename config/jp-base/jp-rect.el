@@ -1,3 +1,13 @@
+;;; jp-rect.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (require 'hydra)
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Rectangle-Operations
@@ -31,3 +41,4 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point
   ("q" nil))
 
 (provide 'jp-rect)
+;;; jp-rect.el ends here

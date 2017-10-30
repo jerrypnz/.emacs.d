@@ -1,3 +1,13 @@
+;;; jp-env.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -53,3 +63,4 @@
 
 (provide 'jp-env)
 
+;;; jp-env.el ends here

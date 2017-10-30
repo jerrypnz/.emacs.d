@@ -1,3 +1,13 @@
+;;; jp-smartparens.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -41,3 +51,4 @@
     (setq sp-highlight-pair-overlay nil)))
 
 (provide 'jp-smartparens)
+;;; jp-smartparens.el ends here

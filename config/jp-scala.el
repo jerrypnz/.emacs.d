@@ -1,3 +1,13 @@
+;;; jp-scala.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -41,3 +51,4 @@
     (require 'ensime-expand-region nil 'noerror)))
 
 (provide 'jp-scala)
+;;; jp-scala.el ends here

@@ -1,3 +1,13 @@
+;;; jp-layouts.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (require 'hydra)
 (require 'eyebrowse)
 
@@ -39,3 +49,4 @@
   ("q" nil))
 
 (provide 'jp-layouts)
+;;; jp-layouts.el ends here

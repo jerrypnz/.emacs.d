@@ -1,3 +1,13 @@
+;;; jp-go.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -35,3 +45,4 @@
   :commands (go-play))
 
 (provide 'jp-go)
+;;; jp-go.el ends here

@@ -1,3 +1,13 @@
+;;; jp-commands.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (defun kill-default-buffer ()
   "Kill the currently active buffer -- set to C-x k so that users are not asked which buffer they want to kill."
   (interactive)
@@ -138,3 +148,4 @@
 
 (provide 'jp-commonds)
 
+;;; jp-commands.el ends here

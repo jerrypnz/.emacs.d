@@ -1,3 +1,13 @@
+;;; jp-flycheck.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -16,6 +26,7 @@
           flycheck-indication-mode nil
           flycheck-display-errors-function 'jp--flycheck-display-errors-function
           flycheck-emacs-lisp-load-path 'inherit)
-    (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))))
+    (setq-default flycheck-disabled-checkers '(c/c++-clang))))
 
 (provide 'jp-flycheck)
+;;; jp-flycheck.el ends here

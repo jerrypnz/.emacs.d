@@ -1,3 +1,13 @@
+;;; jp-magit.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -22,3 +32,4 @@
   (("M-m g t" . git-timemachine)))
 
 (provide 'jp-magit)
+;;; jp-magit.el ends here

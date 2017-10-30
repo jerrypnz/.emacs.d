@@ -1,3 +1,13 @@
+;;; jp-go-play.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (autoload 'go-mode "go-mode")
 
 (defun go-play ()
@@ -33,3 +43,4 @@ func main() {
       (lambda () (interactive)
         (save-buffer)
         (compile (format "go run %s" (buffer-file-name)))))))
+;;; jp-go-play.el ends here

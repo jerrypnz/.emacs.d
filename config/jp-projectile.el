@@ -1,3 +1,13 @@
+;;; jp-projectile.el --- An awesome elisp package -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017 Jerry Peng
+
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+
+;;; Commentary:
+
+;;; Code:
+
 (eval-when-compile
   (require 'use-package))
 
@@ -38,3 +48,4 @@
 (provide 'jp-projectile)
 
 (require 'counsel-projectile)
+;;; jp-projectile.el ends here
