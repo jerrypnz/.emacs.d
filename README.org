@@ -17,6 +17,14 @@ It's still work-in-progress.
 - +Markdown+
 - =JavaScript/JSON/ES6=
 
+*** Coding
+
+- make company and yasnippet work better
+- hight things under the cursor
+- make flycheck nicer
+  - change keybindings
+  - automaticially display errors for current line
+
 *** Look and feel
 
 - Better way of managing themes
@@ -31,9 +39,7 @@ It's still work-in-progress.
 
 *** Editting
 
-- make company and yasnippet work better
 - find a solution for file templates
-- hight things under the cursor
 - +wgrep+
 - +aggresive-indent+
 - +iedit+
@@ -50,5 +56,5 @@ It's still work-in-progress.
 - =undo-tree=
 - create some useful =hydra=.
   - search/replace?
-  - window resize/zooming (or =ace-window=)
+  - +window resize/zooming (or =ace-window=)+
   - +window layout management+
