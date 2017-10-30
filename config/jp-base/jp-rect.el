@@ -4,7 +4,8 @@
 (defhydra jp-rectangle (:body-pre (rectangle-mark-mode 1)
                                   :color pink
                                   :hint nil
-                                  :post (deactivate-mark))
+                                  :post (deactivate-mark)
+                                  :foreign-keys warn)
   "
   ^_k_^       _w_ copy      _o_pen       _N_umber-lines
 _h_   _l_     _y_ank        _t_ype       _e_xchange-point

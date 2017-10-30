@@ -14,10 +14,10 @@
                  'shadow)))
     (propertize name 'face face)))
 
-(defhydra jp-layouts (:hint nil)
+(defhydra jp-layouts (:hint nil :foreign-keys warn)
   "
-   Actions     ^^    Layouts^^
-  ───────────^^─── ───────^^─────
+   Actions   ^^      Layouts^^
+  ───────────^^─── ─────────^^───
    [_n_] next        [_a_] ?a?
    [_p_] previous    [_s_] ?s?
    [_o_] other       [_d_] ?d?
