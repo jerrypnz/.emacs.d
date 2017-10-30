@@ -1,9 +1,5 @@
 (require 'hydra)
-
-(autoload 'aw-select "ace-window")
-(autoload 'aw-split-window-vert "ace-window")
-(autoload 'aw-split-window-horz "ace-window")
-(autoload 'aw-split-window-fair "ace-window")
+(require 'ace-window)
 
 (defun jp-ace-split-window-vert ()
   (interactive)
