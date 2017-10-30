@@ -31,6 +31,8 @@ It's still work-in-progress.
 
 *** Editting
 
+- make company and yasnippet work better
+- find a solution for file templates
 - hight things under the cursor
 - +wgrep+
 - +aggresive-indent+
