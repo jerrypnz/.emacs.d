@@ -6,31 +6,35 @@ It's still work-in-progress.
 
 *** Language support
 
-- +=go=+
-- +=scala=+
+- generic symbol/function search
+- +go+
+- +scala+
 - =clojure=
 - =scheme/racket=
 - =python=
 - =PHP=
-- =Yaml=
-- =Markdown=
+- +Yaml+
+- +Markdown+
 - =JavaScript/JSON/ES6=
 
 *** Look and feel
 
 - Better way of managing themes
-- Mode line
-  - Better project/branch info
+- +Mode line+
+  - +Better project/branch info+
 
 *** Tools
 
-- +=restclient-mode=+
+- +restclient-mode+
+- better way of managing git subtrees
+- =tiny=
 
 *** Editting
 
-- +=wgrep=+
-- +=aggresive-indent=+
-- =multicursor= and/or +=iedit=+
+- hight things under the cursor
+- +wgrep+
+- +aggresive-indent+
+- +iedit+
 
 *** Org
 
@@ -40,8 +44,9 @@ It's still work-in-progress.
 
 *** Misc
 
-- +=which-key=+
+- +which-key+
 - =undo-tree=
 - create some useful =hydra=.
   - search/replace?
+  - window resize/zooming (or =ace-window=)
   - +window layout management+
