@@ -26,6 +26,13 @@
            (t                   " -- "))
      'face face)))
 
+(defun jp-buffer-filename ()
+  (let* ((bufname (buffer-name))
+         (name (file-name-nondirectory bufname)))
+    (if (eq "" name)
+        bufname
+      name)))
+
 ;; Mode line setup
 (setq-default
  mode-line-format
@@ -44,7 +51,7 @@
                       (if (jp-modeline-active-p)
                           'mode-line-folder-face
                         'mode-line-folder-inactive-face)))
-   (:eval (propertize "%b" 'face
+   (:eval (propertize (jp-buffer-filename) 'face
                       (if (jp-modeline-active-p)
                           'mode-line-filename-face
                         'mode-line-filename-inactive-face)))
