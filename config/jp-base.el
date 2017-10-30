@@ -105,11 +105,14 @@
 
 ;; avy
 (use-package avy
+  :defer nil
   :bind
   (("M-g c" . avy-goto-char)
    ("M-g g" . avy-goto-line)
    ("M-g w" . avy-goto-word-1)
-   ("C-M-g" . avy-goto-word-1)))
+   ("C-M-g" . avy-goto-word-1))
+  :config
+  (setq avy-background t))
 
 ;; ace-window
 (use-package ace-window
