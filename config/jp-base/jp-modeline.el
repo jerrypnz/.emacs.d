@@ -5,11 +5,11 @@
 ;; Author: Jerry Peng <pr2jerry@gmail.com>
 
 ;;; Commentary:
-
-;;; Code:
-
+;;
 ;; Taken from http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html with
 ;; some modifications
+;;
+;;; Code:
 
 (autoload 'all-the-icons-icon-for-mode "all-the-icons")
 (autoload 'all-the-icons-octicon "all-the-icons")
