@@ -16,6 +16,8 @@ It's still work-in-progress.
 - +Yaml+
 - +Markdown+
 - =JavaScript/JSON/ES6=
+- =Puppet=
+- =web-mode=
 
 *** Coding
 
@@ -41,6 +43,7 @@ It's still work-in-progress.
 *** Editting
 
 - find a solution for file templates
+  - [[https://github.com/mineo/yatemplate][yatemplate]]?
 - +wgrep+
 - +aggresive-indent+
 - +iedit+
