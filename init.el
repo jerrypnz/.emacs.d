@@ -93,6 +93,7 @@ If argument INTERACTIVE-P is set, log additional information."
 ;; Programming language support
 (use-package jp-go)
 (use-package jp-scala)
+(use-package jp-php)
 
 ;;; Print overall startup time.
 

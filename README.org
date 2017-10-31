@@ -24,6 +24,7 @@ It's still work-in-progress.
 - make flycheck nicer
   - change keybindings
   - automaticially display errors for current line
+- gtags for certain modes (PHP)
 
 *** Look and feel
 
