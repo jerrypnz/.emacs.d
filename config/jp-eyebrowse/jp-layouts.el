@@ -34,6 +34,7 @@
    [_r_] rename      [_f_] ?f?
    [_x_] close       [_j_] ?j?
    [_q_] quit        [_k_] ?k?
+           ^^        [_l_] ?l?
 "
   ("a" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :exit t)
   ("s" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2) :exit t)
@@ -41,6 +42,7 @@
   ("f" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4) :exit t)
   ("j" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5) :exit t)
   ("k" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6) :exit t)
+  ("l" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7) :exit t)
   ("n" eyebrowse-next-window-config)
   ("p" eyebrowse-prev-window-config)
   ("o" eyebrowse-last-window-config)
