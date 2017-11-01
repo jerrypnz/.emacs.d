@@ -82,9 +82,10 @@
    "%] "
    ;; vc info
    (:eval (if vc-mode
-              (format "| %s"(all-the-icons-octicon "git-branch" :height 0.9 :v-adjust 0.05))
+              (format "| %s %s"
+                      (all-the-icons-octicon "git-branch" :height 0.9 :v-adjust 0.05)
+                      (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
             ""))
-   (:eval (replace-regexp-in-string "^ Git[:-]" " " vc-mode))
    "   "
    ;; process
    (:propertize mode-line-process
