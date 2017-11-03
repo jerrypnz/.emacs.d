@@ -60,6 +60,9 @@
 ;; No ring bell at all.
 (setq ring-bell-function 'ignore)
 
+;; Prefer splitting windows horizontally
+(setq split-height-threshold nil)
+
 (provide 'jp-env)
 
 ;;; jp-env.el ends here
