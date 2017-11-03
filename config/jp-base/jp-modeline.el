@@ -125,13 +125,13 @@
  'mode-line nil
  :foreground "gray80" :background "gray20"
  :inverse-video nil
- :box '(:line-width 1 :color "gray20" :style nil))
+ :box '(:line-width 2 :color "gray20" :style nil))
 
 (set-face-attribute
  'mode-line-inactive nil
  :foreground "gray40" :background "gray20"
  :inverse-video nil
- :box '(:line-width 1 :color "gray20" :style nil))
+ :box '(:line-width 2 :color "gray20" :style nil))
 
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
@@ -142,7 +142,7 @@
  'mode-line-read-only-face nil
  :inherit 'mode-line-face
  :foreground "gray80" :background "#4271ae"
- :box '(:line-width 1 :color "#4271ae"))
+ :box '(:line-width 2 :color "#4271ae"))
 
 (set-face-attribute
  'mode-line-read-write-inactive-face nil
@@ -153,7 +153,7 @@
  'mode-line-read-write-face nil
  :inherit 'mode-line-face
  :foreground "gray80" :background "#c82829"
- :box '(:line-width 1 :color "#c82829"))
+ :box '(:line-width 2 :color "#c82829"))
 
 (set-face-attribute
  'mode-line-folder-face nil
