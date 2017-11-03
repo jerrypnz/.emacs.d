@@ -17,7 +17,6 @@
 
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "M-z") 'zap-up-to-char)
 
 ;; M-m is reserved for Spacemacs style prefix key
 (global-unset-key (kbd "M-m"))

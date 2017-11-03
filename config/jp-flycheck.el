@@ -26,7 +26,7 @@
           flycheck-indication-mode nil
           flycheck-display-errors-function 'jp--flycheck-display-errors-function
           flycheck-emacs-lisp-load-path 'inherit)
-    (setq-default flycheck-disabled-checkers '(c/c++-clang))))
+    (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))))
 
 (provide 'jp-flycheck)
 ;;; jp-flycheck.el ends here

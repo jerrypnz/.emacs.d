@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+(require 'dash)
+
 (defvar jp-default-font nil
   "The universal default font.")
 
@@ -37,8 +39,6 @@
 
 (add-hook 'ido-minibuffer-setup-hook
           'jp-minibuffer-setup-hook)
-
-(setq redisplay-dont-pause t)
 
 (mapc (lambda (mode)
         (when (fboundp mode) (funcall mode -1)))
@@ -80,6 +80,7 @@
                       (left . ,f-left)))))))
 
 (defun jp-maybe-set-default-font (default-font var-pitch-font pitch-font)
+  "Set up default fonts when they are not set."
   (unless jp-default-font
     (setq jp-default-font default-font))
   (unless jp-variable-pitch-font
@@ -98,7 +99,7 @@
     (jp-maybe-set-default-font (face-font 'default) (face-font 'variable-pitch) (face-font 'fixed-pitch)))))
 
 (defun jp-look-startup-after-init ()
-  "Load defaults for the overall Jp look -- to be called after loading the init file so as to pick up custom settings."
+  "Load defaults for the overall look -- to be called after loading the init file so as to pick up custom settings."
   (if window-system
       (progn
         (jp-set-geometry)
