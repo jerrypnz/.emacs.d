@@ -12,6 +12,7 @@
 (autoload 'show-smartparens-mode "smartparens")
 (autoload 'company-mode "company")
 (autoload 'flycheck-mode "flycheck")
+(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters")
 
 (defvar jp-prog-mode-hook nil
   "A hook to be run on entering a de facto prog mode.")
@@ -45,7 +46,8 @@
   (show-paren-mode nil)
   (setq blink-matching-paren nil)
   (show-smartparens-mode)
-  (setq sp-show-pair-delay 0))
+  (setq sp-show-pair-delay 0)
+  (rainbow-delimiters-mode-enable))
 
 ;;; completion
 (defun jp-completion ()

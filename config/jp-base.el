@@ -73,6 +73,9 @@
     (add-to-list 'aggressive-indent-excluded-modes 'restclient-mode)
     (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)))
 
+;; rainbow delimiters
+(use-package rainbow-delimiters)
+
 ;; which-key
 (use-package which-key
   :config
