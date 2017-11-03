@@ -83,7 +83,7 @@
    ;; vc info
    (:eval (if vc-mode
               (format "| %s %s"
-                      (all-the-icons-octicon "git-branch" :height 0.9 :v-adjust 0.05)
+                      (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
                       (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
             ""))
    "   "
