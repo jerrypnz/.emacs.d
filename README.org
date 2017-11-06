@@ -57,7 +57,7 @@ It's still work-in-progress.
 *** Misc
 
 - +which-key+
-- =undo-tree=
+- +undo-tree+
 - create some useful =hydra=.
   - search/replace?
   - +window resize/zooming (or =ace-window=)+

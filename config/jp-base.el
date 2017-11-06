@@ -76,6 +76,14 @@
 ;; rainbow delimiters
 (use-package rainbow-delimiters)
 
+;; undo-tree
+(use-package undo-tree
+  :config
+  (progn
+    (setq undo-tree-visualizer-diff t)
+    (setq undo-tree-visualizer-timestamps t)
+    (global-undo-tree-mode)))
+
 ;; which-key
 (use-package which-key
   :config
