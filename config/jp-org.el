@@ -41,7 +41,7 @@
             ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))
 
     (setq org-capture-templates
-          `(("t" "Todo" entry (file org-default-notes-file)
+          `(("t" "TODO" entry (file org-default-notes-file)
              "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
