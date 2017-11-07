@@ -11,6 +11,13 @@
 (eval-when-compile
   (require 'use-package))
 
+(defconst jp-work-org-file "~/org/work.org")
+(defconst jp-private-org-file "~/org/private.org")
+(defconst jp-inbox-org-file "~/org/inbox.org")
+(defconst jp-diary-org-fle "~/org/diary.org")
+(defconst jp-notes-dir "~/org/notes")
+
+
 (use-package org
   :defer t
   :bind
@@ -19,11 +26,6 @@
 
   :config
   (progn
-    (defconst jp-work-org-file "~/org/work.org")
-    (defconst jp-private-org-file "~/org/private.org")
-    (defconst jp-inbox-org-file "~/org/inbox.org")
-    (defconst jp-diary-org-fle "~/org/diary.org")
-
     (setq org-directory "~/org")
     (setq org-default-notes-file jp-inbox-org-file)
 
@@ -60,6 +62,22 @@
                                      (org-agenda-files :maxlevel . 9))))
 
     (setq org-startup-folded nil)))
+
+
+(use-package deft
+  :bind ("M-m n" . deft)
+  :commands (deft)
+  :config
+  (progn
+    (setq deft-extensions '("org"))
+    (setq deft-directory jp-notes-dir)
+    (setq deft-org-mode-title-prefix t)
+    (setq deft-use-filter-string-for-filename t)
+    (setq deft-use-filename-as-title nil)
+    (setq deft-file-naming-rules
+          '((noslash . "-")
+            (nospace . "-")
+            (case-fn . downcase)))))
 
 
 (provide 'jp-org)
