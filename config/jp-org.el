@@ -42,6 +42,8 @@
             ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
             ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))
 
+    (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+
     (setq org-capture-templates
           `(("t" "TODO" entry (file org-default-notes-file)
              "* TODO %?\n%u\n" :clock-in t :clock-resume t)
@@ -51,15 +53,23 @@
              "* %?\n%U\n" :clock-in t :clock-resume t)
             ("i" "Idea" entry (file org-default-notes-file)
              "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
-            ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+            ("n" "Next Task" entry (file org-default-notes-file)
              "** NEXT %? \nDEADLINE: %t")))
+
+    (setq org-agenda-custom-commands
+          '(("a" "Agenda"
+             ((agenda "-REFILE")
+              (alltodo "-REFILE")
+              (tags "REFILE"
+                    ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                     (org-agenda-overriding-header "Inbox:")))))))
 
     (setq org-agenda-files (list jp-work-org-file
                                  jp-private-org-file
                                  jp-inbox-org-file))
 
-    (setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                     (org-agenda-files :maxlevel . 9))))
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9)))
 
     (setq org-startup-folded nil)))
 
