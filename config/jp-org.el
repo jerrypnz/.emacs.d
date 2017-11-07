@@ -80,6 +80,7 @@
   :config
   (progn
     (setq deft-extensions '("org"))
+    (setq deft-default-extension "org")
     (setq deft-directory jp-notes-dir)
     (setq deft-org-mode-title-prefix t)
     (setq deft-use-filter-string-for-filename t)
