@@ -20,7 +20,7 @@
   :config
   (progn
     (defconst jp-work-org-file "~/org/work.org")
-    (defconst jp-life-org-file "~/org/life.org")
+    (defconst jp-private-org-file "~/org/private.org")
     (defconst jp-inbox-org-file "~/org/inbox.org")
     (defconst jp-diary-org-fle "~/org/diary.org")
 
@@ -42,7 +42,7 @@
 
     (setq org-capture-templates
           `(("t" "TODO" entry (file org-default-notes-file)
-             "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
+             "* TODO %?\n%u\n" :clock-in t :clock-resume t)
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
             ("d" "Diary" entry (file+datetree ,jp-diary-org-fle)
@@ -53,7 +53,7 @@
              "** NEXT %? \nDEADLINE: %t")))
 
     (setq org-agenda-files (list jp-work-org-file
-                                 jp-life-org-file
+                                 jp-private-org-file
                                  jp-inbox-org-file))
 
     (setq org-refile-targets (quote ((nil :maxlevel . 9)
