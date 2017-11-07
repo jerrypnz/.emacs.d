@@ -46,3 +46,4 @@ git subtree pull --squash --prefix lisp/markdown-mode https://github.com/jrblevi
 git subtree pull --squash --prefix lisp/ace-window https://github.com/abo-abo/ace-window.git master
 git subtree pull --squash --prefix lisp/rainbow-delimiters https://github.com/Fanael/rainbow-delimiters.git master
 git subtree pull --squash --prefix lisp/undo-tree https://github.com/emacsmirror/undo-tree.git master
+git subtree pull --squash --prefix lisp/org-mode http://orgmode.org/org-mode.git release_9.1.2
