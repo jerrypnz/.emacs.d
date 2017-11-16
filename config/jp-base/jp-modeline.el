@@ -121,17 +121,17 @@
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
 
-(set-face-attribute
- 'mode-line nil
- :foreground "gray80" :background "gray20"
- :inverse-video nil
- :box '(:line-width 2 :color "gray20" :style nil))
+(let ((bg (face-attribute 'mode-line :background)))
+  (set-face-attribute
+   'mode-line nil
+   :inverse-video nil
+   :box `(:line-width 2 :color ,bg :style nil)))
 
-(set-face-attribute
- 'mode-line-inactive nil
- :foreground "gray40" :background "gray20"
- :inverse-video nil
- :box '(:line-width 2 :color "gray20" :style nil))
+(let ((bg (face-attribute 'mode-line-inactive :background)))
+  (set-face-attribute
+   'mode-line-inactive nil
+   :inverse-video nil
+   :box `(:line-width 2 :color ,bg :style nil)))
 
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
