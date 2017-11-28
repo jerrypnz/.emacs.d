@@ -22,7 +22,9 @@
   :defer t
   :bind
   (("M-m c" . org-capture)
-   ("M-m a" . org-agenda))
+   ("M-m a" . org-agenda)
+   :map org-mode-map
+   ("RET" . org-return-indent))
 
   :config
   (progn
