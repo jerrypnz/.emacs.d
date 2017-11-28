@@ -57,7 +57,16 @@
     ;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
     ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)))
+    (doom-themes-org-config)
+
+    ;; Nicer colors for org heading level 3 to 6. Colors are taken
+    ;; from doom-one theme.
+    (eval-after-load "org"
+      '(progn
+         (set-face-attribute 'org-level-3 nil :foreground "#DA8548")
+         (set-face-attribute 'org-level-4 nil :foreground "#ECBE7B")
+         (set-face-attribute 'org-level-5 nil :foreground "#ECBE7B")
+         (set-face-attribute 'org-level-6 nil :foreground "#ECBE7B")))))
 
 (use-package jp-env)
 (use-package jp-programming)
