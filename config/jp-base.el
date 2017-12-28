@@ -141,6 +141,20 @@
   (global-unset-key (kbd "M-r"))
   (setq iedit-toggle-key-default (kbd "M-r")))
 
+;; hightlight-things.el
+(use-package highlight-thing
+  :config
+  (progn
+    (setq highlight-thing-case-sensitive-p t)
+    (global-highlight-thing-mode)
+    (set-face-attribute
+     'hi-yellow nil
+     ;; Using a lighter background color for hightlighted symbols whil
+     ;; keeping the same foreground color. Can use this tool to get
+     ;; lighter versions of a color:
+     ;; https://www.w3schools.com/colors/colors_picker.asp
+     :foreground nil :background "#434956")))
+
 ;; rectangle
 (use-package jp-rect
   :bind
