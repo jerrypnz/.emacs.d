@@ -49,3 +49,4 @@ git subtree pull --squash --prefix lisp/undo-tree https://github.com/emacsmirror
 git subtree pull --squash --prefix lisp/org-mode http://orgmode.org/org-mode.git release_9.1.2
 git subtree pull --squash --prefix lisp/deft https://github.com/jrblevin/deft.git master
 git subtree pull --squash --prefix lisp/doom-themes https://github.com/hlissner/emacs-doom-themes.git master
+git subtree pull --squash --prefix lisp/emacs-htmlize https://github.com/hniksic/emacs-htmlize.git master
