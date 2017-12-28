@@ -2,6 +2,10 @@
 
 It's still work-in-progress.
 
+** Screenshot
+
+   [[./screenshot.png]]
+
 ** TODO
 
 *** Language support
@@ -12,7 +16,7 @@ It's still work-in-progress.
 - =clojure=
 - =scheme/racket=
 - =python=
-- =PHP=
+- +PHP+
 - +Yaml+
 - +Markdown+
 - =JavaScript/JSON/ES6=
