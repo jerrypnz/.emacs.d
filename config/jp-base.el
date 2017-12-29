@@ -15,8 +15,9 @@
   :if (memq window-system '(mac ns x))
   :config
   (progn
-    (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "GOPATH")))
+    (setq exec-path-from-shell-arguments '("-l"))
+    (add-to-list 'exec-path-from-shell-variables "GOPATH")
+    (exec-path-from-shell-initialize)))
 
 (use-package jp-look
   :config
