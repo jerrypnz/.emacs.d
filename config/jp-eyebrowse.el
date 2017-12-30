@@ -17,14 +17,17 @@
     ;; Switch to a project and use its name (shorten) as the tag of
     ;; the window config TODO `shorten-directory' is defined in
     ;; `jp-modeline.el' - move it to a common lib
-    (defun jp-eyebrowse-new-project-workspace ()
+    (defun jp-eyebrowse-switch-project ()
       (interactive)
       (let ((project-name (counsel-projectile-switch-project)))
         (when (> (length project-name) 0)
           (eyebrowse-rename-window-config (eyebrowse--get 'current-slot)
                                           (shorten-directory project-name 32)))))
 
-    (setq eyebrowse-new-workspace 'jp-eyebrowse-new-project-workspace)
+    (eval-after-load "counsel-projectile"
+      '(define-key projectile-mode-map [remap projectile-switch-project] #'jp-eyebrowse-switch-project))
+
+    (setq eyebrowse-new-workspace 'jp-eyebrowse-switch-project)
     (setq eyebrowse-tagged-slot-format "%s [%t]")
     ;; I don't really use its default key map
     (define-key eyebrowse-mode-map eyebrowse-keymap-prefix nil)
