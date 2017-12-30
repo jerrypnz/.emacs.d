@@ -2,6 +2,52 @@
 
 ## master (unreleased)
 
+## 5.6.1 (2016-12-21)
+
+### Bugs fixed
+
+* Make `clojure--read-let-bindings` more robust so `let` related refactorings do not bail on an incorrectly formatted binding form.
+
+## 5.6.0 (2016-11-18)
+
+### New features
+
+* New interactive command `clojure-mode-report-bug`.
+* New interactive command `clojure-view-guide`.
+* New interactive command `clojure-view-reference-section`.
+* New interactive command `clojure-view-cheatsheet`.
+* New interactive command `clojure-view-grimoire`.
+* New interactive command `clojure-view-style-guide`.
+* Make the refactoring keymap prefix customizable via `clojure-refactor-map-prefix`.
+* Port and rework `let`-related features from `clj-refactor`. Available features: introduce `let`, move to `let`, forward slurp form into `let`, backward slurp form into `let`.
+
+### Changes
+
+* `clojure-mode` now requires Emacs 24.4.
+
+## 5.5.2 (2016-08-03)
+
+### Bugs fixed
+
+* [#399](https://github.com/clojure-emacs/clojure-mode/issues/399): Fix fontification of prefix characters inside keywords.
+
+## 5.5.1 (2016-07-25)
+
+### Bugs fixed
+
+* [#394](https://github.com/clojure-emacs/clojure-mode/issues/394): `?` character is now treated as prefix when outside symbols.
+* [#394](https://github.com/clojure-emacs/clojure-mode/issues/394): `#` character now has prefix syntax class.
+* Fixed indentation of `definterface` to match that of `defprotocol`.
+* [#389](https://github.com/clojure-emacs/clojure-mode/issues/389): Fixed the indentation of `defrecord` and `deftype` multiple airity protocol forms.
+* [#393](https://github.com/clojure-emacs/clojure-mode/issues/393): `imenu-generic-expression` is no longer hard-coded and its global value is respected.
+
+## 5.5.0 (2016-06-25)
+
+### New features
+
+* Port cycle privacy, cycle collection type and cycle if/if-not from clj-refactor.el.
+* Rework cycle collection type into convert collection to list, quoted list, map, vector, set.
+
 ## 5.4.0 (2016-05-21)
 
 ### New features
