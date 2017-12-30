@@ -12,17 +12,19 @@
 (autoload 'counsel-projectile-switch-to-buffer "counsel-projectile")
 (autoload 'projectile-project-p "projectile")
 
-(defun jp-switch-buffer ()
-  (interactive)
-  (if (projectile-project-p)
+(defun jp-switch-buffer (global-p)
+  (interactive "P")
+  (if (and (projectile-project-p)
+           (not global-p))
       (counsel-projectile-switch-to-buffer)
     (ivy-switch-buffer)))
 
-(defun jp-search ()
-  (interactive)
-  (if (projectile-project-p)
+(defun jp-search (current-dir-p)
+  (interactive "P")
+  (if (and (projectile-project-p)
+           (not current-dir-p))
       (counsel-projectile-rg)
-    (counsel-rg)))
+    (counsel-rg "" default-directory)))
 
 (provide 'jp-projectile-utils)
 ;;; jp-projectile-utils.el ends here
