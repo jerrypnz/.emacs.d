@@ -34,7 +34,7 @@ It's still work-in-progress.
 
 *** Look and feel
 
-- Better way of managing themes
+- +Better way of managing themes+ (=use-package= seems perfectly fine ;-)
 - +Mode line+
   - +Better project/branch info+
 
