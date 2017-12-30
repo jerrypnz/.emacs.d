@@ -56,3 +56,4 @@ git subtree pull --squash --prefix lisp/emacs-htmlize https://github.com/hniksic
 git subtree pull --squash --prefix lisp/highlight-thing.el https://github.com/fgeller/highlight-thing.el.git master
 git subtree pull --squash --prefix lisp/cider https://github.com/clojure-emacs/cider.git v0.16.0
 git subtree pull --squash --prefix lisp/clojure-mode https://github.com/clojure-emacs/clojure-mode.git 5.6.1
+git subtree pull --squash --prefix lisp/spinner.el https://github.com/Malabarba/spinner.el.git master
