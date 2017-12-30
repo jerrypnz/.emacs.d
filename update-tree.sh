@@ -2,6 +2,9 @@
 
 echo "Updating git subtrees"
 
+# Cider depends on it and I can't find a repo
+mkdir -p lisp/queue && wget http://elpa.gnu.org/packages/queue-0.2.el -O lisp/queue/queue.el
+
 git subtree pull --squash --prefix lisp/hydra https://github.com/abo-abo/hydra.git master
 git subtree pull --squash --prefix lisp/use-package https://github.com/jwiegley/use-package.git master
 git subtree pull --squash --prefix lisp/projectile https://github.com/bbatsov/projectile.git master
