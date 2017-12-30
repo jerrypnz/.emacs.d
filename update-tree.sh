@@ -51,3 +51,4 @@ git subtree pull --squash --prefix lisp/deft https://github.com/jrblevin/deft.gi
 git subtree pull --squash --prefix lisp/doom-themes https://github.com/hlissner/emacs-doom-themes.git master
 git subtree pull --squash --prefix lisp/emacs-htmlize https://github.com/hniksic/emacs-htmlize.git master
 git subtree pull --squash --prefix lisp/highlight-thing.el https://github.com/fgeller/highlight-thing.el.git master
+git subtree pull --squash --prefix lisp/cider https://github.com/clojure-emacs/cider.git v0.16.0
