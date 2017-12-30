@@ -55,3 +55,4 @@ git subtree pull --squash --prefix lisp/doom-themes https://github.com/hlissner/
 git subtree pull --squash --prefix lisp/emacs-htmlize https://github.com/hniksic/emacs-htmlize.git master
 git subtree pull --squash --prefix lisp/highlight-thing.el https://github.com/fgeller/highlight-thing.el.git master
 git subtree pull --squash --prefix lisp/cider https://github.com/clojure-emacs/cider.git v0.16.0
+git subtree pull --squash --prefix lisp/clojure-mode https://github.com/clojure-emacs/clojure-mode.git 5.4.0
