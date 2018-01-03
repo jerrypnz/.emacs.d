@@ -12,10 +12,10 @@
   (require 'use-package))
 
 (use-package clojure-mode
-  :mode (("\\.clj\\"  . clojure-mode)
-         ("\\.cljs\\" . clojurescript-mode)
-         ("\\.cljc\\" . clojurec-mode)
-         ("\\.cljx\\" . clojurex-mode)))
+  :mode (("\\.clj\\'"  . clojure-mode)
+         ("\\.cljs\\'" . clojurescript-mode)
+         ("\\.cljc\\'" . clojurec-mode)
+         ("\\.cljx\\'" . clojurex-mode)))
 
 (use-package cider
   :config
