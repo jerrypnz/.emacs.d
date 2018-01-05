@@ -1,4 +1,4 @@
-;;; doom-one-theme.el --- inspired by Atom One Dark
+;;; doom-peacock-theme.el
 (require 'doom-themes)
 
 (defgroup doom-peacock-theme nil
@@ -46,8 +46,8 @@ determine the exact padding."
    (fg         '("#ede0ce" "#bfbfbf" "brightwhite"  ))
    (fg-alt     '("#5B6268" "#2d2d2d" "white"        ))
 
-   (grey         base4)
-   (white      '("#f8f8f0" "base4" "base4"          ))
+   (grey       base4)
+   (white      '("#f8f8f0" "base4"   "base4"        ))
    (red        '("#ff5d38" "#ff6655" "red"          )) ;; peacock todo 16
    (orange     '("#cb4b16" "#dd8844" "brightred"    ))
    (green      '("#98be65" "#99bb66" "green"        ))
@@ -59,11 +59,12 @@ determine the exact padding."
    (violet     '("#a9a1e1" "#a9a1e1" "brightmagenta"))
    (cyan       '("#46D9FF" "#46D9FF" "brightcyan"   ))
    (dark-cyan  '("#5699AF" "#5699AF" "cyan"         ))
+   (coral-popup  '("#a60033" "#f6bfbc" "coral-popup"         ))
 
    ;; face categories -- required for all themes
    (highlight      red)
    (vertical-bar   bg-alt)
-   (selection      red)
+   (selection      coral-popup)
    (builtin        red)
    (comments       (if doom-peacock-brighter-comments dark-cyan base5)) ;; TODO
    (doc-comments   (doom-lighten (if doom-peacock-brighter-comments dark-cyan base5) 0.25)) ;; TODO
@@ -84,7 +85,6 @@ determine the exact padding."
    (vc-modified    orange)
    (vc-added       green)
    (vc-deleted     red)
-
 
    ;; custom categories
    (-modeline-bright doom-peacock-brighter-modeline)
@@ -117,8 +117,34 @@ determine the exact padding."
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
 
-   (line-number :inherit 'default :foreground base4 :distant-foreground nil :bold nil :underline nil)
-   (line-number-current-line :inherit 'hl-line :foreground base7 :distant-foreground nil :bold nil :underline nil)
+   ((line-number &override) :foreground base4)
+   ((line-number-current-line &override) :foreground base7)
+
+   ;; tooltip
+   (tooltip              :background bg-alt :foreground fg)
+
+   ;; company
+    (company-tooltip            :inherit 'tooltip)
+    (company-tooltip-common                           :foreground highlight)
+    (company-tooltip-search     :background highlight :foreground bg :distant-foreground fg)
+    (company-tooltip-selection  :background selection)
+    (company-tooltip-mouse      :background magenta   :foreground bg :distant-foreground fg)
+    (company-tooltip-annotation                       :foreground violet)
+    (company-scrollbar-bg       :inherit 'tooltip)
+    (company-scrollbar-fg       :background highlight)
+    (company-preview                                  :foreground highlight)
+    (company-preview-common     :background base3 :foreground magenta)
+    (company-preview-search     :inherit 'company-tooltip-search)
+    (company-template-field     :inherit 'match)
+
+   ;; popup
+   (popup-face :inherit 'tooltip)
+   (popup-selection-face :inherit 'tooltip)
+
+   ;; pos-tip
+   (popup          :inherit 'tooltip)
+   (popup-tip-face :inherit 'tooltip)
+
 
    (doom-modeline-bar :background (if -modeline-bright modeline-bg highlight))
 

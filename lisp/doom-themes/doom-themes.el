@@ -5,8 +5,8 @@
 ;; Author: Henrik Lissner <http://github/hlissner>
 ;; Maintainer: Henrik Lissner <henrik@lissner.net>
 ;; Created: May 22, 2016
-;; Modified: November 09, 2017
-;; Version: 2.0.8
+;; Modified: January 2, 2018
+;; Version: 2.1.0
 ;; Keywords: dark light blue atom one theme neotree icons faces nova
 ;; Homepage: https://github.com/hlissner/emacs-doom-theme
 ;; Package-Requires: ((emacs "24.4") (all-the-icons "1.0.0") (cl-lib "0.5"))
@@ -23,13 +23,13 @@
 ;;   [X] `doom-molokai': based on Textmate's monokai
 ;;   [X] `doom-nova': adapted from Nova (thanks to bigardone)
 ;;   [X] `doom-one-light': light version of doom-one
+;;   [X] `doom-peacock': based on Peacock from daylerees' themes (thanks to teesloane)
 ;;   [X] `doom-tomorrow-night': by Chris Kempson
-;;   [ ] `doom-tomorrow-day`: by Chris Kempson
+;;   [X] `doom-spacegrey': I'm sure you've heard of it (thanks to teesloane)
+;;   [ ] `doom-tomorrow-day': by Chris Kempson
 ;;   [ ] `doom-x': reads your colors from ~/.Xresources
-;;   [ ] `doom-spacegrey': I'm sure you've heard of it
 ;;   [ ] `doom-mono-dark' / `doom-mono-light': a minimalistic, monochromatic theme
 ;;   [ ] `doom-tron': based on Tron Legacy from daylerees' themes
-;;   [ ] `doom-peacock': based on Peacock from daylerees' themes
 ;;
 ;; ## Install
 ;;
@@ -154,7 +154,7 @@ between 0 and 1)."
 ;;;###autoload
 (defun doom-ref (face prop &optional class)
   "TODO"
-  (let ((spec (or (cdr (assq face doom-themes--common-faces))
+  (let ((spec (or (cdr (assq face doom-themes--faces))
                   (error "Couldn't find the '%s' face" face))))
     (when (memq (car spec) '(quote backquote \`))
       (user-error "Can't fetch the literal spec for '%s'" face))
@@ -171,6 +171,7 @@ between 0 and 1)."
 ;;;###autoload
 (defmacro doom-themes-set-faces (theme &rest faces)
   "Customize THEME (a symbol) with FACES."
+  (declare (indent defun))
   `(custom-theme-set-faces
     ,theme
     ,@(mapcar #'doom-themes--build-face faces)))
@@ -237,34 +238,6 @@ Includes an Atom-esque icon theme and highlighting based on filetype."
     (add-to-list 'custom-theme-load-path
                  (or (and (file-directory-p dir) dir)
                      base))))
-
-
-;; DEPRECATED FUNCTIONS
-;;;###autoload
-(defun doom-brighten-minibuffer ()
-  "Does nothing. `doom-brighten-minibuffer' has been moved to the `solaire-mode'
-package as `solaire-mode-in-minibuffer'. This function is deprecated."
-  (message "doom-themes: doom-brighten-minibuffer has moved to the solaire-mode package"))
-
-;;;###autoload
-(define-minor-mode doom-buffer-mode
-  "Does nothing. `doom-buffer-mode' has been moved to the `solaire-mode'
-package. This function is deprecated."
-  :lighter "" ; should be obvious it's on
-  :init-value nil
-  (message "doom-themes: doom-buffer-mode has moved to the solaire-mode package"))
-
-;;;###autoload
-(defun doom-buffer-mode-maybe ()
-  "Does nothing. `doom-buffer-mode' has been moved to the `solaire-mode'
-package. This function is deprecated."
-  (doom-buffer-mode +1))
-
-;;;###autoload
-(defun doom-themes-nlinum-config ()
-  "Does nothing. This functionality has been moved to the `nlinum-hl' package.
-This function is deprecated."
-  (require 'doom-themes-nlinum))
 
 (provide 'doom-themes)
 ;;; doom-themes.el ends here
