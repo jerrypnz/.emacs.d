@@ -155,7 +155,16 @@
      ;; https://www.w3schools.com/colors/colors_picker.asp
      :inherit nil
      :foreground nil :background "#434956")
-    (global-highlight-thing-mode)))
+    (global-highlight-thing-mode)
+
+    (eval-after-load "swiper"
+      '(defadvice swiper (before jp-swiper-remove-highlight activate)
+         ;; If the search string happens to be the symbol being
+         ;; highlighted by `highlight-thing', the overlays it applies
+         ;; should be removed, because `swiper' applies its own
+         ;; overlays. Otherwise it can flicker between the two faces
+         ;; as you move between candidates.
+         (highlight-thing-remove-last)))))
 
 ;; rectangle
 (use-package jp-rect
