@@ -438,7 +438,7 @@ Return a new list of the items in @var{list} for which @var{pred} returns a non-
 
 Alias: @code{-select}
 
-See also: @code{-keep} (@pxref{-keep})
+See also: @code{-keep} (@pxref{-keep}), @code{-remove} (@pxref{-remove}).
 
 @example
 @group
@@ -461,6 +461,8 @@ See also: @code{-keep} (@pxref{-keep})
 Return a new list of the items in @var{list} for which @var{pred} returns nil.
 
 Alias: @code{-reject}
+
+See also: @code{-filter} (@pxref{-filter}).
 
 @example
 @group
@@ -1178,6 +1180,102 @@ See also: @code{-reduce-r-from} (@pxref{-reduce-r-from}), @code{-reduce} (@pxref
 @end example
 @end defun
 
+@anchor{-reductions-from}
+@defun -reductions-from (fn init list)
+Return a list of the intermediate values of the reduction.
+
+See @code{-reduce-from} (@pxref{-reduce-from}) for explanation of the arguments.
+
+See also: @code{-reductions} (@pxref{-reductions}), @code{-reductions-r} (@pxref{-reductions-r}), @code{-reduce-r} (@pxref{-reduce-r})
+
+@example
+@group
+(-reductions-from (lambda (a i) (format "(%s FN %s)" a i)) "INIT" '(1 2 3 4))
+    @result{} '("INIT" "(INIT FN 1)" "((INIT FN 1) FN 2)" "(((INIT FN 1) FN 2) FN 3)" "((((INIT FN 1) FN 2) FN 3) FN 4)")
+@end group
+@group
+(-reductions-from 'max 0 '(2 1 4 3))
+    @result{} '(0 2 2 4 4)
+@end group
+@group
+(-reductions-from '* 1 '(1 2 3 4))
+    @result{} '(1 1 2 6 24)
+@end group
+@end example
+@end defun
+
+@anchor{-reductions-r-from}
+@defun -reductions-r-from (fn init list)
+Return a list of the intermediate values of the reduction.
+
+See @code{-reduce-r-from} (@pxref{-reduce-r-from}) for explanation of the arguments.
+
+See also: @code{-reductions-r} (@pxref{-reductions-r}), @code{-reductions} (@pxref{-reductions}), @code{-reduce} (@pxref{-reduce})
+
+@example
+@group
+(-reductions-r-from (lambda (i a) (format "(%s FN %s)" i a)) "INIT" '(1 2 3 4))
+    @result{} '("(1 FN (2 FN (3 FN (4 FN INIT))))" "(2 FN (3 FN (4 FN INIT)))" "(3 FN (4 FN INIT))" "(4 FN INIT)" "INIT")
+@end group
+@group
+(-reductions-r-from 'max 0 '(2 1 4 3))
+    @result{} '(4 4 4 3 0)
+@end group
+@group
+(-reductions-r-from '* 1 '(1 2 3 4))
+    @result{} '(24 24 12 4 1)
+@end group
+@end example
+@end defun
+
+@anchor{-reductions}
+@defun -reductions (fn list)
+Return a list of the intermediate values of the reduction.
+
+See @code{-reduce} (@pxref{-reduce}) for explanation of the arguments.
+
+See also: @code{-reductions-from} (@pxref{-reductions-from}), @code{-reductions-r} (@pxref{-reductions-r}), @code{-reduce-r} (@pxref{-reduce-r})
+
+@example
+@group
+(-reductions (lambda (a i) (format "(%s FN %s)" a i)) '(1 2 3 4))
+    @result{} '(1 "(1 FN 2)" "((1 FN 2) FN 3)" "(((1 FN 2) FN 3) FN 4)")
+@end group
+@group
+(-reductions '+ '(1 2 3 4))
+    @result{} '(1 3 6 10)
+@end group
+@group
+(-reductions '* '(1 2 3 4))
+    @result{} '(1 2 6 24)
+@end group
+@end example
+@end defun
+
+@anchor{-reductions-r}
+@defun -reductions-r (fn list)
+Return a list of the intermediate values of the reduction.
+
+See @code{-reduce-r} (@pxref{-reduce-r}) for explanation of the arguments.
+
+See also: @code{-reductions-r-from} (@pxref{-reductions-r-from}), @code{-reductions} (@pxref{-reductions}), @code{-reduce} (@pxref{-reduce})
+
+@example
+@group
+(-reductions-r (lambda (i a) (format "(%s FN %s)" i a)) '(1 2 3 4))
+    @result{} '("(1 FN (2 FN (3 FN 4)))" "(2 FN (3 FN 4))" "(3 FN 4)" 4)
+@end group
+@group
+(-reductions-r '+ '(1 2 3 4))
+    @result{} '(10 9 7 4)
+@end group
+@group
+(-reductions-r '* '(1 2 3 4))
+    @result{} '(24 24 12 4)
+@end group
+@end example
+@end defun
+
 @anchor{-count}
 @defun -count (pred list)
 Counts the number of items in @var{list} where (@var{pred} item) is non-nil.
@@ -1214,6 +1312,28 @@ Return the sum of @var{list}.
 @end example
 @end defun
 
+@anchor{-running-sum}
+@defun -running-sum (list)
+Return a list with running sums of items in @var{list}.
+
+@var{list} must be non-empty.
+
+@example
+@group
+(-running-sum '(1 2 3 4))
+    @result{} '(1 3 6 10)
+@end group
+@group
+(-running-sum '(1))
+    @result{} '(1)
+@end group
+@group
+(-running-sum '())
+    @result{} error
+@end group
+@end example
+@end defun
+
 @anchor{-product}
 @defun -product (list)
 Return the product of @var{list}.
@@ -1230,6 +1350,68 @@ Return the product of @var{list}.
 @group
 (-product '(1 2 3 4))
     @result{} 24
+@end group
+@end example
+@end defun
+
+@anchor{-running-product}
+@defun -running-product (list)
+Return a list with running products of items in @var{list}.
+
+@var{list} must be non-empty.
+
+@example
+@group
+(-running-product '(1 2 3 4))
+    @result{} '(1 2 6 24)
+@end group
+@group
+(-running-product '(1))
+    @result{} '(1)
+@end group
+@group
+(-running-product '())
+    @result{} error
+@end group
+@end example
+@end defun
+
+@anchor{-inits}
+@defun -inits (list)
+Return all prefixes of @var{list}.
+
+@example
+@group
+(-inits '(1 2 3 4))
+    @result{} '(nil (1) (1 2) (1 2 3) (1 2 3 4))
+@end group
+@group
+(-inits nil)
+    @result{} '(nil)
+@end group
+@group
+(-inits '(1))
+    @result{} '(nil (1))
+@end group
+@end example
+@end defun
+
+@anchor{-tails}
+@defun -tails (list)
+Return all suffixes of @var{list}
+
+@example
+@group
+(-tails '(1 2 3 4))
+    @result{} '((1 2 3 4) (2 3 4) (3 4) (4) nil)
+@end group
+@group
+(-tails nil)
+    @result{} '(nil)
+@end group
+@group
+(-tails '(1))
+    @result{} '((1) nil)
 @end group
 @end example
 @end defun
@@ -2629,6 +2811,8 @@ Return the last x in @var{list} where (@var{pred} x) is non-nil, else nil.
 @defun -first-item (list)
 Return the first item of @var{list}, or nil on an empty list.
 
+See also: @code{-second-item} (@pxref{-second-item}), @code{-last-item} (@pxref{-last-item}).
+
 (fn @var{list})
 
 @example
@@ -2643,6 +2827,82 @@ Return the first item of @var{list}, or nil on an empty list.
 @group
 (let ((list (list 1 2 3))) (setf (-first-item list) 5) list)
     @result{} '(5 2 3)
+@end group
+@end example
+@end defun
+
+@anchor{-second-item}
+@defun -second-item (arg1)
+Return the second item of @var{list}, or nil if @var{list} is too short.
+
+See also: @code{-third-item} (@pxref{-third-item}).
+
+(fn @var{list})
+
+@example
+@group
+(-second-item '(1 2 3))
+    @result{} 2
+@end group
+@group
+(-second-item nil)
+    @result{} nil
+@end group
+@end example
+@end defun
+
+@anchor{-third-item}
+@defun -third-item (arg1)
+Return the third item of @var{list}, or nil if @var{list} is too short.
+
+See also: @code{-fourth-item} (@pxref{-fourth-item}).
+
+(fn @var{list})
+
+@example
+@group
+(-third-item '(1 2 3))
+    @result{} 3
+@end group
+@group
+(-third-item nil)
+    @result{} nil
+@end group
+@end example
+@end defun
+
+@anchor{-fourth-item}
+@defun -fourth-item (list)
+Return the fourth item of @var{list}, or nil if @var{list} is too short.
+
+See also: @code{-fifth-item} (@pxref{-fifth-item}).
+
+@example
+@group
+(-fourth-item '(1 2 3 4))
+    @result{} 4
+@end group
+@group
+(-fourth-item nil)
+    @result{} nil
+@end group
+@end example
+@end defun
+
+@anchor{-fifth-item}
+@defun -fifth-item (list)
+Return the fifth item of @var{list}, or nil if @var{list} is too short.
+
+See also: @code{-last-item} (@pxref{-last-item}).
+
+@example
+@group
+(-fifth-item '(1 2 3 4 5))
+    @result{} 5
+@end group
+@group
+(-fifth-item nil)
+    @result{} nil
 @end group
 @end example
 @end defun
