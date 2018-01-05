@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2017 François-Xavier Bois
 
-;; Version: 15.0.15
+;; Version: 15.0.16
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; Package-Requires: ((emacs "23.1"))
@@ -24,7 +24,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "15.0.15"
+(defconst web-mode-version "15.0.16"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -60,14 +60,16 @@
 
 (defcustom web-mode-attr-indent-offset nil
   "Html attribute indentation level."
-  :type 'integer
-  :safe #'integerp
+  :type '(choice (integer :tags "Number of spaces")
+                 (const :tags "Default" nil))
+  :safe #'(lambda (v) (or (integerp v) (booleanp v)))
   :group 'web-mode)
 
 (defcustom web-mode-attr-value-indent-offset nil
   "Html attribute value indentation level."
-  :type 'integer
-  :safe #'integerp
+  :type '(choice (integer :tags "Number of spaces")
+                 (const :tags "Default" nil))
+  :safe #'(lambda (v) (or (integerp v) (booleanp v)))
   :group 'web-mode)
 
 (defcustom web-mode-markup-indent-offset
@@ -138,7 +140,7 @@
   :group 'web-mode)
 
 (defcustom web-mode-enable-current-element-highlight nil
-  "Disable element highlight."
+  "Enable current element highlight."
   :type 'boolean
   :group 'web-mode)
 
@@ -181,7 +183,7 @@ See web-mode-block-face."
 
 (defcustom web-mode-enable-comment-interpolation t
   "Enable highlight of keywords like FIXME, TODO, etc. in comments."
-  :type 'list
+  :type 'boolean
   :group 'web-mode)
 
 (defcustom web-mode-enable-string-interpolation t
@@ -222,14 +224,14 @@ See web-mode-block-face."
 (defcustom web-mode-comment-style 1
   "Comment style : 1 = default, 2 = force server comments outside a block."
   :group 'web-mode
-  :type '(choice (const :tag "default" 1)
-                 (const :tag "force engine comments" 2)))
+  :type '(choice (const :tag "Default" 1)
+                 (const :tag "Force engine comments" 2)))
 
 (defcustom web-mode-indent-style 2
   "Indentation style."
   :group 'web-mode
-  :type '(choice (const :tag "default (all lines are indented)" 2)
-                 (const :tag "text at the beginning of line is not indented" 1)))
+  :type '(choice (const :tag "Default (all lines are indented)" 2)
+                 (const :tag "Text at the beginning of line is not indented" 1)))
 
 (defcustom web-mode-auto-close-style 1
   "Auto-close style."
@@ -245,47 +247,47 @@ See web-mode-block-face."
 
 (defcustom web-mode-extra-expanders '()
   "A list of additional expanders."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-auto-pairs '()
   "A list of additional snippets."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-snippets '()
   "A list of additional snippets."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-builtins '()
   "A list of additional builtins."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-constants '()
   "A list of additional constants."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-keywords '()
   "A list of additional keywords."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-types '()
   "A list of additional types."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-extra-control-blocks '()
   "A list of additional control blocks."
-  :type 'list
+  :type '(alist :key-type string :value-type string)
   :group 'web-mode)
 
 (defcustom web-mode-tests-directory (concat default-directory "tests/")
   "Directory containing all the unit tests."
-  :type 'list
+  :type 'directory
   :group 'web-mode)
 
 (defcustom web-mode-jsx-depth-faces nil
@@ -294,7 +296,7 @@ See web-mode-block-face."
   ;;  web-mode-jsx-depth-3-face
   ;;  web-mode-jsx-depth-4-face)
   "Each jsx depth has is own face."
-  :type 'list
+  :type '(repeat face)
   :group 'web-mode)
 
 (defcustom web-mode-commands-like-expand-region
@@ -2089,7 +2091,7 @@ shouldn't be moved back.)")
    '("->[ ]?\\([[:alnum:]_]+\\)" 1 'web-mode-variable-name-face)
    '("\\_<\\([[:alnum:]_]+\\)[ ]?::" 1 'web-mode-type-face)
    '("\\_<\\(instanceof\\|class\\|extends\\|new\\)[ ]+\\([[:alnum:]_]+\\)" 2 'web-mode-type-face)
-   '("\\_<\\([$]\\)\\([[:alnum:]_]*\\)" (1 nil) (2 'web-mode-variable-name-face))
+   '("\\(\\_<\\|[+-]\\)\\([$]\\)\\([[:alnum:]_]*\\)" (2 nil) (3 'web-mode-variable-name-face))
    ))
 
 (defvar web-mode-spip-font-lock-keywords
@@ -6874,6 +6876,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
       (when (get-text-property pos 'part-side)
         (setq part-language (symbol-name (get-text-property pos 'part-side))))
 
+      ;;(message "part-language=%S" part-language)
+
       (cond
 
        ((and (bobp) (member web-mode-content-type '("html" "xml")))
@@ -7015,7 +7019,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
          ) ;cond
         ) ;block-side
 
-       ((and part-language (member part-language '("css" "javascript" "sql" "markdown" "stylus")))
+       ((and part-language (member part-language '("css" "javascript" "json" "sql" "markdown" "stylus")))
         (setq reg-beg (or (web-mode-part-beginning-position pos) (point-min)))
         (goto-char reg-beg)
         (search-backward "<" nil t)
@@ -7588,6 +7592,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
                    (string-match-p "^[&|?:+-]" curr-line))
                (not (and (string= language "php")
                          (string-match-p "^->" curr-line)))
+               (not (string-match-p "^\\(++\\|--\\)" curr-line))
                (not (and is_js
                          (string-match-p "]:" prev-line)))
                (not (and (eq prev-char ?\:)

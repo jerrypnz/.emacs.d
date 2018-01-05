@@ -27,8 +27,10 @@
 
   :config
   (progn
+    (setq counsel-projectile-remove-current-buffer t)
+    (setq counsel-projectile-remove-current-project t)
     (projectile-mode)
-    (counsel-projectile-on)))
+    (counsel-projectile-mode)))
 
 (use-package jp-projectile-utils
   :bind
