@@ -35,5 +35,9 @@
     (setq counsel-grep-base-command
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
 
+(use-package jp-ivy-utils
+  :bind
+  ("C-M-s" . jp-counsel-grep-or-swiper-symbol-at-pt))
+
 (provide 'jp-ivy)
 ;;; jp-ivy.el ends here
