@@ -87,7 +87,7 @@ This option can be used to exclude certain files from the grouping mechanism."
   "Return a cons cell (project-name . root-dir) for BUF.
 If the file is not in a project, then nil is returned instead."
   (with-current-buffer buf
-    (let ((file-name (buffer-file-name))
+    (let ((file-name (ibuffer-buffer-file-name))
           (root (ignore-errors (projectile-project-root))))
       (when (and file-name
                  root
@@ -97,9 +97,26 @@ If the file is not in a project, then nil is returned instead."
 (define-ibuffer-filter projectile-root
     "Toggle current view to buffers with projectile root dir QUALIFIER."
   (:description "projectile root dir"
-                :reader (read-from-minibuffer "Filter by projectile root dir (regexp): "))
+                :reader (read-regexp "Filter by projectile root dir (regexp): "))
   (ibuffer-awhen (ibuffer-projectile-root buf)
     (equal qualifier it)))
+
+;;;###autoload (autoload 'ibuffer-make-column-project-name "ibuffer-projectile")
+(define-ibuffer-column project-name
+  (:name "Project")
+  (projectile-project-name))
+
+;;;###autoload (autoload 'ibuffer-do-sort-by-project-name "ibuffer-projectile")
+(define-ibuffer-sorter project-name
+  "Sort the buffers by their project name."
+  (:description "project")
+  (let ((project1 (with-current-buffer (car a)
+                    (projectile-project-name)))
+        (project2 (with-current-buffer (car b)
+                    (projectile-project-name))))
+    (if (and project1 project2)
+        (string-lessp project1 project2)
+      (not (null project1)))))
 
 ;;;###autoload
 (defun ibuffer-projectile-generate-filter-groups ()
