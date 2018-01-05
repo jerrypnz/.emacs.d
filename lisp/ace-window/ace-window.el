@@ -26,11 +26,12 @@
 
 ;;; Commentary:
 ;;
-;; The main function, `ace-window' is meant to replace `other-window'.
-;; In fact, when there are only two windows present, `other-window' is
-;; called.  If there are more, each window will have its first
-;; character highlighted.  Pressing that character will switch to that
-;; window.
+;; The main function, `ace-window' is meant to replace `other-window'
+;; by assigning each window a short, unique label.  When there are only
+;; two windows present, `other-window' is called (unless
+;; aw-dispatch-always is set non-nil).  If there are more, each
+;; window will have its first label character highlighted.  Once a
+;; unique label is typed, ace-window will switch to that window.
 ;;
 ;; To setup this package, just add to your .emacs:
 ;;
@@ -38,23 +39,24 @@
 ;;
 ;; replacing "M-p"  with an appropriate shortcut.
 ;;
-;; Depending on your window usage patterns, you might want to set
+;; By default, ace-window uses numbers for window labels so the window
+;; labeling is intuitively ordered.  But if you prefer to type keys on
+;; your home row for quicker access, use this setting:
 ;;
 ;;    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 ;;
-;; This way they are all on the home row, although the intuitive
-;; ordering is lost.
-;;
-;; If you don't want the gray background that makes the red selection
-;; characters stand out more, set this:
+;; Whenever ace-window prompts for a window selection, it grays out
+;; all the window characters, highlighting window labels in red.  To
+;; disable this behavior, set this:
 ;;
 ;;    (setq aw-background nil)
 ;;
-;; If you want to know the selection characters ahead of time, you can
-;; turn on `ace-window-display-mode'.
+;; If you want to know the selection characters ahead of time, turn on
+;; `ace-window-display-mode'.
 ;;
 ;; When prefixed with one `universal-argument', instead of switching
-;; to selected window, the selected window is swapped with current one.
+;; to the selected window, the selected window is swapped with the
+;; current one.
 ;;
 ;; When prefixed with two `universal-argument', the selected window is
 ;; deleted instead.
@@ -62,6 +64,7 @@
 ;;; Code:
 (require 'avy)
 (require 'ring)
+(require 'subr-x)
 
 ;;* Customization
 (defgroup ace-window nil
@@ -80,12 +83,18 @@
           (const :tag "global" global)
           (const :tag "frame" frame)))
 
+(defcustom aw-minibuffer-flag nil
+  "When non-nil, also display `ace-window-mode' string in the minibuffer when ace-window is active."
+  :type 'boolean)
+
 (defcustom aw-ignored-buffers '("*Calc Trail*" "*LV*")
-  "List of buffers to ignore when selecting window."
+  "List of buffers and major-modes to ignore when choosing a window from the window list.
+Active only when `aw-ignore-on' is non-nil.  Windows displaying these
+buffers can still be chosen by typing their specific labels."
   :type '(repeat string))
 
 (defcustom aw-ignore-on t
-  "When t, `ace-window' will ignore `aw-ignored-buffers'.
+  "When t, `ace-window' will ignore buffers and major-modes in `aw-ignored-buffers'.
 Use M-0 `ace-window' to toggle this value."
   :type 'boolean)
 
@@ -109,16 +118,67 @@ This will make `ace-window' act different from `other-window' for
   one or two windows."
   :type 'boolean)
 
+(defcustom aw-dispatch-when-more-than 2
+  "If the number of windows is more than this, activate ace-window-ness."
+  :type 'integer)
+
 (defcustom aw-reverse-frame-list nil
   "When non-nil `ace-window' will order frames for selection in
 the reverse of `frame-list'"
   :type 'boolean)
 
+(defcustom aw-frame-offset '(13 . 23)
+  "Increase in pixel offset for new ace-window frames relative to the selected frame.
+Its value is an (x-offset . y-offset) pair in pixels."
+  :type '(cons integer integer))
+
+(defcustom aw-frame-size nil
+  "Frame size to make new ace-window frames.
+Its value is a (width . height) pair in pixels or nil for the default frame size.
+(0 . 0) is special and means make the frame size the same as the last selected frame size."
+  :type '(cons integer integer))
+
+;; Must be defined before `aw-make-frame-char' since its :set function references this.
+(defvar aw-dispatch-alist
+  '((?x aw-delete-window "Delete Window")
+    (?m aw-swap-window "Swap Windows")
+    (?M aw-move-window "Move Window")
+    (?j aw-switch-buffer-in-window "Select Buffer")
+    (?n aw-flip-window)
+    (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
+    (?c aw-split-window-fair "Split Fair Window")
+    (?v aw-split-window-vert "Split Vert Window")
+    (?b aw-split-window-horz "Split Horz Window")
+    (?o delete-other-windows "Delete Other Windows")
+    (?? aw-show-dispatch-help))
+  "List of actions for `aw-dispatch-default'.
+Each action is a list of either:
+  (char function description) where function takes a single window argument
+or
+  (char function) where function takes no argument and the description is omitted.")
+
+(defun aw-set-make-frame-char (option value)
+  ;; Signal an error if `aw-make-frame-char' is ever set to an invalid
+  ;; or conflicting value.
+  (when value
+    (cond ((not (characterp value))
+           (user-error "`aw-make-frame-char' must be a character, not `%s'" value))
+          ((memq value aw-keys)
+           (user-error "`aw-make-frame-char' is `%c'; this conflicts with the same character in `aw-keys'" value))
+          ((assq value aw-dispatch-alist)
+           (user-error "`aw-make-frame-char' is `%c'; this conflicts with the same character in `aw-dispatch-alist'" value))))
+  (set option value))
+
+(defcustom aw-make-frame-char ?z
+  "Non-existing ace window label character that triggers creation of a new single-window frame for display."
+  :set 'aw-set-make-frame-char
+  :type 'character)
+
 (defface aw-leading-char-face
-    '((((class color)) (:foreground "red"))
-      (((background dark)) (:foreground "gray100"))
-      (((background light)) (:foreground "gray0"))
-      (t (:foreground "gray100" :underline nil)))
+  '((((class color)) (:foreground "red"))
+    (((background dark)) (:foreground "gray100"))
+    (((background light)) (:foreground "gray0"))
+    (t (:foreground "gray100" :underline nil)))
   "Face for each window's leading char.")
 
 (defface aw-background-face
@@ -126,17 +186,32 @@ the reverse of `frame-list'"
   "Face for whole window background during selection.")
 
 (defface aw-mode-line-face
-    '((t (:inherit mode-line-buffer-id)))
+  '((t (:inherit mode-line-buffer-id)))
   "Face used for displaying the ace window key in the mode-line.")
+
+(defface aw-key-face
+  '((t :inherit font-lock-builtin-face))
+  "Face used by `aw-show-dispatch-help'.")
 
 ;;* Implementation
 (defun aw-ignored-p (window)
-  "Return t if WINDOW should be ignored."
+  "Return t if WINDOW should be ignored when choosing from the window list."
   (or (and aw-ignore-on
-           (member (buffer-name (window-buffer window))
-                   aw-ignored-buffers))
+           ;; Ignore major-modes and buffer-names in `aw-ignored-buffers'.
+           (or (memq (buffer-local-value 'major-mode (window-buffer window))
+                     aw-ignored-buffers)
+               (member (buffer-name (window-buffer window)) aw-ignored-buffers)))
+      ;; Ignore selected window if `aw-ignore-current' is non-nil.
       (and aw-ignore-current
-           (equal window (selected-window)))))
+           (equal window (selected-window)))
+      ;; When `ignore-window-parameters' is nil, ignore windows whose
+      ;; `no-other-window’ or `no-delete-other-windows' parameter is non-nil.
+      (unless ignore-window-parameters
+        (cl-case this-command
+          (ace-select-window (window-parameter window 'no-other-window))
+          (ace-delete-window (window-parameter window 'no-delete-other-windows))
+          (ace-delete-other-windows (window-parameter
+                                     window 'no-delete-other-windows))))))
 
 (defun aw-window-list ()
   "Return the list of interesting windows."
@@ -257,30 +332,89 @@ LEAF is (PT . WND)."
 (defun aw-set-mode-line (str)
   "Set mode line indicator to STR."
   (setq ace-window-mode str)
+  (when (and aw-minibuffer-flag ace-window-mode)
+    (message "%s" (string-trim-left str)))
   (force-mode-line-update))
 
-(defvar aw-dispatch-alist
-  '((?x aw-delete-window " Ace - Delete Window")
-    (?m aw-swap-window " Ace - Swap Window")
-    (?M aw-move-window " Ace - Move Window")
-    (?n aw-flip-window)
-    (?c aw-split-window-fair " Ace - Split Fair Window")
-    (?v aw-split-window-vert " Ace - Split Vert Window")
-    (?b aw-split-window-horz " Ace - Split Horz Window")
-    (?i delete-other-windows " Ace - Delete Other Windows")
-    (?o delete-other-windows))
-  "List of actions for `aw-dispatch-default'.")
+(defun aw--dispatch-action (char)
+  "Return item from `aw-dispatch-alist' matching CHAR."
+  (assoc char aw-dispatch-alist))
+
+(defun aw-make-frame ()
+  "Make a new Emacs frame using the values of `aw-frame-size' and `aw-frame-offset'."
+  (make-frame
+   (delq nil
+         (list
+          ;; This first parameter is important because an
+          ;; aw-dispatch-alist command may not want to leave this
+          ;; frame with input focus.  If it is given focus, the
+          ;; command may not be able to return focus to a different
+          ;; frame since this is done asynchronously by the window
+          ;; manager.
+          '(no-focus-on-map . t)
+          (when aw-frame-size
+            (cons 'width
+                  (if (zerop (car aw-frame-size))
+                      (frame-width)
+                    (car aw-frame-size))))
+          (when aw-frame-size
+            (cons 'height
+                  (if (zerop (cdr aw-frame-size))
+                      (frame-height)
+                    (car aw-frame-size))))
+          (cons 'left (+ (car aw-frame-offset)
+                         (car (frame-position))))
+          (cons 'top (+ (cdr aw-frame-offset)
+                        (cdr (frame-position))))))))
+
+(defun aw-use-frame (window)
+  "Create a new frame using the contents of WINDOW.
+
+The new frame is set to the same size as the previous frame, offset by
+`aw-frame-offset' (x . y) pixels."
+  (aw-switch-to-window window)
+  (aw-make-frame))
+
+(defun aw-clean-up-avy-current-path ()
+  "Edit `avy-current-path' so only window label characters remain."
+  ;; Remove any possible ace-window command char that may
+  ;; precede the last specified window label, so
+  ;; functions can use `avy-current-path' as the chosen
+  ;; window label.
+  (when (and (> (length avy-current-path) 0)
+             (assq (aref avy-current-path 0) aw-dispatch-alist))
+    (setq avy-current-path (substring avy-current-path 1))))
 
 (defun aw-dispatch-default (char)
   "Perform an action depending on CHAR."
-  (let ((val (cdr (assoc char aw-dispatch-alist))))
-    (if val
-        (if (and (car val) (cadr val))
-            (prog1 (setq aw-action (car val))
-              (aw-set-mode-line (cadr val)))
-          (funcall (car val))
-          (throw 'done 'exit))
-      (avy-handler-default char))))
+  (cond ((avy-mouse-event-window char))
+        ((= char (aref (kbd "C-g") 0))
+         (throw 'done 'exit))
+        ((= char aw-make-frame-char)
+         ;; Make a new frame and perform any action on its window.
+         (let ((start-win (selected-window))
+               (end-win (frame-selected-window (aw-make-frame))))
+           (if aw-action
+               ;; Action must be called from the start-win.  The action
+               ;; determines which window to leave selected.
+               (progn (select-frame-set-input-focus (window-frame start-win))
+                      (funcall aw-action end-win))
+             ;; Select end-win when no action
+             (aw-switch-to-window end-win)))
+         (throw 'done 'exit))
+        (t
+         (let ((action (aw--dispatch-action char)))
+           (if action
+               (cl-destructuring-bind (_key fn &optional description) action
+                 (if (and fn description)
+                     (prog1 (setq aw-action fn)
+                       (aw-set-mode-line (format " Ace - %s" description)))
+                   (funcall fn)
+                   (throw 'done 'exit)))
+             (aw-clean-up-avy-current-path)
+             ;; Prevent any char from triggering an avy dispatch command.
+             (let ((avy-dispatch-alist))
+               (avy-handler-default char)))))))
 
 (defun aw-select (mode-line &optional action)
   "Return a selected other window.
@@ -304,7 +438,7 @@ Amend MODE-LINE to the mode line for the duration of the selection."
                    (when (eq aw-action 'exit)
                      (setq aw-action nil)))
                  (or (car wnd-list) start-window))
-                ((and (= (length wnd-list) 2)
+                ((and (<= (length wnd-list) aw-dispatch-when-more-than)
                       (not aw-dispatch-always)
                       (not aw-ignore-current))
                  (let ((wnd (next-window nil nil next-window-scope)))
@@ -367,7 +501,7 @@ Amend MODE-LINE to the mode line for the duration of the selection."
              #'delete-other-windows))
 
 (define-obsolete-function-alias
-  'ace-maximize-window 'ace-delete-other-windows "0.10.0")
+    'ace-maximize-window 'ace-delete-other-windows "0.10.0")
 
 ;;;###autoload
 (defun ace-window (arg)
@@ -454,6 +588,25 @@ Windows are numbered top down, left to right."
   (interactive)
   (aw-switch-to-window (aw--pop-window)))
 
+(defun aw-show-dispatch-help ()
+  "Display action shortucts in echo area."
+  (interactive)
+  (message "%s" (mapconcat
+                 (lambda (action)
+                   (cl-destructuring-bind (key fn &optional description) action
+                     (format "%s: %s"
+                             (propertize
+                              (char-to-string key)
+                              'face 'aw-key-face)
+                             (or description fn))))
+                 aw-dispatch-alist
+                 "\n"))
+  ;; Prevent this from replacing any help display
+  ;; in the minibuffer.
+  (let (aw-minibuffer-flag)
+    (mapc #'delete-overlay aw-overlays-back)
+    (call-interactively 'ace-window)))
+
 (defun aw-delete-window (window)
   "Delete window WINDOW."
   (let ((frame (window-frame window)))
@@ -465,6 +618,21 @@ Windows are numbered top down, left to right."
       (if (window-live-p window)
           (delete-window window)
         (error "Got a dead window %S" window)))))
+
+(defun aw-switch-buffer-in-window (window)
+  "Select buffer in WINDOW."
+  (aw-switch-to-window window)
+  (aw--switch-buffer))
+
+(declare-function ivy-switch-buffer "ext:ivy")
+
+(defun aw--switch-buffer ()
+  (cond ((bound-and-true-p ivy-mode)
+         (ivy-switch-buffer))
+        ((bound-and-true-p ido-mode)
+         (ido-switch-buffer))
+        (t
+         (call-interactively 'switch-to-buffer))))
 
 (defcustom aw-swap-invert nil
   "When non-nil, the other of the two swapped windows gets the point."
@@ -524,6 +692,12 @@ Modify `aw-fair-aspect-ratio' to tweak behavior."
         (aw-split-window-horz window)
       (aw-split-window-vert window))))
 
+(defun aw-switch-buffer-other-window (window)
+  "Switch buffer in WINDOW without selecting WINDOW."
+  (aw-switch-to-window window)
+  (aw--switch-buffer)
+  (aw-flip-window))
+
 (defun aw-offset (window)
   "Return point in WINDOW that's closest to top left corner.
 The point is writable, i.e. it's not part of space after newline."
@@ -545,7 +719,7 @@ The point is writable, i.e. it's not part of space after newline."
 ;;* Mode line
 ;;;###autoload
 (define-minor-mode ace-window-display-mode
-    "Minor mode for showing the ace window key in the mode line."
+  "Minor mode for showing the ace window key in the mode line."
   :global t
   (if ace-window-display-mode
       (progn
@@ -558,24 +732,34 @@ The point is writable, i.e. it's not part of space after newline."
               'ace-window-display-mode
               (default-value 'mode-line-format))))
         (force-mode-line-update t)
-        (add-hook 'window-configuration-change-hook 'aw-update))
+        (add-hook 'window-configuration-change-hook 'aw-update)
+        ;; Add at the end so does not precede select-frame call.
+        (add-hook 'after-make-frame-functions (lambda (_) (aw-update)) t))
     (set-default
      'mode-line-format
      (assq-delete-all
       'ace-window-display-mode
       (default-value 'mode-line-format)))
-    (remove-hook 'window-configuration-change-hook 'aw-update)))
+    (remove-hook 'window-configuration-change-hook 'aw-update)
+    (remove-hook 'after-make-frame-functions 'aw-update)))
 
 (defun aw-update ()
-  "Update ace-window-path window parameter for all windows."
-  (avy-traverse
-   (avy-tree (aw-window-list) aw-keys)
-   (lambda (path leaf)
-     (set-window-parameter
-      leaf 'ace-window-path
-      (propertize
-       (apply #'string (reverse path))
-       'face 'aw-mode-line-face)))))
+  "Update ace-window-path window parameter for all windows.
+
+Ensure all windows are labeled so the user can select a specific
+one, even from the set of windows typically ignored when making a
+window list."
+  (let ((aw-ignore-on)
+        (aw-ignore-current)
+        (ignore-window-parameters t))
+    (avy-traverse
+     (avy-tree (aw-window-list) aw-keys)
+     (lambda (path leaf)
+       (set-window-parameter
+        leaf 'ace-window-path
+        (propertize
+         (apply #'string (reverse path))
+         'face 'aw-mode-line-face))))))
 
 (provide 'ace-window)
 
