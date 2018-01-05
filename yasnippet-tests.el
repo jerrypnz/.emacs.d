@@ -297,40 +297,51 @@ attention to case differences."
 ;;     (should (string= (yas--buffer-contents)
 ;;                      "brother from another mother!"))))
 
-(ert-deftest undo-indentation ()
-  "Check undoing works when only line of snippet is indented."
-  (let ((yas-also-auto-indent-first-line t))
-    (yas-with-snippet-dirs
-     '((".emacs.d/snippets" ("emacs-lisp-mode" ("s" . "(setq $0)"))))
-     (with-temp-buffer
-       (emacs-lisp-mode)
-       (yas-reload-all)
-       (yas-minor-mode 1)
-       (insert "(let\n(while s")
+(defun yas-test-expand-and-undo (mode snippet-entry initial-contents)
+  (yas-with-snippet-dirs
+   `((".emacs.d/snippets" (,(symbol-name mode) ,snippet-entry)))
+   (with-temp-buffer
+     (funcall mode)
+     (yas-reload-all)
+     (yas-minor-mode 1)
+     (yas-expand-snippet initial-contents)
+     (let ((pre-expand-string (buffer-string)))
        (setq buffer-undo-list ())
        (ert-simulate-command '(yas-expand))
        ;; Need undo barrier, I think command loop puts it normally.
        (push nil buffer-undo-list)
-       (should (string= (buffer-string) "(let\n    (while (setq )"))
        (ert-simulate-command '(undo))
-       (should (string= (buffer-string) "(let\n(while s"))))))
+       (should (string= (buffer-string) pre-expand-string))))))
 
-(ert-deftest undo-indentation-multiline ()
-  "Check undoing works when first line of multi-line snippet is indented."
-  (yas-with-snippet-dirs
-    '((".emacs.d/snippets" ("js-mode" ("if" . "if ($1) {\n\n}\n"))))
-    (with-temp-buffer
-      (js-mode)
-      (yas-reload-all)
-      (yas-minor-mode 1)
-      (insert "if\nabc = 123456789 + abcdef;")
-      (setq buffer-undo-list ())
-      (goto-char (point-min))
-      (search-forward "if")
-      (ert-simulate-command '(yas-expand))
-      (push nil buffer-undo-list)       ; See test above.
-      (ert-simulate-command '(undo))
-      (should (string= (buffer-string) "if\nabc = 123456789 + abcdef;")))))
+(ert-deftest undo-indentation-1 ()
+  "Check undoing works when only line of snippet is indented."
+  (let ((yas-also-auto-indent-first-line t))
+    (yas-test-expand-and-undo
+     'emacs-lisp-mode '("s" . "(setq $0)") "(let\n(while s$0")))
+
+(ert-deftest undo-indentation-2 ()
+  "Check undoing works when only line of snippet is indented."
+  (let ((yas-also-auto-indent-first-line t)
+        (indent-tabs-mode nil))
+    (yas-test-expand-and-undo
+     'emacs-lisp-mode '("t" . "; TODO") "t$0")))
+
+(ert-deftest undo-indentation-multiline-1 ()
+  "Check undoing works when 1st line of multi-line snippet is indented."
+  (let ((yas-also-auto-indent-first-line t)
+        (indent-tabs-mode nil))
+    (yas-test-expand-and-undo
+     'js-mode '("if" . "if ($1) {\n\n}\n")
+     "if$0\nabc = 123456789 + abcdef;")))
+
+
+(ert-deftest undo-indentation-multiline-2 ()
+  "Check undoing works when 2nd line of multi-line snippet is indented."
+  (let ((yas-also-auto-indent-first-line t)
+        (indent-tabs-mode nil))
+    (yas-test-expand-and-undo
+     'js-mode '("if" . "if (true) {\n${1:foo};\n}\n")
+     "if$0\nabc = 123456789 + abcdef;")))
 
 (ert-deftest dont-clear-on-partial-deletion-issue-515 ()
   "Ensure fields are not cleared when user doesn't really mean to."
@@ -613,6 +624,19 @@ mapconcat #'(lambda (arg)
     (yas-minor-mode 1)
     (yas-expand-snippet "${1:$$(if (not yas-modified-p) \"a\")}")
     (yas-expand-snippet "\\\\alpha")))
+
+(ert-deftest expand-with-unused-yas-selected-text ()
+  (with-temp-buffer
+    (yas-with-snippet-dirs
+      '((".emacs.d/snippets"
+         ("emacs-lisp-mode"
+          ("foo" . "expanded `yas-selected-text`foo"))))
+      (yas-reload-all)
+      (emacs-lisp-mode)
+      (yas-minor-mode +1)
+      (insert "foo")
+      (ert-simulate-command '(yas-expand))
+      (should (equal (buffer-string) "expanded foo")))))
 
 (ert-deftest example-for-issue-271 ()
   (with-temp-buffer
@@ -1340,7 +1364,7 @@ TODO: be meaner"
 
 (ert-deftest yas-org-native-tab-in-source-block ()
   "Test expansion of snippets in org source blocks."
-  :expected-result (if (fboundp 'org-in-src-block-p)
+  :expected-result (if (and (fboundp 'org-in-src-block-p) (version< (org-version) "9"))
                        :passed :failed)
   (yas-saving-variables
    (yas-with-snippet-dirs
@@ -1406,5 +1430,6 @@ add the snippets associated with the given mode."
 (provide 'yasnippet-tests)
 ;; Local Variables:
 ;; indent-tabs-mode: nil
+;; autoload-compute-prefixes: nil
 ;; End:
 ;;; yasnippet-tests.el ends here
