@@ -57,6 +57,12 @@
       mac-command-modifier 'meta
       mac-option-modifier 'super)
 
+;; Smooth scroll
+(setq scroll-step            1
+      scroll-conservatively  10000
+      scroll-margin          5
+      scroll-preserve-screen-position t)
+
 ;; No ring bell at all.
 (setq ring-bell-function 'ignore)
 
