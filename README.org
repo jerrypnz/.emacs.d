@@ -1,6 +1,7 @@
 * New Emacs Config
 
-It's still work-in-progress.
+My personal Emacs config structured using =use-package= and git
+subtrees.
 
 ** Screenshot
 
@@ -13,7 +14,7 @@ It's still work-in-progress.
 - generic symbol/function search
 - +go+
 - +scala+
-- =clojure=
+- +clojure+
 - =scheme/racket=
 - =python=
 - +PHP+
@@ -54,7 +55,7 @@ It's still work-in-progress.
 
 *** Org
 
-- =deft=
+- +deft+
 - Port my org config from my old repo
 - GTD using org
 
