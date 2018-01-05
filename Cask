@@ -1,7 +1,7 @@
 (source melpa)
 (source gnu)
 
-(package "smartparens" "1.10.1"
+(package "smartparens" "1.11.0"
          "Automatic insertion, wrapping and paredit-like navigation with user defined pairs.")
 
 (depends-on "cl-lib" "0.3")
@@ -24,6 +24,7 @@
   (depends-on "tuareg")
   (depends-on "scala-mode")
   (depends-on "elixir-mode")
+  (depends-on "haskell-mode")
   (depends-on "markdown-mode")
   (depends-on "hungry-delete")
   (depends-on "evil"))
