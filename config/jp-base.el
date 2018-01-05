@@ -81,8 +81,7 @@
          ("C-c n"   . create-new-buffer)
          ("C-;"     . insert-semicolon-at-end-of-line)
          ("C-M-;"   . comment-current-line-dwim)
-         ("C-o"     . start-newline-after)
-         ("M-o"     . start-newline-before)
+         ("C-o"     . jp-newline)
          ("M-j"     . join-next-line)
          ("M-m t n" . toggle-linum)))
 
@@ -185,7 +184,7 @@
 ;; ace-window
 (use-package ace-window
   :bind
-  (("M-p" . ace-window))
+  (("M-o" . ace-window))
   :config
   (progn
     (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))))
@@ -193,7 +192,7 @@
 ;; window management hydra
 (use-package jp-window
   :bind
-  ("C-M-p" . jp-window/body))
+  ("C-M-o" . jp-window/body))
 
 (provide 'jp-base)
 ;;; jp-base.el ends here

@@ -55,41 +55,23 @@
     (end-of-line)
     (comment-dwim nil)))
 
-;; TODO Look at a hydra for window resizing
-(defun increase-window-height (&optional arg)
-  "Make the window taller by one line. Useful when bound to a repeatable key combination."
-  (interactive "p")
-  (enlarge-window arg))
-
-(defun decrease-window-height (&optional arg)
-  "Make the window shorter by one line. Useful when bound to a repeatable key combination."
-  (interactive "p")
-  (enlarge-window (- 0 arg)))
-
-(defun decrease-window-width (&optional arg)
-  "Make the window narrower by one column. Useful when bound to a repeatable key combination."
-  (interactive "p")
-  (enlarge-window (- 0 arg) t))
-
-(defun increase-window-width (&optional arg)
-  "Make the window wider by one column. Useful when bound to a repeatable key combination."
-  (interactive "p")
-  (enlarge-window arg t))
-
-(defun start-newline-after ()
-  (interactive)
+(defun jp-newline-below ()
   (end-of-line)
   (newline-and-indent))
 
-(defun start-newline-before ()
-  (interactive)
+(defun jp-newline-above ()
   (if (eq (forward-line -1) 0)
-      (start-newline-after)
+      (jp-newline-below)
     (progn
-      (message "Begin new line at the start")
       (beginning-of-line)
       (newline)
       (forward-line -1))))
+
+(defun jp-newline (above-p)
+  (interactive "P")
+  (if above-p
+      (jp-newline-above)
+    (jp-newline-below)))
 
 (defun join-next-line ()
   (interactive)
