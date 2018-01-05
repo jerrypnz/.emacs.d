@@ -135,9 +135,17 @@ Functions reducing lists into single value.
 * [-reduce-r-from](#-reduce-r-from-fn-initial-value-list) `(fn initial-value list)`
 * [-reduce](#-reduce-fn-list) `(fn list)`
 * [-reduce-r](#-reduce-r-fn-list) `(fn list)`
+* [-reductions-from](#-reductions-from-fn-init-list) `(fn init list)`
+* [-reductions-r-from](#-reductions-r-from-fn-init-list) `(fn init list)`
+* [-reductions](#-reductions-fn-list) `(fn list)`
+* [-reductions-r](#-reductions-r-fn-list) `(fn list)`
 * [-count](#-count-pred-list) `(pred list)`
 * [-sum](#-sum-list) `(list)`
+* [-running-sum](#-running-sum-list) `(list)`
 * [-product](#-product-list) `(list)`
+* [-running-product](#-running-product-list) `(list)`
+* [-inits](#-inits-list) `(list)`
+* [-tails](#-tails-list) `(list)`
 * [-min](#-min-list) `(list)`
 * [-min-by](#-min-by-comparator-list) `(comparator list)`
 * [-max](#-max-list) `(list)`
@@ -233,6 +241,10 @@ Other list functions not fit to be classified elsewhere.
 * [-some](#-some-pred-list) `(pred list)`
 * [-last](#-last-pred-list) `(pred list)`
 * [-first-item](#-first-item-list) `(list)`
+* [-second-item](#-second-item-arg1) `(arg1)`
+* [-third-item](#-third-item-arg1) `(arg1)`
+* [-fourth-item](#-fourth-item-list) `(list)`
+* [-fifth-item](#-fifth-item-list) `(list)`
 * [-last-item](#-last-item-list) `(list)`
 * [-butlast](#-butlast-list) `(list)`
 * [-sort](#-sort-comparator-list) `(comparator list)`
@@ -460,7 +472,7 @@ Return a new list of the items in `list` for which `pred` returns a non-nil valu
 
 Alias: `-select`
 
-See also: [`-keep`](#-keep-fn-list)
+See also: [`-keep`](#-keep-fn-list), [`-remove`](#-remove-pred-list).
 
 ```el
 (-filter (lambda (num) (= 0 (% num 2))) '(1 2 3 4)) ;; => '(2 4)
@@ -473,6 +485,8 @@ See also: [`-keep`](#-keep-fn-list)
 Return a new list of the items in `list` for which `pred` returns nil.
 
 Alias: `-reject`
+
+See also: [`-filter`](#-filter-pred-list).
 
 ```el
 (-remove (lambda (num) (= 0 (% num 2))) '(1 2 3 4)) ;; => '(1 3)
@@ -900,6 +914,62 @@ See also: [`-reduce-r-from`](#-reduce-r-from-fn-initial-value-list), [`-reduce`]
 (--reduce-r (format "%s-%s" acc it) '(1 2 3)) ;; => "3-2-1"
 ```
 
+#### -reductions-from `(fn init list)`
+
+Return a list of the intermediate values of the reduction.
+
+See [`-reduce-from`](#-reduce-from-fn-initial-value-list) for explanation of the arguments.
+
+See also: [`-reductions`](#-reductions-fn-list), [`-reductions-r`](#-reductions-r-fn-list), [`-reduce-r`](#-reduce-r-fn-list)
+
+```el
+(-reductions-from (lambda (a i) (format "(%s FN %s)" a i)) "INIT" '(1 2 3 4)) ;; => '("INIT" "(INIT FN 1)" "((INIT FN 1) FN 2)" "(((INIT FN 1) FN 2) FN 3)" "((((INIT FN 1) FN 2) FN 3) FN 4)")
+(-reductions-from 'max 0 '(2 1 4 3)) ;; => '(0 2 2 4 4)
+(-reductions-from '* 1 '(1 2 3 4)) ;; => '(1 1 2 6 24)
+```
+
+#### -reductions-r-from `(fn init list)`
+
+Return a list of the intermediate values of the reduction.
+
+See [`-reduce-r-from`](#-reduce-r-from-fn-initial-value-list) for explanation of the arguments.
+
+See also: [`-reductions-r`](#-reductions-r-fn-list), [`-reductions`](#-reductions-fn-list), [`-reduce`](#-reduce-fn-list)
+
+```el
+(-reductions-r-from (lambda (i a) (format "(%s FN %s)" i a)) "INIT" '(1 2 3 4)) ;; => '("(1 FN (2 FN (3 FN (4 FN INIT))))" "(2 FN (3 FN (4 FN INIT)))" "(3 FN (4 FN INIT))" "(4 FN INIT)" "INIT")
+(-reductions-r-from 'max 0 '(2 1 4 3)) ;; => '(4 4 4 3 0)
+(-reductions-r-from '* 1 '(1 2 3 4)) ;; => '(24 24 12 4 1)
+```
+
+#### -reductions `(fn list)`
+
+Return a list of the intermediate values of the reduction.
+
+See [`-reduce`](#-reduce-fn-list) for explanation of the arguments.
+
+See also: [`-reductions-from`](#-reductions-from-fn-init-list), [`-reductions-r`](#-reductions-r-fn-list), [`-reduce-r`](#-reduce-r-fn-list)
+
+```el
+(-reductions (lambda (a i) (format "(%s FN %s)" a i)) '(1 2 3 4)) ;; => '(1 "(1 FN 2)" "((1 FN 2) FN 3)" "(((1 FN 2) FN 3) FN 4)")
+(-reductions '+ '(1 2 3 4)) ;; => '(1 3 6 10)
+(-reductions '* '(1 2 3 4)) ;; => '(1 2 6 24)
+```
+
+#### -reductions-r `(fn list)`
+
+Return a list of the intermediate values of the reduction.
+
+See [`-reduce-r`](#-reduce-r-fn-list) for explanation of the arguments.
+
+See also: [`-reductions-r-from`](#-reductions-r-from-fn-init-list), [`-reductions`](#-reductions-fn-list), [`-reduce`](#-reduce-fn-list)
+
+```el
+(-reductions-r (lambda (i a) (format "(%s FN %s)" i a)) '(1 2 3 4)) ;; => '("(1 FN (2 FN (3 FN 4)))" "(2 FN (3 FN 4))" "(3 FN 4)" 4)
+(-reductions-r '+ '(1 2 3 4)) ;; => '(10 9 7 4)
+(-reductions-r '* '(1 2 3 4)) ;; => '(24 24 12 4)
+```
+
 #### -count `(pred list)`
 
 Counts the number of items in `list` where (`pred` item) is non-nil.
@@ -919,6 +989,18 @@ Return the sum of `list`.
 (-sum '(1 2 3 4)) ;; => 10
 ```
 
+#### -running-sum `(list)`
+
+Return a list with running sums of items in `list`.
+
+`list` must be non-empty.
+
+```el
+(-running-sum '(1 2 3 4)) ;; => '(1 3 6 10)
+(-running-sum '(1)) ;; => '(1)
+(-running-sum '()) ;; Error
+```
+
 #### -product `(list)`
 
 Return the product of `list`.
@@ -927,6 +1009,38 @@ Return the product of `list`.
 (-product '()) ;; => 1
 (-product '(1)) ;; => 1
 (-product '(1 2 3 4)) ;; => 24
+```
+
+#### -running-product `(list)`
+
+Return a list with running products of items in `list`.
+
+`list` must be non-empty.
+
+```el
+(-running-product '(1 2 3 4)) ;; => '(1 2 6 24)
+(-running-product '(1)) ;; => '(1)
+(-running-product '()) ;; Error
+```
+
+#### -inits `(list)`
+
+Return all prefixes of `list`.
+
+```el
+(-inits '(1 2 3 4)) ;; => '(nil (1) (1 2) (1 2 3) (1 2 3 4))
+(-inits nil) ;; => '(nil)
+(-inits '(1)) ;; => '(nil (1))
+```
+
+#### -tails `(list)`
+
+Return all suffixes of `list`
+
+```el
+(-tails '(1 2 3 4)) ;; => '((1 2 3 4) (2 3 4) (3 4) (4) nil)
+(-tails nil) ;; => '(nil)
+(-tails '(1)) ;; => '((1) nil)
 ```
 
 #### -min `(list)`
@@ -1730,12 +1844,62 @@ Return the last x in `list` where (`pred` x) is non-nil, else nil.
 
 Return the first item of `list`, or nil on an empty list.
 
+See also: [`-second-item`](#-second-item-arg1), [`-last-item`](#-last-item-list).
+
 (fn `list`)
 
 ```el
 (-first-item '(1 2 3)) ;; => 1
 (-first-item nil) ;; => nil
 (let ((list (list 1 2 3))) (setf (-first-item list) 5) list) ;; => '(5 2 3)
+```
+
+#### -second-item `(arg1)`
+
+Return the second item of `list`, or nil if `list` is too short.
+
+See also: [`-third-item`](#-third-item-arg1).
+
+(fn `list`)
+
+```el
+(-second-item '(1 2 3)) ;; => 2
+(-second-item nil) ;; => nil
+```
+
+#### -third-item `(arg1)`
+
+Return the third item of `list`, or nil if `list` is too short.
+
+See also: [`-fourth-item`](#-fourth-item-list).
+
+(fn `list`)
+
+```el
+(-third-item '(1 2 3)) ;; => 3
+(-third-item nil) ;; => nil
+```
+
+#### -fourth-item `(list)`
+
+Return the fourth item of `list`, or nil if `list` is too short.
+
+See also: [`-fifth-item`](#-fifth-item-list).
+
+```el
+(-fourth-item '(1 2 3 4)) ;; => 4
+(-fourth-item nil) ;; => nil
+```
+
+#### -fifth-item `(list)`
+
+Return the fifth item of `list`, or nil if `list` is too short.
+
+See also: [`-last-item`](#-last-item-list).
+
+```el
+(-fifth-item '(1 2 3 4 5)) ;; => 5
+(-fifth-item nil) ;; => nil
 ```
 
 #### -last-item `(list)`
