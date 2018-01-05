@@ -36,20 +36,16 @@
 (defvar ivy-overlay-at nil
   "Overlay variable for `ivy-display-function-overlay'.")
 
+(declare-function ivy--truncate-string "ivy")
+
 (defun ivy-left-pad (str width)
-  "Pad STR from left with WIDTH spaces."
-  (let ((padding (make-string width ?\ )))
+  "Return STR, but with each line indented by WIDTH spaces.
+Lines are truncated to the window width."
+  (let ((padding (make-string width ?\s)))
     (mapconcat (lambda (x)
-                 (setq x (concat padding x))
-                 (if (> (length x) (window-width))
-                     (concat
-                      (substring x 0 (- (window-width) 4))
-                      "...")
-                   x))
+                 (ivy--truncate-string (concat padding x) (1- (window-width))))
                (split-string str "\n")
                "\n")))
-
-(declare-function company-abort "ext:company")
 
 (defun ivy-overlay-cleanup ()
   "Clean up after `ivy-display-function-overlay'."
@@ -77,23 +73,27 @@ Then attach the overlay the character before point."
 
 (declare-function org-current-level "org")
 (defvar org-indent-indentation-per-level)
+(defvar ivy-height)
 (defvar ivy-last)
 (defvar ivy-text)
 (defvar ivy-completion-beg)
 (declare-function ivy--get-window "ivy")
+(declare-function ivy-state-current "ivy")
+(declare-function ivy-state-window "ivy")
 
-(defun ivy-overlay-possible-p ()
+(defun ivy-overlay-impossible-p ()
   (or
    (< (- (window-width) (current-column))
       (length (ivy-state-current ivy-last)))
-   (<= (window-height) (+ ivy-height 3))))
+   (<= (window-height) (+ ivy-height 3))
+   (= (point) (point-min))))
 
 (defun ivy-display-function-overlay (str)
   "Called from the minibuffer, display STR in an overlay in Ivy window.
 Hide the minibuffer contents and cursor."
   (if (save-selected-window
         (select-window (ivy-state-window ivy-last))
-        (ivy-overlay-possible-p))
+        (ivy-overlay-impossible-p))
       (let ((buffer-undo-list t))
         (save-excursion
           (forward-line 1)
@@ -117,7 +117,8 @@ Hide the minibuffer contents and cursor."
                 (buffer-substring (point) (line-end-position))
                 (ivy-left-pad
                  str
-                 (+ (if (eq major-mode 'org-mode)
+                 (+ (if (and (eq major-mode 'org-mode)
+                             (bound-and-true-p org-indent-mode))
                         (* org-indent-indentation-per-level (org-current-level))
                       0)
                     (save-excursion
