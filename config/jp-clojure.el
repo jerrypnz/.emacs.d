@@ -22,6 +22,8 @@
   (progn
     ;; REPL history file
     (setq cider-repl-history-file "~/.emacs.d/cider-history")
+    ;; Don't prompt for symbol by default
+    (setq cider-prompt-for-symbol nil)
     ;; nice pretty printing
     (setq cider-repl-use-pretty-printing t)
     ;; nicer font lock in REPL
