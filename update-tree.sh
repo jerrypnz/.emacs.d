@@ -57,3 +57,4 @@ git subtree pull --squash --prefix lisp/highlight-thing.el https://github.com/fg
 git subtree pull --squash --prefix lisp/cider https://github.com/clojure-emacs/cider.git v0.16.0
 git subtree pull --squash --prefix lisp/clojure-mode https://github.com/clojure-emacs/clojure-mode.git 5.6.1
 git subtree pull --squash --prefix lisp/spinner.el https://github.com/Malabarba/spinner.el.git master
+git subtree pull --squash --prefix lisp/move-border https://github.com/ramnes/move-border.git master

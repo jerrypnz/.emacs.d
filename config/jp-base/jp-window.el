@@ -10,6 +10,7 @@
 
 (require 'hydra)
 (require 'ace-window)
+(require 'move-border)
 
 (defun jp-text-scale-reset ()
   "Reset text scale."
@@ -34,10 +35,10 @@
   ("a" ace-select-window)
   ("o" other-window)
   ;; resize
-  ("h" shrink-window-horizontally)
-  ("j" shrink-window)
-  ("k" enlarge-window)
-  ("l" enlarge-window-horizontally)
+  ("h" move-border-left)
+  ("j" move-border-down)
+  ("k" move-border-up)
+  ("l" move-border-right)
   ;; split
   ("b" split-window-right)
   ("v" split-window-below)
