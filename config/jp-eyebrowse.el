@@ -25,7 +25,7 @@
                                           (shorten-directory project-name 32)))))
 
     (eval-after-load "counsel-projectile"
-      '(define-key projectile-mode-map [remap projectile-switch-project] #'jp-eyebrowse-switch-project))
+      '(define-key counsel-projectile-mode-map [remap projectile-switch-project] #'jp-eyebrowse-switch-project))
 
     (setq eyebrowse-new-workspace 'jp-eyebrowse-switch-project)
     (setq eyebrowse-tagged-slot-format "%s [%t]")
