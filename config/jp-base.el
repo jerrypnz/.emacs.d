@@ -155,6 +155,7 @@
   :config
   (progn
     (setq highlight-thing-case-sensitive-p t)
+    (setq highlight-thing-delay-seconds 0.1)
     (set-face-attribute
      'highlight-thing nil
      ;; Using a lighter background color for hightlighted symbols whil
