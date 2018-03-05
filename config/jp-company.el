@@ -20,12 +20,16 @@
           company-minimum-prefix-length 1
           company-require-match nil
           company-transformers '(company-sort-by-occurrence)
-          company-dabbrev-ignore-case nil
-          company-dabbrev-downcase nil
           company-frontends '(company-pseudo-tooltip-unless-just-one-frontend
                               company-preview-frontend
                               company-echo-metadata-frontend))
     (global-company-mode t)))
+
+(use-package company-dabbrev
+  :config
+  (progn
+    (setq company-dabbrev-ignore-case nil
+          company-dabbrev-downcase nil)))
 
 (use-package company-yasnippet
   :bind
