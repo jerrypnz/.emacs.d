@@ -24,7 +24,7 @@
   (if (and (projectile-project-p)
            (not current-dir-p))
       (counsel-projectile-rg)
-    (counsel-rg "" default-directory)))
+    (counsel-rg "" default-directory "" (format "[%s] rg" default-directory))))
 
 (defvar counsel-projectile-rg-initial-input nil) ;; defined in counsel-projectile.el
 
@@ -35,7 +35,7 @@
       (let ((counsel-projectile-rg-initial-input '(thing-at-point 'symbol t)))
         (counsel-projectile-rg))
     (let ((sym (thing-at-point 'symbol t)))
-      (counsel-rg sym default-directory))))
+      (counsel-rg sym default-directory "" (format "[%s] rg" default-directory)))))
 
 (provide 'jp-projectile-utils)
 ;;; jp-projectile-utils.el ends here
