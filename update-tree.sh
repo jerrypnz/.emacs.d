@@ -59,3 +59,4 @@ git subtree pull --squash --prefix lisp/clojure-mode https://github.com/clojure-
 git subtree pull --squash --prefix lisp/spinner.el https://github.com/Malabarba/spinner.el.git master
 git subtree pull --squash --prefix lisp/move-border https://github.com/ramnes/move-border.git master
 git subtree pull --squash --prefix lisp/puppet-syntax-emacs https://github.com/puppetlabs/puppet-syntax-emacs.git master
+git subtree pull --squash --prefix lisp/frame-cmds https://github.com/emacsmirror/frame-cmds.git master
