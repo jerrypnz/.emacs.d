@@ -112,6 +112,7 @@
 (use-package highlight-sexp
   :config
   (progn
+    (setq hl-sexp-background-color "#383d47")
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
