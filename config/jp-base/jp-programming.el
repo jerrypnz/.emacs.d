@@ -42,6 +42,7 @@
 (defun jp-pairs ()
   (smartparens-mode t))
 
+;;; show pairs
 (defun jp-show-pairs ()
   (show-paren-mode nil)
   (setq blink-matching-paren nil)

@@ -112,7 +112,7 @@
 (use-package highlight-sexp
   :config
   (progn
-    (setq hl-sexp-background-color "#383d47")
+    (setq hl-sexp-background-color "#22252b")
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
@@ -164,7 +164,7 @@
      ;; lighter versions of a color:
      ;; https://www.w3schools.com/colors/colors_picker.asp
      :inherit nil
-     :foreground nil :background "#434956")
+     :foreground nil :background "#383d47")
     (global-highlight-thing-mode)
 
     (eval-after-load "swiper"
