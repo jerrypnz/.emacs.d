@@ -60,3 +60,5 @@ git subtree pull --squash --prefix lisp/spinner.el https://github.com/Malabarba/
 git subtree pull --squash --prefix lisp/move-border https://github.com/ramnes/move-border.git master
 git subtree pull --squash --prefix lisp/puppet-syntax-emacs https://github.com/puppetlabs/puppet-syntax-emacs.git master
 git subtree pull --squash --prefix lisp/frame-cmds https://github.com/emacsmirror/frame-cmds.git master
+git subtree pull --squash --prefix lisp/zoom-frm https://github.com/emacsmirror/zoom-frm.git master
+

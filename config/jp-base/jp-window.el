@@ -11,11 +11,12 @@
 (require 'hydra)
 (require 'ace-window)
 (require 'move-border)
+(require 'zoom-frm)
 
-(defun jp-text-scale-reset ()
+(defun jp-zoom-default ()
   "Reset text scale."
   (interactive)
-  (text-scale-increase 0))
+  (zoom-in/out 0))
 
 (defhydra jp-window (:hint nil :foreign-keys warn)
   "
@@ -43,10 +44,10 @@
   ("b" split-window-right)
   ("v" split-window-below)
   ;; zoom
-  ("+" text-scale-increase)
-  ("=" text-scale-increase)
-  ("-" text-scale-decrease)
-  ("0" jp-text-scale-reset)
+  ("+" zoom-in)
+  ("=" zoom-in)
+  ("-" zoom-out)
+  ("0" jp-zoom-default)
   ("q" nil))
 
 (provide 'jp-window)
