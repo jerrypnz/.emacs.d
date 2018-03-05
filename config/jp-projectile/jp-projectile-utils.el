@@ -26,5 +26,16 @@
       (counsel-projectile-rg)
     (counsel-rg "" default-directory)))
 
+(defvar counsel-projectile-rg-initial-input nil) ;; defined in counsel-projectile.el
+
+(defun jp-search-symbol-at-pt (current-dir-p)
+  (interactive "P")
+  (if (and (projectile-project-p)
+           (not current-dir-p))
+      (let ((counsel-projectile-rg-initial-input '(thing-at-point 'symbol t)))
+        (counsel-projectile-rg))
+    (let ((sym (thing-at-point 'symbol t)))
+      (counsel-rg sym default-directory))))
+
 (provide 'jp-projectile-utils)
 ;;; jp-projectile-utils.el ends here

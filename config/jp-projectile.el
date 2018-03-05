@@ -35,7 +35,8 @@
 (use-package jp-projectile-utils
   :bind
   (("C-x b" . jp-switch-buffer)
-   ("M-m /" . jp-search)))
+   ("M-m /" . jp-search)
+   ("M-m *" . jp-search-symbol-at-pt)))
 
 (use-package ibuffer-projectile
   :config
