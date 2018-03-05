@@ -15,23 +15,24 @@ subtrees.
 - +go+
 - +scala+
 - +clojure+
-- =scheme/racket=
-- =python=
+- =Haskell=
+- =Scheme / Racket=
+- =Python=
 - +PHP+
 - +Yaml+
 - +Markdown+
-- =JavaScript/JSON/ES6=
-- =Puppet=
+- =JavaScript / JSON / ES6=
+- +Puppet+
 - =web-mode=
 
 *** Coding
 
-- make company and yasnippet work better
-- hight things under the cursor
+- +make company and yasnippet work better+ (`company-yasnippet` is bound to `C-M-y` now)
+- +hight things under the cursor+
 - make flycheck nicer
   - change keybindings
   - automaticially display errors for current line
-- gtags for certain modes (PHP)
+- +gtags for certain modes (PHP)+ (don't care about PHP anymore)
 
 *** Look and feel
 
@@ -45,7 +46,7 @@ subtrees.
 - better way of managing git subtrees
 - =tiny=
 
-*** Editting
+*** Editing
 
 - find a solution for file templates
   - [[https://github.com/mineo/yatemplate][yatemplate]]?
@@ -65,5 +66,6 @@ subtrees.
 - +undo-tree+
 - create some useful =hydra=.
   - search/replace?
+  - press =C-M-m= for a major mode specific hydra?
   - +window resize/zooming (or =ace-window=)+
   - +window layout management+
