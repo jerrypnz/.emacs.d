@@ -96,6 +96,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-scala)
 (use-package jp-clojure)
 (use-package jp-php)
+(use-package jp-puppet)
 
 ;;; Print overall startup time.
 
