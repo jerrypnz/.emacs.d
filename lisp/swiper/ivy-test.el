@@ -64,7 +64,7 @@
   "Suppress void-function errors.
 
 This advice makes `symbol-function' return nil when called on a
-symbol with no function rather than throwing a void-fucntion
+symbol with no function rather than throwing a void-function
 error. On Emacs 24.4 and above, this has no effect, because
 `symbol-function' already does this, but on 24.3 and earlier, it
 will bring the behavior in line with the newer Emacsen."
@@ -153,10 +153,10 @@ will bring the behavior in line with the newer Emacsen."
 (ert-deftest ivy--split ()
   (should (equal (ivy--split "King of the who?")
                  '("King" "of" "the" "who?")))
-  (should (equal (ivy--split "The  Brittons.")
-                 '("The Brittons.")))
-  (should (equal (ivy--split "Who  are the  Brittons?")
-                 '("Who are" "the Brittons?")))
+  (should (equal (ivy--split "The  Britons.")
+                 '("The Britons.")))
+  (should (equal (ivy--split "Who  are the  Britons?")
+                 '("Who are" "the Britons?")))
   (should (equal (ivy--split "We're  all  Britons and   I   am your   king.")
                  '("We're all Britons"
                    "and  I  am"
@@ -168,6 +168,46 @@ will bring the behavior in line with the newer Emacsen."
   (should (equal (ivy--regex
                   "\\(?:interactive\\|swiper\\) \\(?:list\\|symbol\\)")
                  "\\(\\(?:interactive\\|swiper\\)\\).*?\\(\\(?:list\\|symbol\\)\\)")))
+
+(ert-deftest ivy--split-negation ()
+  (should (equal (ivy--split-negation "") ()))
+  (should (equal (ivy--split-negation "not") '("not")))
+  (should (equal (ivy--split-negation "!not") '("" "not")))
+  (should (equal (ivy--split-negation "not!") '("not")))
+  (should (equal (ivy--split-negation "!not!") '("" "not")))
+  (should (equal (ivy--split-negation "not!not!not") '("not" "not")))
+  (should (equal (ivy--split-negation "not!not\\!not") '("not" "not!not")))
+  (should (equal (ivy--split-negation "\\!not!not\\!not") '("!not" "not!not")))
+  (should (equal (ivy--split-negation "\\!not!notnot\\!") '("!not" "notnot!"))))
+
+(ert-deftest ivy--split-spaces ()
+  (should (equal (ivy--split-spaces "") ()))
+  (should (equal (ivy--split-spaces " ") ()))
+  (should (equal (ivy--split-spaces "  ") ()))
+
+  (should (equal (ivy--split-spaces "a ") '("a")))
+  (should (equal (ivy--split-spaces " a") '("a")))
+  (should (equal (ivy--split-spaces " a ") '("a")))
+  (should (equal (ivy--split-spaces "a  ") '("a")))
+  (should (equal (ivy--split-spaces "  a") '("a")))
+  (should (equal (ivy--split-spaces "  a  ") '("a")))
+
+  (should (equal (ivy--split-spaces "\\ ") '(" ")))
+  (should (equal (ivy--split-spaces "\\  ") '(" ")))
+  (should (equal (ivy--split-spaces " \\ ") '(" ")))
+  (should (equal (ivy--split-spaces "\\ \\ ") '("  ")))
+  (should (equal (ivy--split-spaces "a\\ ") '("a ")))
+  (should (equal (ivy--split-spaces "\\ a") '(" a")))
+  (should (equal (ivy--split-spaces "\\ a\\ ") '(" a ")))
+
+  (should (equal (ivy--split-spaces "a b") '("a" "b")))
+  (should (equal (ivy--split-spaces "a\\ b") '("a b")))
+  (should (equal (ivy--split-spaces " a b\\ ") '("a" "b ")))
+  (should (equal (ivy--split-spaces "\\  a b ") '(" " "a" "b")))
+  (should (equal (ivy--split-spaces " a\\  \\ b ") '("a " " b"))))
+
+(ert-deftest ivy--regex-plus ()
+  (should (equal (ivy--regex-plus "add path\\!") "\\(add\\).*?\\(path!\\)")))
 
 (ert-deftest ivy-partial-2 ()
   (when (fboundp 'read--expression)
@@ -181,6 +221,8 @@ will bring the behavior in line with the newer Emacsen."
 (ert-deftest ivy--regex-fuzzy ()
   (should (string= (ivy--regex-fuzzy "tmux")
                    "\\(t\\).*?\\(m\\).*?\\(u\\).*?\\(x\\)"))
+  (should (string= (ivy--regex-fuzzy ".tmux")
+                   "\\(\\.\\).*?\\(t\\).*?\\(m\\).*?\\(u\\).*?\\(x\\)"))
   (should (string= (ivy--regex-fuzzy "^tmux")
                    "^\\(t\\).*?\\(m\\).*?\\(u\\).*?\\(x\\)"))
   (should (string= (ivy--regex-fuzzy "^tmux$")
