@@ -27,5 +27,9 @@
                               company-echo-metadata-frontend))
     (global-company-mode t)))
 
+(use-package company-yasnippet
+  :bind
+  ("C-M-y" . company-yasnippet))
+
 (provide 'jp-company)
 ;;; jp-company.el ends here
