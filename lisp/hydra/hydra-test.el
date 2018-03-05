@@ -104,17 +104,18 @@
            31 32 (face hydra-face-red)
            42 45 (face hydra-face-red)))))
       (defun hydra-error/first-error nil
-        "Create a hydra with a \"M-g\" body and the heads:
+        "Call the head `first-error' in the \"hydra-error\" hydra.
+
+The heads for the associated hydra are:
 
 \"h\":    `first-error',
 \"j\":    `next-error',
 \"k\":    `previous-error',
 \"SPC\":    `hydra-repeat'
 
-The body can be accessed via `hydra-error/body'.
-
-Call the head: `first-error'."
+The body can be accessed via `hydra-error/body', which is bound to \"M-g\"."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore t))
           (hydra-keyboard-quit)
@@ -140,17 +141,18 @@ Call the head: `first-error'."
            nil)
          nil))
       (defun hydra-error/next-error nil
-        "Create a hydra with a \"M-g\" body and the heads:
+        "Call the head `next-error' in the \"hydra-error\" hydra.
+
+The heads for the associated hydra are:
 
 \"h\":    `first-error',
 \"j\":    `next-error',
 \"k\":    `previous-error',
 \"SPC\":    `hydra-repeat'
 
-The body can be accessed via `hydra-error/body'.
-
-Call the head: `next-error'."
+The body can be accessed via `hydra-error/body', which is bound to \"M-g\"."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore t))
           (hydra-keyboard-quit)
@@ -176,17 +178,18 @@ Call the head: `next-error'."
            nil)
          nil))
       (defun hydra-error/previous-error nil
-        "Create a hydra with a \"M-g\" body and the heads:
+        "Call the head `previous-error' in the \"hydra-error\" hydra.
+
+The heads for the associated hydra are:
 
 \"h\":    `first-error',
 \"j\":    `next-error',
 \"k\":    `previous-error',
 \"SPC\":    `hydra-repeat'
 
-The body can be accessed via `hydra-error/body'.
-
-Call the head: `previous-error'."
+The body can be accessed via `hydra-error/body', which is bound to \"M-g\"."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore t))
           (hydra-keyboard-quit)
@@ -225,15 +228,18 @@ Call the head: `previous-error'."
        (quote
         hydra-error/previous-error))
       (defun hydra-error/body nil
-        "Create a hydra with a \"M-g\" body and the heads:
+        "Call the body in the \"hydra-error\" hydra.
+
+The heads for the associated hydra are:
 
 \"h\":    `first-error',
 \"j\":    `next-error',
 \"k\":    `previous-error',
 \"SPC\":    `hydra-repeat'
 
-The body can be accessed via `hydra-error/body'."
+The body can be accessed via `hydra-error/body', which is bound to \"M-g\"."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore nil))
           (hydra-keyboard-quit)
@@ -322,17 +328,18 @@ The body can be accessed via `hydra-error/body'."
            35 36 (face hydra-face-blue)
            48 49 (face hydra-face-blue)))))
       (defun hydra-toggle/toggle-truncate-lines-and-exit nil
-        "Create a hydra with no body and the heads:
+        "Call the head `toggle-truncate-lines' in the \"hydra-toggle\" hydra.
+
+The heads for the associated hydra are:
 
 \"t\":    `toggle-truncate-lines',
 \"f\":    `auto-fill-mode',
 \"a\":    `abbrev-mode',
 \"q\":    `nil'
 
-The body can be accessed via `hydra-toggle/body'.
-
-Call the head: `toggle-truncate-lines'."
+The body can be accessed via `hydra-toggle/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (hydra-keyboard-quit)
         (setq hydra-curr-body-fn
@@ -344,17 +351,18 @@ Call the head: `toggle-truncate-lines'."
            (function
             toggle-truncate-lines))))
       (defun hydra-toggle/auto-fill-mode-and-exit nil
-        "Create a hydra with no body and the heads:
+        "Call the head `auto-fill-mode' in the \"hydra-toggle\" hydra.
+
+The heads for the associated hydra are:
 
 \"t\":    `toggle-truncate-lines',
 \"f\":    `auto-fill-mode',
 \"a\":    `abbrev-mode',
 \"q\":    `nil'
 
-The body can be accessed via `hydra-toggle/body'.
-
-Call the head: `auto-fill-mode'."
+The body can be accessed via `hydra-toggle/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (hydra-keyboard-quit)
         (setq hydra-curr-body-fn
@@ -365,17 +373,18 @@ Call the head: `auto-fill-mode'."
           (hydra--call-interactively-remap-maybe
            (function auto-fill-mode))))
       (defun hydra-toggle/abbrev-mode-and-exit nil
-        "Create a hydra with no body and the heads:
+        "Call the head `abbrev-mode' in the \"hydra-toggle\" hydra.
+
+The heads for the associated hydra are:
 
 \"t\":    `toggle-truncate-lines',
 \"f\":    `auto-fill-mode',
 \"a\":    `abbrev-mode',
 \"q\":    `nil'
 
-The body can be accessed via `hydra-toggle/body'.
-
-Call the head: `abbrev-mode'."
+The body can be accessed via `hydra-toggle/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (hydra-keyboard-quit)
         (setq hydra-curr-body-fn
@@ -386,23 +395,9 @@ Call the head: `abbrev-mode'."
           (hydra--call-interactively-remap-maybe
            (function abbrev-mode))))
       (defun hydra-toggle/nil nil
-        "Create a hydra with no body and the heads:
+        "Call the head `nil' in the \"hydra-toggle\" hydra.
 
-\"t\":    `toggle-truncate-lines',
-\"f\":    `auto-fill-mode',
-\"a\":    `abbrev-mode',
-\"q\":    `nil'
-
-The body can be accessed via `hydra-toggle/body'.
-
-Call the head: `nil'."
-        (interactive)
-        (hydra-default-pre)
-        (hydra-keyboard-quit)
-        (setq hydra-curr-body-fn
-              (quote hydra-toggle/body)))
-      (defun hydra-toggle/body nil
-        "Create a hydra with no body and the heads:
+The heads for the associated hydra are:
 
 \"t\":    `toggle-truncate-lines',
 \"f\":    `auto-fill-mode',
@@ -411,6 +406,24 @@ Call the head: `nil'."
 
 The body can be accessed via `hydra-toggle/body'."
         (interactive)
+        (require (quote hydra))
+        (hydra-default-pre)
+        (hydra-keyboard-quit)
+        (setq hydra-curr-body-fn
+              (quote hydra-toggle/body)))
+      (defun hydra-toggle/body nil
+        "Call the body in the \"hydra-toggle\" hydra.
+
+The heads for the associated hydra are:
+
+\"t\":    `toggle-truncate-lines',
+\"f\":    `auto-fill-mode',
+\"a\":    `abbrev-mode',
+\"q\":    `nil'
+
+The body can be accessed via `hydra-toggle/body'."
+        (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore nil))
           (hydra-keyboard-quit)
@@ -494,16 +507,17 @@ The body can be accessed via `hydra-toggle/body'."
            7 8 (face hydra-face-amaranth)
            11 12 (face hydra-face-teal)))))
       (defun hydra-vi/next-line nil
-        "Create a hydra with no body and the heads:
+        "Call the head `next-line' in the \"hydra-vi\" hydra.
+
+The heads for the associated hydra are:
 
 \"j\":    `next-line',
 \"k\":    `previous-line',
 \"q\":    `nil'
 
-The body can be accessed via `hydra-vi/body'.
-
-Call the head: `next-line'."
+The body can be accessed via `hydra-vi/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (set-cursor-color "#e52b50")
         (let ((hydra--ignore t))
@@ -530,16 +544,17 @@ Call the head: `next-line'."
            (set-cursor-color "#ffffff"))
          (quote warn)))
       (defun hydra-vi/previous-line nil
-        "Create a hydra with no body and the heads:
+        "Call the head `previous-line' in the \"hydra-vi\" hydra.
+
+The heads for the associated hydra are:
 
 \"j\":    `next-line',
 \"k\":    `previous-line',
 \"q\":    `nil'
 
-The body can be accessed via `hydra-vi/body'.
-
-Call the head: `previous-line'."
+The body can be accessed via `hydra-vi/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (set-cursor-color "#e52b50")
         (let ((hydra--ignore t))
@@ -566,23 +581,9 @@ Call the head: `previous-line'."
            (set-cursor-color "#ffffff"))
          (quote warn)))
       (defun hydra-vi/nil nil
-        "Create a hydra with no body and the heads:
+        "Call the head `nil' in the \"hydra-vi\" hydra.
 
-\"j\":    `next-line',
-\"k\":    `previous-line',
-\"q\":    `nil'
-
-The body can be accessed via `hydra-vi/body'.
-
-Call the head: `nil'."
-        (interactive)
-        (hydra-default-pre)
-        (set-cursor-color "#e52b50")
-        (hydra-keyboard-quit)
-        (setq hydra-curr-body-fn
-              (quote hydra-vi/body)))
-      (defun hydra-vi/body nil
-        "Create a hydra with no body and the heads:
+The heads for the associated hydra are:
 
 \"j\":    `next-line',
 \"k\":    `previous-line',
@@ -590,6 +591,24 @@ Call the head: `nil'."
 
 The body can be accessed via `hydra-vi/body'."
         (interactive)
+        (require (quote hydra))
+        (hydra-default-pre)
+        (set-cursor-color "#e52b50")
+        (hydra-keyboard-quit)
+        (setq hydra-curr-body-fn
+              (quote hydra-vi/body)))
+      (defun hydra-vi/body nil
+        "Call the body in the \"hydra-vi\" hydra.
+
+The heads for the associated hydra are:
+
+\"j\":    `next-line',
+\"k\":    `previous-line',
+\"q\":    `nil'
+
+The body can be accessed via `hydra-vi/body'."
+        (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (set-cursor-color "#e52b50")
         (let ((hydra--ignore nil))
@@ -674,16 +693,17 @@ The body can be accessed via `hydra-vi/body'."
            7 8 (face hydra-face-red)
            9 10 (face hydra-face-blue)))))
       (defun hydra-zoom/lambda-r nil
-        "Create a hydra with no body and the heads:
+        "Call the head `(text-scale-set 0)' in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
 \"1\":    `(text-scale-set 0)'
 
-The body can be accessed via `hydra-zoom/body'.
-
-Call the head: `(text-scale-set 0)'."
+The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore t))
           (hydra-keyboard-quit)
@@ -709,16 +729,17 @@ Call the head: `(text-scale-set 0)'."
            nil)
          nil))
       (defun hydra-zoom/lambda-0-and-exit nil
-        "Create a hydra with no body and the heads:
+        "Call the head `(text-scale-set 0)' in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
 \"1\":    `(text-scale-set 0)'
 
-The body can be accessed via `hydra-zoom/body'.
-
-Call the head: `(text-scale-set 0)'."
+The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (hydra-keyboard-quit)
         (setq hydra-curr-body-fn
@@ -729,7 +750,9 @@ Call the head: `(text-scale-set 0)'."
            (interactive)
            (text-scale-set 0)))))
       (defun hydra-zoom/body nil
-        "Create a hydra with no body and the heads:
+        "Call the body in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
@@ -737,6 +760,7 @@ Call the head: `(text-scale-set 0)'."
 
 The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore nil))
           (hydra-keyboard-quit)
@@ -820,16 +844,17 @@ The body can be accessed via `hydra-zoom/body'."
            7 8 (face hydra-face-red)
            9 10 (face hydra-face-blue)))))
       (defun hydra-zoom/lambda-r nil
-        "Create a hydra with no body and the heads:
+        "Call the head `(text-scale-set 0)' in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
 \"1\":    `(text-scale-set 0)'
 
-The body can be accessed via `hydra-zoom/body'.
-
-Call the head: `(text-scale-set 0)'."
+The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore t))
           (hydra-keyboard-quit)
@@ -855,16 +880,17 @@ Call the head: `(text-scale-set 0)'."
            nil)
          nil))
       (defun hydra-zoom/lambda-0-and-exit nil
-        "Create a hydra with no body and the heads:
+        "Call the head `(text-scale-set 0)' in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
 \"1\":    `(text-scale-set 0)'
 
-The body can be accessed via `hydra-zoom/body'.
-
-Call the head: `(text-scale-set 0)'."
+The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (hydra-keyboard-quit)
         (setq hydra-curr-body-fn
@@ -875,7 +901,9 @@ Call the head: `(text-scale-set 0)'."
            (interactive)
            (text-scale-set 0)))))
       (defun hydra-zoom/body nil
-        "Create a hydra with no body and the heads:
+        "Call the body in the \"hydra-zoom\" hydra.
+
+The heads for the associated hydra are:
 
 \"r\":    `(text-scale-set 0)',
 \"0\":    `(text-scale-set 0)',
@@ -883,6 +911,7 @@ Call the head: `(text-scale-set 0)'."
 
 The body can be accessed via `hydra-zoom/body'."
         (interactive)
+        (require (quote hydra))
         (hydra-default-pre)
         (let ((hydra--ignore nil))
           (hydra-keyboard-quit)
