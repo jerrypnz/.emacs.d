@@ -156,6 +156,7 @@
   :config
   (progn
     (setq highlight-thing-case-sensitive-p t)
+    (setq highlight-thing-exclude-thing-under-point t)
     (setq highlight-thing-delay-seconds 0.1)
     (set-face-attribute
      'highlight-thing nil
