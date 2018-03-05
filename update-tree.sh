@@ -63,3 +63,4 @@ git subtree pull --squash --prefix lisp/frame-cmds https://github.com/emacsmirro
 git subtree pull --squash --prefix lisp/zoom-frm https://github.com/emacsmirror/zoom-frm.git master
 git subtree pull --squash --prefix lisp/frame-fns https://github.com/emacsmirror/frame-fns.git master
 git subtree pull --squash --prefix lisp/misc-fns https://github.com/emacsmirror/misc-fns.git master
+git subtree pull --squash --prefix lisp/highlight-sexp https://github.com/daimrod/highlight-sexp.git master

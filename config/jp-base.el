@@ -108,6 +108,14 @@
 ;; rainbow delimiters
 (use-package rainbow-delimiters)
 
+;; highlight-sexp
+(use-package highlight-sexp
+  :config
+  (progn
+    (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
+    (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
+    (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
+
 ;; undo-tree
 (use-package undo-tree
   :config
