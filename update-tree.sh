@@ -61,4 +61,5 @@ git subtree pull --squash --prefix lisp/move-border https://github.com/ramnes/mo
 git subtree pull --squash --prefix lisp/puppet-syntax-emacs https://github.com/puppetlabs/puppet-syntax-emacs.git master
 git subtree pull --squash --prefix lisp/frame-cmds https://github.com/emacsmirror/frame-cmds.git master
 git subtree pull --squash --prefix lisp/zoom-frm https://github.com/emacsmirror/zoom-frm.git master
-
+git subtree pull --squash --prefix lisp/frame-fns https://github.com/emacsmirror/frame-fns.git master
+git subtree pull --squash --prefix lisp/misc-fns https://github.com/emacsmirror/misc-fns.git master
