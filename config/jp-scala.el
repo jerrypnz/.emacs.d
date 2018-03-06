@@ -20,7 +20,7 @@
       (add-to-list 'completion-ignored-extensions ext)))
   :config
   (progn
-    (require 'jp-scala-editting)
+    (require 'jp-scala-editing)
     (add-hook 'scala-mode-hook
               (lambda ()
                 ;; Add the hook to the end of the list and use buffer local hooks

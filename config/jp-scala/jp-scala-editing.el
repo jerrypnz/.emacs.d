@@ -1,4 +1,4 @@
-;;; jp-scala-editting.el --- An awesome elisp package -*- lexical-binding: t; -*-
+;;; jp-scala-editing.el --- An awesome elisp package -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Jerry Peng
 
@@ -120,5 +120,5 @@ the end of your string."
         (eq 'start-newline-before this-command))
     (jp-scala-insert-margin-on-multiline-string))))
 
-(provide 'jp-scala-editting)
-;;; jp-scala-editting.el ends here
+(provide 'jp-scala-editing)
+;;; jp-scala-editing.el ends here
