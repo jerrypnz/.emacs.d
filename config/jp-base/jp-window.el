@@ -20,8 +20,8 @@
 
 (defhydra jp-window (:hint nil :foreign-keys warn)
   "
- Windows^^        Resize^^   Split        ^^    Zoom
-──────^^──────── ───────^^─ ──────────────^^── ──────^^───────
+ Windows^^        Resize^^   Split^^            Zoom
+────────────^^ ───────^^ ──────────────^^ ─────────────^^
  [_x_] delete     [_h_] ←    [_b_] horizontal   [_+_] in
  [_m_] maximize   [_j_] ↓    [_v_] vertical     [_-_] out
  [_s_] swap       [_k_] ↑    ^^                 [_0_] default
