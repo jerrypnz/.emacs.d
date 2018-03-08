@@ -64,3 +64,4 @@ git subtree pull --squash --prefix lisp/zoom-frm https://github.com/emacsmirror/
 git subtree pull --squash --prefix lisp/frame-fns https://github.com/emacsmirror/frame-fns.git master
 git subtree pull --squash --prefix lisp/misc-fns https://github.com/emacsmirror/misc-fns.git master
 git subtree pull --squash --prefix lisp/highlight-sexp https://github.com/daimrod/highlight-sexp.git master
+git subtree pull --squash --prefix lisp/protobuf-mode https://github.com/emacsmirror/protobuf-mode master

@@ -97,6 +97,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-clojure)
 (use-package jp-php)
 (use-package jp-puppet)
+(use-package jp-protobuf)
 
 ;;; Print overall startup time.
 
