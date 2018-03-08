@@ -18,6 +18,25 @@
   (interactive)
   (zoom-in/out 0))
 
+;; https://github.com/purcell/emacs.d/blob/master/lisp/init-windows.el
+(defun split-window-vertically-instead ()
+  (interactive)
+  (let* ((next-buffer (window-buffer (next-window))))
+    (delete-other-windows)
+    (split-window-vertically)
+    (other-window 1)
+    (switch-to-buffer next-buffer)
+    (other-window 1)))
+
+(defun split-window-horizontally-instead ()
+  (interactive)
+  (let* ((next-buffer (window-buffer (next-window))))
+    (delete-other-windows)
+    (split-window-horizontally)
+    (other-window 1)
+    (switch-to-buffer next-buffer)
+    (other-window 1)))
+
 (defhydra jp-window (:hint nil :foreign-keys warn)
   "
  Windows^^        Resize^^   Split^^            Zoom
