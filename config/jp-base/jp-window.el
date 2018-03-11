@@ -44,7 +44,7 @@
               ("s" ace-swap-window "swap")
               ("a" ace-select-window "select")
               ("o" other-window "cycle")
-              ("q" nil "quit")) ;;TODO fancy hydra bug: this head doesn't appear in the docstring
+              ("q" nil "quit"))
    ;; resize
    "Resize" (("h" move-border-left "←")
              ("j" move-border-down "↓")

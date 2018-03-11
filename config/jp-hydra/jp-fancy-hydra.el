@@ -23,9 +23,7 @@
        -max))
 
 (defun jp-fancy-hydra-gen-heads-docstring (group-name heads max-heads)
-  (-let* ((column-len (jp-fancy-hydra-calc-column-width group-name heads))
-          (heads-n (length heads))
-          (empty-heads (-repeat (- max-heads heads-n) (s-pad-left column-len " " "^^"))))
+  (-let ((column-len (jp-fancy-hydra-calc-column-width group-name heads)))
     (-as-> heads docs
            (-mapcat (-lambda ((key _ hint))
                       (cond
@@ -39,7 +37,8 @@
            (-concat (list (format " %s^^" group-name)
                           (format "%s" (s-pad-right column-len "─" "")))
                     docs
-                    empty-heads)
+                    ;; Add empty rows if it doesn't have as many heads in this column
+                    (-repeat (- max-heads (length docs)) (s-pad-left column-len " " "^^")))
            (-map (lambda (doc) (s-pad-right column-len " " doc)) docs))))
 
 (defun jp-fancy-hydra-gen-body-docstring (hydra-plist)
