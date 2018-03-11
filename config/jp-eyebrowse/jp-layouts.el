@@ -30,7 +30,7 @@
                ("o" eyebrowse-last-window-config   "last")
                ("r" eyebrowse-rename-window-config "rename")
                ("x" eyebrowse-close-window-config  "close")
-               ("q" nil))
+               ("q" nil "quit"))
    "Layouts"  (("a" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :exit t)
                ("s" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2) :exit t)
                ("d" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3) :exit t)
