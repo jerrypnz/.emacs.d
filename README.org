@@ -66,6 +66,7 @@ subtrees.
 - +undo-tree+
 - create some useful =hydra=.
   - search/replace?
+  - record / use keyboard macros?
   - press =C-M-m= for a major mode specific hydra?
   - +window resize/zooming (or =ace-window=)+
   - +window layout management+
