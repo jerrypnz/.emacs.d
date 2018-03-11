@@ -20,18 +20,18 @@
              ("j" rectangle-next-line "↓")
              ("h" rectangle-backward-char "←")
              ("l" rectangle-forward-char "→")
-             ("e" rectangle-exchange-point-and-mark "exchange point")
+             ("e" rectangle-exchange-point-and-mark "exchange")
              ("r" (if (region-active-p)
                       (deactivate-mark)
-                    (rectangle-mark-mode 1)) "reset selection"))
-   "Edit" (("d" kill-rectangle "kill")                    ;; C-x r k
-           ("y" yank-rectangle "yank")                    ;; C-x r y
-           ("w" copy-rectangle-as-kill "copy")            ;; C-x r M-w
-           ("o" open-rectangle "open")                    ;; C-x r o
-           ("t" string-rectangle "string")                  ;; C-x r t
-           ("c" clear-rectangle "clear")                   ;; C-x r c
-           ("N" rectangle-number-lines "line number")            ;; C-x r N
-           )
+                    (rectangle-mark-mode 1)) "reset"))
+   "Edit" (("d" kill-rectangle "kill")
+           ("o" open-rectangle "open")
+           ("t" string-rectangle "string")
+           ("c" clear-rectangle "clear")
+           ("N" rectangle-number-lines "line number"))
+
+   "Copy/Yank" (("w" copy-rectangle-as-kill "copy")
+                ("y" yank-rectangle "yank"))
 
    "Undo" (("u" undo "undo")
            ("q" nil "quit"))))
