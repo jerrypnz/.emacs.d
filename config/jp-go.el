@@ -41,6 +41,11 @@
               (set (make-local-variable 'company-backends) '(company-go))
               (company-mode))))
 
+(use-package go-rename
+  :bind (:map go-mode-map
+              ;;TODO Replace it with major mode hydra
+              ("C-M-m r" . go-rename)))
+
 (use-package jp-go-play
   :commands (go-play))
 
