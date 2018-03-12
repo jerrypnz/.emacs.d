@@ -46,6 +46,33 @@
               ;;TODO Replace it with major mode hydra
               ("C-M-m r" . go-rename)))
 
+(use-package go-guru
+  :bind (:map go-mode-map
+              ;;TODO Replace it with major mode hydra
+              ("C-M-m R" . go-guru-referrers)
+              ("C-M-m I" . go-guru-implements)
+              ("C-M-m F" . go-guru-freevars)
+              ("C-M-m D" . go-guru-describe)
+              ("C-M-m C" . go-guru-callers)
+              ("C-M-m E" . go-guru-callees)
+              ("C-M-m T" . go-guru-callstack)
+              ("C-M-m P" . go-guru-pointsto)
+              ("C-M-m W" . go-guru-whicherrs)
+              ("C-M-m H" . go-guru-peers)
+              ("C-M-m S" . jp-go-guru-set-current-package-as-main))
+  :config
+  (progn
+    ;; Taken from https://gist.github.com/sideshowcoder/0d37c53bbf1d62299600bb723cc20af0
+    (defun jp-go-guru-set-current-package-as-main ()
+      "GoGuru requires the scope to be set to a go package which
+   contains a main, this function will make the current package the
+   active go guru scope, assuming it contains a main"
+      (interactive)
+      (let* ((filename (buffer-file-name))
+             (gopath-src-path (concat (file-name-as-directory (go-guess-gopath)) "src"))
+             (relative-package-path (directory-file-name (file-name-directory (file-relative-name filename gopath-src-path)))))
+        (setq go-guru-scope relative-package-path)))))
+
 (use-package jp-go-play
   :commands (go-play))
 
