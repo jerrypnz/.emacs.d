@@ -59,6 +59,7 @@ subtrees.
 - +deft+
 - Port my org config from my old repo
 - GTD using org
+- Remove org-agenda =M-m= keybinding
 
 *** Misc
 
@@ -66,6 +67,8 @@ subtrees.
 - +undo-tree+
 - create some useful =hydra=.
   - search/replace?
+  - record / use keyboard macros?
+  - hydra for org agenda
   - press =C-M-m= for a major mode specific hydra?
   - +window resize/zooming (or =ace-window=)+
   - +window layout management+
