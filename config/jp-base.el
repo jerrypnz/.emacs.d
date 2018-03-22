@@ -200,7 +200,8 @@
   (("M-o" . ace-window))
   :config
   (progn
-    (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))))
+    (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
+    (setq aw-background nil)))
 
 ;; window management hydra
 (use-package jp-window
