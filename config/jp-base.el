@@ -134,6 +134,7 @@
     "M-m *" "search-symbol-at-point"
     "M-m g" "git"
     "M-m l" "layouts"
+    "M-m m" "major mode hydra"
     "M-m p" "projects"
     "M-m t" "toggles"
     "M-m w" "workspace")
@@ -205,6 +206,12 @@
 (use-package jp-window
   :bind
   ("C-M-o" . jp-window/body))
+
+;; Major mode keys managed by a pretty hydra
+(use-package major-mode-hydra
+  :bind
+  (("C-M-m" . major-mode-hydra)
+   ("M-m m" . major-mode-hydra)))
 
 (provide 'jp-base)
 ;;; jp-base.el ends here

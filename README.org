@@ -70,5 +70,6 @@ subtrees.
   - record / use keyboard macros?
   - hydra for org agenda
   - press =C-M-m= for a major mode specific hydra?
+  - replace =M-m= with a nice hydra and get rid of =which-key=?
   - +window resize/zooming (or =ace-window=)+
   - +window layout management+

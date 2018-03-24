@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(require 'hydra)
+(require 'pretty-hydra)
 (require 'eyebrowse)
 
 (defun jp-eyebrowse-layout-tag (slot)
@@ -24,31 +24,20 @@
                  'shadow)))
     (propertize name 'face face)))
 
-(defhydra jp-layouts (:hint nil :foreign-keys warn)
-  "
-   Actions   ^^      Layouts^^
-  ───────────^^─── ─────────^^───
-   [_n_] next        [_a_] ?a?
-   [_p_] previous    [_s_] ?s?
-   [_o_] other       [_d_] ?d?
-   [_r_] rename      [_f_] ?f?
-   [_x_] close       [_j_] ?j?
-   [_q_] quit        [_k_] ?k?
-           ^^        [_l_] ?l?
-"
-  ("a" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :exit t)
-  ("s" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2) :exit t)
-  ("d" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3) :exit t)
-  ("f" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4) :exit t)
-  ("j" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5) :exit t)
-  ("k" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6) :exit t)
-  ("l" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7) :exit t)
-  ("n" eyebrowse-next-window-config)
-  ("p" eyebrowse-prev-window-config)
-  ("o" eyebrowse-last-window-config)
-  ("r" eyebrowse-rename-window-config)
-  ("x" eyebrowse-close-window-config)
-  ("q" nil))
+(pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn)
+  ("Actions"  (("n" eyebrowse-next-window-config   "next")
+               ("p" eyebrowse-prev-window-config   "previous")
+               ("o" eyebrowse-last-window-config   "last")
+               ("r" eyebrowse-rename-window-config "rename")
+               ("x" eyebrowse-close-window-config  "close")
+               ("q" nil "quit"))
+   "Layouts"  (("a" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :exit t)
+               ("s" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2) :exit t)
+               ("d" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3) :exit t)
+               ("f" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4) :exit t)
+               ("j" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5) :exit t)
+               ("k" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6) :exit t)
+               ("l" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7) :exit t))))
 
 (provide 'jp-layouts)
 ;;; jp-layouts.el ends here
