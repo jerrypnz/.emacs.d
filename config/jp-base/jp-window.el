@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(require 'jp-fancy-hydra)
+(require 'pretty-hydra)
 (require 'ace-window)
 (require 'move-border)
 (require 'zoom-frm)
@@ -37,7 +37,7 @@
     (switch-to-buffer next-buffer)
     (other-window 1)))
 
-(defancyhydra jp-window (:hint nil :foreign-keys warn)
+(pretty-hydra-define jp-window (:hint nil :foreign-keys warn)
   (;; general window management commands
    "Windows" (("x" ace-delete-window "delete")
               ("m" ace-delete-other-windows "maximize")

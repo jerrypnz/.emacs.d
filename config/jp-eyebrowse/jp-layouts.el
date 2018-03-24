@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-(require 'jp-fancy-hydra)
+(require 'pretty-hydra)
 (require 'eyebrowse)
 
 (defun jp-eyebrowse-layout-tag (slot)
@@ -24,7 +24,7 @@
                  'shadow)))
     (propertize name 'face face)))
 
-(defancyhydra jp-layouts (:hint nil :foreign-keys warn)
+(pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn)
   ("Actions"  (("n" eyebrowse-next-window-config   "next")
                ("p" eyebrowse-prev-window-config   "previous")
                ("o" eyebrowse-last-window-config   "last")

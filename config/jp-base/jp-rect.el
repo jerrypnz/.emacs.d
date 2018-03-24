@@ -8,14 +8,14 @@
 
 ;;; Code:
 
-(require 'jp-fancy-hydra)
+(require 'pretty-hydra)
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Rectangle-Operations
-(defancyhydra jp-rectangle (:body-pre (rectangle-mark-mode 1)
-                                      :color pink
-                                      :hint nil
-                                      :post (deactivate-mark)
-                                      :foreign-keys warn)
+(pretty-hydra-define jp-rectangle (:body-pre (rectangle-mark-mode 1)
+                                             :color pink
+                                             :hint nil
+                                             :post (deactivate-mark)
+                                             :foreign-keys warn)
   ("Select" (("k" rectangle-previous-line "↑")
              ("j" rectangle-next-line "↓")
              ("h" rectangle-backward-char "←")
