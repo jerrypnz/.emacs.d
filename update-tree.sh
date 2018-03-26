@@ -66,3 +66,4 @@ git subtree pull --squash --prefix lisp/misc-fns https://github.com/emacsmirror/
 git subtree pull --squash --prefix lisp/highlight-sexp https://github.com/daimrod/highlight-sexp.git master
 git subtree pull --squash --prefix lisp/protobuf-mode https://github.com/emacsmirror/protobuf-mode master
 git subtree pull --squash --prefix lisp/major-mode-hydra.el https://github.com/jerrypnz/major-mode-hydra.el.git milestone-1
+git subtree pull --squash --prefix lisp/magit-gitflow https://github.com/jtatarik/magit-gitflow.git master
