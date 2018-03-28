@@ -15,7 +15,12 @@
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
          ("\\.cljc\\'" . clojurec-mode)
-         ("\\.cljx\\'" . clojurex-mode)))
+         ("\\.cljx\\'" . clojurex-mode))
+  :config
+  (progn
+    (define-clojure-indent
+      ;; expectations
+      (expect 0))))
 
 (use-package cider
   :config
