@@ -125,7 +125,15 @@ If argument INTERACTIVE-P is set, log additional information."
  '(custom-safe-themes
    (quote
     ("7ef2884658a1fed818a11854c232511fa25721c60083a2695e6ea34ce14777ee" default)))
- '(package-selected-packages (quote (flycheck))))
+ '(package-selected-packages (quote (flycheck)))
+ '(safe-local-variable-values
+   (quote
+    ((eval progn
+           (aggressive-indent-mode -1)
+           (define-clojure-indent
+             (expect 0)
+             (expect-search 0)
+             (expect-next 0)))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
