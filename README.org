@@ -79,3 +79,4 @@ subtrees.
 - better projectile discovery
   - configurable root directory for projects, where it detects projects automaticially
   - discover projects in those root directories whenever it switches project
+- clean up =jp-base=
