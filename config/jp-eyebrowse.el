@@ -14,15 +14,16 @@
 (use-package eyebrowse
   :config
   (progn
-    ;; Switch to a project and use its name (shorten) as the tag of
-    ;; the window config TODO `shorten-directory' is defined in
-    ;; `jp-modeline.el' - move it to a common lib
+    ;; Switch to a project and use its name as the tag of
+    ;; the window config
     (defun jp-eyebrowse-switch-project ()
       (interactive)
       (let ((project-name (counsel-projectile-switch-project)))
         (when (> (length project-name) 0)
-          (eyebrowse-rename-window-config (eyebrowse--get 'current-slot)
-                                          (shorten-directory project-name 32)))))
+          (eyebrowse-rename-window-config
+           (eyebrowse--get 'current-slot)
+           ;;(shorten-directory project-name 32)
+           (file-name-nondirectory (directory-file-name project-name))))))
 
     (eval-after-load "counsel-projectile"
       '(define-key counsel-projectile-mode-map [remap projectile-switch-project] #'jp-eyebrowse-switch-project))
