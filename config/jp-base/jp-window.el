@@ -49,7 +49,8 @@
    "Resize" (("h" move-border-left "←")
              ("j" move-border-down "↓")
              ("k" move-border-up "↑")
-             ("l" move-border-right "→"))
+             ("l" move-border-right "→")
+             ("n" balance-windows "balance"))
    ;; split
    "Split"  (("b" split-window-right "horizontally")
              ("B" split-window-horizontally-instead "horizontally instead")
