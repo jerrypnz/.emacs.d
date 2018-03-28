@@ -97,5 +97,16 @@
 ;; 2-space indent for CSS
 (setq css-indent-offset 2)
 
+(defvar jp-ediff-last-windows nil)
+
+(defun jp-store-pre-ediff-winconfig ()
+  (setq jp-ediff-last-windows (current-window-configuration)))
+
+(defun jp-restore-pre-ediff-winconfig ()
+  (set-window-configuration jp-ediff-last-windows))
+
+(add-hook 'ediff-before-setup-hook #'jp-store-pre-ediff-winconfig)
+(add-hook 'ediff-quit-hook #'jp-restore-pre-ediff-winconfig)
+
 (provide 'jp-programming)
 ;;; jp-programming.el ends here
