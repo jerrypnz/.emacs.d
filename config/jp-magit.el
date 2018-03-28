@@ -31,5 +31,11 @@
   :bind
   (("M-m g t" . git-timemachine)))
 
+;; git-workflow
+(use-package magit-gitflow
+  :config
+  (progn
+    (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)))
+
 (provide 'jp-magit)
 ;;; jp-magit.el ends here
