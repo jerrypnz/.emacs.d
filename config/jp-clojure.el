@@ -11,6 +11,9 @@
 (eval-when-compile
   (require 'use-package))
 
+;; major mode hydra
+(require 'major-mode-hydra)
+
 (use-package clojure-mode
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
@@ -23,6 +26,37 @@
       (expect 0))))
 
 (use-package cider
+  :init
+  (progn
+    (major-mode-hydra-bind clojure-mode "Connect"
+      ("j" #'cider-jack-in "jack-in")
+      ("J" #'cider-jack-in-clojurescript "jack-in-cljs")
+      ("c" #'cider-connect "connect")
+      ("R" #'cider-restart "restart")
+      ("Q" #'cider-quit "quit"))
+    (major-mode-hydra-bind clojure-mode "Load"
+      ("k" #'cider-load-buffer "buffer")
+      ("l" #'cider-load-file "file")
+      ("L" #'cider-load-all-project-ns "all-ns")
+      ("r" #'cider-refresh "reload"))
+    (major-mode-hydra-bind clojure-mode "Eval"
+      ("e" #'cider-eval-last-sexp-to-repl "eval-last")
+      ("f" #'cider-eval-defun-at-point "eval-defun")
+      ("d" '(cider-eval-defun-at-point t) "debug-defun")
+      ("i" #'cider-interrupt "interrupt"))
+    (major-mode-hydra-bind clojure-mode "Test"
+      ("t" #'cider-test-run-ns-tests "ns")
+      ("T" #'cider-test-run-loaded-tests "loaded")
+      ("F" #'cider-test-rerun-failed-tests "failed"))
+    (major-mode-hydra-bind clojure-mode "Find"
+      ("n" #'cider-find-ns "ns"))
+    (major-mode-hydra-bind clojure-mode "Docs"
+      ("d" #'cider-doc "doc")))
+
+  :commands (cider-jack-in
+             cider-jack-in-clojurescript
+             cider-connect)
+
   :config
   (progn
     ;; REPL history file
@@ -42,52 +76,22 @@
     ;; eldoc for clojure
     (add-hook 'cider-mode-hook #'eldoc-mode)
     ;; error buffer not popping up
-    (setq cider-show-error-buffer nil)
-
-    ;; major mode hydra
-    (require 'major-mode-hydra)
-
-    (major-mode-hydra-bind-key 'clojure-mode "Connect" "j" #'cider-jack-in "jack-in")
-    (major-mode-hydra-bind-key 'clojure-mode "Connect" "J" #'cider-jack-in-clojurescript "jack-in-cljs")
-    (major-mode-hydra-bind-key 'clojure-mode "Connect" "c" #'cider-connect "connect")
-    (major-mode-hydra-bind-key 'clojure-mode "Connect" "R" #'cider-restart "restart")
-    (major-mode-hydra-bind-key 'clojure-mode "Connect" "Q" #'cider-quit "quit")
-
-    (major-mode-hydra-bind-key 'clojure-mode "Load" "k" #'cider-load-buffer "buffer")
-    (major-mode-hydra-bind-key 'clojure-mode "Load" "l" #'cider-load-file "file")
-    (major-mode-hydra-bind-key 'clojure-mode "Load" "L" #'cider-load-all-project-ns "all-ns")
-    (major-mode-hydra-bind-key 'clojure-mode "Load" "r" #'cider-refresh "reload")
-
-    (major-mode-hydra-bind-key 'clojure-mode "Eval" "e" #'cider-eval-last-sexp-to-repl "eval-last")
-    (major-mode-hydra-bind-key 'clojure-mode "Eval" "f" #'cider-eval-defun-at-point "eval-defun")
-    (major-mode-hydra-bind-key 'clojure-mode "Eval" "d" '(cider-eval-defun-at-point t) "debug-defun")
-    (major-mode-hydra-bind-key 'clojure-mode "Eval" "i" #'cider-interrupt "interrupt")
-
-    (major-mode-hydra-bind-key 'clojure-mode "Test" "t" #'cider-test-run-ns-tests "ns")
-    (major-mode-hydra-bind-key 'clojure-mode "Test" "T" #'cider-test-run-loaded-tests "loaded")
-    (major-mode-hydra-bind-key 'clojure-mode "Test" "F" #'cider-test-rerun-failed-tests "failed")
-
-    (major-mode-hydra-bind-key 'clojure-mode "Find" "n" #'cider-find-ns "ns")
-    ;;(major-mode-hydra-bind-key 'clojure-mode "Find" "K" #'cider-find-keyword "keyword")
-
-    (major-mode-hydra-bind-key 'clojure-mode "Docs" "d" #'cider-doc "doc")))
+    (setq cider-show-error-buffer nil)))
 
 (use-package cider-apropos
-  :config
+  :init
   (progn
-    ;; major mode hydra
-    (require 'major-mode-hydra)
-
-    (major-mode-hydra-bind-key 'clojure-mode "Docs" "a" #'cider-apropos "apropos")))
+    (major-mode-hydra-bind clojure-mode "Docs"
+      ("a" #'cider-apropos "apropos")))
+  :commands (cider-apropos))
 
 (use-package cider-macroexpansion
-  :config
+  :init
   (progn
-    ;; major mode hydra
-    (require 'major-mode-hydra)
-
-    (major-mode-hydra-bind-key 'clojure-mode "Macros" "x" #'cider-macroexpand-1 "expand-1")
-    (major-mode-hydra-bind-key 'clojure-mode "Macros" "X" #'cider-macroexpand-1 "expand-all")))
+    (major-mode-hydra-bind clojure-mode "Macros"
+      ("x" #'cider-macroexpand-1 "expand-1")
+      ("X" #'cider-macroexpand-all "expand-all")))
+  :commands (cider-macroexpand-1 cider-macroexpand-all))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here
