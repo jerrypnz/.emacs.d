@@ -29,29 +29,29 @@
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Connect"
-      ("j" #'cider-jack-in "jack-in")
-      ("J" #'cider-jack-in-clojurescript "jack-in-cljs")
-      ("c" #'cider-connect "connect")
-      ("R" #'cider-restart "restart")
-      ("Q" #'cider-quit "quit"))
+      ("j" cider-jack-in "jack-in")
+      ("J" cider-jack-in-clojurescript "jack-in-cljs")
+      ("c" cider-connect "connect")
+      ("R" cider-restart "restart")
+      ("Q" cider-quit "quit"))
     (major-mode-hydra-bind clojure-mode "Load"
-      ("k" #'cider-load-buffer "buffer")
-      ("l" #'cider-load-file "file")
-      ("L" #'cider-load-all-project-ns "all-ns")
-      ("r" #'cider-refresh "reload"))
+      ("k" cider-load-buffer "buffer")
+      ("l" cider-load-file "file")
+      ("L" cider-load-all-project-ns "all-ns")
+      ("r" cider-refresh "reload"))
     (major-mode-hydra-bind clojure-mode "Eval"
-      ("e" #'cider-eval-last-sexp-to-repl "eval-last")
-      ("f" #'cider-eval-defun-at-point "eval-defun")
-      ("d" '(cider-eval-defun-at-point t) "debug-defun")
-      ("i" #'cider-interrupt "interrupt"))
+      ("e" cider-eval-last-sexp-to-repl "eval-last")
+      ("f" cider-eval-defun-at-point "eval-defun")
+      ("d" (cider-eval-defun-at-point t) "debug-defun")
+      ("i" cider-interrupt "interrupt"))
     (major-mode-hydra-bind clojure-mode "Test"
-      ("t" #'cider-test-run-ns-tests "ns")
-      ("T" #'cider-test-run-loaded-tests "loaded")
-      ("F" #'cider-test-rerun-failed-tests "failed"))
+      ("t" cider-test-run-ns-tests "ns")
+      ("T" cider-test-run-loaded-tests "loaded")
+      ("F" cider-test-rerun-failed-tests "failed"))
     (major-mode-hydra-bind clojure-mode "Find"
-      ("n" #'cider-find-ns "ns"))
+      ("n" cider-find-ns "ns"))
     (major-mode-hydra-bind clojure-mode "Docs"
-      ("d" #'cider-doc "doc")))
+      ("d" cider-doc "doc")))
 
   :commands (cider-jack-in
              cider-jack-in-clojurescript
@@ -82,15 +82,15 @@
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Docs"
-      ("a" #'cider-apropos "apropos")))
+      ("a" cider-apropos "apropos")))
   :commands (cider-apropos))
 
 (use-package cider-macroexpansion
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Macros"
-      ("x" #'cider-macroexpand-1 "expand-1")
-      ("X" #'cider-macroexpand-all "expand-all")))
+      ("x" cider-macroexpand-1 "expand-1")
+      ("X" cider-macroexpand-all "expand-all")))
   :commands (cider-macroexpand-1 cider-macroexpand-all))
 
 (provide 'jp-clojure)
