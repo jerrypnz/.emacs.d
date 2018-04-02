@@ -73,6 +73,8 @@ If argument INTERACTIVE-P is set, log additional information."
 (defconst use-package-verbose t)
 (require 'use-package)
 
+;; major mode hydra
+(require 'major-mode-hydra)
 
 ;; Load features.
 (use-package jp-base)

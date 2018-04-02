@@ -11,9 +11,6 @@
 (eval-when-compile
   (require 'use-package))
 
-;; major mode hydra
-(require 'major-mode-hydra)
-
 (use-package clojure-mode
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
