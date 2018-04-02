@@ -43,6 +43,7 @@ subtrees.
 *** Tools
 
 - +restclient-mode+
+  - =edn= support in restclient mode
 - better way of managing git subtrees
 - =tiny=
 
@@ -69,13 +70,10 @@ subtrees.
   - search/replace?
   - record / use keyboard macros?
   - hydra for org agenda
-  - press =C-M-m= for a major mode specific hydra?
+  - +press =C-M-m= for a major mode specific hydra?+ (https://github.com/jerrypnz/major-mode-hydra.el)
   - replace =M-m= with a nice hydra and get rid of =which-key=?
   - +window resize/zooming (or =ace-window=)+
   - +window layout management+
-- fix eyebrowse window configs when a buffer is renamed, otherwise
-  when switching to a window config with a renamed buffer, that buffer
-  gets replaced by =*scratch*=
 - better projectile discovery
   - configurable root directory for projects, where it detects projects automaticially
   - discover projects in those root directories whenever it switches project
