@@ -72,6 +72,8 @@
     (setq cider-repl-history-size 3000)
     ;; eldoc for clojure
     (add-hook 'cider-mode-hook #'eldoc-mode)
+    ;; smartparens mode for the REPL
+    (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
     (setq cider-show-error-buffer nil)))
 
