@@ -37,7 +37,9 @@
                ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4) :exit t)
                ("5" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5) :exit t)
                ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6) :exit t)
-               ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7) :exit t))))
+               ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7) :exit t)
+               ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8) :exit t)
+               ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9) :exit t))))
 
 (provide 'jp-layouts)
 ;;; jp-layouts.el ends here
