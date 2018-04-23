@@ -35,8 +35,17 @@
 (use-package jp-projectile-utils
   :bind
   (("C-x b" . jp-switch-buffer)
+   ("M-m b" . jp-switch-buffer)
+   ("M-m f" . jp-open-file)
    ("M-m /" . jp-search)
-   ("M-m *" . jp-search-symbol-at-pt)))
+   ("M-m *" . jp-search-symbol-at-pt))
+
+  :config
+  (which-key-add-key-based-replacements
+    "M-m /" "search"
+    "M-m *" "search-symbol-at-point"
+    "M-m b" "buffers"
+    "M-m f" "find-file"))
 
 (use-package ibuffer-projectile
   :config

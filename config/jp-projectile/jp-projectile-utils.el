@@ -12,6 +12,13 @@
 (autoload 'counsel-projectile-switch-to-buffer "counsel-projectile")
 (autoload 'projectile-project-p "projectile")
 
+(defun jp-open-file (current-dir-p)
+  (interactive "P")
+  (if (and (projectile-project-p)
+           (not current-dir-p))
+      (counsel-projectile-find-file)
+    (counsel-find-file)))
+
 (defun jp-switch-buffer (global-p)
   (interactive "P")
   (if (and (projectile-project-p)

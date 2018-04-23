@@ -130,8 +130,6 @@
   :config
   (setq which-key-idle-delay 0.3)
   (which-key-add-key-based-replacements
-    "M-m /" "search"
-    "M-m *" "search-symbol-at-point"
     "M-m g" "git"
     "M-m l" "layouts"
     "M-m m" "major-mode-hydra"
