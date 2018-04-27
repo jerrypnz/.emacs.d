@@ -68,3 +68,4 @@ git subtree pull --squash --prefix lisp/protobuf-mode https://github.com/emacsmi
 git subtree pull --squash --prefix lisp/major-mode-hydra.el https://github.com/jerrypnz/major-mode-hydra.el.git milestone-1
 git subtree pull --squash --prefix lisp/magit-gitflow https://github.com/jtatarik/magit-gitflow.git master
 git subtree pull --squash --prefix lisp/eyebrowse https://github.com/wasamasa/eyebrowse.git master
+git subtree pull --squash --prefix lisp/ox-gfm https://github.com/larstvei/ox-gfm.git master

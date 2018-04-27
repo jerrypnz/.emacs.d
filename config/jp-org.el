@@ -76,6 +76,10 @@
     (setq org-startup-folded nil)))
 
 
+(use-package ox-gfm
+  :after (org))
+
+
 (use-package deft
   :bind ("M-m n" . deft)
   :commands (deft)
