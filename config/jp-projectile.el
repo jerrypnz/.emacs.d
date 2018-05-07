@@ -16,6 +16,8 @@
   :init
   (setq projectile-keymap-prefix (kbd "M-m p"))
 
+  :defer 2
+
   :commands (counsel-projectile
              counsel-projectile-switch-project
              counsel-projectile-find-file
@@ -29,6 +31,16 @@
   (progn
     (setq counsel-projectile-remove-current-buffer t)
     (setq counsel-projectile-remove-current-project t)
+
+    (defun jp-refresh-projectile-projects ()
+      (when (require 'magit nil t)
+        (projectile-cleanup-known-projects)
+        (mapc #'projectile-add-known-project
+              (mapcar #'file-name-as-directory (magit-list-repos)))
+        (projectile-save-known-projects)))
+
+    (advice-add #'counsel-projectile-switch-project :before #'jp-refresh-projectile-projects)
+
     (projectile-mode)
     (counsel-projectile-mode)))
 
@@ -41,11 +53,12 @@
    ("M-m *" . jp-search-symbol-at-pt))
 
   :config
-  (which-key-add-key-based-replacements
-    "M-m /" "search"
-    "M-m *" "search-symbol-at-point"
-    "M-m b" "buffers"
-    "M-m f" "find-file"))
+  (progn
+    (which-key-add-key-based-replacements
+      "M-m /" "search"
+      "M-m *" "search-symbol-at-point"
+      "M-m b" "buffers"
+      "M-m f" "find-file")))
 
 (use-package ibuffer-projectile
   :config
@@ -58,6 +71,4 @@
                   (ibuffer-do-sort-by-alphabetic))))))
 
 (provide 'jp-projectile)
-
-(require 'counsel-projectile)
 ;;; jp-projectile.el ends here
