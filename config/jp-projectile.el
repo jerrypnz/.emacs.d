@@ -36,8 +36,7 @@
       (when (require 'magit nil t)
         (projectile-cleanup-known-projects)
         (mapc #'projectile-add-known-project
-              (mapcar #'file-name-as-directory (magit-list-repos)))
-        (projectile-save-known-projects)))
+              (mapcar #'file-name-as-directory (magit-list-repos)))))
 
     (advice-add #'counsel-projectile-switch-project :before #'jp-refresh-projectile-projects)
 
