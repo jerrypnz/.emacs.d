@@ -212,5 +212,12 @@
   (("C-M-m" . major-mode-hydra)
    ("M-m m" . major-mode-hydra)))
 
+;; ispell
+(use-package ispell
+  :config
+  (progn
+    (setq-default ispell-program-name "hunspell")
+    (setq ispell-really-hunspell t)))
+
 (provide 'jp-base)
 ;;; jp-base.el ends here
