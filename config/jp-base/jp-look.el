@@ -44,6 +44,11 @@
         (when (fboundp mode) (funcall mode -1)))
       '(scroll-bar-mode tool-bar-mode blink-cursor-mode))
 
+(when (eq system-type 'darwin)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
+  (setq frame-title-format nil))
+
 (defvar jp-geometry-file
   (expand-file-name ".jp-geometry" user-emacs-directory)
   "The file where frame geometry settings are saved.")
