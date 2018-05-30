@@ -39,6 +39,7 @@
     (major-mode-hydra-bind clojure-mode "Eval"
       ("e" cider-eval-last-sexp-to-repl "eval-last")
       ("f" cider-eval-defun-at-point "eval-defun")
+      ("I" cider-inspect-last-result "inspect-last-result")
       ("D" (cider-eval-defun-at-point t) "debug-defun")
       ("i" cider-interrupt "interrupt"))
     (major-mode-hydra-bind clojure-mode "Test"
