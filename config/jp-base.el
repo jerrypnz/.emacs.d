@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package exec-path-from-shell
+  :straight t
   :if (memq window-system '(mac ns x))
   :config
   (progn
@@ -26,7 +27,8 @@
     (setq jp-variable-pitch-font "Lucida Grande-12")
     (setq jp-fixed-pitch-font "Inconsolata-13")))
 
-(use-package all-the-icons)
+(use-package all-the-icons
+  :straight t)
 
 ;; themes
 
@@ -41,6 +43,9 @@
 
 ;; Doom theme
 (use-package doom-themes
+  :straight t
+  :preface
+  (defvar region-fg nil)
   :config
   (progn
     ;; Global settings (defaults)
@@ -87,17 +92,20 @@
 
 ;; expand-region
 (use-package expand-region
+  :straight t
   :bind
   (("C-=" . er/expand-region)
    ("C--" . er/contract-region)))
 
 ;; smex
 (use-package smex
+  :straight t
   :defer t
   :init (setq-default smex-history-length 32))
 
 ;; aggressive-indent
 (use-package aggressive-indent
+  :straight t
   :config
   (progn
     (global-aggressive-indent-mode 1)
@@ -106,10 +114,12 @@
     (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)))
 
 ;; rainbow delimiters
-(use-package rainbow-delimiters)
+(use-package rainbow-delimiters
+  :straight t)
 
 ;; highlight-sexp
 (use-package highlight-sexp
+  :straight t
   :config
   (progn
     (setq hl-sexp-background-color "#22252b")
@@ -119,6 +129,7 @@
 
 ;; undo-tree
 (use-package undo-tree
+  :straight t
   :config
   (progn
     (setq undo-tree-visualizer-diff t)
@@ -127,6 +138,7 @@
 
 ;; which-key
 (use-package which-key
+  :straight t
   :config
   (setq which-key-idle-delay 0.3)
   (which-key-add-key-based-replacements
@@ -140,18 +152,21 @@
 
 ;; mwim
 (use-package mwim
+  :straight t
   :bind
   (("C-a" . mwim-beginning-of-code-or-line)
    ("C-e" . mwim-end-of-code-or-line)))
 
 ;; iedit
 (use-package iedit
+  :straight t
   :init
   (global-unset-key (kbd "M-r"))
   (setq iedit-toggle-key-default (kbd "M-r")))
 
 ;; hightlight-things.el
 (use-package highlight-thing
+  :straight t
   :config
   (progn
     (setq highlight-thing-case-sensitive-p t)
@@ -183,6 +198,7 @@
 
 ;; avy
 (use-package avy
+  :straight t
   :defer nil
   :bind
   (("M-g c" . avy-goto-char)
@@ -194,6 +210,7 @@
 
 ;; ace-window
 (use-package ace-window
+  :straight t
   :bind
   (("M-o" . ace-window))
   :config
