@@ -23,18 +23,44 @@
 (unless noninteractive
   (message "Loading %s..." load-file-name))
 
-;; Initialize package.el
-;;
-;; Most packages are installed using git subtrees, but some packages (such as
-;; flycheck) break unless installed via package.el.
+;; Bootstrap straight.el package manager.
 
-(require 'package)
-(add-to-list 'package-archives '("MELPA" . "https://melpa.org/packages/"))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+(eval-and-compile
+  (defvar bootstrap-version 3)
+  (defvar bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el")))
 
-;; Bootstrap use-package.
+(unless (file-exists-p bootstrap-file)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+       'silent 'inhibit-cookies)
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(with-no-warnings
+  (setq straight-cache-autoloads t)
+  (setq straight-check-for-modifications 'live))4
+
+(require 'straight bootstrap-file t)
+
+;; Install some basic packages
+
+(straight-use-package 'dash)
+(straight-use-package 'dash-functional)
+(straight-use-package 'f)
+(straight-use-package 's)
+(straight-use-package 'noflet)
+(straight-use-package 'memoize)
+(straight-use-package 'general)
+(straight-use-package 'el-patch)
+
+(with-no-warnings
+  (setq use-package-verbose t))
+
+(straight-use-package 'use-package)
+
+(eval-when-compile
+  (require 'use-package))
 
 (require 'seq)
 (require 'subr-x)
@@ -69,9 +95,6 @@ If argument INTERACTIVE-P is set, log additional information."
         (message "No change to load-path")))))
 
 (jp-init/init-load-path)
-
-(defconst use-package-verbose t)
-(require 'use-package)
 
 ;; major mode hydra
 (require 'major-mode-hydra)
