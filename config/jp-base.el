@@ -225,6 +225,12 @@
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
+  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
+  :init
+  (progn
+    (autoload 'pretty-hydra-define "pretty-hydra" nil nil 'macro)
+    (autoload 'major-mode-hydra-bind "major-mode-hydra" nil 'macro))
+
   :bind
   (("C-M-m" . major-mode-hydra)
    ("M-m m" . major-mode-hydra)))

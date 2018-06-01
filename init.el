@@ -96,9 +96,6 @@ If argument INTERACTIVE-P is set, log additional information."
 
 (jp-init/init-load-path)
 
-;; major mode hydra
-(require 'major-mode-hydra)
-
 ;; Load features.
 (use-package jp-base)
 (use-package jp-smartparens)
