@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package eyebrowse
+  :straight t
   :config
   (progn
     ;; Switch to a project and use its name as the tag of
@@ -35,6 +36,7 @@
     (eyebrowse-mode t)))
 
 (use-package jp-layouts
+  :after (eyebrowse)
   :bind
   ("M-m l" . jp-layouts/body))
 
