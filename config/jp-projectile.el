@@ -16,7 +16,7 @@
   :init
   (setq projectile-keymap-prefix (kbd "M-m p"))
 
-  :defer 2
+  :defer nil
 
   :commands (counsel-projectile
              counsel-projectile-switch-project
