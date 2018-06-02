@@ -1,7 +1,7 @@
 * New Emacs Config
 
-My personal Emacs config structured using =use-package= and git
-subtrees.
+  My personal Emacs config structured using =use-package= and git
+  subtrees.
 
 ** Screenshot
 
@@ -11,70 +11,72 @@ subtrees.
 
 *** Language support
 
-- generic symbol/function search
-- +go+
-- +scala+
-- +clojure+
-- =Haskell=
-- =Scheme / Racket=
-- =Python=
-- +PHP+
-- +Yaml+
-- +Markdown+
-- =JavaScript / JSON / ES6=
-- +Puppet+
-- =web-mode=
+    - generic symbol/function search
+    - +go+
+    - +scala+
+    - +clojure+
+    - =Haskell=
+    - =Scheme / Racket=
+    - =Python=
+    - +PHP+
+    - +Yaml+
+    - +Markdown+
+    - =JavaScript / JSON / ES6=
+    - +Puppet+
+    - =web-mode=
 
 *** Coding
 
-- +make company and yasnippet work better+ (`company-yasnippet` is bound to `C-M-y` now)
-- +hight things under the cursor+
-- make flycheck nicer
-  - change keybindings
-  - automaticially display errors for current line
-- +gtags for certain modes (PHP)+ (don't care about PHP anymore)
+    - +make company and yasnippet work better+ (`company-yasnippet` is bound to `C-M-y` now)
+    - +hight things under the cursor+
+    - make flycheck nicer
+      - change keybindings (hydra)
+      - change flycheck tmp file location
+      - automaticially display errors for current line
+    - +gtags for certain modes (PHP)+ (don't care about PHP anymore)
 
 *** Look and feel
 
-- +Better way of managing themes+ (=use-package= seems perfectly fine ;-)
-- +Mode line+
-  - +Better project/branch info+
+    - +Better way of managing themes+ (=use-package= seems perfectly fine ;-)
+    - +Mode line+
+      - +Better project/branch info+
 
 *** Tools
 
-- +restclient-mode+
-  - =edn= support in restclient mode
-- better way of managing git subtrees
-- =tiny=
+    - +restclient-mode+
+      - =edn= support in restclient mode
+    - +better way of managing git subtrees+
+    - =tiny=
 
 *** Editing
 
-- find a solution for file templates
-  - [[https://github.com/mineo/yatemplate][yatemplate]]?
-- +wgrep+
-- +aggresive-indent+
-- +iedit+
+    - find a solution for file templates
+      - [[https://github.com/mineo/yatemplate][yatemplate]]?
+    - +wgrep+
+    - +aggresive-indent+
+    - +iedit+
 
 *** Org
 
-- +deft+
-- Port my org config from my old repo
-- GTD using org
-- Remove org-agenda =M-m= keybinding
+    - +deft+
+    - +Port my org config from my old repo+
+    - GTD using org
+    - Remove org-agenda =M-m= keybinding
 
 *** Misc
 
-- +which-key+
-- +undo-tree+
-- create some useful =hydra=.
-  - search/replace?
-  - record / use keyboard macros?
-  - hydra for org agenda
-  - +press =C-M-m= for a major mode specific hydra?+ (https://github.com/jerrypnz/major-mode-hydra.el)
-  - replace =M-m= with a nice hydra and get rid of =which-key=?
-  - +window resize/zooming (or =ace-window=)+
-  - +window layout management+
-- better projectile discovery
-  - configurable root directory for projects, where it detects projects automaticially
-  - discover projects in those root directories whenever it switches project
-- clean up =jp-base=
+    - +which-key+
+    - +undo-tree+
+    - create some useful =hydra=.
+      - search/replace?
+      - record / use keyboard macros?
+      - profiling
+      - hydra for org agenda
+      - +press =C-M-m= for a major mode specific hydra?+ (https://github.com/jerrypnz/major-mode-hydra.el)
+      - replace =M-m= with a nice hydra and get rid of =which-key=?
+      - +window resize/zooming (or =ace-window=)+
+      - +window layout management+
+    - +better projectile discovery+
+      - +configurable root directory for projects, where it detects projects automaticially+
+      - +discover projects in those root directories whenever it switches project+
+    - clean up =jp-base=
