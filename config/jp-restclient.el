@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package restclient
+  :straight t
   :init
   (progn
     (major-mode-hydra-bind restclient-mode "Navigate"
