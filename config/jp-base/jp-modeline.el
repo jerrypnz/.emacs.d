@@ -150,7 +150,7 @@
 (set-face-attribute
  'mode-line-read-only-face nil
  :inherit 'mode-line
- :foreground "gray80" :background jp-modeline--read-only-color
+ :background jp-modeline--read-only-color
  :box `(:line-width 2 :color ,jp-modeline--read-only-color))
 
 (set-face-attribute
@@ -161,7 +161,7 @@
 (set-face-attribute
  'mode-line-read-write-face nil
  :inherit 'mode-line
- :foreground "gray80" :background jp-modeline--read-write-color
+ :background jp-modeline--read-write-color
  :box `(:line-width 2 :color ,jp-modeline--read-write-color))
 
 (set-face-attribute
