@@ -11,22 +11,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package exec-path-from-shell
-  :straight t
-  :if (memq window-system '(mac ns x))
-  :config
-  (progn
-    (setq exec-path-from-shell-arguments '("-l"))
-    (add-to-list 'exec-path-from-shell-variables "GOPATH")
-    (exec-path-from-shell-initialize)))
-
-(use-package jp-look
-  :config
-  (progn
-    (setq jp-default-font "Inconsolata-13")
-    (setq jp-variable-pitch-font "Lucida Grande-12")
-    (setq jp-fixed-pitch-font "Inconsolata-13")))
-
 (use-package all-the-icons
   :straight t)
 
@@ -73,6 +57,22 @@
          (set-face-attribute 'org-level-4 nil :foreground "#ECBE7B")
          (set-face-attribute 'org-level-5 nil :foreground "#ECBE7B")
          (set-face-attribute 'org-level-6 nil :foreground "#ECBE7B")))))
+
+(use-package exec-path-from-shell
+  :straight t
+  :if (memq window-system '(mac ns x))
+  :config
+  (progn
+    (setq exec-path-from-shell-arguments '("-l"))
+    (add-to-list 'exec-path-from-shell-variables "GOPATH")
+    (exec-path-from-shell-initialize)))
+
+(use-package jp-look
+  :config
+  (progn
+    (setq jp-default-font "Inconsolata-13")
+    (setq jp-variable-pitch-font "Lucida Grande-12")
+    (setq jp-fixed-pitch-font "Inconsolata-13")))
 
 (use-package jp-env)
 (use-package jp-programming)
