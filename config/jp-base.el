@@ -38,6 +38,7 @@
 
     ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
     ;; may have their own settings.
+    (setq doom-spacegrey-brighter-modeline t)
     (load-theme 'doom-spacegrey t)
 
     ;; Enable flashing mode-line on errors
@@ -47,16 +48,7 @@
     ;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
     ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)
-
-    ;; Nicer colors for org heading level 3 to 6. Colors are taken
-    ;; from doom-one theme.
-    (eval-after-load "org"
-      '(progn
-         (set-face-attribute 'org-level-3 nil :foreground "#DA8548")
-         (set-face-attribute 'org-level-4 nil :foreground "#ECBE7B")
-         (set-face-attribute 'org-level-5 nil :foreground "#ECBE7B")
-         (set-face-attribute 'org-level-6 nil :foreground "#ECBE7B")))))
+    (doom-themes-org-config)))
 
 (use-package exec-path-from-shell
   :straight t
@@ -122,7 +114,7 @@
   :straight t
   :config
   (progn
-    (setq hl-sexp-background-color "#22252b")
+    (setq hl-sexp-background-color "#343D46")
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
@@ -179,7 +171,7 @@
      ;; lighter versions of a color:
      ;; https://www.w3schools.com/colors/colors_picker.asp
      :inherit nil
-     :foreground nil :background "#383d47")
+     :foreground nil :background "#414d58")
     (global-highlight-thing-mode)
 
     (eval-after-load "swiper"

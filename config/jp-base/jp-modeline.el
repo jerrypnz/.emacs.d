@@ -135,55 +135,55 @@
 
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#4271ae")
 
 (set-face-attribute
  'mode-line-read-only-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "gray80" :background "#4271ae"
  :box '(:line-width 2 :color "#4271ae"))
 
 (set-face-attribute
  'mode-line-read-write-inactive-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#c82829")
 
 (set-face-attribute
  'mode-line-read-write-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "gray80" :background "#c82829"
  :box '(:line-width 2 :color "#c82829"))
 
 (set-face-attribute
  'mode-line-folder-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "gray60")
 
 (set-face-attribute
  'mode-line-folder-inactive-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "gray40")
 
 (set-face-attribute
  'mode-line-filename-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#eab700"
  :weight 'bold)
 
 (set-face-attribute
  'mode-line-filename-inactive-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#927200"
  :weight 'bold)
 
 (set-face-attribute
  'mode-line-position-face nil
- :inherit 'mode-line-face)
+ :inherit 'mode-line)
 
 (set-face-attribute
  'mode-line-process-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#718c00")
 
 (set-face-attribute
