@@ -31,9 +31,9 @@
                    (if active 'mode-line-read-only-face 'mode-line-read-only-inactive-face)
                  (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face))))
     (propertize
-     (cond (buffer-read-only    " RO ")
-           ((buffer-modified-p) " ** ")
-           (t                   " -- "))
+     (cond (buffer-read-only    " R ")
+           ((buffer-modified-p) " * ")
+           (t                   " - "))
      'face face)))
 
 (defun jp-buffer-filename ()
@@ -121,6 +121,10 @@
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
 
+(defvar jp-modeline--read-only-color "#2257A0")
+(defvar jp-modeline--read-write-color "#BF616A")
+(defvar jp-modeline--filename-color "#D08770")
+
 (let ((bg (face-attribute 'mode-line :background)))
   (set-face-attribute
    'mode-line nil
@@ -136,24 +140,24 @@
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
  :inherit 'mode-line
- :foreground "#4271ae")
+ :foreground jp-modeline--read-only-color)
 
 (set-face-attribute
  'mode-line-read-only-face nil
  :inherit 'mode-line
- :foreground "gray80" :background "#4271ae"
- :box '(:line-width 2 :color "#4271ae"))
+ :foreground "gray80" :background jp-modeline--read-only-color
+ :box `(:line-width 2 :color ,jp-modeline--read-only-color))
 
 (set-face-attribute
  'mode-line-read-write-inactive-face nil
  :inherit 'mode-line
- :foreground "#c82829")
+ :foreground jp-modeline--read-write-color)
 
 (set-face-attribute
  'mode-line-read-write-face nil
  :inherit 'mode-line
- :foreground "gray80" :background "#c82829"
- :box '(:line-width 2 :color "#c82829"))
+ :foreground "gray80" :background jp-modeline--read-write-color
+ :box `(:line-width 2 :color ,jp-modeline--read-write-color))
 
 (set-face-attribute
  'mode-line-folder-face nil
@@ -168,13 +172,13 @@
 (set-face-attribute
  'mode-line-filename-face nil
  :inherit 'mode-line
- :foreground "#eab700"
+ :foreground jp-modeline--filename-color
  :weight 'bold)
 
 (set-face-attribute
  'mode-line-filename-inactive-face nil
  :inherit 'mode-line
- :foreground "#927200"
+ :foreground "gray40"
  :weight 'bold)
 
 (set-face-attribute
@@ -189,7 +193,7 @@
 (set-face-attribute
  'mode-line-80col-face nil
  :inherit 'mode-line-position-face
- :foreground "black" :background "#eab700")
+ :foreground "black" :background jp-modeline--filename-color)
 
 (provide 'jp-modeline)
 ;;; jp-modeline.el ends here
