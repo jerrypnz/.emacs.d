@@ -50,11 +50,15 @@
    (:eval (jp-modeline-status))
    " "
    ;; Position, including warning for 80 columns
-   (:propertize "%4l |" face mode-line-position-face)
+   (:eval (propertize "%4l |" 'face
+                      (if (jp-modeline-active-p)
+                          'mode-line-position-face
+                        'mode-line-position-inactive-face)))
    (:eval (propertize "%3c " 'face
-                      (if (>= (current-column) 80)
-                          'mode-line-80col-face
-                        'mode-line-position-face)))
+                      (cond
+                       ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
+                       ((>= (current-column) 80) 'mode-line-80col-face)
+                       (t 'mode-line-position-face))))
    "  "
    ;; directory and buffer/file name
    (:eval (propertize (shorten-directory default-directory 10) 'face
@@ -118,6 +122,7 @@
 (make-face 'mode-line-filename-face)
 (make-face 'mode-line-filename-inactive-face)
 (make-face 'mode-line-position-face)
+(make-face 'mode-line-position-inactive-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
 
@@ -181,6 +186,10 @@
 (set-face-attribute
  'mode-line-position-face nil
  :inherit 'mode-line)
+
+(set-face-attribute
+ 'mode-line-position-inactive-face nil
+ :inherit 'mode-line-inactive)
 
 (set-face-attribute
  'mode-line-process-face nil
