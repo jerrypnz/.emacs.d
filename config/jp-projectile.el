@@ -13,6 +13,7 @@
 
 ;; counsel-projectile also loads projectile itself
 (use-package counsel-projectile
+  :straight t
   :init
   (setq projectile-keymap-prefix (kbd "M-m p"))
 
@@ -60,6 +61,7 @@
       "M-m f" "find-file")))
 
 (use-package ibuffer-projectile
+  :straight t
   :config
   (progn
     (setq ibuffer-projectile-prefix "Project: ")

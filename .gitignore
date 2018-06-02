@@ -13,3 +13,6 @@ projectile-bookmarks.eld
 /recentf
 *~
 
+/straight/*
+!/straight/versions/
+!/straight/versions/*

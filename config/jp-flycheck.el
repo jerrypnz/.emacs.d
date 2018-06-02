@@ -13,7 +13,7 @@
 
 ;; flycheck
 (use-package flycheck
-  :ensure t ; load with package.el
+  :straight t
   :defer 1
   :commands (flycheck-mode global-flycheck-mode)
   :config

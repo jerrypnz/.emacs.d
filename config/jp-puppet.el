@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package puppet-mode
+  :straight t
   :mode (("\\.pp\\'"  . puppet-mode)))
 
 (provide 'jp-puppet)

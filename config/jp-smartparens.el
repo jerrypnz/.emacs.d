@@ -13,6 +13,7 @@
 
 ;; smartparens
 (use-package smartparens
+  :straight t
   :bind
   (:map smartparens-mode-map
         ("M-<right>" . sp-forward-slurp-sexp)

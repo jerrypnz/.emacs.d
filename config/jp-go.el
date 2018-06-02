@@ -23,6 +23,7 @@
         nil))))
 
 (use-package go-mode
+  :straight t
   :mode "\\.go\\'"
   :bind (:map go-mode-map
               ("M-." . godef-jump))
@@ -42,11 +43,13 @@
               (company-mode))))
 
 (use-package go-rename
+  :after (go-mode)
   :bind (:map go-mode-map
               ;;TODO Replace it with major mode hydra
               ("C-M-m r" . go-rename)))
 
 (use-package go-guru
+  :after (go-mode)
   :bind (:map go-mode-map
               ;;TODO Replace it with major mode hydra
               ("C-M-m R" . go-guru-referrers)

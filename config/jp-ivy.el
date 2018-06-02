@@ -10,6 +10,7 @@
 
 ;; ivy
 (use-package ivy
+  :straight t
   :bind
   ("M-m r" . ivy-resume)
 
@@ -19,9 +20,14 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")))
 
-(use-package ivy-hydra)
+(use-package ivy-hydra
+  :straight t)
+
+(use-package wgrep
+  :straight t)
 
 (use-package counsel
+  :straight t
   :bind
   (("M-x"     . counsel-M-x)
    ("M-y"     . counsel-yank-pop)

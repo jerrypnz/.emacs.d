@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package yaml-mode
+  :straight t
   :mode ("\\.yaml\\'" "\\.yml\\'"))
 
 (provide 'jp-yaml)

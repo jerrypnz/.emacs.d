@@ -13,6 +13,7 @@
 
 ;; company
 (use-package company
+  :straight t
   :config
   (progn
     (define-key company-active-map (kbd "RET") nil)
@@ -26,12 +27,14 @@
     (global-company-mode t)))
 
 (use-package company-dabbrev
+  :after (company)
   :config
   (progn
     (setq company-dabbrev-ignore-case nil
           company-dabbrev-downcase nil)))
 
 (use-package company-yasnippet
+  :after (company)
   :bind
   ("C-M-y" . company-yasnippet))
 

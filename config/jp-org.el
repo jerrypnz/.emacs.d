@@ -19,6 +19,7 @@
 
 
 (use-package org
+  :straight org-plus-contrib
   :defer t
   :bind
   (("M-m c" . org-capture)
@@ -77,6 +78,7 @@
 
 
 (use-package ox-gfm
+  :straight t
   :after (org))
 
 (use-package ox-html
@@ -192,6 +194,7 @@
                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 (use-package deft
+  :straight t
   :bind ("M-m n" . deft)
   :commands (deft)
   :config

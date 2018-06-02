@@ -11,22 +11,8 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
-  :config
-  (progn
-    (setq exec-path-from-shell-arguments '("-l"))
-    (add-to-list 'exec-path-from-shell-variables "GOPATH")
-    (exec-path-from-shell-initialize)))
-
-(use-package jp-look
-  :config
-  (progn
-    (setq jp-default-font "Inconsolata-13")
-    (setq jp-variable-pitch-font "Lucida Grande-12")
-    (setq jp-fixed-pitch-font "Inconsolata-13")))
-
-(use-package all-the-icons)
+(use-package all-the-icons
+  :straight t)
 
 ;; themes
 
@@ -41,6 +27,9 @@
 
 ;; Doom theme
 (use-package doom-themes
+  :straight t
+  :preface
+  (defvar region-fg nil)
   :config
   (progn
     ;; Global settings (defaults)
@@ -49,7 +38,8 @@
 
     ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
     ;; may have their own settings.
-    (load-theme 'doom-one t)
+    (setq doom-spacegrey-brighter-modeline t)
+    (load-theme 'doom-spacegrey t)
 
     ;; Enable flashing mode-line on errors
     ;;(doom-themes-visual-bell-config)
@@ -58,16 +48,23 @@
     ;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
     ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)
+    (doom-themes-org-config)))
 
-    ;; Nicer colors for org heading level 3 to 6. Colors are taken
-    ;; from doom-one theme.
-    (eval-after-load "org"
-      '(progn
-         (set-face-attribute 'org-level-3 nil :foreground "#DA8548")
-         (set-face-attribute 'org-level-4 nil :foreground "#ECBE7B")
-         (set-face-attribute 'org-level-5 nil :foreground "#ECBE7B")
-         (set-face-attribute 'org-level-6 nil :foreground "#ECBE7B")))))
+(use-package exec-path-from-shell
+  :straight t
+  :if (memq window-system '(mac ns x))
+  :config
+  (progn
+    (setq exec-path-from-shell-arguments '("-l"))
+    (add-to-list 'exec-path-from-shell-variables "GOPATH")
+    (exec-path-from-shell-initialize)))
+
+(use-package jp-look
+  :config
+  (progn
+    (setq jp-default-font "Inconsolata-13")
+    (setq jp-variable-pitch-font "Lucida Grande-12")
+    (setq jp-fixed-pitch-font "Inconsolata-13")))
 
 (use-package jp-env)
 (use-package jp-programming)
@@ -87,17 +84,20 @@
 
 ;; expand-region
 (use-package expand-region
+  :straight t
   :bind
   (("C-=" . er/expand-region)
    ("C--" . er/contract-region)))
 
 ;; smex
 (use-package smex
+  :straight t
   :defer t
   :init (setq-default smex-history-length 32))
 
 ;; aggressive-indent
 (use-package aggressive-indent
+  :straight t
   :config
   (progn
     (global-aggressive-indent-mode 1)
@@ -106,19 +106,22 @@
     (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)))
 
 ;; rainbow delimiters
-(use-package rainbow-delimiters)
+(use-package rainbow-delimiters
+  :straight t)
 
 ;; highlight-sexp
 (use-package highlight-sexp
+  :straight t
   :config
   (progn
-    (setq hl-sexp-background-color "#22252b")
+    (setq hl-sexp-background-color "#343D46")
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
 
 ;; undo-tree
 (use-package undo-tree
+  :straight t
   :config
   (progn
     (setq undo-tree-visualizer-diff t)
@@ -127,6 +130,7 @@
 
 ;; which-key
 (use-package which-key
+  :straight t
   :config
   (setq which-key-idle-delay 0.3)
   (which-key-add-key-based-replacements
@@ -140,18 +144,21 @@
 
 ;; mwim
 (use-package mwim
+  :straight t
   :bind
   (("C-a" . mwim-beginning-of-code-or-line)
    ("C-e" . mwim-end-of-code-or-line)))
 
 ;; iedit
 (use-package iedit
+  :straight t
   :init
   (global-unset-key (kbd "M-r"))
   (setq iedit-toggle-key-default (kbd "M-r")))
 
 ;; hightlight-things.el
 (use-package highlight-thing
+  :straight t
   :config
   (progn
     (setq highlight-thing-case-sensitive-p t)
@@ -164,7 +171,7 @@
      ;; lighter versions of a color:
      ;; https://www.w3schools.com/colors/colors_picker.asp
      :inherit nil
-     :foreground nil :background "#383d47")
+     :foreground nil :background "#414d58")
     (global-highlight-thing-mode)
 
     (eval-after-load "swiper"
@@ -183,6 +190,7 @@
 
 ;; avy
 (use-package avy
+  :straight t
   :defer nil
   :bind
   (("M-g c" . avy-goto-char)
@@ -194,6 +202,7 @@
 
 ;; ace-window
 (use-package ace-window
+  :straight t
   :bind
   (("M-o" . ace-window))
   :config
@@ -201,13 +210,26 @@
     (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
     (setq aw-background nil)))
 
+(use-package move-border
+  :straight (:host github :repo "ramnes/move-border" :branch "master"))
+
+(use-package zoom-frm
+  :straight (:host github :repo "emacsmirror/zoom-frm" :branch "master"))
+
 ;; window management hydra
 (use-package jp-window
+  :after (move-border zoom-frm)
   :bind
   ("C-M-o" . jp-window/body))
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
+  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
+  :init
+  (progn
+    (autoload 'pretty-hydra-define "pretty-hydra" nil nil 'macro)
+    (autoload 'major-mode-hydra-bind "major-mode-hydra" nil 'macro))
+
   :bind
   (("C-M-m" . major-mode-hydra)
    ("M-m m" . major-mode-hydra)))

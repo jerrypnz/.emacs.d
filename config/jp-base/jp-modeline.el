@@ -31,9 +31,9 @@
                    (if active 'mode-line-read-only-face 'mode-line-read-only-inactive-face)
                  (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face))))
     (propertize
-     (cond (buffer-read-only    " RO ")
-           ((buffer-modified-p) " ** ")
-           (t                   " -- "))
+     (cond (buffer-read-only    " R ")
+           ((buffer-modified-p) " * ")
+           (t                   " - "))
      'face face)))
 
 (defun jp-buffer-filename ()
@@ -50,11 +50,15 @@
    (:eval (jp-modeline-status))
    " "
    ;; Position, including warning for 80 columns
-   (:propertize "%4l |" face mode-line-position-face)
+   (:eval (propertize "%4l |" 'face
+                      (if (jp-modeline-active-p)
+                          'mode-line-position-face
+                        'mode-line-position-inactive-face)))
    (:eval (propertize "%3c " 'face
-                      (if (>= (current-column) 80)
-                          'mode-line-80col-face
-                        'mode-line-position-face)))
+                      (cond
+                       ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
+                       ((>= (current-column) 80) 'mode-line-80col-face)
+                       (t 'mode-line-position-face))))
    "  "
    ;; directory and buffer/file name
    (:eval (propertize (shorten-directory default-directory 10) 'face
@@ -118,8 +122,13 @@
 (make-face 'mode-line-filename-face)
 (make-face 'mode-line-filename-inactive-face)
 (make-face 'mode-line-position-face)
+(make-face 'mode-line-position-inactive-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-80col-face)
+
+(defvar jp-modeline--read-only-color "#2257A0")
+(defvar jp-modeline--read-write-color "#BF616A")
+(defvar jp-modeline--filename-color "#D08770")
 
 (let ((bg (face-attribute 'mode-line :background)))
   (set-face-attribute
@@ -135,61 +144,62 @@
 
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
- :inherit 'mode-line-face
- :foreground "#4271ae")
+ :inherit 'mode-line-inactive
+ :foreground jp-modeline--read-only-color)
 
 (set-face-attribute
  'mode-line-read-only-face nil
- :inherit 'mode-line-face
- :foreground "gray80" :background "#4271ae"
- :box '(:line-width 2 :color "#4271ae"))
+ :inherit 'mode-line
+ :background jp-modeline--read-only-color
+ :box `(:line-width 2 :color ,jp-modeline--read-only-color))
 
 (set-face-attribute
  'mode-line-read-write-inactive-face nil
- :inherit 'mode-line-face
- :foreground "#c82829")
+ :inherit 'mode-line-inactive
+ :foreground jp-modeline--read-write-color)
 
 (set-face-attribute
  'mode-line-read-write-face nil
- :inherit 'mode-line-face
- :foreground "gray80" :background "#c82829"
- :box '(:line-width 2 :color "#c82829"))
+ :inherit 'mode-line
+ :background jp-modeline--read-write-color
+ :box `(:line-width 2 :color ,jp-modeline--read-write-color))
 
 (set-face-attribute
  'mode-line-folder-face nil
- :inherit 'mode-line-face
- :foreground "gray60")
+ :inherit 'mode-line)
 
 (set-face-attribute
  'mode-line-folder-inactive-face nil
- :inherit 'mode-line-face
- :foreground "gray40")
+ :inherit 'mode-line-inactive)
 
 (set-face-attribute
  'mode-line-filename-face nil
- :inherit 'mode-line-face
- :foreground "#eab700"
+ :inherit 'mode-line
+ :foreground jp-modeline--filename-color
  :weight 'bold)
 
 (set-face-attribute
  'mode-line-filename-inactive-face nil
- :inherit 'mode-line-face
- :foreground "#927200"
+ :inherit 'mode-line-inactive
  :weight 'bold)
 
 (set-face-attribute
  'mode-line-position-face nil
- :inherit 'mode-line-face)
+ :inherit 'mode-line)
+
+(set-face-attribute
+ 'mode-line-position-inactive-face nil
+ :inherit 'mode-line-inactive)
 
 (set-face-attribute
  'mode-line-process-face nil
- :inherit 'mode-line-face
+ :inherit 'mode-line
  :foreground "#718c00")
 
 (set-face-attribute
  'mode-line-80col-face nil
  :inherit 'mode-line-position-face
- :foreground "black" :background "#eab700")
+ :foreground "black" :background jp-modeline--filename-color)
 
 (provide 'jp-modeline)
 ;;; jp-modeline.el ends here

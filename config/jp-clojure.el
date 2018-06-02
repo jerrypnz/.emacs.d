@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package clojure-mode
+  :straight t
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
          ("\\.cljc\\'" . clojurec-mode)
@@ -23,6 +24,7 @@
       (expect 0))))
 
 (use-package cider
+  :straight t
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Connect"
@@ -79,6 +81,7 @@
     (setq cider-show-error-buffer nil)))
 
 (use-package cider-apropos
+  :after (cider)
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Docs"
@@ -86,6 +89,7 @@
   :commands (cider-apropos))
 
 (use-package cider-macroexpansion
+  :after (cider)
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Macros"
