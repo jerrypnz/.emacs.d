@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package protobuf-mode
+  :straight t
   :mode ("\\.proto\\'"))
 
 (provide 'jp-protobuf)
