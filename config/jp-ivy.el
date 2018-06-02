@@ -23,6 +23,9 @@
 (use-package ivy-hydra
   :straight t)
 
+(use-package wgrep
+  :straight t)
+
 (use-package counsel
   :straight t
   :bind
