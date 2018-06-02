@@ -139,7 +139,7 @@
 
 (set-face-attribute
  'mode-line-read-only-inactive-face nil
- :inherit 'mode-line
+ :inherit 'mode-line-inactive
  :foreground jp-modeline--read-only-color)
 
 (set-face-attribute
@@ -150,7 +150,7 @@
 
 (set-face-attribute
  'mode-line-read-write-inactive-face nil
- :inherit 'mode-line
+ :inherit 'mode-line-inactive
  :foreground jp-modeline--read-write-color)
 
 (set-face-attribute
@@ -161,13 +161,11 @@
 
 (set-face-attribute
  'mode-line-folder-face nil
- :inherit 'mode-line
- :foreground "gray60")
+ :inherit 'mode-line)
 
 (set-face-attribute
  'mode-line-folder-inactive-face nil
- :inherit 'mode-line
- :foreground "gray40")
+ :inherit 'mode-line-inactive)
 
 (set-face-attribute
  'mode-line-filename-face nil
@@ -177,8 +175,7 @@
 
 (set-face-attribute
  'mode-line-filename-inactive-face nil
- :inherit 'mode-line
- :foreground "gray40"
+ :inherit 'mode-line-inactive
  :weight 'bold)
 
 (set-face-attribute
