@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package php-mode
+  :straight t
   :mode ("\\.php\\'"))
 
 (provide 'jp-php)

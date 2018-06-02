@@ -12,6 +12,7 @@
   (require 'use-package))
 
 (use-package scala-mode
+  :straight t
   :mode ("\\.scala\\'" "\\.sbt\\'")
   :defer t
   :init
@@ -38,9 +39,12 @@
           scala-indent:default-run-on-strategy
           scala-indent:operator-strategy)))
 
-(use-package sbt-mode)
+(use-package sbt-mode
+  :straight t)
 
 (use-package ensime
+  ;; Have to do this to get around https://github.com/raxod502/straight.el/issues/279
+  :straight (:host github :repo "ensime/ensime-emacs" :branch "2.0")
   :commands (ensime)
   :config
   (progn
