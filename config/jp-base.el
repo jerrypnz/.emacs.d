@@ -218,8 +218,15 @@
     (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
     (setq aw-background nil)))
 
+(use-package move-border
+  :straight (:host github :repo "ramnes/move-border" :branch "master"))
+
+(use-package zoom-frm
+  :straight (:host github :repo "emacsmirror/zoom-frm" :branch "master"))
+
 ;; window management hydra
 (use-package jp-window
+  :after (move-border zoom-frm)
   :bind
   ("C-M-o" . jp-window/body))
 
