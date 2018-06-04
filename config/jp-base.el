@@ -166,9 +166,9 @@
     (setq highlight-thing-delay-seconds 0.1)
     (set-face-attribute
      'highlight-thing nil
-     ;; Using a lighter background color for hightlighted symbols whil
-     ;; keeping the same foreground color. Can use this tool to get
-     ;; lighter versions of a color:
+     ;; Using a lighter background color for hightlighted symbols
+     ;; while keeping the same foreground color. Can use this tool to
+     ;; get lighter versions of a color:
      ;; https://www.w3schools.com/colors/colors_picker.asp
      :inherit nil
      :foreground nil :background "#414d58")
