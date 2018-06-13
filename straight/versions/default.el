@@ -60,7 +60,7 @@
  ("smartparens" . "84f20e0c4ce0bd910168c8c13f2e540f533b276f")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("straight.el" . "7e77328b43a521ecb231d9eea8d2291abe9a332d")
- ("swiper" . "7df7ab6292ec85c396d85d837e820d248121ffcf")
+ ("swiper" . "5658acb417ed0b6bbb1307bfd068e7136adf6fce")
  ("use-package" . "d3ace722ea890f9e99054af4487eff65c4e36243")
  ("with-editor" . "ad5bb005ed3afec2d8b9b2bc1df19fb9b5e2dd84")
  ("yaml-mode" . "40067a10ac1360f0b9533f0bbbb2eea128e2574d")
