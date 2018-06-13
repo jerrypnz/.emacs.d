@@ -21,7 +21,9 @@
         ("M-S-<right>" . sp-backward-slurp-sexp)
         ("M-S-<left>" . sp-backward-slurp-sexp)
         ("M-<up>" . sp-raise-sexp)
-        ("C-k" . sp-kill-hybrid-sexp))
+        ("C-k" . sp-kill-hybrid-sexp)
+        ("C-M-f" . sp-forward-sexp)
+        ("C-M-b" . sp-backward-sexp))
 
   :config
   (progn
