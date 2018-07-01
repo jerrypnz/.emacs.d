@@ -21,7 +21,16 @@
   (progn
     (define-clojure-indent
       ;; expectations
-      (expect 0))))
+      (expect 0)
+      ;; clj-time
+      (do-at 1)
+      ;; custom core.async macros
+      (go? 0)
+      (go?>x 1)
+      (go?> 1)
+      (go-loop? 1)
+      ;; metrics-clojure
+      (time! 1))))
 
 (use-package cider
   :straight t
