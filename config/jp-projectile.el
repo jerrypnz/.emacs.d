@@ -45,6 +45,7 @@
     (counsel-projectile-mode)))
 
 (use-package jp-projectile-utils
+  :after (counsel-projectile)
   :bind
   (("C-x b" . jp-switch-buffer)
    ("M-m b" . jp-switch-buffer)
