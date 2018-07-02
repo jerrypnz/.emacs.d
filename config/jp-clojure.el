@@ -41,13 +41,15 @@
       ("J" cider-jack-in-clojurescript "jack-in-cljs")
       ("c" cider-connect "connect")
       ("R" cider-restart "restart")
-      ("Q" cider-quit "quit"))
+      ("Q" cider-quit "disconnect")
+      ("q" nil "quit"))
     (major-mode-hydra-bind clojure-mode "Load"
       ("k" cider-load-buffer "buffer")
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
       ("r" cider-refresh "reload"))
     (major-mode-hydra-bind clojure-mode "Eval"
+      ("s" cider-repl-set-ns "set-repl-ns")
       ("e" cider-eval-last-sexp-to-repl "eval-last")
       ("f" cider-eval-defun-at-point "eval-defun")
       ("I" cider-inspect-last-result "inspect-last-result")
@@ -87,13 +89,29 @@
     ;; smartparens mode for the REPL
     (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
-    (setq cider-show-error-buffer nil)))
+    (setq cider-show-error-buffer nil)
+
+    (major-mode-hydra-bind cider-repl-mode "Connect"
+      ("R" cider-restart "restart")
+      ("Q" cider-quit "disconnect")
+      ("q" nil "quit"))
+    (major-mode-hydra-bind cider-repl-mode "Load"
+      ("l" cider-load-file "file")
+      ("L" cider-load-all-project-ns "all-ns")
+      ("r" cider-refresh "reload"))
+    (major-mode-hydra-bind cider-repl-mode "Eval"
+      ("s" cider-repl-set-ns "set-repl-ns")
+      ("i" cider-interrupt "interrupt"))
+    (major-mode-hydra-bind cider-repl-mode "Docs"
+      ("d" cider-doc "doc"))))
 
 (use-package cider-apropos
   :after (cider)
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Docs"
+      ("a" cider-apropos "apropos"))
+    (major-mode-hydra-bind cider-repl-mode "Docs"
       ("a" cider-apropos "apropos")))
   :commands (cider-apropos))
 
@@ -102,6 +120,9 @@
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Macros"
+      ("x" cider-macroexpand-1 "expand-1")
+      ("X" cider-macroexpand-all "expand-all"))
+    (major-mode-hydra-bind cider-repl-mode "Macros"
       ("x" cider-macroexpand-1 "expand-1")
       ("X" cider-macroexpand-all "expand-all")))
   :commands (cider-macroexpand-1 cider-macroexpand-all))
