@@ -20,6 +20,8 @@
   :config
   (progn
     (define-clojure-indent
+      (-> 1)
+      (->> 1)
       ;; expectations
       (expect 0)
       ;; clj-time
