@@ -101,9 +101,10 @@
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
       ("r" cider-refresh "reload"))
-    (major-mode-hydra-bind cider-repl-mode "Eval"
+    (major-mode-hydra-bind cider-repl-mode "REPL"
       ("s" cider-repl-set-ns "set-repl-ns")
-      ("i" cider-interrupt "interrupt"))
+      ("i" cider-interrupt "interrupt")
+      ("c" cider-repl-clear-buffer "clear"))
     (major-mode-hydra-bind cider-repl-mode "Docs"
       ("d" cider-doc "doc"))))
 
