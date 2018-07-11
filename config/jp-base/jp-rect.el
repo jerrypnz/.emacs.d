@@ -16,25 +16,30 @@
                                              :hint nil
                                              :post (deactivate-mark)
                                              :foreign-keys warn)
-  ("Select" (("k" rectangle-previous-line "↑")
-             ("j" rectangle-next-line "↓")
-             ("h" rectangle-backward-char "←")
-             ("l" rectangle-forward-char "→")
-             ("e" rectangle-exchange-point-and-mark "exchange")
-             ("r" (if (region-active-p)
-                      (deactivate-mark)
-                    (rectangle-mark-mode 1)) "reset"))
-   "Edit" (("d" kill-rectangle "kill")
-           ("o" open-rectangle "open")
-           ("t" string-rectangle "string")
-           ("c" clear-rectangle "clear")
-           ("N" rectangle-number-lines "line number"))
+  ("Select"
+   (("k" rectangle-previous-line "↑")
+    ("j" rectangle-next-line "↓")
+    ("h" rectangle-backward-char "←")
+    ("l" rectangle-forward-char "→")
+    ("e" rectangle-exchange-point-and-mark "exchange")
+    ("r" (if (region-active-p)
+             (deactivate-mark)
+           (rectangle-mark-mode 1)) "reset"))
 
-   "Copy/Yank" (("w" copy-rectangle-as-kill "copy")
-                ("y" yank-rectangle "yank"))
+   "Edit"
+   (("d" kill-rectangle "kill")
+    ("o" open-rectangle "open")
+    ("t" string-rectangle "string")
+    ("c" clear-rectangle "clear")
+    ("N" rectangle-number-lines "line number"))
 
-   "Undo" (("u" undo "undo")
-           ("q" nil "quit"))))
+   "Copy/Yank"
+   (("w" copy-rectangle-as-kill "copy")
+    ("y" yank-rectangle "yank"))
+
+   "Undo"
+   (("u" undo "undo")
+    ("q" nil "quit"))))
 
 (provide 'jp-rect)
 ;;; jp-rect.el ends here
