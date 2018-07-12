@@ -116,9 +116,10 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-markdown)
 
 ;; Programming language support
-(use-package jp-go)
-(use-package jp-scala)
 (use-package jp-clojure)
+(use-package jp-scala)
+(use-package jp-elisp)
+(use-package jp-go)
 (use-package jp-php)
 (use-package jp-puppet)
 (use-package jp-protobuf)
