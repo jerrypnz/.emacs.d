@@ -13,7 +13,7 @@
 (defun jp-go-run-tests (args)
   (interactive)
   (save-selected-window
-    (async-shell-command (concat "go test " args))))
+    (compile (concat "go test " args))))
 
 (defun jp-go-run-package-tests ()
   (interactive)
