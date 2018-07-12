@@ -21,11 +21,11 @@
     (insert "package main
 
 import (
-	\"fmt\"
+  \"fmt\"
 )
 
 func main() {
-	fmt.Printf(\"\")
+  fmt.Printf(\"\")
 }")
     (goto-char 61)
     (go-mode)
@@ -43,4 +43,6 @@ func main() {
       (lambda () (interactive)
         (save-buffer)
         (compile (format "go run %s" (buffer-file-name)))))))
+
+(provide 'jp-go-play)
 ;;; jp-go-play.el ends here

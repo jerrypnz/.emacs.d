@@ -31,7 +31,8 @@
   (setq magit-repository-directories
         '(("~/dev/workspace/"   . 3)
           ("~/dev/personal/"    . 2)
-          ("~/dev/open-source/" . 2))))
+          ("~/dev/open-source/" . 2)
+          ("~/go/src/"          . 4))))
 
 ;; git-timemachine
 (use-package git-timemachine

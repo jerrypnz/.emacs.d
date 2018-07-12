@@ -32,7 +32,13 @@
     (setq gofmt-command "goimports")
     (add-hook 'go-mode-hook
               (lambda ()
-                (add-hook 'before-save-hook 'gofmt-before-save)))))
+                (add-hook 'before-save-hook 'gofmt-before-save)))
+
+    (major-mode-hydra-bind go-mode "Doc"
+      ("d" godoc-at-point "doc at point"))
+    (major-mode-hydra-bind go-mode "Imports"
+      ("ia" go-import-add "add")
+      ("ir" go-remove-unused-imports "cleanup"))))
 
 (use-package company-go
   :if (jp-init-gocode-emacs-path)
@@ -42,27 +48,48 @@
               (set (make-local-variable 'company-backends) '(company-go))
               (company-mode))))
 
-(use-package go-rename
+(use-package go-eldoc
+  :straight t
   :after (go-mode)
-  :bind (:map go-mode-map
-              ;;TODO Replace it with major mode hydra
-              ("C-M-m r" . go-rename)))
+  :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package go-rename
+  :straight t
+  :after (go-mode)
+  :commands (go-rename)
+  :init
+  (major-mode-hydra-bind go-mode "Refactor"
+    ("r" go-rename "rename")))
 
 (use-package go-guru
+  :straight t
   :after (go-mode)
-  :bind (:map go-mode-map
-              ;;TODO Replace it with major mode hydra
-              ("C-M-m R" . go-guru-referrers)
-              ("C-M-m I" . go-guru-implements)
-              ("C-M-m F" . go-guru-freevars)
-              ("C-M-m D" . go-guru-describe)
-              ("C-M-m C" . go-guru-callers)
-              ("C-M-m E" . go-guru-callees)
-              ("C-M-m T" . go-guru-callstack)
-              ("C-M-m P" . go-guru-pointsto)
-              ("C-M-m W" . go-guru-whicherrs)
-              ("C-M-m H" . go-guru-peers)
-              ("C-M-m S" . jp-go-guru-set-current-package-as-main))
+  :init
+  (major-mode-hydra-bind go-mode "Guru"
+    ("D" go-guru-describe "describe")
+    ("R" go-guru-referrers "referrers")
+    ("I" go-guru-implements "implements")
+    ("F" go-guru-freevars "freevars")
+    ("C" go-guru-callers "callers")
+    ("E" go-guru-callees "callees")
+    ("T" go-guru-callstack "callstack")
+    ("P" go-guru-pointsto "pointsto")
+    ("W" go-guru-whicherrs "whicherrs")
+    ("H" go-guru-peers "peers")
+    ("S" jp-go-guru-set-current-package-as-main "set scope"))
+
+  :commands (go-guru-referrers
+             go-guru-implements
+             go-guru-freevars
+             go-guru-describe
+             go-guru-callers
+             go-guru-callees
+             go-guru-callstack
+             go-guru-pointsto
+             go-guru-whicherrs
+             go-guru-peers
+             jp-go-guru-set-current-package-as-main)
   :config
   (progn
     ;; Taken from https://gist.github.com/sideshowcoder/0d37c53bbf1d62299600bb723cc20af0
@@ -75,6 +102,15 @@
              (gopath-src-path (concat (file-name-as-directory (go-guess-gopath)) "src"))
              (relative-package-path (directory-file-name (file-name-directory (file-relative-name filename gopath-src-path)))))
         (setq go-guru-scope relative-package-path)))))
+
+(use-package jp-go-tests
+  :after (go-mode)
+  :config
+  (major-mode-hydra-bind go-mode "Test"
+    ("tt" jp-go-run-test-current-function "current function")
+    ("ts" jp-go-run-test-current-suite "current suite")
+    ("tp" jp-go-run-package-tests "package")
+    ("tP" jp-go-run-package-tests-nested "package nested")))
 
 (use-package jp-go-play
   :commands (go-play))
