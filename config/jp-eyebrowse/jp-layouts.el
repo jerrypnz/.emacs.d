@@ -24,14 +24,13 @@
                  'shadow)))
     (propertize name 'face face)))
 
-(pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn)
+(pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn :quit-key "q")
   ("Actions"
    (("n" eyebrowse-next-window-config   "next")
     ("p" eyebrowse-prev-window-config   "previous")
     ("o" eyebrowse-last-window-config   "last")
     ("r" eyebrowse-rename-window-config "rename")
-    ("x" eyebrowse-close-window-config  "close")
-    ("q" nil "quit"))
+    ("x" eyebrowse-close-window-config  "close"))
 
    "Layouts"
    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :exit t)

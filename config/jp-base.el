@@ -224,7 +224,7 @@
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
-  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
+  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
   :init
   (progn
     (autoload 'pretty-hydra-define "pretty-hydra" nil nil 'macro)
@@ -236,10 +236,14 @@
 
   :config
   (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
     (setq major-mode-hydra-title-generator
           '(lambda (mode)
-             (s-concat "\n "
-                       (all-the-icons-icon-for-mode mode :v-adjust 0.05)
+             (s-concat (all-the-icons-icon-for-mode
+                        mode
+                        :v-adjust (if (eq mode 'emacs-lisp-mode)
+                                      -0.1
+                                    0.05))
                        " "
                        (symbol-name mode))))))
 
