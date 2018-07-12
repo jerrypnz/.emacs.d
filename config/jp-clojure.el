@@ -18,9 +18,13 @@
          ("\\.cljc\\'" . clojurec-mode))
   :config
   (progn
+    ;; If put in `define-clojure-indent', it will fail with a "wrong
+    ;; type argument: listp, 1" error the first time a clj buffer is
+    ;; opened.
+    (put-clojure-indent '-> 1)
+    (put-clojure-indent '->> 1)
+
     (define-clojure-indent
-      (-> 1)
-      (->> 1)
       ;; expectations
       (expect 0)
       ;; clj-time
