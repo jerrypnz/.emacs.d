@@ -232,7 +232,16 @@
 
   :bind
   (("C-M-m" . major-mode-hydra)
-   ("M-m m" . major-mode-hydra)))
+   ("M-m m" . major-mode-hydra))
+
+  :config
+  (progn
+    (setq major-mode-hydra-title-generator
+          '(lambda (mode)
+             (s-concat "\n "
+                       (all-the-icons-icon-for-mode mode :v-adjust 0.05)
+                       " "
+                       (symbol-name mode))))))
 
 ;; ispell
 (use-package ispell
