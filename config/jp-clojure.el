@@ -15,8 +15,7 @@
   :straight t
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
-         ("\\.cljc\\'" . clojurec-mode)
-         ("\\.cljx\\'" . clojurex-mode))
+         ("\\.cljc\\'" . clojurec-mode))
   :config
   (progn
     (define-clojure-indent
