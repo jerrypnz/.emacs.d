@@ -239,13 +239,15 @@
     (setq major-mode-hydra-invisible-quit-key "q")
     (setq major-mode-hydra-title-generator
           '(lambda (mode)
-             (s-concat (all-the-icons-icon-for-mode
-                        mode
-                        :v-adjust (if (eq mode 'emacs-lisp-mode)
-                                      -0.1
-                                    0.05))
-                       " "
-                       (symbol-name mode))))))
+             (let ((icon (all-the-icons-icon-for-mode
+                          mode
+                          :v-adjust (if (eq mode 'emacs-lisp-mode)
+                                        -0.1
+                                      0.05))))
+               (s-concat
+                "\n "
+                (if (stringp icon) (s-append " " icon) "")
+                (symbol-name mode)))))))
 
 ;; ispell
 (use-package ispell
