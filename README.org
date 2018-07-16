@@ -12,6 +12,7 @@
 *** Language support
 
     - generic symbol/function search
+      - each language can have a specific impl, and defaults to gtags
     - +go+
     - +scala+
     - +clojure+
@@ -67,6 +68,8 @@
 
     - +which-key+
     - +undo-tree+
+    - ivy / counsel / swiper
+      - ability to preview without exiting it
     - create some useful =hydra=.
       - search/replace?
       - record / use keyboard macros?
