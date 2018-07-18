@@ -149,7 +149,13 @@ If argument INTERACTIVE-P is set, log additional information."
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
    (quote
-    ((elisp-lint-indent-specs
+    ((eval progn
+           (aggressive-indent-mode -1)
+           (define-clojure-indent
+             (expect 0)
+             (expect-search 0)
+             (expect-next 0)))
+     (elisp-lint-indent-specs
       (if-let* . 2)
       (when-let* . 1)
       (let* . defun)
