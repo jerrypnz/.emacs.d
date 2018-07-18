@@ -56,5 +56,9 @@ This checks in turn:
   ("f" describe-function)
   ("v" describe-variable))
 
+;; Prefer xref-find than dump-jump for elisp
+(define-key emacs-lisp-mode-map (kbd "M-.") #'xref-find-definitions)
+(define-key emacs-lisp-mode-map (kbd "C-M-.") #'xref-find-apropos)
+
 (provide 'jp-elisp)
 ;;; jp-elisp.el ends here

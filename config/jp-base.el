@@ -156,6 +156,16 @@
   (global-unset-key (kbd "M-r"))
   (setq iedit-toggle-key-default (kbd "M-r")))
 
+;; dump-jump
+(use-package dumb-jump
+  :straight t
+  (("M-."   . dumb-jump-go)
+   ("C-M-." . dumb-jump-go-other-window))
+  :config
+  (progn
+    (setq dumb-jump-selector 'ivy)
+    (setq dumb-jump-prefer-searcher 'rg)))
+
 ;; hightlight-things.el
 (use-package highlight-thing
   :straight t
