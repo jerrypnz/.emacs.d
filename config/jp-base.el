@@ -159,6 +159,7 @@
 ;; dump-jump
 (use-package dumb-jump
   :straight t
+  :bind
   (("M-."   . dumb-jump-go)
    ("C-M-." . dumb-jump-go-other-window))
   :config
