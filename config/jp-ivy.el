@@ -20,6 +20,19 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")))
 
+;; (use-package ivy-posframe
+;;   :straight t
+;;   :config
+;;   (progn
+;;     (push '(t . ivy-posframe-display-at-frame-center) ivy-display-functions-alist)
+;;     (setq ivy-posframe-parameters
+;;           '((left-fringe . 10)
+;;             (right-fringe . 10)
+;;             (min-width  . 80)
+;;             (min-height . 15)
+;;             (border-width . 10)))
+;;     (ivy-posframe-enable)))
+
 (use-package ivy-hydra
   :straight t)
 
