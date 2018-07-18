@@ -111,15 +111,15 @@
     (major-mode-hydra-bind cider-repl-mode "Docs"
       ("d" cider-doc "doc"))))
 
-(use-package cider-apropos
+(use-package jp-counsel-cider
   :after (cider)
   :init
   (progn
     (major-mode-hydra-bind clojure-mode "Docs"
-      ("a" cider-apropos "apropos"))
+      ("a" jp-counsel-cider-apropos "apropos"))
     (major-mode-hydra-bind cider-repl-mode "Docs"
-      ("a" cider-apropos "apropos")))
-  :commands (cider-apropos))
+      ("a" jp-counsel-cider-apropos "apropos")))
+  :commands (jp-counsel-cider-apropos))
 
 (use-package cider-macroexpansion
   :after (cider)
