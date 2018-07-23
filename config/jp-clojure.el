@@ -27,6 +27,7 @@
     (define-clojure-indent
       ;; expectations
       (expect 0)
+      (expect-let 1)
       ;; clj-time
       (do-at 1)
       ;; custom core.async macros
