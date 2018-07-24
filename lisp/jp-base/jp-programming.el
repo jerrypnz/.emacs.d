@@ -94,6 +94,10 @@
 ;; auto json-mode
 (push '("\\.json\\'" . json-mode) auto-mode-alist)
 
+;; Cassandra CQL
+(push '("\\.cql\\'" . sql-mode) auto-mode-alist)
+(push '("\\.hcql\\'" . sql-mode) auto-mode-alist)
+
 ;; 2-space indent for CSS
 (setq css-indent-offset 2)
 
