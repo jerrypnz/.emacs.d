@@ -4,7 +4,7 @@
  ("all-the-icons-ivy" . "52b3f4a8a4a038998943afaffb5ff25054f65af4")
  ("all-the-icons.el" . "52d1f2d36468146c93aaf11399f581401a233306")
  ("avy" . "7c40f5e3811716b05d87a06096b190f7cf7bdc45")
- ("cider" . "c4313db0bdd55138f63d6a8624b0ba2db5c23a3b")
+ ("cider" . "1c9f9e33a2c3995774953e43906148200b11507e")
  ("clojure-mode" . "8a043506bb9722eab0b0612952613fb683cd5220")
  ("company-mode" . "1c768504eb0ed7c416be4f7844311b6c68f789fb")
  ("counsel-projectile" . "a091875789cd3dcf88164212103d7f783b6712c0")
