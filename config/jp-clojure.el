@@ -25,6 +25,8 @@
     (put-clojure-indent '->> 1)
 
     (define-clojure-indent
+      ;; core.match
+      (match 1)
       ;; expectations
       (expect 0)
       (expect-let 1)
@@ -53,7 +55,7 @@
       ("k" cider-load-buffer "buffer")
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
-      ("r" cider-refresh "reload"))
+      ("r" cider-ns-refresh "reload"))
     (major-mode-hydra-bind clojure-mode "Eval"
       ("s" cider-repl-set-ns "set-repl-ns")
       ("e" cider-eval-last-sexp-to-repl "eval-last")
@@ -104,7 +106,7 @@
     (major-mode-hydra-bind cider-repl-mode "Load"
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
-      ("r" cider-refresh "reload"))
+      ("r" cider-ns-refresh "reload"))
     (major-mode-hydra-bind cider-repl-mode "REPL"
       ("s" cider-repl-set-ns "set-repl-ns")
       ("i" cider-interrupt "interrupt")
