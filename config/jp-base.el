@@ -137,6 +137,7 @@
     "M-m g" "git"
     "M-m l" "layouts"
     "M-m m" "major-mode-hydra"
+    "M-m M" "keyboard macros"
     "M-m p" "projects"
     "M-m t" "toggles"
     "M-m w" "workspace")
@@ -232,6 +233,11 @@
   :after (move-border zoom-frm)
   :bind
   ("C-M-o" . jp-window/body))
+
+;; keyboard macro
+(use-package jp-macro
+  :bind
+  ("M-m M" . hydra-macro/body))
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
