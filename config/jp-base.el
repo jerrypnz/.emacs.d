@@ -103,7 +103,8 @@
     (global-aggressive-indent-mode 1)
     (add-to-list 'aggressive-indent-excluded-modes 'go-mode)
     (add-to-list 'aggressive-indent-excluded-modes 'restclient-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)))
+    (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'cider-repl-mode)))
 
 ;; rainbow delimiters
 (use-package rainbow-delimiters
