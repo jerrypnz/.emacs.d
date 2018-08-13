@@ -58,13 +58,13 @@
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
     ("m" major-mode-hydra "major mode hydra")
-    ("o" jp-layouts/body "window management")
+    ("o" jp-window/body "window management")
     ("l" jp-layouts/body "layouts")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "symbol at pt")
     ("M" hydra-macro/body "keyboard macros")
-    ("M-SPC" nil nil)) ;; The hydra is bound to M-SPC, pressing it
-                       ;; again closes it.
+     ;; The hydra is bound to M-SPC, pressing it again closes it.
+    ("M-SPC" nil nil))
 
    "Project"
    (("pp" jp-eyebrowse-switch-project "switch project")
