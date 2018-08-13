@@ -144,6 +144,10 @@
     "M-m w" "workspace")
   (which-key-mode))
 
+(use-package jp-main-hydra
+  :bind
+  ("M-SPC" . jp-main-hydra/body))
+
 ;; mwim
 (use-package mwim
   :straight t
@@ -235,11 +239,6 @@
   :bind
   ("C-M-o" . jp-window/body))
 
-;; keyboard macro
-(use-package jp-macro
-  :bind
-  ("M-m M" . hydra-macro/body))
-
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
   :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
@@ -249,8 +248,7 @@
     (autoload 'major-mode-hydra-bind "major-mode-hydra" nil 'macro))
 
   :bind
-  (("C-M-m" . major-mode-hydra)
-   ("M-m m" . major-mode-hydra))
+  (("C-M-m" . major-mode-hydra))
 
   :config
   (progn

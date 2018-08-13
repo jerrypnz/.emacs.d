@@ -11,6 +11,19 @@
 (require 'pretty-hydra)
 (require 'eyebrowse)
 
+(autoload 'counsel-projectile-switch-project "counsel-projectile")
+
+;; Switch to a project and use its name as the tag of
+;; the window config
+(defun jp-eyebrowse-switch-project ()
+  (interactive)
+  (let ((project-name (counsel-projectile-switch-project)))
+    (when (> (length project-name) 0)
+      (eyebrowse-rename-window-config
+       (eyebrowse--get 'current-slot)
+       ;;(shorten-directory project-name 32)
+       (file-name-nondirectory (directory-file-name project-name))))))
+
 (defun jp-eyebrowse-layout-tag (slot)
   (let* ((window-configs (eyebrowse--get 'window-configs))
          (window-config (assoc slot window-configs))
