@@ -62,7 +62,9 @@
     ("l" jp-layouts/body "layouts")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "symbol at pt")
-    ("M" hydra-macro/body "keyboard macros"))
+    ("M" hydra-macro/body "keyboard macros")
+    ("M-SPC" nil nil)) ;; The hydra is bound to M-SPC, pressing it
+                       ;; again closes it.
 
    "Project"
    (("pp" jp-eyebrowse-switch-project "switch project")
