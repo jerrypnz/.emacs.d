@@ -20,20 +20,6 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")))
 
-(use-package all-the-icons-ivy
-  :straight t
-  :after (ivy)
-  :config
-  (progn
-    (setq all-the-icons-ivy-file-commands
-          '(counsel-find-file
-            counsel-file-jump
-            counsel-recentf
-            counsel-projectile
-            counsel-projectile-find-file
-            counsel-projectile-find-dir))
-    (all-the-icons-ivy-setup)))
-
 ;; (use-package ivy-posframe
 ;;   :straight t
 ;;   :config
