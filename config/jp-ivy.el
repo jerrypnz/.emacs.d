@@ -22,6 +22,7 @@
 
 (use-package all-the-icons-ivy
   :straight t
+  :after (ivy)
   :config
   (progn
     (setq all-the-icons-ivy-file-commands
