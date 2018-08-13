@@ -11,9 +11,6 @@
 ;; ivy
 (use-package ivy
   :straight t
-  :bind
-  ("M-m r" . ivy-resume)
-
   :config
   (progn
     (ivy-mode 1)

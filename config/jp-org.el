@@ -21,10 +21,10 @@
 (use-package org
   :straight org-plus-contrib
   :defer t
+  :commands (org-capture org-agenda)
   :bind
-  (("M-m c" . org-capture)
-   ("M-m a" . org-agenda)
-   :map org-mode-map
+  (:map
+   org-mode-map
    ("RET" . org-return-indent))
 
   :config
@@ -195,7 +195,6 @@
 
 (use-package deft
   :straight t
-  :bind ("M-m n" . deft)
   :commands (deft)
   :config
   (progn

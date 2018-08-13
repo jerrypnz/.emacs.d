@@ -49,6 +49,10 @@
 (autoload 'eyebrowse-switch-to-window-config-8 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-9 "eyebrowse")
 
+(autoload 'deft "deft")
+(autoload 'org-capture "org")
+(autoload 'org-agenda "org")
+
 (defvar jp-main-hydra--title (s-concat "\n " (all-the-icons-faicon "cogs" :v-adjust 0.05) " Main Hydra"))
 
 (pretty-hydra-define jp-main-hydra
@@ -58,12 +62,12 @@
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
     ("m" major-mode-hydra "major mode hydra")
-    ("o" jp-window/body "window management")
+    ("w" jp-window/body "window management")
     ("l" jp-layouts/body "layouts")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "symbol at pt")
     ("M" hydra-macro/body "keyboard macros")
-     ;; The hydra is bound to M-SPC, pressing it again closes it.
+    ;; The hydra is bound to M-SPC, pressing it again closes it.
     ("M-SPC" nil nil))
 
    "Project"
@@ -79,6 +83,11 @@
     ("gL" magit-log-current "project log")
     ("gb" magit-blame "blame")
     ("gt" git-timemachine "time machine"))
+
+   "Org"
+   (("oc" org-capture "capture")
+    ("oa" org-agenda "agenda")
+    ("on" deft "deft"))
 
    "Toggles"
    (("tn" toggle-linum "line number")

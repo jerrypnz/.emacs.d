@@ -14,19 +14,16 @@
 ;; counsel-projectile also loads projectile itself
 (use-package counsel-projectile
   :straight t
-  :init
-  (setq projectile-keymap-prefix (kbd "M-m p"))
-
   :defer nil
-
   :commands (counsel-projectile
              counsel-projectile-switch-project
              counsel-projectile-find-file
              counsel-projectile-find-dir)
+  :bind (:map projectile-command-map
+              ("/" . counsel-projectile-rg))
 
-  :bind
-  (:map projectile-command-map
-        ("/" . counsel-projectile-rg))
+  :init
+  (setq projectile-keymap-prefix "C-c p")
 
   :config
   (progn
@@ -61,19 +58,7 @@
 (use-package jp-projectile-utils
   :after (counsel-projectile)
   :bind
-  (("C-x b" . jp-switch-buffer)
-   ("M-m b" . jp-switch-buffer)
-   ("M-m f" . jp-open-file)
-   ("M-m /" . jp-search)
-   ("M-m *" . jp-search-symbol-at-pt))
-
-  :config
-  (progn
-    (which-key-add-key-based-replacements
-      "M-m /" "search"
-      "M-m *" "search-symbol-at-point"
-      "M-m b" "buffers"
-      "M-m f" "find-file")))
+  (("C-x b" . jp-switch-buffer)))
 
 (use-package ibuffer-projectile
   :straight t

@@ -15,12 +15,6 @@
 (use-package magit
   :straight t
   :defer 2
-  :bind
-  (("M-m g s" . magit-status)
-   ("M-m g b" . magit-blame)
-   ("M-m g l" . magit-log-current)
-   ("M-m g L" . magit-log-buffer-file))
-
   :init
   ;; Since we're using git subtree without building it with Make, we
   ;; don't have "magit-version.el" file.  Get around it by setting the
@@ -37,8 +31,7 @@
 ;; git-timemachine
 (use-package git-timemachine
   :straight t
-  :bind
-  (("M-m g t" . git-timemachine)))
+  :commands (git-timemachine))
 
 (provide 'jp-magit)
 ;;; jp-magit.el ends here

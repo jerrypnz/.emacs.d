@@ -22,9 +22,6 @@
 
 (use-package jp-layouts
   :after (eyebrowse)
-  :bind
-  ("M-m l" . jp-layouts/body)
-
   :config
   (progn
     (eval-after-load "counsel-projectile"

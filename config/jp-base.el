@@ -79,8 +79,7 @@
          ("C-;"     . insert-semicolon-at-end-of-line)
          ("C-M-;"   . comment-current-line-dwim)
          ("C-o"     . jp-newline)
-         ("M-j"     . join-next-line)
-         ("M-m t n" . toggle-linum)))
+         ("M-j"     . join-next-line)))
 
 ;; expand-region
 (use-package expand-region
@@ -134,14 +133,6 @@
   :straight t
   :config
   (setq which-key-idle-delay 0.3)
-  (which-key-add-key-based-replacements
-    "M-m g" "git"
-    "M-m l" "layouts"
-    "M-m m" "major-mode-hydra"
-    "M-m M" "keyboard macros"
-    "M-m p" "projects"
-    "M-m t" "toggles"
-    "M-m w" "workspace")
   (which-key-mode))
 
 (use-package jp-main-hydra
