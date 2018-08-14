@@ -23,7 +23,7 @@
               ("/" . counsel-projectile-rg))
 
   :init
-  (setq projectile-keymap-prefix "C-c p")
+  (setq projectile-keymap-prefix (kbd "C-c p"))
 
   :config
   (progn
