@@ -37,6 +37,8 @@
       (go?>x 1)
       (go?> 1)
       (go-loop? 1)
+      (some-> 1)
+      (some->> 1)
       ;; metrics-clojure
       (time! 1))))
 
