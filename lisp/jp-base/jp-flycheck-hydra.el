@@ -1,4 +1,4 @@
-;;; jp-flycheck.el --- An awesome elisp package -*- lexical-binding: t; -*-
+;;; jp-flycheck-hydra.el --- An awesome elisp package -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Jerry Peng
 
@@ -29,5 +29,5 @@
   (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
   ("q"  nil))
 
-(provide 'jp-flycheck)
-;;; jp-flycheck.el ends here
+(provide 'jp-flycheck-hydra)
+;;; jp-flycheck-hydra.el ends here

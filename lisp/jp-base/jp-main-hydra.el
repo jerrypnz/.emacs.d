@@ -16,7 +16,7 @@
 (require 'jp-layouts)
 (require 'jp-projectile-utils)
 (require 'jp-window)
-(require 'jp-flycheck)
+(require 'jp-flycheck-hydra)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
