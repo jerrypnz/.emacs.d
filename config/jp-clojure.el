@@ -11,6 +11,8 @@
 (eval-when-compile
   (require 'use-package))
 
+(require 'major-mode-hydra)
+
 (use-package clojure-mode
   :straight t
   :mode (("\\.clj\\'"  . clojure-mode)
@@ -137,6 +139,12 @@
       ("x" cider-macroexpand-1 "expand-1")
       ("X" cider-macroexpand-all "expand-all")))
   :commands (cider-macroexpand-1 cider-macroexpand-all))
+
+(use-package flycheck-clojure
+  :straight t
+  :after (cider flycheck)
+  :config
+  (flycheck-clojure-setup))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here

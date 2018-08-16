@@ -8,8 +8,13 @@
 
 ;;; Code:
 
-(require 'flycheck)
 (require 'hydra)
+
+(autoload 'flycheck-list-errors "flycheck")
+(autoload 'flycheck-error-list-set-filter "flycheck")
+(autoload 'flycheck-next-error "flycheck")
+(autoload 'flycheck-previous-error "flycheck")
+(autoload 'flycheck-first-error "flycheck")
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Flycheck
 (defhydra jp-flycheck
@@ -20,7 +25,7 @@
   ("f"  flycheck-error-list-set-filter                            "filter")
   ("n"  flycheck-next-error                                       "next")
   ("p"  flycheck-previous-error                                   "previous")
-  ("<" flycheck-first-error                                      "first")
+  ("<"  flycheck-first-error                                      "first")
   (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
   ("q"  nil))
 
