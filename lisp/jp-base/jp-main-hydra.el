@@ -9,20 +9,14 @@
 ;;; Code:
 
 (require 'pretty-hydra)
-
-(autoload 'jp-rectangle/body "jp-rect")
-(autoload 'hydra-macro/body "jp-macro")
-
-(autoload 'jp-layouts/body "jp-layouts")
-(autoload 'jp-eyebrowse-switch-project "jp-layouts")
-(autoload 'jp-eyebrowse-layout-tag "jp-layouts")
-
-(autoload 'jp-switch-buffer "jp-projectile-utils")
-(autoload 'jp-open-file "jp-projectile-utils")
-(autoload 'jp-search "jp-projectile-utils")
-(autoload 'jp-search-symbol-at-pt "jp-projectile-utils")
-
-(autoload 'jp-window/body "jp-window")
+(require 'major-mode-hydra)
+(require 'all-the-icons)
+(require 'jp-rect)
+(require 'jp-macro)
+(require 'jp-layouts)
+(require 'jp-projectile-utils)
+(require 'jp-window)
+(require 'jp-flycheck)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
@@ -34,10 +28,6 @@
 (autoload 'magit-log-current "magit")
 (autoload 'magit-log-buffer-file "magit")
 (autoload 'git-timemachine "git-timemachine")
-
-(autoload 'ivy-resume "ivy")
-
-(autoload 'major-mode-hydra "major-mode-hydra")
 
 (autoload 'eyebrowse-switch-to-window-config-1 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-2 "eyebrowse")
@@ -63,6 +53,8 @@
     ("r" ivy-resume "ivy resume")
     ("m" major-mode-hydra "major mode hydra")
     ("w" jp-window/body "window management")
+    ("R" jp-rectangle/body "rectangle")
+    ("F" jp-flycheck/body "flycheck")
     ("l" jp-layouts/body "layouts")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "symbol at pt")

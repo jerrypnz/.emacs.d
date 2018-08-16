@@ -18,15 +18,23 @@
   :commands (flycheck-mode global-flycheck-mode)
   :config
   (progn
-    (defun jp--flycheck-display-errors-function (errors)
-      (mapc (lambda (err)
-              (message "FlyC: %s" (flycheck-error-message err)) (sit-for 1))
-            errors))
+
+    ;; (defun jp--flycheck-display-errors-function (errors)
+    ;;   (mapc (lambda (err)
+    ;;           (message "FlyC: %s" (flycheck-error-message err)) (sit-for 1))
+    ;;         errors))
+    ;; (setq flycheck-display-errors-function 'jp--flycheck-display-errors-function)
+
     (setq flycheck-highlighting-mode 'symbols
           flycheck-indication-mode nil
-          flycheck-display-errors-function 'jp--flycheck-display-errors-function
           flycheck-emacs-lisp-load-path 'inherit)
     (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))))
+
+(use-package flycheck-pos-tip
+  :straight t
+  :after (flycheck)
+  :config
+  (flycheck-pos-tip-mode))
 
 (provide 'jp-flycheck)
 ;;; jp-flycheck.el ends here
