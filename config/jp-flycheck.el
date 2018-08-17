@@ -28,7 +28,15 @@
     (setq flycheck-highlighting-mode 'symbols
           flycheck-indication-mode nil
           flycheck-emacs-lisp-load-path 'inherit)
-    (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))))
+    (setq-default flycheck-disabled-checkers '(c/c++-clang emacs-lisp-checkdoc))
+
+    (add-to-list 'display-buffer-alist
+                 `(,(rx bos "*Flycheck errors*" eos)
+                   (display-buffer-reuse-window
+                    display-buffer-in-side-window)
+                   (reusable-frames . visible)
+                   (side            . bottom)
+                   (window-height   . 0.25)))))
 
 (use-package flycheck-pos-tip
   :straight t

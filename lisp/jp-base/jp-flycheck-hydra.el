@@ -18,9 +18,9 @@
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Flycheck
 (defhydra jp-flycheck
-  (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-        :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-        :hint nil)
+  (:hint nil :foreign-keys warn
+         :pre (progn (setq hydra-lv t) (flycheck-list-errors))
+         :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*")))
   "Errors"
   ("f"  flycheck-error-list-set-filter                            "filter")
   ("n"  flycheck-next-error                                       "next")
