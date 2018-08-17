@@ -138,59 +138,9 @@ If argument INTERACTIVE-P is set, log additional information."
                           ,load-file-name elapsed)))
             t))
 
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
 
 (provide 'init)
 
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values
-   (quote
-    ((eval progn
-           (aggressive-indent-mode -1)
-           (define-clojure-indent
-             (expect 0)
-             (expect-search 0)
-             (expect-next 0)))
-     (elisp-lint-indent-specs
-      (if-let* . 2)
-      (when-let* . 1)
-      (let* . defun)
-      (nrepl-dbind-response . 2)
-      (cider-save-marker . 1)
-      (cider-propertize-region . 1)
-      (cider-map-repls . 1)
-      (cider--jack-in . 1)
-      (cider--make-result-overlay . 1)
-      (multiline-comment-handler . defun)
-      (insert-label . defun)
-      (insert-align-label . defun)
-      (insert-rect . defun)
-      (cl-defun . 2)
-      (with-parsed-tramp-file-name . 2)
-      (thread-first . 1)
-      (thread-last . 1))
-     (checkdoc-package-keywords-flag)
-     (eval progn
-           (define-clojure-indent
-             (by :defn)
-             (rate :defn)
-             (where :defn)
-             (tagged :defn)
-             (tagged-all :defn)
-             (changed :defn)
-             (project :defn)
-             (smap :defn)
-             (with :defn)
-             (split :defn)
-             (coalesce :defn)
-             (adjust :defn)))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

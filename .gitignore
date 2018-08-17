@@ -16,3 +16,4 @@ projectile-bookmarks.eld
 /straight/*
 !/straight/versions/
 !/straight/versions/*
+/custom.el
