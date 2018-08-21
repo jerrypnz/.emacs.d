@@ -39,6 +39,7 @@
       (go?>x 1)
       (go?> 1)
       (go-loop? 1)
+      (thread?>x 1)
       (some-> 1)
       (some->> 1)
       ;; metrics-clojure
@@ -102,6 +103,17 @@
     (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
     (setq cider-show-error-buffer nil)
+
+    (defun jp-around-cider-find-var (fn &rest args)
+      (let* ((sess (sesman-current-session 'CIDER))
+             (orig-buf (current-buffer))
+             (result (apply fn args)))
+        (unless (eq orig-buf (current-buffer))
+          (sesman-link-with-buffer (current-buffer) sess))
+        result))
+
+    ;; Workaround for https://github.com/clojure-emacs/cider/issues/2408#issuecomment-413768401
+    (advice-add #'cider--find-var :around #'jp-around-cider-find-var)
 
     (major-mode-hydra-bind cider-repl-mode "Connect"
       ("R" cider-restart "restart")
