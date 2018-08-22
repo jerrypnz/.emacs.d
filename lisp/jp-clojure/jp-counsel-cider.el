@@ -52,16 +52,16 @@
     (-let* (((name type doc) (s-split-up-to " " str 2))
             ((ns var)        (s-split-up-to "/" name 1))
             ((label face)    (cond
-                              ((string= type "function")     '("fn" font-lock-function-name-face))
-                              ((string= type "macro")        '("macro" font-lock-keyword-face))
-                              ((string= type "variable")     '("var" font-lock-variable-name-face))
-                              ((string= type "special-form") '("special" font-lock-keyword-face))
-                              (t                             `(,type font-lock-variable-name-face)))))
-      (format "%-32s %-8s  %s"
+                              ((string= type "function")     '("⨍" font-lock-function-name-face))
+                              ((string= type "macro")        '("⨎" font-lock-keyword-face))
+                              ((string= type "variable")     '("𝒙" font-lock-variable-name-face))
+                              ((string= type "special-form") '("⨐" font-lock-keyword-face))
+                              (t                             '("𝒙" font-lock-variable-name-face)))))
+      (format "%s %-32s %s"
+              (propertize label 'face face)
               (format "%s/%s"
                       (propertize ns 'face 'font-lock-type-face)
                       (propertize var 'face face))
-              (propertize label 'face face)
               (if (string= doc "(not documented)")
                   ""
                 (propertize doc 'face 'font-lock-comment-face))))))
