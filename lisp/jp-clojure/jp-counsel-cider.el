@@ -52,11 +52,11 @@
     (-let* (((name type doc) (s-split-up-to " " str 2))
             ((ns var)        (s-split-up-to "/" name 1))
             ((label face)    (cond
-                              ((string= type "function")     '("⨍" font-lock-function-name-face))
-                              ((string= type "macro")        '("⨎" font-lock-keyword-face))
-                              ((string= type "variable")     '("𝒙" font-lock-variable-name-face))
-                              ((string= type "special-form") '("⨐" font-lock-keyword-face))
-                              (t                             '("𝒙" font-lock-variable-name-face)))))
+                              ((string= type "function")     '("[f]" font-lock-function-name-face))
+                              ((string= type "macro")        '("[m]" font-lock-keyword-face))
+                              ((string= type "variable")     '("[v]" font-lock-variable-name-face))
+                              ((string= type "special-form") '("[s]" font-lock-keyword-face))
+                              (t                             '("[v]" font-lock-variable-name-face)))))
       (format "%s %-32s %s"
               (propertize label 'face face)
               (format "%s/%s"
