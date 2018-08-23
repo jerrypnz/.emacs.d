@@ -28,6 +28,14 @@
           ("~/dev/open-source/" . 2)
           ("~/go/src/"          . 4))))
 
+(use-package magit-todos
+  :straight t
+  :after (magit)
+  :config
+  (progn
+    (setq magit-todos-require-colon nil)
+    (magit-todos-mode)))
+
 ;; git-timemachine
 (use-package git-timemachine
   :straight t
