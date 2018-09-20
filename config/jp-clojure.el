@@ -20,6 +20,10 @@
          ("\\.cljc\\'" . clojurec-mode))
   :config
   (progn
+    (major-mode-hydra-bind clojure-mode "Edit"
+      (">" clojure-thread-first-all "thread-first")
+      ("<" clojure-thread-last-all "thread-last")
+      ("u" clojure-unwind-all "thread-unwind"))
     ;; If put in `define-clojure-indent', it will fail with a "wrong
     ;; type argument: listp, 1" error the first time a clj buffer is
     ;; opened.
@@ -39,6 +43,8 @@
       (go?>x 1)
       (go?> 1)
       (go-loop? 1)
+      (thread? 0)
+      (thread?> 1)
       (thread?>x 1)
       (some-> 1)
       (some->> 1)
@@ -124,6 +130,7 @@
       ("L" cider-load-all-project-ns "all-ns")
       ("r" cider-ns-refresh "reload"))
     (major-mode-hydra-bind cider-repl-mode "REPL"
+      ("h" cider-repl-history "history")
       ("s" cider-repl-set-ns "set-repl-ns")
       ("i" cider-interrupt "interrupt")
       ("c" cider-repl-clear-buffer "clear"))
