@@ -12,7 +12,7 @@
 (require 's)
 
 (autoload 'cider-current-repl "cider-connection")
-(autoload 'cider--find-var "cider-find")
+(autoload 'cider-find-var "cider-find")
 (autoload 'cider-sync-request:apropos "cider-client")
 (autoload 'cider-doc-lookup "cider-doc")
 (autoload 'cider-grimoire-lookup "cider-grimoire")
@@ -32,7 +32,7 @@
   (car (s-split-up-to " " candidate 2)))
 
 (defun jp-counsel-cider-apropos--action-find (candidate)
-  (cider--find-var (jp-counsel-cider--get-symbol candidate)))
+  (cider-find-var nil (jp-counsel-cider--get-symbol candidate)))
 
 (defun jp-counsel-cider-apropos--action-doc (candidate)
   (cider-doc-lookup (jp-counsel-cider--get-symbol candidate)))

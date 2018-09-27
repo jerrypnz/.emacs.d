@@ -110,17 +110,6 @@
     ;; error buffer not popping up
     (setq cider-show-error-buffer nil)
 
-    (defun jp-around-cider-find-var (fn &rest args)
-      (let* ((sess (sesman-current-session 'CIDER))
-             (orig-buf (current-buffer))
-             (result (apply fn args)))
-        (unless (eq orig-buf (current-buffer))
-          (sesman-link-with-buffer (current-buffer) sess))
-        result))
-
-    ;; Workaround for https://github.com/clojure-emacs/cider/issues/2408#issuecomment-413768401
-    (advice-add #'cider--find-var :around #'jp-around-cider-find-var)
-
     (major-mode-hydra-bind cider-repl-mode "Connect"
       ("R" cider-restart "restart")
       ("Q" cider-quit "disconnect")
