@@ -24,8 +24,6 @@
   :after (eyebrowse)
   :config
   (progn
-    (eval-after-load "counsel-projectile"
-      '(define-key counsel-projectile-mode-map [remap projectile-switch-project] #'jp-eyebrowse-switch-project))
     (setq eyebrowse-new-workspace 'jp-eyebrowse-switch-project)))
 
 (provide 'jp-eyebrowse)
