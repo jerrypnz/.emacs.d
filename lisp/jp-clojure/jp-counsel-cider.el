@@ -11,11 +11,14 @@
 (require 'dash)
 (require 's)
 
-(autoload 'cider-current-repl "cider-connection")
-(autoload 'cider-find-var "cider-find")
-(autoload 'cider-sync-request:apropos "cider-client")
-(autoload 'cider-doc-lookup "cider-doc")
-(autoload 'cider-grimoire-lookup "cider-grimoire")
+(require 'cider-connection)
+(require 'cider-find)
+(require 'cider-client)
+(require 'cider-doc)
+(require 'cider-grimoire)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; counsel-cider-apropos
 
 (defun jp-counsel-cider--apropos-function (input)
   (if (not (cider-current-repl))
@@ -74,11 +77,51 @@
             :require-match t
             :re-builder #'ivy--regex
             :action jp-counsel-cider-apropos--actions
+            :sort t
             :history 'jp-counsel-cider-apropos
             :caller 'jp-counsel-cider-apropos))
 
 (ivy-set-display-transformer 'jp-counsel-cider-apropos
                              #'jp-counsel-cider-apropos--transformer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; counsel-cider-repl-history
+
+;; Defined in cider-repl-history.el
+(defvar cider-repl-history-repl-buffer)
+(defvar cider-repl-history-repl-window)
+
+(defun jp-counsel-cider-repl-history--transformer (str)
+  (with-temp-buffer
+    (clojure-mode-variables)
+    (clojure-font-lock-setup)
+    (insert str)
+    (font-lock-ensure)
+    (buffer-substring (point-min) (point-max))))
+
+(defun jp-counsel-cider-repl-history--action (candidate)
+  (with-selected-window cider-repl-history-repl-window
+    (with-current-buffer cider-repl-history-repl-buffer
+      (goto-char (point-max))
+      (cider-repl-history-insert-and-highlight candidate))))
+
+(defun jp-counsel-cider-repl-history ()
+  (interactive)
+  (let* ((repl-win (selected-window))
+         (repl-buf (window-buffer repl-win)))
+    (setq cider-repl-history-repl-buffer repl-buf)
+    (setq cider-repl-history-repl-window repl-win)
+    (let ((history (mapcar #'copy-sequence (cider-repl-history-get-history))))
+      (ivy-read "Find: "
+                history
+                :require-match t
+                :re-builder #'ivy--regex
+                :action #'jp-counsel-cider-repl-history--action
+                :history 'jp-counsel-cider-repl-history
+                :caller 'jp-counsel-cider-repl-history))))
+
+(ivy-set-display-transformer 'jp-counsel-cider-repl-history
+                             #'jp-counsel-cider-repl-history--transformer)
 
 (provide 'jp-counsel-cider)
 ;;; jp-counsel-cider.el ends here
