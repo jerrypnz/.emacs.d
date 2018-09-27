@@ -96,12 +96,8 @@
 (defun jp-counsel-cider-repl-history--action (candidate)
   (with-selected-window cider-repl-history-repl-window
     (with-current-buffer cider-repl-history-repl-buffer
-      (let ((max (point-max)))
-        (if (= max (point))
-            (cider-repl-history-insert-and-highlight candidate)
-          (save-excursion
-            (goto-char max)
-            (cider-repl-history-insert-and-highlight candidate)))))))
+      (goto-char (point-max))
+      (cider-repl-history-insert-and-highlight candidate))))
 
 (defun jp-counsel-cider-repl-history ()
   (interactive)
