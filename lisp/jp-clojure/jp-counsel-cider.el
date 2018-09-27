@@ -17,6 +17,9 @@
 (require 'cider-doc)
 (require 'cider-grimoire)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; counsel-cider-apropos
+
 (defun jp-counsel-cider--apropos-function (input)
   (if (not (cider-current-repl))
       (list "" "No linked CIDER session")
@@ -80,6 +83,9 @@
 
 (ivy-set-display-transformer 'jp-counsel-cider-apropos
                              #'jp-counsel-cider-apropos--transformer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; counsel-cider-repl-history
 
 ;; Defined in cider-repl-history.el
 (defvar cider-repl-history-repl-buffer)
