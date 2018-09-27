@@ -119,7 +119,6 @@
       ("L" cider-load-all-project-ns "all-ns")
       ("r" cider-ns-refresh "reload"))
     (major-mode-hydra-bind cider-repl-mode "REPL"
-      ("H" cider-repl-history "show-history")
       ("s" cider-repl-set-ns "set-repl-ns")
       ("i" cider-interrupt "interrupt")
       ("c" cider-repl-clear-buffer "clear"))
@@ -135,8 +134,10 @@
     (major-mode-hydra-bind cider-repl-mode "Docs"
       ("a" jp-counsel-cider-apropos "apropos"))
     (major-mode-hydra-bind cider-repl-mode "REPL"
-      ("h" jp-counsel-cider-repl-history "search-history")))
-  :commands (jp-counsel-cider-apropos))
+      ("h" jp-counsel-cider-repl-history "search-history")
+      ("H" cider-repl-history "show-history")))
+  :commands (jp-counsel-cider-apropos
+             jp-counsel-cider-repl-history))
 
 (use-package cider-macroexpansion
   :after (cider)
