@@ -29,12 +29,14 @@
   (let* ((active (jp-modeline-active-p))
          (face (if buffer-read-only
                    (if active 'mode-line-read-only-face 'mode-line-read-only-inactive-face)
-                 (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face))))
-    (propertize
-     (cond (buffer-read-only    " R ")
-           ((buffer-modified-p) " * ")
-           (t                   " - "))
-     'face face)))
+                 (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face)))
+         (icon (cond (buffer-read-only    "lock")
+                     ((buffer-modified-p) "plus-circle")
+                     (t                   "check-circle"))))
+    (format "%s%s%s"
+            (propertize " " 'face face)
+            (all-the-icons-faicon icon :height 0.8 :v-adjust 0.05 :face face)
+            (propertize " " 'face face))))
 
 (defun jp-buffer-filename ()
   (let* ((bufname (buffer-name))
