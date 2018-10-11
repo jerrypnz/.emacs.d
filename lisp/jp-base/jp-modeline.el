@@ -33,10 +33,9 @@
          (icon (cond (buffer-read-only    "lock")
                      ((buffer-modified-p) "plus-circle")
                      (t                   "check-circle"))))
-    (format "%s%s%s"
-            (propertize " " 'face face)
-            (all-the-icons-faicon icon :height 0.8 :v-adjust 0.05 :face face)
-            (propertize " " 'face face))))
+    (s-concat (propertize " " 'face face)
+              (all-the-icons-faicon icon :height 0.8 :v-adjust 0.05 :face face)
+              (propertize " " 'face face))))
 
 (defun jp-buffer-filename ()
   (let* ((bufname (buffer-name))
