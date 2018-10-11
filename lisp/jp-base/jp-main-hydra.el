@@ -43,7 +43,17 @@
 (autoload 'org-capture "org")
 (autoload 'org-agenda "org")
 
-(defvar jp-main-hydra--title (s-concat "\n " (all-the-icons-faicon "cogs" :v-adjust 0.05) " Main Hydra"))
+(defun jp-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open
+buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(defvar jp-main-hydra--title
+  (s-concat "\n "
+            (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
+            (propertize " Main Hydra" 'face '(:height 1.1 :weight bold))))
 
 (pretty-hydra-define jp-main-hydra
   (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
@@ -59,6 +69,8 @@
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "symbol at pt")
     ("M" hydra-macro/body "keyboard macros")
+    ("TAB" jp-switch-to-previous-buffer "prev buffer")
+    ("SPC" counsel-M-x "M-x")
     ;; The hydra is bound to M-SPC, pressing it again closes it.
     ("M-SPC" nil nil))
 
