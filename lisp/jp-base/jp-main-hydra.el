@@ -17,6 +17,7 @@
 (require 'jp-projectile-utils)
 (require 'jp-window)
 (require 'jp-flycheck-hydra)
+(require 'jp-commonds)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
@@ -43,69 +44,73 @@
 (autoload 'org-capture "org")
 (autoload 'org-agenda "org")
 
-(defun jp-switch-to-previous-buffer ()
-  "Switch to previously open buffer.
-Repeated invocations toggle between the two most recently open
-buffers."
-  (interactive)
-  (switch-to-buffer (other-buffer (current-buffer) 1)))
-
 (defvar jp-main-hydra--title
   (s-concat "\n "
             (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
-            (propertize " Main Hydra" 'face '(:height 1.1 :weight bold))))
+            (propertize " Main Hydra\n\n" 'face '(:height 1.1 :weight bold))))
 
-(pretty-hydra-define jp-main-hydra
-  (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
-  ("Basic"
-   (("f" jp-open-file "open file")
-    ("b" jp-switch-buffer "switch buffers")
-    ("r" ivy-resume "ivy resume")
-    ("m" major-mode-hydra "major mode hydra")
-    ("w" jp-window/body "window management")
-    ("R" jp-rectangle/body "rectangle")
-    ("F" jp-flycheck/body "flycheck")
-    ("l" jp-layouts/body "layouts")
-    ("/" jp-search "search")
-    ("*" jp-search-symbol-at-pt "symbol at pt")
-    ("M" hydra-macro/body "keyboard macros")
-    ("TAB" jp-switch-to-previous-buffer "prev buffer")
-    ("SPC" counsel-M-x "M-x")
-    ;; The hydra is bound to M-SPC, pressing it again closes it.
-    ("M-SPC" nil nil))
+(defun with-faicon (icon str &optional height v-adjust)
+  (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
 
-   "Project"
-   (("pp" jp-eyebrowse-switch-project "switch project")
-    ("pf" counsel-projectile "file/buffer")
-    ("pd" counsel-projectile-find-dir "directory")
-    ("pi" projectile-ibuffer "ibuffer")
-    ("pI" projectile-invalidate-cache "invalidate cache"))
+(defun with-fileicon (icon str &optional height v-adjust)
+  (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
 
-   "Git"
-   (("gs" magit-status "status")
-    ("gl" magit-log-buffer-file "file log")
-    ("gL" magit-log-current "project log")
-    ("gb" magit-blame "blame")
-    ("gt" git-timemachine "time machine"))
+(eval
+ `(pretty-hydra-define jp-main-hydra
+    (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
+    (,(with-faicon "file-text" "Files & Buffers")
+     (("f" jp-open-file "open file")
+      ("b" jp-switch-buffer "switch buffers")
+      ("/" jp-search "search")
+      ("*" jp-search-symbol-at-pt "symbol at pt")
+      ("TAB" jp-switch-to-previous-buffer "prev buffer"))
 
-   "Org"
-   (("oc" org-capture "capture")
-    ("oa" org-agenda "agenda")
-    ("on" deft "deft"))
+     ,(with-faicon "wrench" "Tools")
+     (("r" ivy-resume "ivy resume")
+      ("m" major-mode-hydra "major mode hydra")
+      ("w" jp-window/body "window management")
+      ("R" jp-rectangle/body "rectangle")
+      ("F" jp-flycheck/body "flycheck")
+      ("l" jp-layouts/body "layouts")
+      ("M" hydra-macro/body "keyboard macros")
+      ("SPC" counsel-M-x "M-x")
+      ;; The hydra is bound to M-SPC, pressing it again closes it.
+      ("M-SPC" nil nil))
 
-   "Toggles"
-   (("tn" toggle-linum "line number")
-    ("tw" whitespace-mode "whitespace"))
+     ,(with-faicon "list" "Projects")
+     (("pp" jp-eyebrowse-switch-project "switch project")
+      ("pf" counsel-projectile "file/buffer")
+      ("pd" counsel-projectile-find-dir "directory")
+      ("pi" projectile-ibuffer "ibuffer")
+      ("pI" projectile-invalidate-cache "invalidate cache"))
 
-   "Quick Layouts"
-   (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))
-    ("2" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2))
-    ("3" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3))
-    ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4))
-    ("5" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5))
-    ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6))
-    ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
-    ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
-    ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9)))))
+     ,(with-faicon "github" "Git")
+     (("gs" magit-status "status")
+      ("gl" magit-log-buffer-file "file log")
+      ("gL" magit-log-current "project log")
+      ("gb" magit-blame "blame")
+      ("gt" git-timemachine "time machine"))
+
+     ,(with-fileicon "org" "Org")
+     (("oc" org-capture "capture")
+      ("oa" org-agenda "agenda")
+      ("on" deft "deft"))
+
+     ,(with-faicon "toggle-on" "Toggles")
+     (("tn" toggle-linum "line number")
+      ("tw" whitespace-mode "whitespace"))
+
+     ,(with-faicon "th" "Windows & Layouts")
+     (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))
+      ("2" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2))
+      ("3" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3))
+      ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4))
+      ("5" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5))
+      ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6))
+      ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
+      ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
+      ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9))
+      ("l" jp-layouts/body "window layouts")
+      ("w" jp-window/body "window management")))))
 
 (provide 'jp-main-hydra)

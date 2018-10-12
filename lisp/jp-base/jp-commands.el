@@ -8,6 +8,13 @@
 
 ;;; Code:
 
+(defun jp-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open
+buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
 (defun kill-default-buffer ()
   "Kill the currently active buffer -- set to C-x k so that users are not asked which buffer they want to kill."
   (interactive)
