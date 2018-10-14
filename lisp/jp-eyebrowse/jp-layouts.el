@@ -32,9 +32,7 @@
                 ((not tag)          "") ; show nothing if it's not created yet
                 ((= (length tag) 0) "default") ; default name if there is no tag
                 (t                  tag)))
-         (face (if (= slot (eyebrowse--get 'current-slot))
-                   '(underline t)
-                 'shadow)))
+         (face (if (= slot (eyebrowse--get 'current-slot)) 'underline 'shadow)))
     (propertize name 'face face)))
 
 (pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn :quit-key "q")
