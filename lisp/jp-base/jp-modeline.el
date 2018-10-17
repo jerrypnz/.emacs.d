@@ -55,12 +55,12 @@
                       (if (jp-modeline-active-p)
                           'mode-line-position-face
                         'mode-line-position-inactive-face)))
-   (4 (:eval (propertize "%c" 'face
+   (3 (:eval (propertize "%c" 'face
                          (cond
                           ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
                           ((>= (current-column) 80) 'mode-line-80col-face)
                           (t 'mode-line-position-face)))))
-   "  "
+   " "
    ;; directory and buffer/file name
    (:eval (propertize (shorten-directory default-directory 10) 'face
                       (if (jp-modeline-active-p)
@@ -71,7 +71,7 @@
                           'mode-line-filename-face
                         'mode-line-filename-inactive-face)))
    ;; narrow [default -- keep?]
-   " %n "
+   " %n ◦ "
    ;; major mode
    (:eval (all-the-icons-icon-for-mode
            major-mode
@@ -84,20 +84,20 @@
                    'mode-line-inactive)))
    " %["
    (mode-name mode-name)
-   "%] "
+   "%] ◦ "
    ;; vc info
    (:eval (if vc-mode
-              (format "| %s %s"
+              (format "%s %s"
                       (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
                       (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
             ""))
-   "   "
+   " "
    ;; process
    (:propertize mode-line-process
                 face mode-line-process-face)
    ;; global mode string
    (global-mode-string global-mode-string)
-   "    "))
+   " "))
 
 ;; Helper function
 (defun shorten-directory (dir max-length)
