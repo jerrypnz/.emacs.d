@@ -51,15 +51,15 @@
    (:eval (jp-modeline-status))
    " "
    ;; Position, including warning for 80 columns
-   (:eval (propertize "%4l |" 'face
+   (:eval (propertize "%4l:" 'face
                       (if (jp-modeline-active-p)
                           'mode-line-position-face
                         'mode-line-position-inactive-face)))
-   (:eval (propertize "%3c " 'face
-                      (cond
-                       ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
-                       ((>= (current-column) 80) 'mode-line-80col-face)
-                       (t 'mode-line-position-face))))
+   (4 (:eval (propertize "%c" 'face
+                         (cond
+                          ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
+                          ((>= (current-column) 80) 'mode-line-80col-face)
+                          (t 'mode-line-position-face)))))
    "  "
    ;; directory and buffer/file name
    (:eval (propertize (shorten-directory default-directory 10) 'face
