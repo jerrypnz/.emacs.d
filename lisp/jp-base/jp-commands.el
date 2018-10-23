@@ -135,6 +135,6 @@ buffers."
         (interactive)
         (kill-buffer)))))
 
-(provide 'jp-commonds)
+(provide 'jp-commands)
 
 ;;; jp-commands.el ends here

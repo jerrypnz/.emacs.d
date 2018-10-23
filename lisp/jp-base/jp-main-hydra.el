@@ -17,7 +17,7 @@
 (require 'jp-projectile-utils)
 (require 'jp-window)
 (require 'jp-flycheck-hydra)
-(require 'jp-commonds)
+(require 'jp-commands)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
