@@ -45,10 +45,10 @@
 (autoload 'org-agenda "org")
 
 (defvar jp-main-hydra--title
-      (s-concat "\n "
-                (s-repeat 60 " ")
-                (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
-                (propertize " Main Hydra\n" 'face '(:height 1.1 :weight bold))))
+  (s-concat "\n "
+            (s-repeat 60 " ")
+            (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
+            (propertize " Main Hydra\n" 'face '(:height 1.1 :weight bold))))
 
 (defun with-faicon (icon str &optional height v-adjust)
   (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
