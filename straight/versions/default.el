@@ -1,6 +1,5 @@
 (("Emacs-wgrep" . "414be70bd313e482cd9f0b70fd2daad4ee23497c")
  ("ace-window" . "5b88de026cea5fc57e62bb490034392815be5f0f")
- ("aggressive-indent-mode" . "cc8da01e32684e1b75d2901400e6723b2c2d42f8")
  ("all-the-icons-ivy" . "7baba16410e78ca3c7a564c3731baa75b2e8d93a")
  ("all-the-icons.el" . "52d1f2d36468146c93aaf11399f581401a233306")
  ("avy" . "df4c4ac488ee59bc44f8658d9fcca0c86fb32c5c")

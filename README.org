@@ -53,8 +53,7 @@
 
     - find a solution for file templates
       - [[https://github.com/mineo/yatemplate][yatemplate]]?
-    - +wgrep+
-    - +aggresive-indent+
+    - +wgrep+    
     - +iedit+
 
 *** Org

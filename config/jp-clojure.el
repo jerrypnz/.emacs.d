@@ -48,8 +48,11 @@
       (thread?>x 1)
       (some-> 1)
       (some->> 1)
+      (->application 1)
+      (->server 1)
       ;; metrics-clojure
-      (time! 1))))
+      (time! 1)
+      (with-logging-context 1))))
 
 (use-package cider
   :straight t
