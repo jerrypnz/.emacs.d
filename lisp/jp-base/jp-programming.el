@@ -40,7 +40,8 @@
 
 ;;; auto-pairing
 (defun jp-pairs ()
-  (smartparens-mode t))
+  (smartparens-mode t)
+  (bind-key "C-M-q" #'sp-indent-defun prog-mode-map))
 
 ;;; show pairs
 (defun jp-show-pairs ()
