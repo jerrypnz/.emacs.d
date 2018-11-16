@@ -44,7 +44,7 @@
       (mode-line-filename-face :inherit 'mode-line :foreground orange :weight 'bold)
       (mode-line-process-face :inherit 'mode-line :foreground green)
       ;; vertical border
-      (vertical-border :background bg-alt :foreground bg-alt)
+      (vertical-border :background modeline-bg :foreground modeline-bg)
       ;; highlight
       (highlight-thing :background (doom-lighten bg 0.1))
       (show-paren-match :background (doom-lighten bg-alt 0.3)))))
