@@ -44,6 +44,42 @@
         bufname
       name)))
 
+;; Extra mode line faces
+(defface mode-line-read-only-face
+  '((t (:inherit 'mode-line)))
+  "Face for read only indicator in mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-read-only-inactive-face
+  '((t (:inherit 'mode-line-inactive)))
+  "Face for read only indicator in inactive mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-read-write-face
+  '((t (:inherit 'mode-line)))
+  "Face for read write indicator in mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-read-write-inactive-face
+  '((t (:inherit 'mode-line-inactive)))
+  "Face for read write indicator in inactive mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-filename-face
+  '((t (:inherit 'mode-line :weight bold)))
+  "Face for filename in mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-filename-inactive-face
+  '((t (:inherit 'mode-line-inactive :weight bold)))
+  "Face for filename in inactive mode line"
+  :group 'jp-modeline)
+
+(defface mode-line-process-face
+  '((t (:inherit 'mode-line)))
+  "Face for process in mode line"
+  :group 'jp-modeline)
+
 ;; Mode line setup
 (setq-default
  mode-line-format
@@ -53,19 +89,19 @@
    ;; Position, including warning for 80 columns
    (:eval (propertize "%4l:" 'face
                       (if (jp-modeline-active-p)
-                          'mode-line-position-face
-                        'mode-line-position-inactive-face)))
+                          'mode-line
+                        'mode-line-inactive)))
    (3 (:eval (propertize "%c" 'face
                          (cond
-                          ((not (jp-modeline-active-p)) 'mode-line-position-inactive-face)
+                          ((not (jp-modeline-active-p)) 'mode-line-inactive)
                           ((>= (current-column) 80) 'mode-line-80col-face)
-                          (t 'mode-line-position-face)))))
+                          (t 'mode-line)))))
    " "
    ;; directory and buffer/file name
    (:eval (propertize (shorten-directory default-directory 10) 'face
                       (if (jp-modeline-active-p)
-                          'mode-line-folder-face
-                        'mode-line-folder-inactive-face)))
+                          'mode-line
+                        'mode-line-inactive)))
    (:eval (propertize (jp-buffer-filename) 'face
                       (if (jp-modeline-active-p)
                           'mode-line-filename-face
@@ -94,7 +130,7 @@
    " "
    ;; process
    (:propertize mode-line-process
-                face mode-line-process-face)
+                face (if (jp-modeline-active-p) 'mode-line-process 'mode-line-inactive))
    ;; global mode string
    (global-mode-string global-mode-string)
    " "))
@@ -112,95 +148,6 @@
     (when path
       (setq output (concat "…/" output)))
     output))
-
-;; Extra mode line faces
-(make-face 'mode-line-read-only-face)
-(make-face 'mode-line-read-only-inactive-face)
-(make-face 'mode-line-read-write-face)
-(make-face 'mode-line-read-write-inactive-face)
-(make-face 'mode-line-folder-face)
-(make-face 'mode-line-folder-inactive-face)
-(make-face 'mode-line-filename-face)
-(make-face 'mode-line-filename-inactive-face)
-(make-face 'mode-line-position-face)
-(make-face 'mode-line-position-inactive-face)
-(make-face 'mode-line-process-face)
-(make-face 'mode-line-80col-face)
-
-(defvar jp-modeline--read-only-color "#2257A0")
-(defvar jp-modeline--read-write-color "#BF616A")
-(defvar jp-modeline--filename-color "#D08770")
-
-(let ((bg (face-attribute 'mode-line :background)))
-  (set-face-attribute
-   'mode-line nil
-   :inverse-video nil
-   :box `(:line-width 2 :color ,bg :style nil)))
-
-(let ((bg (face-attribute 'mode-line-inactive :background)))
-  (set-face-attribute
-   'mode-line-inactive nil
-   :inverse-video nil
-   :box `(:line-width 2 :color ,bg :style nil)))
-
-(set-face-attribute
- 'mode-line-read-only-inactive-face nil
- :inherit 'mode-line-inactive
- :foreground jp-modeline--read-only-color)
-
-(set-face-attribute
- 'mode-line-read-only-face nil
- :inherit 'mode-line
- :background jp-modeline--read-only-color
- :box `(:line-width 2 :color ,jp-modeline--read-only-color))
-
-(set-face-attribute
- 'mode-line-read-write-inactive-face nil
- :inherit 'mode-line-inactive
- :foreground jp-modeline--read-write-color)
-
-(set-face-attribute
- 'mode-line-read-write-face nil
- :inherit 'mode-line
- :background jp-modeline--read-write-color
- :box `(:line-width 2 :color ,jp-modeline--read-write-color))
-
-(set-face-attribute
- 'mode-line-folder-face nil
- :inherit 'mode-line)
-
-(set-face-attribute
- 'mode-line-folder-inactive-face nil
- :inherit 'mode-line-inactive)
-
-(set-face-attribute
- 'mode-line-filename-face nil
- :inherit 'mode-line
- :foreground jp-modeline--filename-color
- :weight 'bold)
-
-(set-face-attribute
- 'mode-line-filename-inactive-face nil
- :inherit 'mode-line-inactive
- :weight 'bold)
-
-(set-face-attribute
- 'mode-line-position-face nil
- :inherit 'mode-line)
-
-(set-face-attribute
- 'mode-line-position-inactive-face nil
- :inherit 'mode-line-inactive)
-
-(set-face-attribute
- 'mode-line-process-face nil
- :inherit 'mode-line
- :foreground "#718c00")
-
-(set-face-attribute
- 'mode-line-80col-face nil
- :inherit 'mode-line-position-face
- :foreground "black" :background jp-modeline--filename-color)
 
 (provide 'jp-modeline)
 ;;; jp-modeline.el ends here

@@ -11,45 +11,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package all-the-icons
-  :straight t)
-
-;; themes
-
-;; Ample theme
-;;(use-package ample-theme
-;;  :config
-;;  (progn
-;;    (load-theme 'ample t t)
-;;    (load-theme 'ample-flat t t)
-;;    (load-theme 'ample-light t t)
-;;    (enable-theme 'ample-flat)))
-
-;; Doom theme
-(use-package doom-themes
-  :straight t
-  :preface
-  (defvar region-fg nil)
-  :config
-  (progn
-    ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-    ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
-    ;; may have their own settings.
-    (setq doom-spacegrey-brighter-modeline t)
-    (load-theme 'doom-spacegrey t)
-
-    ;; Enable flashing mode-line on errors
-    ;;(doom-themes-visual-bell-config)
-
-    ;; Enable custom neotree theme
-    ;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
-
-    ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)))
-
 (use-package exec-path-from-shell
   :straight t
   :if (memq window-system '(mac ns x))
@@ -59,16 +20,8 @@
     (add-to-list 'exec-path-from-shell-variables "GOPATH")
     (exec-path-from-shell-initialize)))
 
-(use-package jp-look
-  :config
-  (progn
-    (setq jp-default-font "Iosevka Extralight-13")
-    (setq jp-variable-pitch-font "Lucida Grande-13")
-    (setq jp-fixed-pitch-font "Iosevka Extralight-13")))
-
 (use-package jp-env)
 (use-package jp-programming)
-(use-package jp-modeline)
 
 ;; some useful global commands
 (use-package jp-commands
@@ -103,7 +56,7 @@
   :straight t
   :config
   (progn
-    (setq hl-sexp-background-color "#343D46")
+    (setq hl-sexp-background-color (doom-lighten (doom-color 'bg) 0.05))
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
@@ -161,14 +114,6 @@
     (setq highlight-thing-case-sensitive-p t)
     (setq highlight-thing-exclude-thing-under-point t)
     (setq highlight-thing-delay-seconds 0.1)
-    (set-face-attribute
-     'highlight-thing nil
-     ;; Using a lighter background color for hightlighted symbols
-     ;; while keeping the same foreground color. Can use this tool to
-     ;; get lighter versions of a color:
-     ;; https://www.w3schools.com/colors/colors_picker.asp
-     :inherit nil
-     :foreground nil :background "#414d58")
     (global-highlight-thing-mode)
 
     (eval-after-load "swiper"

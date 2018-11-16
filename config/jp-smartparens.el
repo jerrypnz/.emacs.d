@@ -51,9 +51,6 @@
                    :unless '(sp-in-string-p)
                    :actions '(insert wrap))
 
-    (set-face-attribute 'show-paren-match nil
-                        :background "#434956"
-                        :foreground nil)
     (setq sp-highlight-pair-overlay nil)))
 
 (provide 'jp-smartparens)

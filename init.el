@@ -99,6 +99,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (require 'org-version)
 
 ;; Load features.
+(use-package jp-ui)
 (use-package jp-base)
 (use-package jp-smartparens)
 (use-package jp-ivy)
