@@ -56,7 +56,7 @@
   :straight t
   :config
   (progn
-    (setq hl-sexp-background-color (doom-lighten (doom-color 'bg) 0.05))
+    (setq hl-sexp-background-color (doom-lighten (doom-color 'bg) 0.03))
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
