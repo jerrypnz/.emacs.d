@@ -130,7 +130,7 @@
    " "
    ;; process
    (:propertize mode-line-process
-                face (if (jp-modeline-active-p) 'mode-line-process 'mode-line-inactive))
+                face (if (jp-modeline-active-p) 'mode-line-process-face 'mode-line-inactive))
    ;; global mode string
    (global-mode-string global-mode-string)
    " "))
