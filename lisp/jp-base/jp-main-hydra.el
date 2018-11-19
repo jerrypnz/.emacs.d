@@ -57,60 +57,60 @@
   (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
 
 (pretty-hydra-define jp-main-hydra
-   (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
-   ("Files & Buffers"
-    (("f" jp-open-file "open file")
-     ("b" jp-switch-buffer "switch buffers")
-     ("/" jp-search "search")
-     ("*" jp-search-symbol-at-pt "symbol at pt")
-     ("TAB" jp-switch-to-previous-buffer "prev buffer"))
+  (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
+  ("Files & Buffers"
+   (("f" jp-open-file "open file")
+    ("b" jp-switch-buffer "switch buffers")
+    ("/" jp-search "search")
+    ("*" jp-search-symbol-at-pt "symbol at pt")
+    ("TAB" jp-switch-to-previous-buffer "prev buffer"))
 
-    "Tools"
-    (("r" ivy-resume "ivy resume")
-     ("m" major-mode-hydra "major mode hydra")
-     ("w" jp-window/body "window management")
-     ("R" jp-rectangle/body "rectangle")
-     ("F" jp-flycheck/body "flycheck")
-     ("l" jp-layouts/body "layouts")
-     ("M" hydra-macro/body "keyboard macros")
-     ("SPC" counsel-M-x "M-x")
-     ;; The hydra is bound to M-SPC, pressing it again closes it.
-     ("M-SPC" nil nil))
+   "Tools"
+   (("r" ivy-resume "ivy resume")
+    ("m" major-mode-hydra "major mode hydra")
+    ("w" jp-window/body "window management")
+    ("R" jp-rectangle/body "rectangle")
+    ("F" jp-flycheck/body "flycheck")
+    ("l" jp-layouts/body "layouts")
+    ("M" hydra-macro/body "keyboard macros")
+    ("SPC" counsel-M-x "M-x")
+    ;; The hydra is bound to M-SPC, pressing it again closes it.
+    ("M-SPC" nil nil))
 
-    "Projects"
-    (("pp" jp-eyebrowse-switch-project "switch project")
-     ("pf" counsel-projectile "file/buffer")
-     ("pd" counsel-projectile-find-dir "directory")
-     ("pi" projectile-ibuffer "ibuffer")
-     ("pI" projectile-invalidate-cache "invalidate cache"))
+   "Projects"
+   (("pp" jp-eyebrowse-switch-project "switch project")
+    ("pf" counsel-projectile "file/buffer")
+    ("pd" counsel-projectile-find-dir "directory")
+    ("pi" projectile-ibuffer "ibuffer")
+    ("pI" projectile-invalidate-cache "invalidate cache"))
 
-    "Git"
-    (("gs" magit-status "status")
-     ("gl" magit-log-buffer-file "file log")
-     ("gL" magit-log-current "project log")
-     ("gb" magit-blame "blame")
-     ("gt" git-timemachine "time machine"))
+   "Git"
+   (("gs" magit-status "status")
+    ("gl" magit-log-buffer-file "file log")
+    ("gL" magit-log-current "project log")
+    ("gb" magit-blame "blame")
+    ("gt" git-timemachine "time machine"))
 
-    "Org"
-    (("oc" org-capture "capture")
-     ("oa" org-agenda "agenda")
-     ("on" deft "deft"))
+   "Org"
+   (("oc" org-capture "capture")
+    ("oa" org-agenda "agenda")
+    ("on" deft "deft"))
 
-    "Toggles"
-    (("tn" toggle-linum "line number")
-     ("tw" whitespace-mode "whitespace"))
+   "Toggles"
+   (("tn" toggle-linum "line number")
+    ("tw" whitespace-mode "whitespace"))
 
-    "Windows & Layouts"
-    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))
-     ("2" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2))
-     ("3" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3))
-     ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4))
-     ("5" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5))
-     ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6))
-     ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
-     ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
-     ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9))
-     ("l" jp-layouts/body "window layouts")
-     ("w" jp-window/body "window management"))))
+   "Windows & Layouts"
+   (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))
+    ("2" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2))
+    ("3" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3))
+    ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4))
+    ("5" eyebrowse-switch-to-window-config-5 (jp-eyebrowse-layout-tag 5))
+    ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6))
+    ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
+    ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
+    ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9))
+    ("l" jp-layouts/body "window layouts")
+    ("w" jp-window/body "window management"))))
 
 (provide 'jp-main-hydra)
