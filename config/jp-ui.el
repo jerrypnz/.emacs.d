@@ -63,3 +63,4 @@
 (use-package jp-modeline)
 
 (provide 'jp-ui)
+;;; jp-ui.el ends here

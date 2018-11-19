@@ -11,8 +11,8 @@
 ;;
 ;;; Code:
 
-(autoload 'all-the-icons-icon-for-mode "all-the-icons")
-(autoload 'all-the-icons-octicon "all-the-icons")
+(require 'all-the-icons)
+(require 's)
 
 (defvar jp-modeline-active-window nil)
 
