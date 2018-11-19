@@ -80,6 +80,11 @@
   "Face for process in mode line"
   :group 'jp-modeline)
 
+(defface mode-line-80col-face
+  '((t (:inherit 'mode-line)))
+  "Face for column number when it's greater than 80"
+  :group 'jp-modeline)
+
 ;; Mode line setup
 (setq-default
  mode-line-format

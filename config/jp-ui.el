@@ -43,6 +43,7 @@
       (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground red)
       (mode-line-filename-face :inherit 'mode-line :foreground orange :weight 'bold)
       (mode-line-process-face :inherit 'mode-line :foreground green)
+      (mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
       ;; vertical border
       (vertical-border :background modeline-bg :foreground modeline-bg)
       ;; highlight
