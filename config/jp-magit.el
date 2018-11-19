@@ -25,7 +25,9 @@
   (setq magit-repository-directories
         '(("~/dev/workspace/"   . 3)
           ("~/dev/personal/"    . 2)
-          ("~/dev/open-source/" . 2))))
+          ("~/dev/open-source/" . 2)))
+
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 (use-package magit-todos
   :straight t
