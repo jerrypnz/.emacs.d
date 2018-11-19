@@ -25,8 +25,7 @@
   (setq magit-repository-directories
         '(("~/dev/workspace/"   . 3)
           ("~/dev/personal/"    . 2)
-          ("~/dev/open-source/" . 2)
-          ("~/go/src/"          . 4))))
+          ("~/dev/open-source/" . 2))))
 
 (use-package magit-todos
   :straight t
