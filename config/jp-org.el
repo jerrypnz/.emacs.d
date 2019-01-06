@@ -74,7 +74,11 @@
     (setq org-refile-targets '((nil :maxlevel . 9)
                                (org-agenda-files :maxlevel . 9)))
 
-    (setq org-startup-folded nil)))
+    (setq org-startup-folded nil)
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+      '((dot . t)))))
 
 
 (use-package ox-gfm
