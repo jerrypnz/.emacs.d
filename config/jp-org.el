@@ -129,6 +129,10 @@
 \\usepackage[center,pagestyles]{titlesec}
 \\usepackage{indentfirst}
 \\usepackage[export]{adjustbox}
+\\usepackage{fontspec}
+\\setmainfont{Merriweather}
+\\setsansfont{Merriweather Sans}
+\\setmonofont{Roboto Mono}
 \\usemintedstyle{emacs}
 \\setlength{\\parskip}{0.5\\baselineskip}
 \\setlength{\\parindent}{0em}
