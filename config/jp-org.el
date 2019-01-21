@@ -11,10 +11,8 @@
 (eval-when-compile
   (require 'use-package))
 
-(defconst jp-work-org-file "~/org/work.org")
-(defconst jp-private-org-file "~/org/private.org")
+(defconst jp-gtd-org-file "~/org/gtd.org")
 (defconst jp-inbox-org-file "~/org/inbox.org")
-(defconst jp-diary-org-fle "~/org/diary.org")
 (defconst jp-notes-dir "~/org/notes")
 
 
@@ -33,8 +31,8 @@
     (setq org-default-notes-file jp-inbox-org-file)
 
     (setq org-todo-keywords
-          '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "MEETING")))
+          '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(p)" "|" "DONE(d)")
+            (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
 
     (setq org-todo-state-tags-triggers
           '(("CANCELLED" ("CANCELLED" . t))
@@ -49,30 +47,36 @@
 
     (setq org-capture-templates
           `(("t" "TODO" entry (file org-default-notes-file)
-             "* TODO %?\n%u\n" :clock-in t :clock-resume t)
+             "* TODO %?\n%u\n")
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-            ("d" "Diary" entry (file+datetree ,jp-diary-org-fle)
-             "* %?\n%U\n" :clock-in t :clock-resume t)
-            ("i" "Idea" entry (file org-default-notes-file)
-             "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
             ("n" "Next Task" entry (file org-default-notes-file)
              "** NEXT %? \nDEADLINE: %t")))
 
     (setq org-agenda-custom-commands
-          '(("a" "Agenda"
-             ((agenda "-REFILE")
-              (alltodo "-REFILE")
-              (tags "REFILE"
+          '(("k" "Kanban"
+             ((todo "NEXT"
+                    ((org-agenda-overriding-header "Ready to Start:")))
+              (todo "IN-PROGRESS"
+                    ((org-agenda-overriding-header "In Progress:")))
+              (todo "WAITING"
+                    ((org-agenda-overriding-header "Waiting:")))
+              (todo "DONE"
+                    ((org-agenda-overriding-header "Done:")))))
+            ("r" "Daily Review"
+             ((agenda "-inbox"
+                      ((org-agenda-overriding-header "This Week:")))
+              (tags "+inbox"
                     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                     (org-agenda-overriding-header "Inbox:")))))))
+                     (org-agenda-overriding-header "Inbox:")))
+              (tags "-inbox/TODO"
+                    ((org-agenda-overriding-header "Backlog")))))))
 
-    (setq org-agenda-files (list jp-work-org-file
-                                 jp-private-org-file
+    (setq org-agenda-files (list jp-gtd-org-file
                                  jp-inbox-org-file))
 
     (setq org-refile-targets '((nil :maxlevel . 9)
-                               (org-agenda-files :maxlevel . 9)))
+                               (jp-gtd-org-file :maxlevel . 4)))
 
     (setq org-startup-folded nil)
 
