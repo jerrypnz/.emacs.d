@@ -41,8 +41,8 @@
 (autoload 'eyebrowse-switch-to-window-config-9 "eyebrowse")
 
 (autoload 'deft "deft")
-(autoload 'org-capture "org")
-(autoload 'org-agenda "org")
+(autoload 'org-capture "org-capture")
+(autoload 'org-agenda "org-agenda")
 
 (defvar jp-main-hydra--title
   (s-concat "\n "
