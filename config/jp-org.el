@@ -13,6 +13,7 @@
 
 (defconst jp-gtd-org-file "~/org/gtd.org")
 (defconst jp-inbox-org-file "~/org/inbox.org")
+(defconst jp-someday-org-file "~/org/someday.org")
 (defconst jp-notes-dir "~/org/notes")
 
 
@@ -76,9 +77,16 @@
                                  jp-inbox-org-file))
 
     (setq org-refile-targets '((nil :maxlevel . 9)
-                               (jp-gtd-org-file :maxlevel . 4)))
+                               (jp-gtd-org-file :maxlevel . 2)
+                               (jp-someday-org-file :maxlevel . 2)))
 
     (setq org-startup-folded nil)
+
+    (setq org-log-done 'time)
+    (setq org-log-redeadline 'time)
+    (setq org-log-reschedule 'time)
+    (setq org-goto-interface 'outline-path-completion)
+    (setq org-outline-path-complete-in-steps nil)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -129,10 +137,6 @@
 \\usepackage[center,pagestyles]{titlesec}
 \\usepackage{indentfirst}
 \\usepackage[export]{adjustbox}
-\\usepackage{fontspec}
-\\setmainfont{Merriweather}
-\\setsansfont{Merriweather Sans}
-\\setmonofont{Roboto Mono}
 \\usemintedstyle{emacs}
 \\setlength{\\parskip}{0.5\\baselineskip}
 \\setlength{\\parindent}{0em}
