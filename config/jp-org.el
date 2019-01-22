@@ -113,6 +113,7 @@
   :after (org)
   :config
   (progn
+    (setq org-latex-compiler "xelatex")
     ;; for multiple passes
     (setq org-latex-pdf-process
           '("xelatex -shell-escape -interaction nonstopmode %f"
@@ -127,17 +128,21 @@
     (setq org-latex-listings 'minted)
 
     (defvar en-article "
-\\documentclass{scrartcl}
+\\documentclass{article}
 \\usepackage{hyperref}
 \\usepackage{color}
 \\usepackage[hyperref,x11names,usenames,dvipsnames]{xcolor}
 \\hypersetup{colorlinks=true,linkcolor=BlueViolet}
 \\usepackage{minted}
+\\usemintedstyle{emacs}
 \\usepackage[top=1in,bottom=1in,left=0.8in,right=0.8in]{geometry}
 \\usepackage[center,pagestyles]{titlesec}
 \\usepackage{indentfirst}
 \\usepackage[export]{adjustbox}
-\\usemintedstyle{emacs}
+\\usepackage{fontspec}
+\\setromanfont{Georgia}
+\\setsansfont{Helvetica}
+\\setmonofont[Scale=0.9]{Inconsolata}
 \\setlength{\\parskip}{0.5\\baselineskip}
 \\setlength{\\parindent}{0em}
 \\titleformat{\\section}{\\Large\\bfseries}{\\S\\,\\thesection}{1em}{}
