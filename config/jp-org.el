@@ -126,6 +126,8 @@
     (setq org-latex-tables-centered nil)
     ;; Use `minted' for syntax highlighting
     (setq org-latex-listings 'minted)
+    (setq org-latex-minted-options '(("breaklines" "true")
+                                     ("breakanywhere" "true")))
 
     (defvar en-article "
 \\documentclass{article}
@@ -142,7 +144,7 @@
 \\usepackage{fontspec}
 \\setromanfont{Georgia}
 \\setsansfont{Helvetica}
-\\setmonofont[Scale=0.9]{Inconsolata}
+\\setmonofont[Scale=MatchLowercase]{Inconsolata}
 \\setlength{\\parskip}{0.5\\baselineskip}
 \\setlength{\\parindent}{0em}
 \\titleformat{\\section}{\\Large\\bfseries}{\\S\\,\\thesection}{1em}{}
