@@ -87,7 +87,7 @@
              nil
              :ascent center)
             ("BAU"
-             ,(list (all-the-icons-faicon "tasks" :height 0.9 :v-adjust 0.05))
+             ,(list (all-the-icons-faicon "tasks" :height 0.8 :v-adjust 0.05))
              nil
              nil
              :ascent center)
