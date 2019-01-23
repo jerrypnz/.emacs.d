@@ -90,6 +90,11 @@
              ,(list (all-the-icons-faicon "tasks" :height 0.9 :v-adjust 0.05))
              nil
              nil
+             :ascent center)
+            ("Inbox"
+             ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
+             nil
+             nil
              :ascent center)))
 
     (setq org-refile-targets '((nil :maxlevel . 9)
