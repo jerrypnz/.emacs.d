@@ -46,14 +46,47 @@
 
     (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (jp-gtd-org-file :maxlevel . 2)
+                               (jp-someday-org-file :maxlevel . 2)))
+
+    (setq org-startup-folded nil)
+
+    (setq org-log-done 'time)
+    (setq org-log-redeadline 'time)
+    (setq org-log-reschedule 'time)
+    (setq org-goto-interface 'outline-path-completion)
+    (setq org-outline-path-complete-in-steps nil)
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((dot . t)))
+
+    (defun jp-org-confirm-babel-evaluate (lang body)
+      (not (string= lang "dot")))
+
+    (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
+
+
+(use-package org-capture
+  :after (org)
+  :command (org-capture)
+  :config
+  (progn
     (setq org-capture-templates
           `(("t" "TODO" entry (file org-default-notes-file)
              "* TODO %?\n%u\n")
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
             ("n" "Next Task" entry (file org-default-notes-file)
-             "** NEXT %? \nDEADLINE: %t")))
+             "** NEXT %? \nDEADLINE: %t")))))
 
+
+(use-package org-agenda
+  :after (org)
+  :command (org-agenda)
+  :config
+  (progn
     (setq org-agenda-custom-commands
           '(("k" "Kanban"
              ((todo "NEXT"
@@ -77,46 +110,14 @@
                                  jp-inbox-org-file))
 
     (setq org-agenda-category-icon-alist
-          `(("Emacs"
-             ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
-             nil nil
-             :ascent center)
-            ("Projects"
-             ,(list (all-the-icons-octicon "repo" :v-adjust 0.05))
-             nil
-             nil
-             :ascent center)
-            ("BAU"
-             ,(list (all-the-icons-faicon "tasks" :height 0.8 :v-adjust 0.05))
-             nil
-             nil
-             :ascent center)
-            ("Inbox"
-             ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
-             nil
-             nil
-             :ascent center)))
-
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (jp-gtd-org-file :maxlevel . 2)
-                               (jp-someday-org-file :maxlevel . 2)))
-
-    (setq org-startup-folded nil)
-
-    (setq org-log-done 'time)
-    (setq org-log-redeadline 'time)
-    (setq org-log-reschedule 'time)
-    (setq org-goto-interface 'outline-path-completion)
-    (setq org-outline-path-complete-in-steps nil)
-
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((dot . t)))
-
-    (defun jp-org-confirm-babel-evaluate (lang body)
-      (not (string= lang "dot")))
-
-    (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
+          `(("Emacs" ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Projects" ,(list (all-the-icons-octicon "repo" :v-adjust 0.05))
+             nil nil :ascent center)
+            ("BAU" ,(list (all-the-icons-faicon "tasks" :height 0.8 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
+             nil nil :ascent center)))))
 
 
 (use-package ox-gfm
