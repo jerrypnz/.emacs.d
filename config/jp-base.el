@@ -197,5 +197,8 @@
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t)))
 
+(use-package imenu-list
+  :straight t)
+
 (provide 'jp-base)
 ;;; jp-base.el ends here
