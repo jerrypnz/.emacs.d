@@ -76,6 +76,22 @@
     (setq org-agenda-files (list jp-gtd-org-file
                                  jp-inbox-org-file))
 
+    (setq org-agenda-category-icon-alist
+          `(("Emacs"
+             ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
+             nil nil
+             :ascent center)
+            ("Projects"
+             ,(list (all-the-icons-octicon "repo" :v-adjust 0.05))
+             nil
+             nil
+             :ascent center)
+            ("BAU"
+             ,(list (all-the-icons-faicon "tasks" :height 0.9 :v-adjust 0.05))
+             nil
+             nil
+             :ascent center)))
+
     (setq org-refile-targets '((nil :maxlevel . 9)
                                (jp-gtd-org-file :maxlevel . 2)
                                (jp-someday-org-file :maxlevel . 2)))
