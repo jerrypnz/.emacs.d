@@ -106,6 +106,7 @@
     (setq cider-repl-wrap-history t)
     ;; looong history
     (setq cider-repl-history-size 3000)
+    (setq cider-repl-display-help-banner nil)
     ;; eldoc for clojure
     (add-hook 'cider-mode-hook #'eldoc-mode)
     ;; smartparens mode for the REPL
