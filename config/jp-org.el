@@ -20,7 +20,6 @@
 (use-package org
   :straight org-plus-contrib
   :defer t
-  :commands (org-capture org-agenda)
   :bind
   (:map
    org-mode-map
@@ -70,7 +69,7 @@
 
 (use-package org-capture
   :after (org)
-  :command (org-capture)
+  :commands (org-capture)
   :config
   (progn
     (setq org-capture-templates
@@ -84,7 +83,7 @@
 
 (use-package org-agenda
   :after (org)
-  :command (org-agenda)
+  :commands (org-agenda)
   :config
   (progn
     (setq org-agenda-custom-commands
