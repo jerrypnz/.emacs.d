@@ -18,6 +18,7 @@
 (require 'jp-window)
 (require 'jp-flycheck-hydra)
 (require 'jp-commands)
+(require 'jp-org-agenda)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
@@ -42,7 +43,6 @@
 
 (autoload 'deft "deft")
 (autoload 'org-capture "org-capture")
-(autoload 'org-agenda "org-agenda")
 
 (defvar jp-main-hydra--title
   (s-concat "\n "
@@ -93,7 +93,7 @@
 
    "Org"
    (("oc" org-capture "capture")
-    ("oa" org-agenda "agenda")
+    ("oa" jp-org-agenda/body "agenda")
     ("on" deft "deft"))
 
    "Toggles"

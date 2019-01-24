@@ -80,12 +80,12 @@
             ("n" "Next Task" entry (file org-default-notes-file)
              "** NEXT %? \nDEADLINE: %t")))))
 
-
 (use-package org-agenda
   :after (org)
   :commands (org-agenda)
   :config
   (progn
+    (setq org-agenda-restore-windows-after-quit t)
     (setq org-agenda-custom-commands
           '(("k" "Kanban"
              ((todo "NEXT"
