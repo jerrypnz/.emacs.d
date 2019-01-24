@@ -29,8 +29,13 @@
       (propertize (cadr c) 'face (if (= n jp-org-agenda--current-view-idx) 'underline 'shadow))
     ""))
 
+(defvar jp-org-agenda--title
+  (s-concat "\n "
+            (all-the-icons-faicon "calendar" :v-adjust 0.01 :height 1.1)
+            (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
+
 (pretty-hydra-define jp-org-agenda
-  (:hint nil :foreign-keys run :quit-key "q"
+  (:hint nil :foreign-keys run :quit-key "q" :title jp-org-agenda--title
          :pre (jp-org-agenda-open-nth-view 0)
          :post (org-agenda-quit))
   ("Agenda Views"
