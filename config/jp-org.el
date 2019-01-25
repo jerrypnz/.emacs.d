@@ -116,6 +116,8 @@
             ("BAU" ,(list (all-the-icons-faicon "tasks" :height 0.8 :v-adjust 0.05))
              nil nil :ascent center)
             ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
              nil nil :ascent center)))))
 
 
