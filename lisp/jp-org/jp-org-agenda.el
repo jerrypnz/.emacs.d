@@ -32,7 +32,7 @@
             (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
 
 (pretty-hydra-define jp-org-agenda
-  (:hint nil :foreign-keys run :quit-key "q" :title jp-org-agenda--title)
+  (:hint nil :foreign-keys run :title jp-org-agenda--title)
   ("Actions"
    (("SPC" (org-agenda-show-and-scroll-up t) "preview")
     ("TAB" org-agenda-goto "goto" :exit t)
@@ -73,7 +73,8 @@
     ("2" (jp-org-agenda-open-nth-view 1) (jp-org-agenda-nth-name 1))
     ("3" (jp-org-agenda-open-nth-view 2) (jp-org-agenda-nth-name 2))
     ("A" org-agenda "open dispatcher")
-    ("Q" org-agenda-quit "close agenda" :exit t))))
+    ("q" org-agenda-quit "close agenda" :exit t)
+    ("Q" nil "quit (leave agenda open)" :exit t))))
 
 (defun jp-org-agenda-open ()
   (interactive)
