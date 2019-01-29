@@ -86,6 +86,10 @@
   :config
   (progn
     (setq org-agenda-restore-windows-after-quit t)
+    (setq org-agenda-window-setup 'only-window)
+
+    (advice-add 'org-agenda-quit :before 'org-save-all-org-buffers)
+
     (setq org-agenda-custom-commands
           '(("k" "Kanban"
              ((todo "NEXT"
@@ -94,16 +98,16 @@
                     ((org-agenda-overriding-header "In Progress:")))
               (todo "WAITING"
                     ((org-agenda-overriding-header "Waiting:")))
-              (todo "DONE"
+              (tags "+CLOSED>=\"<-3d>\"/DONE"
                     ((org-agenda-overriding-header "Done:")))))
             ("r" "Daily Review"
              ((agenda "-inbox"
-                      ((org-agenda-overriding-header "This Week:")))
+                      ((org-agenda-overriding-header "Calendar:")))
               (tags "+inbox"
                     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                      (org-agenda-overriding-header "Inbox:")))
               (tags "-inbox/TODO"
-                    ((org-agenda-overriding-header "Backlog")))))))
+                    ((org-agenda-overriding-header "Backlog:")))))))
 
     (setq org-agenda-files (list jp-gtd-org-file
                                  jp-inbox-org-file))

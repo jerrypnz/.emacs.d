@@ -19,7 +19,7 @@
       (progn
         (org-agenda nil (car c))
         (setq jp-org-agenda--current-view-idx n))
-    (setq jp-org-agenda--current-view-idx nil)))
+    (message "Non-existent agenda view")))
 
 (defun jp-org-agenda-nth-name (n)
   (-if-let (c (nth n org-agenda-custom-commands))
@@ -32,7 +32,8 @@
             (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
 
 (pretty-hydra-define jp-org-agenda
-  (:hint nil :foreign-keys run :title jp-org-agenda--title)
+  (:hint nil :foreign-keys run :title jp-org-agenda--title
+         :body-pre (jp-org-agenda-open-nth-view 0))
   ("Actions"
    (("SPC" (org-agenda-show-and-scroll-up t) "preview")
     ("TAB" org-agenda-goto "goto" :exit t)
@@ -75,11 +76,6 @@
     ("A" org-agenda "open dispatcher")
     ("q" org-agenda-quit "close agenda" :exit t)
     ("Q" nil "quit (leave agenda open)" :exit t))))
-
-(defun jp-org-agenda-open ()
-  (interactive)
-  (jp-org-agenda-open-nth-view 0)
-  (jp-org-agenda/body))
 
 (provide 'jp-org-agenda)
 ;;; jp-org-agenda.el ends here

@@ -42,7 +42,7 @@
 
 (autoload 'deft "deft")
 (autoload 'org-capture "org-capture")
-(autoload 'jp-org-agenda-open "jp-org-agenda")
+(autoload 'jp-org-agenda/body "jp-org-agenda")
 
 (defvar jp-main-hydra--title
   (s-concat "\n "
@@ -93,7 +93,7 @@
 
    "Org"
    (("oc" org-capture "capture")
-    ("oa" jp-org-agenda-open "agenda")
+    ("oa" jp-org-agenda/body "agenda")
     ("on" deft "deft"))
 
    "Toggles"
