@@ -46,8 +46,8 @@
     (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
     (setq org-refile-targets '((nil :maxlevel . 9)
-                               (jp-gtd-org-file :maxlevel . 2)
-                               (jp-someday-org-file :maxlevel . 2)))
+                               (jp-gtd-org-file :maxlevel . 3)
+                               (jp-someday-org-file :maxlevel . 3)))
 
     (setq org-startup-folded nil)
 
