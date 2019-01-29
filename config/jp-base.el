@@ -197,8 +197,22 @@
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t)))
 
+;; TODO configuration
 (use-package imenu-list
   :straight t)
+
+(use-package helpful
+  :straight t
+  :commands (helpful-callable
+             helpful-variable
+             helpful-key
+             helpful-at-point
+             helpful-command))
+
+(use-package jp-help
+  :after (helpful)
+  :init (global-set-key (kbd "C-h") 'jp-help/body)
+  :commands (jp-help/body))
 
 (provide 'jp-base)
 ;;; jp-base.el ends here
