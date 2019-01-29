@@ -210,7 +210,6 @@
              helpful-command))
 
 (use-package jp-help
-  :after (helpful)
   :init (global-set-key (kbd "C-h") 'jp-help/body)
   :commands (jp-help/body))
 

@@ -29,9 +29,7 @@
   (("M-x"     . counsel-M-x)
    ("M-y"     . counsel-yank-pop)
    ("C-s"     . counsel-grep-or-swiper)
-   ("C-x C-f" . counsel-find-file)
-   ("C-h f"   . counsel-describe-function)
-   ("C-h v"   . counsel-describe-variable))
+   ("C-x C-f" . counsel-find-file))
 
   :config
   (progn
