@@ -124,6 +124,51 @@
             ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
              nil nil :ascent center)))))
 
+(use-package org-archive
+  :after (org)
+  :commands (org-archive-subtree)
+  :config
+  (progn
+    ;; Found here: https://github.com/Fuco1/.emacs.d/blob/master/files/org-defs.el#L1795
+    (defadvice org-archive-subtree (around fix-hierarchy activate)
+      (let* ((fix-archive-p (and (not current-prefix-arg)
+                                 (not (use-region-p))))
+             (afile (org-extract-archive-file (org-get-local-archive-location)))
+             (buffer (or (find-buffer-visiting afile) (find-file-noselect afile))))
+        ad-do-it
+        (when fix-archive-p
+          (with-current-buffer buffer
+            (goto-char (point-max))
+            (while (org-up-heading-safe))
+            (let* ((olpath (org-entry-get (point) "ARCHIVE_OLPATH"))
+                   (path (and olpath (split-string olpath "/")))
+                   (level 1)
+                   tree-text)
+              (when olpath
+                (org-mark-subtree)
+                (setq tree-text (buffer-substring (region-beginning) (region-end)))
+                (let (this-command) (org-cut-subtree))
+                (goto-char (point-min))
+                (save-restriction
+                  (widen)
+                  (-each path
+                    (lambda (heading)
+                      (if (re-search-forward
+                           (rx-to-string
+                            `(: bol (repeat ,level "*") (1+ " ") ,heading)) nil t)
+                          (org-narrow-to-subtree)
+                        (goto-char (point-max))
+                        (unless (looking-at "^")
+                          (insert "\n"))
+                        (insert (make-string level ?*)
+                                " "
+                                heading
+                                "\n"))
+                      (cl-incf level)))
+                  (widen)
+                  (org-end-of-subtree t t)
+                  (org-paste-subtree level tree-text))))))))))
+
 
 (use-package ox-gfm
   :straight t
