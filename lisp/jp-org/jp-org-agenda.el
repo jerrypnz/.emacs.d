@@ -42,6 +42,7 @@
     ("C-t" org-agenda-todo "todo")
     ("n" org-agenda-next-item "next item")
     ("p" org-agenda-previous-item "previous item")
+    ("k" org-agenda-capture "capture" :exit t)
     ("g" org-agenda-redo-all "refresh")
     ("s" org-save-all-org-buffers "save all"))
    "Filter"
@@ -64,8 +65,8 @@
     ("J" org-agenda-clock-goto "goto" :exit t))
    "Toggles"
    (("tl" org-agenda-log-mode "log")
-    ("ta" org-agenda-archives-mode "archive")
-    ("tA" (org-agenda-archives-mode 'files) "archive (files)")
+    ("ta" (org-agenda-archives-mode
+           (if org-agenda-archives-mode nil t)) "archive")
     ("tr" org-agenda-clockreport-mode "clockreport")
     ("tf" org-agenda-follow-mode "follow")
     ("td" org-agenda-toggle-diary "diary"))
