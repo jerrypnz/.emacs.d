@@ -70,13 +70,6 @@
     (setq undo-tree-visualizer-timestamps t)
     (global-undo-tree-mode)))
 
-;; which-key
-(use-package which-key
-  :straight t
-  :config
-  (setq which-key-idle-delay 0.3)
-  (which-key-mode))
-
 (use-package jp-main-hydra
   :bind
   ("M-SPC" . jp-main-hydra/body))

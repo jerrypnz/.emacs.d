@@ -53,7 +53,7 @@
 
     - find a solution for file templates
       - [[https://github.com/mineo/yatemplate][yatemplate]]?
-    - +wgrep+    
+    - +wgrep+
     - +iedit+
 
 *** Org
@@ -65,7 +65,6 @@
 
 *** Misc
 
-    - +which-key+
     - +undo-tree+
     - ivy / counsel / swiper
       - ability to preview without exiting it
@@ -75,7 +74,6 @@
       - profiling
       - hydra for org agenda
       - +press =C-M-m= for a major mode specific hydra?+ (https://github.com/jerrypnz/major-mode-hydra.el)
-      - replace =M-m= with a nice hydra and get rid of =which-key=?
       - +window resize/zooming (or =ace-window=)+
       - +window layout management+
     - +better projectile discovery+

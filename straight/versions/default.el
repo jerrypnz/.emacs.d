@@ -20,7 +20,6 @@
  ("emacs-noflet" . "7ae84dc3257637af7334101456dafe1759c6b68a")
  ("emacs-sbt-mode" . "e658af140547cbef495c33535c7f694a501d318c")
  ("emacs-scala-mode" . "56cba2903cf6e12c715dbb5c99b34c97b2679379")
- ("emacs-which-key" . "43e3e3d7641a8e1c298b37e6a277612bf0898708")
  ("ensime-emacs" . "34eb11dac3ec9d1c554c2e55bf056ece6983add7")
  ("epkgs" . "a593993ba96fdb9bf4b253b2fe80bb34d27c3801")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
