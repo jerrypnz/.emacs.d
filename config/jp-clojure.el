@@ -30,12 +30,15 @@
     (put-clojure-indent '-> 1)
     (put-clojure-indent '->> 1)
 
+    (add-to-list 'clojure-align-cond-forms "more-of")
+
     (define-clojure-indent
       ;; core.match
       (match 1)
       ;; expectations
       (expect 0)
       (expect-let 1)
+      (more-of 1)
       ;; clj-time
       (do-at 1)
       ;; custom core.async macros
@@ -52,7 +55,10 @@
       (->server 1)
       ;; metrics-clojure
       (time! 1)
-      (with-logging-context 1))))
+      (with-logging-context 1)
+      ;; hiccup
+      (xhtml 1)
+      (html5 1))))
 
 (use-package cider
   :straight t
