@@ -99,11 +99,11 @@
               (todo "WAITING"
                     ((org-agenda-overriding-header "Waiting:")))
               (tags "+CLOSED>=\"<-3d>\"/DONE"
-                    ((org-agenda-overriding-header "Done:")))))
+                    ((org-agenda-overriding-header "Done:")))
+              (agenda "-inbox"
+                      ((org-agenda-overriding-header "Calendar:")))))
             ("r" "Daily Review"
-             ((agenda "-inbox"
-                      ((org-agenda-overriding-header "Calendar:")))
-              (tags "+inbox"
+             ((tags "+inbox"
                     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                      (org-agenda-overriding-header "Inbox:")))
               (tags "-inbox/TODO"
