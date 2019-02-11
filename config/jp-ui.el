@@ -53,7 +53,7 @@
       (mode-line-process-face :inherit 'mode-line :foreground green)
       (mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
       ;; vertical border
-      (vertical-border :background modeline-bg :foreground modeline-bg)
+      (vertical-border :background (doom-lighten modeline-bg 0.2) :foreground (doom-lighten modeline-bg 0.2))
       ;; highlight
       (highlight-thing :background (doom-lighten bg 0.1))
       (show-paren-match :background (doom-lighten bg-alt 0.3)))))
