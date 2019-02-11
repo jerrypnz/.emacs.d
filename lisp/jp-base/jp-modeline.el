@@ -13,6 +13,7 @@
 
 (require 'all-the-icons)
 (require 's)
+(require 'moody)
 
 (defvar jp-modeline-active-window nil)
 
@@ -103,35 +104,42 @@
                           (t 'mode-line)))))
    " "
    ;; directory and buffer/file name
-   (:eval (propertize (shorten-directory default-directory 10) 'face
-                      (if (jp-modeline-active-p)
-                          'mode-line
-                        'mode-line-inactive)))
-   (:eval (propertize (jp-buffer-filename) 'face
-                      (if (jp-modeline-active-p)
-                          'mode-line-filename-face
-                        'mode-line-filename-inactive-face)))
+   (:eval (moody-tab (s-concat (propertize (shorten-directory default-directory 10) 'face
+                                           (if (jp-modeline-active-p)
+                                               'mode-line
+                                             'mode-line-inactive))
+                               (propertize (jp-buffer-filename) 'face
+                                           (if (jp-modeline-active-p)
+                                               'mode-line-filename-face
+                                             'mode-line-filename-inactive-face)))
+                     nil
+                     'down))
    ;; narrow [default -- keep?]
    " %n "
-   ;; major mode
-   (:eval (all-the-icons-icon-for-mode
-           major-mode
-           :height 0.8
-           :v-adjust (if (eq major-mode 'emacs-lisp-mode)
-                         -0.1
-                       0.05)
-           :face (if (jp-modeline-active-p)
-                     'mode-line
-                   'mode-line-inactive)))
-   " %["
-   (mode-name mode-name)
-   "%] "
+
    ;; vc info
    (:eval (if vc-mode
-              (format "◦ %s %s"
+              (format "%s %s  "
                       (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
                       (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
-            ""))
+            "     "))
+
+   ;; major mode
+   (:eval (moody-tab (s-concat
+                      (all-the-icons-icon-for-mode
+                       major-mode
+                       :height 0.8
+                       :v-adjust (if (eq major-mode 'emacs-lisp-mode)
+                                     -0.1
+                                   0.05)
+                       :face (if (jp-modeline-active-p)
+                                 'mode-line
+                               'mode-line-inactive))
+                      " %["
+                      mode-name
+                      "%] ")
+                     nil
+                     'up))
    " "
    ;; process
    (:eval (when mode-line-process

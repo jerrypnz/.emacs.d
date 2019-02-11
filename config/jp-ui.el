@@ -37,9 +37,17 @@
     ;; Customize faces
     (jp-doom-themes-set-faces 'doom-nord
       ;; mode-line
-      (mode-line-read-only-face :inherit 'mode-line :background dark-blue :box `(:line-width 2 :color ,dark-blue))
+      (mode-line :background modeline-bg
+                 :foreground modeline-fg
+                 :overline (doom-lighten modeline-bg 0.2)
+                 :underline (doom-lighten modeline-bg 0.2))
+      (mode-line-inactive :background modeline-bg-inactive
+                          :foreground modeline-fg-alt
+                          :overline (doom-lighten modeline-bg 0.2)
+                          :underline (doom-lighten modeline-bg 0.2))
+      (mode-line-read-only-face :inherit 'mode-line :background dark-blue)
       (mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
-      (mode-line-read-write-face :inherit 'mode-line :background red :box `(:line-width 2 :color ,red))
+      (mode-line-read-write-face :inherit 'mode-line :background red)
       (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground red)
       (mode-line-filename-face :inherit 'mode-line :foreground orange :weight 'bold)
       (mode-line-process-face :inherit 'mode-line :foreground green)
@@ -59,6 +67,13 @@
 
 (use-package all-the-icons
   :straight t)
+
+(use-package moody
+  :straight t
+  :config
+  (progn
+    (setq x-underline-at-descent-line t)
+    (setq moody-slant-function #'moody-slant-apple-rgb)))
 
 (use-package jp-modeline)
 
