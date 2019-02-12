@@ -108,14 +108,13 @@
                      nil
                      'down))
    ;; narrow [default -- keep?]
-   " %n "
+   " %n   "
 
    ;; vc info
-   (:eval (if vc-mode
-              (format "  %s %s    "
-                      (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
-                      (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
-            "        "))
+   (:eval (when vc-mode
+            (format "%s %s"
+                    (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
+                    (replace-regexp-in-string "^ Git[:-]" "" vc-mode))))
 
    "   "
    (:eval (concat (pcase (coding-system-eol-type buffer-file-coding-system)
