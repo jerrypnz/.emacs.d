@@ -102,7 +102,7 @@
                           ((not (jp-modeline-active-p)) 'mode-line-inactive)
                           ((>= (current-column) 80) 'mode-line-80col-face)
                           (t 'mode-line)))))
-   " "
+   " %6p   "
    ;; directory and buffer/file name
    (:eval (moody-tab (s-concat (propertize (shorten-directory default-directory 10) 'face
                                            (if (jp-modeline-active-p)
@@ -119,10 +119,10 @@
 
    ;; vc info
    (:eval (if vc-mode
-              (format "%s %s  "
+              (format "  %s %s    "
                       (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
                       (replace-regexp-in-string "^ Git[:-]" "" vc-mode))
-            "     "))
+            "        "))
 
    ;; major mode
    (:eval (moody-tab (s-concat
@@ -140,7 +140,18 @@
                       "%] ")
                      nil
                      'up))
-   " "
+   "   "
+   (:eval (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+                    (0 "LF  ")
+                    (1 "CRLF  ")
+                    (2 "CR  "))
+                  (let ((sys (coding-system-plist buffer-file-coding-system)))
+                    (cond ((memq (plist-get sys :category)
+                                 '(coding-category-undecided coding-category-utf-8))
+                           "UTF-8")
+                          (t (upcase (symbol-name (plist-get sys :name))))))
+                  " "))
+   "   "
    ;; process
    (:eval (when mode-line-process
             (propertize mode-line-process 'face
