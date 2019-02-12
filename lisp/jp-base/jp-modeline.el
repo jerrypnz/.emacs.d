@@ -100,7 +100,8 @@
                           (t 'mode-line)))))
    " %6p   "
    ;; directory and buffer/file name
-   (:eval (moody-tab (s-concat (shorten-directory default-directory 10)
+   (:eval (moody-tab (s-concat (when (buffer-file-name)
+                                 (shorten-directory default-directory 10))
                                (propertize (jp-buffer-filename) 'face
                                            (if (jp-modeline-active-p)
                                                'mode-line-filename-face
@@ -129,14 +130,17 @@
    "   "
    ;; major mode
    (:eval (moody-tab (s-concat
-                      (all-the-icons-icon-for-mode
-                       major-mode
-                       :height 0.8
-                       :v-adjust (if (eq major-mode 'emacs-lisp-mode)
-                                     -0.1
-                                   0.05))
+                      (let ((icon (all-the-icons-icon-for-mode
+                                   major-mode
+                                   :height 0.8
+                                   :v-adjust (if (eq major-mode 'emacs-lisp-mode)
+                                                 -0.1
+                                               0.05))))
+                        ;;TODO Use a default icon if there is none
+                        (when (not (symbolp icon))
+                          icon))
                       " %["
-                      mode-name
+                      (format-mode-line mode-name)
                       "%] ")
                      nil
                      'up))
