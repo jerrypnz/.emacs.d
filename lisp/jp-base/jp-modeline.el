@@ -91,12 +91,8 @@
  mode-line-format
  '(
    (:eval (jp-modeline-status))
-   " "
    ;; Position, including warning for 80 columns
-   (:eval (propertize "%4l:" 'face
-                      (if (jp-modeline-active-p)
-                          'mode-line
-                        'mode-line-inactive)))
+   " %4l:"
    (3 (:eval (propertize "%c" 'face
                          (cond
                           ((not (jp-modeline-active-p)) 'mode-line-inactive)
@@ -104,10 +100,7 @@
                           (t 'mode-line)))))
    " %6p   "
    ;; directory and buffer/file name
-   (:eval (moody-tab (s-concat (propertize (shorten-directory default-directory 10) 'face
-                                           (if (jp-modeline-active-p)
-                                               'mode-line
-                                             'mode-line-inactive))
+   (:eval (moody-tab (s-concat (shorten-directory default-directory 10)
                                (propertize (jp-buffer-filename) 'face
                                            (if (jp-modeline-active-p)
                                                'mode-line-filename-face
@@ -131,10 +124,7 @@
                        :height 0.8
                        :v-adjust (if (eq major-mode 'emacs-lisp-mode)
                                      -0.1
-                                   0.05)
-                       :face (if (jp-modeline-active-p)
-                                 'mode-line
-                               'mode-line-inactive))
+                                   0.05))
                       " %["
                       mode-name
                       "%] ")
@@ -155,11 +145,12 @@
    ;; process
    (:eval (when mode-line-process
             (propertize mode-line-process 'face
-                        (if (jp-modeline-active-p) 'mode-line-process-face 'mode-line-inactive))))
+                        (if (jp-modeline-active-p)
+                            'mode-line-process-face
+                          'mode-line-inactive))))
 
    ;; global mode string
-   (global-mode-string global-mode-string)
-   " "))
+   (global-mode-string global-mode-string)))
 
 ;; Helper function
 (defun shorten-directory (dir max-length)
