@@ -15,6 +15,8 @@
 (defconst jp-inbox-org-file "~/org/inbox.org")
 (defconst jp-someday-org-file "~/org/someday.org")
 (defconst jp-notes-dir "~/org/notes")
+(defconst jp-work-notes "~/org/work-notes.org")
+(defconst jp-study-notes "~/org/study-notes.org")
 
 
 (use-package org
@@ -47,7 +49,9 @@
 
     (setq org-refile-targets '((nil :maxlevel . 9)
                                (jp-gtd-org-file :maxlevel . 3)
-                               (jp-someday-org-file :maxlevel . 3)))
+                               (jp-someday-org-file :maxlevel . 3)
+                               (jp-work-notes :maxlevel . 4)
+                               (jp-study-notes :maxlevel . 4)))
 
     (setq org-startup-folded nil)
 
@@ -92,25 +96,29 @@
 
     (setq org-agenda-custom-commands
           '(("k" "Kanban"
-             ((todo "NEXT"
+             ((tags "-someday-inbox/NEXT"
                     ((org-agenda-overriding-header "Ready to Start:")))
-              (todo "IN-PROGRESS"
+              (tags "-someday-inbox/IN-PROGRESS"
                     ((org-agenda-overriding-header "In Progress:")))
-              (todo "WAITING"
+              (tags "-someday-inbox/WAITING"
                     ((org-agenda-overriding-header "Waiting:")))
-              (tags "+CLOSED>=\"<-3d>\"/DONE"
+              (tags "-someday-inbox+CLOSED>=\"<-3d>\"/DONE"
                     ((org-agenda-overriding-header "Done:")))
-              (agenda "-inbox"
+              (agenda "-someday-inbox"
                       ((org-agenda-overriding-header "Calendar:")))))
             ("r" "Daily Review"
              ((tags "+inbox"
                     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                      (org-agenda-overriding-header "Inbox:")))
-              (tags "-inbox/TODO"
-                    ((org-agenda-overriding-header "Backlog:")))))))
+              (tags "-someday-inbox/TODO"
+                    ((org-agenda-overriding-header "Backlog:")))))
+            ("s" "Someday"
+             ((tags "+someday/TODO"
+                    ((org-agenda-overriding-header "Maybe Someday:")))))))
 
     (setq org-agenda-files (list jp-gtd-org-file
-                                 jp-inbox-org-file))
+                                 jp-inbox-org-file
+                                 jp-someday-org-file))
 
     (setq org-agenda-category-icon-alist
           `(("Emacs" ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
