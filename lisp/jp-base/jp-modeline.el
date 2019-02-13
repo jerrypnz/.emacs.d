@@ -147,7 +147,7 @@
    "   "
    ;; process
    (:eval (when mode-line-process
-            (propertize mode-line-process 'face
+            (propertize (format-mode-line mode-line-process) 'face
                         (if (jp-modeline-active-p)
                             'mode-line-process-face
                           'mode-line-inactive))))
