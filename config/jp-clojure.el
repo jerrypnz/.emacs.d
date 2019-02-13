@@ -20,7 +20,7 @@
          ("\\.cljc\\'" . clojurec-mode))
   :config
   (progn
-    (major-mode-hydra-bind clojure-mode "Edit"
+    (major-mode-hydra-bind clojure-mode "Refactor"
       (">" clojure-thread-first-all "thread-first")
       ("<" clojure-thread-last-all "thread-last")
       ("u" clojure-unwind-all "thread-unwind"))
@@ -69,13 +69,12 @@
       ("J" cider-jack-in-clojurescript "jack-in-cljs")
       ("c" cider-connect "connect")
       ("R" cider-restart "restart")
-      ("Q" cider-quit "disconnect")
-      ("q" nil "quit"))
+      ("Q" cider-quit "disconnect"))
     (major-mode-hydra-bind clojure-mode "Load"
       ("k" cider-load-buffer "buffer")
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
-      ("r" cider-ns-refresh "reload"))
+      ("g" cider-ns-refresh "reload"))
     (major-mode-hydra-bind clojure-mode "Eval"
       ("s" cider-repl-set-ns "set-repl-ns")
       ("e" cider-eval-last-sexp-to-repl "eval-last")
@@ -127,7 +126,7 @@
     (major-mode-hydra-bind cider-repl-mode "Load"
       ("l" cider-load-file "file")
       ("L" cider-load-all-project-ns "all-ns")
-      ("r" cider-ns-refresh "reload"))
+      ("g" cider-ns-refresh "reload"))
     (major-mode-hydra-bind cider-repl-mode "REPL"
       ("s" cider-repl-set-ns "set-repl-ns")
       ("i" cider-interrupt "interrupt")
@@ -165,7 +164,24 @@
   :straight t
   :after (cider flycheck)
   :config
-  (flycheck-clojure-setup))
+  (progn
+    (flycheck-clojure-setup)
+    ;; Don't think I'll ever use core.typed
+    (add-to-list 'flycheck-disabled-checkers 'clojure-cider-typed)))
+
+(use-package clj-refactor
+  :straight t
+  :config
+  (progn
+    (add-hook 'cider-mode-hook (lambda ()
+                                 (clj-refactor-mode 1)))
+
+    (major-mode-hydra-bind clojure-mode "Refactor"
+      ("rs" hydra-cljr-cljr-menu/body "refactor")
+      ("rn" hydra-cljr-ns-menu/body "namespaces")
+      ("rc" hydra-cljr-code-menu/body "code")
+      ("rp" hydra-cljr-project-menu/body "project")
+      ("rt" hydra-cljr-toplevel-form-menu/body "top level form"))))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here
