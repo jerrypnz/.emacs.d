@@ -26,20 +26,25 @@
       (propertize (cadr c) 'face (if (= n jp-org-agenda--current-view-idx) 'underline 'shadow))
     ""))
 
+(defun jp-org-agenda-maybe-open ()
+  (interactive)
+  (when (not (eq major-mode 'org-agenda-mode))
+    (jp-org-agenda-open-nth-view 0)))
+
 (defvar jp-org-agenda--title
   (s-concat "\n "
             (all-the-icons-faicon "calendar" :v-adjust 0.01 :height 1.1)
             (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
 
 (pretty-hydra-define jp-org-agenda
-  (:hint nil :foreign-keys run :title jp-org-agenda--title
-         :body-pre (jp-org-agenda-open-nth-view 0))
+  (:hint nil :foreign-keys run :title jp-org-agenda--title :body-pre (jp-org-agenda-maybe-open) :quit-key "q")
   ("Actions"
    (("SPC" (org-agenda-show-and-scroll-up t) "preview")
     ("TAB" org-agenda-goto "goto" :exit t)
     ("C-r" org-agenda-refile "refile")
     ("C-s" org-agenda-schedule "schedule")
-    ("C-t" org-agenda-todo "todo")
+    ("C-t" org-agenda-todo "todo" :exit t)
+    ("C-a" org-agenda-archive "archive")
     ("n" org-agenda-next-item "next item")
     ("p" org-agenda-previous-item "previous item")
     ("k" org-agenda-capture "capture" :exit t)
@@ -75,8 +80,7 @@
     ("2" (jp-org-agenda-open-nth-view 1) (jp-org-agenda-nth-name 1))
     ("3" (jp-org-agenda-open-nth-view 2) (jp-org-agenda-nth-name 2))
     ("A" org-agenda "open dispatcher")
-    ("q" org-agenda-quit "close agenda" :exit t)
-    ("Q" nil "quit (leave agenda open)" :exit t))))
+    ("Q" org-agenda-quit "close agenda" :exit t))))
 
 (provide 'jp-org-agenda)
 ;;; jp-org-agenda.el ends here

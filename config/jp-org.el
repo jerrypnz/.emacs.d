@@ -98,7 +98,7 @@
           '(("k" "Kanban"
              ((tags "-someday-inbox/NEXT"
                     ((org-agenda-overriding-header "Ready to Start:")))
-              (tags "-someday-inbox/IN-PROGRESS"
+              (tags "-someday-inbox+TODO=\"IN-PROGRESS\""
                     ((org-agenda-overriding-header "In Progress:")))
               (tags "-someday-inbox/WAITING"
                     ((org-agenda-overriding-header "Waiting:")))
@@ -131,6 +131,14 @@
              nil nil :ascent center)
             ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
              nil nil :ascent center)))))
+
+(use-package jp-org-agenda
+  :commands (jp-org-agenda/body)
+  :config
+  (progn
+    (defvar major-mode-hydra--body-cache)
+    ;; TODO This is a hack - do it properly in major-mode-hydra package
+    (setf (alist-get 'org-agenda-mode major-mode-hydra--body-cache) #'jp-org-agenda/body)))
 
 (use-package org-archive
   :after (org)
