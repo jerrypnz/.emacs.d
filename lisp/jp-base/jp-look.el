@@ -110,7 +110,7 @@
       (progn
         (jp-set-geometry)
         (add-hook 'kill-emacs-hook 'jp-save-frame-geometry)
-        (setq-default line-spacing 1)
+        (setq-default line-spacing 2)
         (jp-set-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
         (set-face-font 'default jp-default-font)
