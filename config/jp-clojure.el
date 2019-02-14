@@ -160,14 +160,17 @@
       ("X" cider-macroexpand-all "expand-all")))
   :commands (cider-macroexpand-1 cider-macroexpand-all))
 
-(use-package flycheck-clojure
-  :straight t
-  :after (cider flycheck)
-  :config
-  (progn
-    (flycheck-clojure-setup)
-    ;; Don't think I'll ever use core.typed
-    (add-to-list 'flycheck-disabled-checkers 'clojure-cider-typed)))
+;; (use-package flycheck-clojure
+;;   :straight t
+;;   :after (cider flycheck)
+;;   :config
+;;   (progn
+;;     (flycheck-clojure-setup)
+;;     ;; Don't think I'll ever use core.typed
+;;     (add-to-list 'flycheck-disabled-checkers 'clojure-cider-typed)))
+
+(use-package flycheck-joker
+  :straight t)
 
 (use-package clj-refactor
   :straight t
