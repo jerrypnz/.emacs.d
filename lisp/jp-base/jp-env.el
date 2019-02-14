@@ -66,8 +66,9 @@
 ;; No ring bell at all.
 (setq ring-bell-function 'ignore)
 
-;; Prefer splitting windows horizontally
-(setq split-height-threshold nil)
+;; Window management
+(setq split-height-threshold nil)         ; Prefer splitting windows horizontally
+(setq split-width-threshold 200)
 
 (provide 'jp-env)
 
