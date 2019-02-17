@@ -18,3 +18,4 @@ projectile-bookmarks.eld
 !/straight/versions/*
 /custom.el
 /tramp
+/transient
