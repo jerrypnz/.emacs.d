@@ -44,6 +44,8 @@
 (autoload 'org-capture "org-capture")
 (autoload 'jp-org-agenda/body "jp-org-agenda")
 
+(autoload 'rainbow-mode "rainbow-mode")
+
 (defvar jp-main-hydra--title
   (s-concat "\n "
             (s-repeat 60 " ")
@@ -98,7 +100,8 @@
 
    "Toggles"
    (("tn" toggle-linum "line number")
-    ("tw" whitespace-mode "whitespace"))
+    ("tw" whitespace-mode "whitespace")
+    ("tr" rainbow-mode "rainbow"))
 
    "Windows & Layouts"
    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))

@@ -99,16 +99,18 @@
     (setq dumb-jump-selector 'ivy)
     (setq dumb-jump-prefer-searcher 'rg)))
 
-;; hightlight-things.el
-(use-package highlight-thing
+;; symbol-overlay
+(use-package symbol-overlay
   :straight t
+  :defer nil
+  :bind
+  (("M-s" . symbol-overlay-put))
   :config
   (progn
-    (setq highlight-thing-case-sensitive-p t)
-    (setq highlight-thing-exclude-thing-under-point t)
-    (setq highlight-thing-delay-seconds 0.1)
-    (global-highlight-thing-mode)
-
+    ;; TODO add a hydra
+    ;;(setq symbol-overlay-map nil)
+    (setq symbol-overlay-idle-time 0.1)
+    (add-hook 'jp-prog-mode-hook #'symbol-overlay-mode)
     (eval-after-load "swiper"
       '(defadvice swiper (before jp-swiper-remove-highlight activate)
          ;; If the search string happens to be the symbol being
@@ -116,7 +118,7 @@
          ;; should be removed, because `swiper' applies its own
          ;; overlays. Otherwise it can flicker between the two faces
          ;; as you move between candidates.
-         (highlight-thing-remove-last)))))
+         (symbol-overlay-remove-temp)))))
 
 ;; rectangle
 (use-package jp-rect
@@ -205,6 +207,10 @@
 (use-package jp-help
   :init (global-set-key (kbd "C-h") 'jp-help/body)
   :commands (jp-help/body))
+
+(use-package rainbow-mode
+  :straight t
+  :commands (rainbow-mode))
 
 (provide 'jp-base)
 ;;; jp-base.el ends here
