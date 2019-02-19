@@ -9,6 +9,7 @@
 ;;; Code:
 
 (require 'pretty-hydra)
+(require 'counsel)
 (require 'helpful)
 
 (pretty-hydra-define jp-help
@@ -18,7 +19,9 @@
     ("v" helpful-variable "variable")
     ("k" helpful-key "key")
     ("c" helpful-command "command")
-    ("d" helpful-at-point "thing at point"))))
+    ("d" helpful-at-point "thing at point")
+    ("F" counsel-faces "faces")
+    ("a" counsel-apropos "apropos"))))
 
 (provide 'jp-help)
 ;;; jp-help.el ends here
