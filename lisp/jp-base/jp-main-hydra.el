@@ -48,63 +48,79 @@
 
 (defvar jp-main-hydra--title
   (s-concat "\n "
-            (s-repeat 60 " ")
             (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
             (propertize " Main Hydra\n" 'face '(:height 1.1 :weight bold))))
 
 (defun with-faicon (icon str &optional height v-adjust)
-  (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
+  (s-concat "\n " (all-the-icons-faicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
 
 (defun with-fileicon (icon str &optional height v-adjust)
-  (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0.05) :height (or height 0.7)) " " str))
+  (s-concat "\n " (all-the-icons-fileicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
+
+(defun with-octicon (icon str &optional height v-adjust)
+  (s-concat "\n " (all-the-icons-octicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
+
+(pretty-hydra-define jp-toggles
+  (:hint nil :color amaranth :quit-key "q" :title (with-faicon "toggle-on" "Toggles"))
+  ("Basic"
+   (("n" toggle-linum (pretty-hydra-mode-radio "line number" linum-mode))
+    ("w" whitespace-mode (pretty-hydra-mode-radio "whitespace" whitespace-mode))
+    ("r" rainbow-mode (pretty-hydra-mode-radio "rainbow" rainbow-mode)))
+   "Coding"
+   (("s" smartparens-mode (pretty-hydra-mode-radio "smartparens" smartparens-mode) :width 30)
+    ("S" smartparens-strict-mode (pretty-hydra-mode-radio "smartparens strict" smartparens-strict-mode))
+    ("f" flycheck-mode (pretty-hydra-mode-radio "flycheck" flycheck-mode))
+    ("x" highlight-sexp-mode (pretty-hydra-mode-radio "highlight-sexp" highlight-sexp-mode)))))
+
+(pretty-hydra-define jp-projects
+  (:hint nil :color teal :quit-key "q" :title (with-octicon "repo" "Projects"))
+  ("Actions"
+   (("p" jp-eyebrowse-switch-project "switch project")
+    ("f" counsel-projectile "open file/buffer")
+    ("d" counsel-projectile-find-dir "open directory")
+    ("i" projectile-ibuffer "ibuffer")
+    ("I" projectile-invalidate-cache "invalidate cache"))))
+
+(pretty-hydra-define jp-git
+  (:hint nil :color teal :quit-key "q" :title (with-octicon "git-compare" "Version Control"))
+  ("Actions"
+   (("s" magit-status "magit status")
+    ("l" magit-log-buffer-file "commit log (current file)")
+    ("L" magit-log-current "commit log (project)")
+    ("b" magit-blame "blame")
+    ("t" git-timemachine "time machine"))))
 
 (pretty-hydra-define jp-main-hydra
   (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
-  ("Files & Buffers"
-   (("f" jp-open-file "open file")
-    ("b" jp-switch-buffer "switch buffers")
-    ("/" jp-search "search")
-    ("*" jp-search-symbol-at-pt "symbol at pt")
-    ("TAB" jp-switch-to-previous-buffer "prev buffer"))
-
-   "Tools"
-   (("r" ivy-resume "ivy resume")
-    ("m" major-mode-hydra "major mode hydra")
-    ("w" jp-window/body "window management")
-    ("R" jp-rectangle/body "rectangle")
-    ("F" jp-flycheck/body "flycheck")
-    ("l" jp-layouts/body "layouts")
-    ("M" hydra-macro/body "keyboard macros")
+  ("Actions"
+   (("TAB" jp-switch-to-previous-buffer "prev buffer")
     ("SPC" counsel-M-x "M-x")
+    ("f" jp-open-file "open file")
+    ("b" jp-switch-buffer "switch buffers")
+    ("r" ivy-resume "ivy resume")
+    ("/" jp-search "search")
+    ("*" jp-search-symbol-at-pt "search symbol at pt")
+    ("F" jp-flycheck/body "flycheck")
     ;; The hydra is bound to M-SPC, pressing it again closes it.
     ("M-SPC" nil nil))
 
-   "Projects"
-   (("pp" jp-eyebrowse-switch-project "switch project")
-    ("pf" counsel-projectile "file/buffer")
-    ("pd" counsel-projectile-find-dir "directory")
-    ("pi" projectile-ibuffer "ibuffer")
-    ("pI" projectile-invalidate-cache "invalidate cache"))
-
-   "Git"
-   (("gs" magit-status "status")
-    ("gl" magit-log-buffer-file "file log")
-    ("gL" magit-log-current "project log")
-    ("gb" magit-blame "blame")
-    ("gt" git-timemachine "time machine"))
+   "Menus"
+   (("p" jp-projects/body "projects...")
+    ("g" jp-git/body "git...")
+    ("m" major-mode-hydra "major mode...")
+    ("R" jp-rectangle/body "rectangle...")
+    ("M" hydra-macro/body "macros...")
+    ("w" jp-window/body "windows...")
+    ("l" jp-layouts/body "layouts...")
+    ("t" jp-toggles/body "toggles..."))
 
    "Org"
-   (("oc" org-capture "capture")
-    ("oa" jp-org-agenda/body "agenda")
-    ("on" deft "deft"))
+   (("c" org-capture "capture")
+    ("a" jp-org-agenda/body "agenda")
+    ("n" deft "deft"))
 
-   "Toggles"
-   (("tn" toggle-linum "line number")
-    ("tw" whitespace-mode "whitespace")
-    ("tr" rainbow-mode "rainbow"))
-
-   "Windows & Layouts"
-   (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1))
+   "Quick Layouts"
+   (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :width 20)
     ("2" eyebrowse-switch-to-window-config-2 (jp-eyebrowse-layout-tag 2))
     ("3" eyebrowse-switch-to-window-config-3 (jp-eyebrowse-layout-tag 3))
     ("4" eyebrowse-switch-to-window-config-4 (jp-eyebrowse-layout-tag 4))
@@ -112,8 +128,8 @@
     ("6" eyebrowse-switch-to-window-config-6 (jp-eyebrowse-layout-tag 6))
     ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
     ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
-    ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9))
-    ("l" jp-layouts/body "window layouts")
-    ("w" jp-window/body "window management"))))
+    ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9)))))
+
+
 
 (provide 'jp-main-hydra)
