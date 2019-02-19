@@ -79,7 +79,8 @@
     ("f" counsel-projectile "open file/buffer")
     ("d" counsel-projectile-find-dir "open directory")
     ("i" projectile-ibuffer "ibuffer")
-    ("I" projectile-invalidate-cache "invalidate cache"))))
+    ("I" projectile-invalidate-cache "invalidate cache")
+    ("r" jp-refresh-projectile-projects "refresh project list"))))
 
 (pretty-hydra-define jp-git
   (:hint nil :color teal :quit-key "q" :title (with-octicon "git-compare" "Version Control"))

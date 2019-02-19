@@ -44,5 +44,13 @@
     (let ((sym (thing-at-point 'symbol t)))
       (counsel-rg sym default-directory "" (format "[%s] rg" default-directory)))))
 
+(defun jp-refresh-projectile-projects ()
+  (interactive)
+  (when (require 'magit nil t)
+        (projectile-cleanup-known-projects)
+        (->> (magit-list-repos)
+             (-map #'file-name-as-directory)
+             (mapc #'projectile-add-known-project))))
+
 (provide 'jp-projectile-utils)
 ;;; jp-projectile-utils.el ends here

@@ -29,15 +29,6 @@
   (progn
     (setq counsel-projectile-remove-current-buffer t)
     (setq counsel-projectile-remove-current-project t)
-
-    (defun jp-refresh-projectile-projects ()
-      (when (require 'magit nil t)
-        (projectile-cleanup-known-projects)
-        (mapc #'projectile-add-known-project
-              (mapcar #'file-name-as-directory (magit-list-repos)))))
-
-    (advice-add #'counsel-projectile-switch-project :before #'jp-refresh-projectile-projects)
-
     (projectile-mode)
     (counsel-projectile-mode)))
 
