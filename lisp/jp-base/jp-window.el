@@ -37,14 +37,14 @@
     (switch-to-buffer next-buffer)
     (other-window 1)))
 
-(pretty-hydra-define jp-window (:hint nil :foreign-keys warn)
+(pretty-hydra-define jp-window (:hint nil :foreign-keys warn :title "\n Window Management")
   (;; general window management commands
-   "Windows"
-   (("x" ace-delete-window "delete")
+   "Actions"
+   (("TAB" other-window "switch")
+    ("x" ace-delete-window "delete")
     ("m" ace-delete-other-windows "maximize")
     ("s" ace-swap-window "swap")
     ("a" ace-select-window "select")
-    ("o" other-window "cycle")
     ("q" nil "quit"))
 
    ;; resize

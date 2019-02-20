@@ -117,7 +117,7 @@
         (set-face-font 'variable-pitch jp-variable-pitch-font)
         (set-face-font 'fixed-pitch jp-fixed-pitch-font)
         (add-to-list 'default-frame-alist '(internal-border-width . 0))
-        (set-fringe-mode '(8 . 0)))
+        (set-fringe-mode 5))
     (when (not (eq system-type 'darwin))
       (menu-bar-mode -1))
     ;; Menu bar always off in text mode

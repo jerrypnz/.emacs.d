@@ -13,6 +13,7 @@
 (autoload 'company-mode "company")
 (autoload 'flycheck-mode "flycheck")
 (autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters")
+(autoload 'whitespace-cleanup-mode "whitespace-cleanup-mode")
 
 (defvar jp-prog-mode-hook nil
   "A hook to be run on entering a de facto prog mode.")
@@ -61,7 +62,7 @@
 
 ;;; cleanup whitespace on save
 (defun jp-whitespace-cleanup ()
-  (add-hook 'before-save-hook 'whitespace-cleanup t t))
+  (whitespace-cleanup-mode))
 
 ;; Delete marked text on typing
 (delete-selection-mode t)

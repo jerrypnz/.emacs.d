@@ -208,6 +208,14 @@
   :init (global-set-key (kbd "C-h") 'jp-help/body)
   :commands (jp-help/body))
 
+(use-package page-break-lines
+  :straight t
+  :commands (page-break-lines-mode))
+
+(use-package whitespace-cleanup-mode
+  :straight t
+  :commands (whitespace-cleanup-mode))
+
 (use-package rainbow-mode
   :straight t
   :commands (rainbow-mode))

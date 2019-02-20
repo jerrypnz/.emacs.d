@@ -44,8 +44,6 @@
 (autoload 'org-capture "org-capture")
 (autoload 'jp-org-agenda/body "jp-org-agenda")
 
-(autoload 'rainbow-mode "rainbow-mode")
-
 (defvar jp-main-hydra--title
   (s-concat "\n "
             (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
@@ -63,9 +61,11 @@
 (pretty-hydra-define jp-toggles
   (:hint nil :color amaranth :quit-key "q" :title (with-faicon "toggle-on" "Toggles"))
   ("Basic"
-   (("n" toggle-linum (pretty-hydra-mode-radio "line number" linum-mode))
+   (("n" toggle-linum (pretty-hydra-mode-radio "line number" linum-mode) :width 30)
     ("w" whitespace-mode (pretty-hydra-mode-radio "whitespace" whitespace-mode))
-    ("r" rainbow-mode (pretty-hydra-mode-radio "rainbow" rainbow-mode)))
+    ("W" whitespace-cleanup-mode (pretty-hydra-mode-radio "whitespace cleanup" whitespace-cleanup-mode))
+    ("r" rainbow-mode (pretty-hydra-mode-radio "rainbow" rainbow-mode))
+    ("l" page-break-lines-mode (pretty-hydra-mode-radio "page break lines" page-break-lines-mode)))
    "Coding"
    (("s" smartparens-mode (pretty-hydra-mode-radio "smartparens" smartparens-mode) :width 30)
     ("S" smartparens-strict-mode (pretty-hydra-mode-radio "smartparens strict" smartparens-strict-mode))
