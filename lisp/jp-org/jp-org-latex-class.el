@@ -23,6 +23,18 @@
 (defvar zh-italic-font "Adobe Kaiti Std")
 (defvar zh-bold-font "Adobe Heiti Std")
 
+(defun jp-org-latex-class--fancyhdr (title img)
+  (format "
+\\usepackage{fancyhdr}
+\\setlength{\\headheight}{30pt}
+\\pagestyle{fancy}
+\\lhead{\\includegraphics[height=1cm]{%s}}
+\\rhead{\footnotesize{%s}}
+\\renewcommand{\\headrulewidth}{0.4pt}
+\\renewcommand{\\footrulewidth}{0.4pt}"
+          img
+          title))
+
 (defun jp-org-latex-class--article-header ()
   (format "
 \\documentclass{article}
