@@ -45,11 +45,11 @@
                           :foreground modeline-fg-alt
                           :overline (doom-darken modeline-bg 0.2)
                           :underline (doom-darken modeline-bg 0.2))
-      (mode-line-read-only-face :inherit 'mode-line :background teal :foreground bg-alt)
-      (mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground teal)
+      (mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground bg-alt)
+      (mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
       (mode-line-read-write-face :inherit 'mode-line :background red :foreground bg-alt)
       (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground violet)
-      (mode-line-filename-face :inherit 'mode-line :foreground teal :weight 'bold)
+      (mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
       (mode-line-process-face :inherit 'mode-line :foreground green)
       (mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
       ;; vertical border
