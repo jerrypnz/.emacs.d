@@ -47,8 +47,8 @@
                           :underline (doom-darken modeline-bg 0.2))
       (mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground bg-alt)
       (mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
-      (mode-line-read-write-face :inherit 'mode-line :background red :foreground bg-alt)
-      (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground violet)
+      (mode-line-read-write-face :inherit 'mode-line :background magenta :foreground bg-alt)
+      (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground magenta)
       (mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
       (mode-line-process-face :inherit 'mode-line :foreground green)
       (mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
@@ -64,7 +64,10 @@
       (symbol-overlay-face-6 :background magenta :foreground bg-alt)
       (symbol-overlay-face-7 :background violet :foreground bg-alt)
       (symbol-overlay-face-8 :background cyan :foreground bg-alt)
-      (show-paren-match :background (doom-darken bg-alt 0.3)))))
+      ;; parens
+      (show-paren-match :background (doom-darken bg-alt 0.3))
+      ;; s-exp
+      (hl-sexp-face :background (doom-darken (doom-color 'bg) 0.03)))))
 
 (use-package jp-look
   :config

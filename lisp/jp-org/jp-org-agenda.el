@@ -31,9 +31,9 @@
   (when (not (eq major-mode 'org-agenda-mode))
     (jp-org-agenda-open-nth-view 0)))
 
-(defvar jp-org-agenda--title
-  (s-concat "\n "
-            (all-the-icons-faicon "calendar" :v-adjust 0.01 :height 1.1)
+(defvar jp-org-agenda--title)
+(setq jp-org-agenda--title
+  (s-concat (all-the-icons-faicon "calendar" :v-adjust 0.01 :height 1.1)
             (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
 
 (pretty-hydra-define jp-org-agenda

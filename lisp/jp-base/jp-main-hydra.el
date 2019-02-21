@@ -97,7 +97,9 @@
     ("t" git-timemachine "time machine"))))
 
 (defvar jp-main-hydra--title)
-(setq jp-main-hydra--title (with-faicon "keyboard-o" (propertize "Main Dispatcher\n" 'face '(:weight bold))))
+(setq jp-main-hydra--title
+      (with-faicon "keyboard-o" (propertize "Main Dispatcher\n" 'face '(:weight bold :height 1.1))
+                   1.1 0.01))
 
 (pretty-hydra-define jp-main-hydra
   (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
