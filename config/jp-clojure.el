@@ -174,6 +174,11 @@
 
 (use-package clj-refactor
   :straight t
+  :commands (hydra-cljr-cljr-menu/body
+             hydra-cljr-ns-menu/body
+             hydra-cljr-code-menu/body
+             hydra-cljr-project-menu/body
+             hydra-cljr-toplevel-form-menu/body)
   :config
   (progn
     (add-hook 'cider-mode-hook (lambda ()
