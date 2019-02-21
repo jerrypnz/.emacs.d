@@ -44,36 +44,38 @@
 (autoload 'org-capture "org-capture")
 (autoload 'jp-org-agenda/body "jp-org-agenda")
 
-(defvar jp-main-hydra--title
-  (s-concat "\n "
-            (all-the-icons-faicon "keyboard-o" :v-adjust 0.01 :height 1.1)
-            (propertize " Main Hydra\n" 'face '(:height 1.1 :weight bold))))
-
 (defun with-faicon (icon str &optional height v-adjust)
-  (s-concat "\n " (all-the-icons-faicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
+  (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
 (defun with-fileicon (icon str &optional height v-adjust)
-  (s-concat "\n " (all-the-icons-fileicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
+  (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
 (defun with-octicon (icon str &optional height v-adjust)
-  (s-concat "\n " (all-the-icons-octicon icon :v-adjust (or v-adjust 0.05) :height (or height 1)) " " str))
+  (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+
+(defvar jp-toggles--title)
+(setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
 
 (pretty-hydra-define jp-toggles
-  (:hint nil :color amaranth :quit-key "q" :title (with-faicon "toggle-on" "Toggles"))
+  (:hint nil :color amaranth :quit-key "q" :title jp-toggles--title)
   ("Basic"
-   (("n" toggle-linum (pretty-hydra-mode-radio "line number" linum-mode) :width 30)
-    ("w" whitespace-mode (pretty-hydra-mode-radio "whitespace" whitespace-mode))
-    ("W" whitespace-cleanup-mode (pretty-hydra-mode-radio "whitespace cleanup" whitespace-cleanup-mode))
-    ("r" rainbow-mode (pretty-hydra-mode-radio "rainbow" rainbow-mode))
-    ("l" page-break-lines-mode (pretty-hydra-mode-radio "page break lines" page-break-lines-mode)))
+   (("n" linum-mode "line number" :toggle t)
+    ("w" whitespace-mode "whitespace" :toggle t)
+    ("W" whitespace-cleanup-mode "whitespace cleanup" :toggle t)
+    ("r" rainbow-mode "rainbow" :toggle t)
+    ("l" page-break-lines-mode "page break lines" :toggle t))
    "Coding"
-   (("s" smartparens-mode (pretty-hydra-mode-radio "smartparens" smartparens-mode) :width 30)
-    ("S" smartparens-strict-mode (pretty-hydra-mode-radio "smartparens strict" smartparens-strict-mode))
-    ("f" flycheck-mode (pretty-hydra-mode-radio "flycheck" flycheck-mode))
-    ("x" highlight-sexp-mode (pretty-hydra-mode-radio "highlight-sexp" highlight-sexp-mode)))))
+   (("s" smartparens-mode "smartparens" :toggle t)
+    ("S" smartparens-strict-mode "smartparens strict" :toggle t)
+    ("f" flycheck-mode "flycheck" :toggle t)
+    ("x" highlight-sexp-mode "highlight sexp" :toggle t))))
+
+(defvar jp-projects--title)
+(setq jp-projects--title (with-octicon "repo" "Projects"))
 
 (pretty-hydra-define jp-projects
-  (:hint nil :color teal :quit-key "q" :title (with-octicon "repo" "Projects"))
+  (:hint nil :color teal :quit-key "q" :title jp-projects--title)
   ("Actions"
    (("p" jp-eyebrowse-switch-project "switch project")
     ("f" counsel-projectile "open file/buffer")
@@ -82,14 +84,20 @@
     ("I" projectile-invalidate-cache "invalidate cache")
     ("r" jp-refresh-projectile-projects "refresh project list"))))
 
+(defvar jp-git--title)
+(setq jp-git--title (with-octicon "git-compare" "Git"))
+
 (pretty-hydra-define jp-git
-  (:hint nil :color teal :quit-key "q" :title (with-octicon "git-compare" "Version Control"))
+  (:hint nil :color teal :quit-key "q" :title jp-git--title)
   ("Actions"
    (("s" magit-status "magit status")
     ("l" magit-log-buffer-file "commit log (current file)")
     ("L" magit-log-current "commit log (project)")
     ("b" magit-blame "blame")
     ("t" git-timemachine "time machine"))))
+
+(defvar jp-main-hydra--title)
+(setq jp-main-hydra--title (with-faicon "keyboard-o" (propertize "Main Dispatcher\n" 'face '(:weight bold))))
 
 (pretty-hydra-define jp-main-hydra
   (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
@@ -130,7 +138,5 @@
     ("7" eyebrowse-switch-to-window-config-7 (jp-eyebrowse-layout-tag 7))
     ("8" eyebrowse-switch-to-window-config-8 (jp-eyebrowse-layout-tag 8))
     ("9" eyebrowse-switch-to-window-config-9 (jp-eyebrowse-layout-tag 9)))))
-
-
 
 (provide 'jp-main-hydra)

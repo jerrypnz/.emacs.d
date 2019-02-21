@@ -53,7 +53,7 @@
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
  ("magit" . "6a6b2bbf583bfd223148250e35d683c38f950bfd")
  ("magit-todos" . "14e5347c98f42166ad7061b8663d368bb0d4fba4")
- ("major-mode-hydra.el" . "08b0002d908b7171b01fffc0130d8810b8e845d3")
+ ("major-mode-hydra.el" . "9d9151e6943794aa6b7a178c22f14d3ab8af6681")
  ("markdown-mode" . "53db08184b84ac2bb0709d3ef4dfbaf97965e0d9")
  ("melpa" . "ee7bfefdf4423d63706a6dcf128886ca6b514e6b")
  ("moody" . "e0975e844876f0962b2e9481c26739397bd23541")
