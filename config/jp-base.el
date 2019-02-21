@@ -53,10 +53,9 @@
 
 ;; highlight-sexp
 (use-package highlight-sexp
-  :straight t
+  :straight (:host github :repo "jerrypnz/highlight-sexp")
   :config
   (progn
-    (setq hl-sexp-background-color (doom-darken (doom-color 'bg) 0.03))
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
     (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
