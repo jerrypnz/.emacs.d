@@ -69,7 +69,8 @@
    (("s" smartparens-mode "smartparens" :toggle t)
     ("S" smartparens-strict-mode "smartparens strict" :toggle t)
     ("f" flycheck-mode "flycheck" :toggle t)
-    ("x" highlight-sexp-mode "highlight sexp" :toggle t))))
+    ("x" highlight-sexp-mode "highlight sexp" :toggle t)
+    ("h" symbol-overlay-mode "symbol overlay" :toggle t))))
 
 (defvar jp-projects--title)
 (setq jp-projects--title (with-octicon "repo" "Projects"))
@@ -93,7 +94,7 @@
    (("s" magit-status "magit status")
     ("l" magit-log-buffer-file "commit log (current file)")
     ("L" magit-log-current "commit log (project)")
-    ("b" magit-blame "blame")
+    ("b" magit-blame-addition "blame")
     ("t" git-timemachine "time machine"))))
 
 (defvar jp-main-hydra--title)
