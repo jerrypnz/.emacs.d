@@ -26,20 +26,21 @@
     (setq doom-nord-padded-modeline 2)))
 
 ;; Load doom theme through jp-doom-themes
-(use-package jp-doom-themes
+(use-package jp-themes
+  :after (doom-themes)
   :config
   (progn
     (setq jp-light-theme 'doom-opera-light
           jp-dark-theme 'doom-opera
           jp-current-theme-dark-p nil)
-    (jp-doom-themes-load)))
+    (jp-themes-load)))
 
 (use-package jp-look
   :config
   (progn
-    (setq jp-default-font "Iosevka Extralight-14")
-    (setq jp-variable-pitch-font "Lucida Grande-14")
-    (setq jp-fixed-pitch-font "Iosevka Extralight-14")))
+    (setq jp-default-font "Iosevka Extralight-15")
+    (setq jp-variable-pitch-font "Lucida Grande-15")
+    (setq jp-fixed-pitch-font "Iosevka Extralight-15")))
 
 (use-package all-the-icons
   :straight t)
