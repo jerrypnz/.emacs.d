@@ -18,6 +18,7 @@
 (require 'jp-window)
 (require 'jp-flycheck-hydra)
 (require 'jp-commands)
+(require 'jp-themes)
 
 (autoload 'counsel-projectile "counsel-projectile")
 (autoload 'counsel-projectile "counsel-projectile")
@@ -70,7 +71,9 @@
     ("S" smartparens-strict-mode "smartparens strict" :toggle t)
     ("f" flycheck-mode "flycheck" :toggle t)
     ("x" highlight-sexp-mode "highlight sexp" :toggle t)
-    ("h" symbol-overlay-mode "symbol overlay" :toggle t))))
+    ("h" symbol-overlay-mode "symbol overlay" :toggle t))
+   "UI"
+   (("d" jp-themes-toggle-light-dark (pretty-hydra-toggle "dark theme" jp-current-theme-dark-p)))))
 
 (defvar jp-projects--title)
 (setq jp-projects--title (with-octicon "repo" "Projects"))
