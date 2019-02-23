@@ -51,7 +51,6 @@
 (straight-use-package 's)
 (straight-use-package 'noflet)
 (straight-use-package 'memoize)
-(straight-use-package 'general)
 (straight-use-package 'el-patch)
 
 (with-no-warnings
@@ -81,10 +80,7 @@ If argument INTERACTIVE-P is set, log additional information."
                       (directory-files config-dir t "^[^.]"))))
     (dolist (path (append (list lisp-dir config-dir) config-subtrees git-subtrees))
       (add-to-list 'load-path path)
-      (add-to-list 'Info-default-directory-list path)
-      (add-to-list 'load-path (concat path "/emacs"))
-      (add-to-list 'load-path (concat path "/elisp"))
-      (add-to-list 'load-path (concat path "/lisp")))
+      (add-to-list 'Info-default-directory-list path))
 
     (setq load-path (seq-filter #'file-directory-p load-path))
     (setq Info-default-directory-list (seq-filter #'file-directory-p Info-default-directory-list))
