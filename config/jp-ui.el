@@ -32,7 +32,7 @@
   (progn
     (setq jp-light-theme 'doom-opera-light
           jp-dark-theme 'doom-opera
-          jp-current-theme-dark-p nil)
+          jp-current-theme-dark-p t)
     (jp-themes-load)))
 
 (use-package jp-look
