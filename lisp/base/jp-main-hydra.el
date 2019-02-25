@@ -54,7 +54,6 @@
 (defun with-octicon (icon str &optional height v-adjust)
   (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
-
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
 
@@ -65,27 +64,37 @@
     ("w" whitespace-mode "whitespace" :toggle t)
     ("W" whitespace-cleanup-mode "whitespace cleanup" :toggle t)
     ("r" rainbow-mode "rainbow" :toggle t)
-    ("l" page-break-lines-mode "page break lines" :toggle t))
-   "Coding"
-   (("s" smartparens-mode "smartparens" :toggle t)
-    ("S" smartparens-strict-mode "smartparens strict" :toggle t)
-    ("f" flycheck-mode "flycheck" :toggle t)
-    ("x" highlight-sexp-mode "highlight sexp" :toggle t)
-    ("h" symbol-overlay-mode "symbol overlay" :toggle t))
+    ("L" page-break-lines-mode "page break lines" :toggle t))
+   "Highlight"
+   (("s" symbol-overlay-mode "symbol" :toggle t)
+    ("l" hl-line-mode "line" :toggle t)
+    ("x" highlight-sexp-mode "sexp" :toggle t)
+    ("t" hl-todo-mode "todo" :toggle t))
    "UI"
-   (("d" jp-themes-toggle-light-dark (pretty-hydra-toggle "dark theme" jp-current-theme-dark-p)))))
+   (("d" jp-themes-toggle-light-dark (pretty-hydra-toggle "dark theme" jp-current-theme-dark-p)))
+   "Coding"
+   (("p" smartparens-mode "smartparens" :toggle t)
+    ("P" smartparens-strict-mode "smartparens strict" :toggle t)
+    ("f" flycheck-mode "flycheck" :toggle t))))
 
-(defvar jp-projects--title)
-(setq jp-projects--title (with-octicon "repo" "Projects"))
+(defun jp-projects--title ()
+  (let ((p (projectile-project-name)))
+    (with-octicon "repo"
+                  (if (s-blank-p p)
+                      "Projects"
+                    (s-concat "Projects (current: " p ")")))))
 
 (pretty-hydra-define jp-projects
-  (:hint nil :color teal :quit-key "q" :title jp-projects--title)
-  ("Actions"
-   (("p" jp-eyebrowse-switch-project "switch project")
-    ("f" counsel-projectile "open file/buffer")
+  (:hint nil :color teal :quit-key "q" :title (jp-projects--title))
+  ("Current Project"
+   (("f" counsel-projectile "open file/buffer")
+    ("b" counsel-projectile-switch-to-buffe "switch to buffer")
     ("d" counsel-projectile-find-dir "open directory")
     ("i" projectile-ibuffer "ibuffer")
-    ("I" projectile-invalidate-cache "invalidate cache")
+    ("k" projectile-kill-buffers "kill buffers")
+    ("I" projectile-invalidate-cache "invalidate cache"))
+   "All Projects"
+   (("p" jp-eyebrowse-switch-project "switch")
     ("r" jp-refresh-projectile-projects "refresh project list"))))
 
 (defvar jp-git--title)
