@@ -16,6 +16,7 @@
 (require 'moody)
 
 (defvar jp-modeline-active-window nil)
+(defvar jp-modeline-width-threshold 110)
 
 (defun jp-modeline-set-active-window (windows)
   (when (not (minibuffer-window-active-p (frame-selected-window)))
@@ -44,6 +45,9 @@
     (if (eq "" name)
         bufname
       name)))
+
+(defun jp-modeline-long? ()
+  (> (window-width) jp-modeline-width-threshold))
 
 ;; Extra mode line faces
 (defface mode-line-read-only-face
@@ -98,7 +102,10 @@
                           ((not (jp-modeline-active-p)) 'mode-line-inactive)
                           ((>= (current-column) 80) 'mode-line-80col-face)
                           (t 'mode-line)))))
-   " %6p   "
+
+   (:eval (when (jp-modeline-long?)
+            " %6p"))
+   "   "
    ;; directory and buffer/file name
    (:eval (moody-tab (s-concat (when (buffer-file-name)
                                  (shorten-directory default-directory 10))
@@ -118,15 +125,16 @@
                     (replace-regexp-in-string "^ Git[:-]" "" vc-mode))))
 
    "   "
-   (:eval (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-                    (0 "LF  ")
-                    (1 "CRLF  ")
-                    (2 "CR  "))
-                  (let ((sys (coding-system-plist buffer-file-coding-system)))
-                    (cond ((memq (plist-get sys :category)
-                                 '(coding-category-undecided coding-category-utf-8))
-                           "UTF-8")
-                          (t (upcase (symbol-name (plist-get sys :name))))))))
+   (:eval (when (jp-modeline-long?)
+            (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+                      (0 "LF  ")
+                      (1 "CRLF  ")
+                      (2 "CR  "))
+                    (let ((sys (coding-system-plist buffer-file-coding-system)))
+                      (cond ((memq (plist-get sys :category)
+                                   '(coding-category-undecided coding-category-utf-8))
+                             "UTF-8")
+                            (t (upcase (symbol-name (plist-get sys :name)))))))))
    "   "
    ;; major mode
    (:eval (moody-tab (s-concat
