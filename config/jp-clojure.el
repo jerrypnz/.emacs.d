@@ -23,7 +23,8 @@
     (major-mode-hydra-bind clojure-mode "Refactor"
       (">" clojure-thread-first-all "thread-first")
       ("<" clojure-thread-last-all "thread-last")
-      ("u" clojure-unwind-all "thread-unwind"))
+      ("u" clojure-unwind-all "thread-unwind")
+      (":" clojure-toggle-keyword-string "toggle keyword/string"))
     ;; If put in `define-clojure-indent', it will fail with a "wrong
     ;; type argument: listp, 1" error the first time a clj buffer is
     ;; opened.
