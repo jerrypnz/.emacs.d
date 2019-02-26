@@ -27,6 +27,7 @@
 
   :config
   (progn
+    (setq projectile-track-known-projects-automatically nil)
     (setq counsel-projectile-remove-current-buffer t)
     (setq counsel-projectile-remove-current-project t)
     (projectile-mode)
