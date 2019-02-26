@@ -144,7 +144,8 @@
   :config
   (progn
     (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
-    (setq aw-background nil)))
+    (setq aw-background t)
+    (setq aw-minibuffer-flag t)))
 
 (use-package move-border
   :straight (:host github :repo "ramnes/move-border" :branch "master"))
@@ -167,7 +168,7 @@
     (autoload 'major-mode-hydra-bind "major-mode-hydra" nil 'macro))
 
   :bind
-  (("C-M-m" . major-mode-hydra))
+  (("C-M-SPC" . major-mode-hydra))
 
   :config
   (progn
