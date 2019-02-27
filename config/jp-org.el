@@ -36,6 +36,8 @@
                                (jp-work-notes :maxlevel . 4)
                                (jp-study-notes :maxlevel . 4)))
 
+    (setq org-refile-use-outline-path 'file)
+
     (setq org-todo-keywords
           '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(p)" "|" "DONE(d)")
             (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
