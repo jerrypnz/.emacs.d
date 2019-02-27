@@ -32,6 +32,10 @@
     (setq org-directory "~/org")
     (setq org-default-notes-file jp-inbox-org-file)
 
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (jp-work-notes :maxlevel . 4)
+                               (jp-study-notes :maxlevel . 4)))
+
     (setq org-todo-keywords
           '((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(p)" "|" "DONE(d)")
             (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
@@ -73,26 +77,25 @@
     (setq org-capture-templates
           `(("t" "TODO" entry (file org-default-notes-file)
              "* TODO %?\n%u\n")
+            ("p" "Project" entry (file org-default-notes-file)
+             "* %? [%] :PROJECT:\n%u\n")
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-            ("p" "Project" entry (file org-default-notes-file)
-             "* %? [%] :PROJECT:\n%u\n")))))
+            ("n" "Notes" entry (file org-default-notes-file)
+             "* %? \n%t")))))
 
 (use-package jp-org-refile
   :after (org)
   :config
-  (progn
-    (defun jp-org-refile--is-project ()
-      (member "PROJECT" (org-get-tags)))
-
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (jp-work-notes :maxlevel . 4)
-                               (jp-study-notes :maxlevel . 4)))
-
-    (setq jp-org-refile-contexts `((org-entry-is-todo-p . ((jp-gtd-org-file :maxlevel . 3)
-                                                           (jp-someday-org-file :maxlevel . 3)))
-                                   (jp-org-refile--is-project . ((jp-gtd-org-file :regexp . "Projects")
-                                                                 (jp-someday-org-file :regexp . "Projects")))))))
+  (setq jp-org-refile-contexts
+        `((org-entry-is-todo-p
+           (jp-gtd-org-file :maxlevel . 3)
+           (jp-someday-org-file :maxlevel . 3))
+          ((lambda () (member "PROJECT" (org-get-tags)))
+           (jp-gtd-org-file :regexp . "Projects")
+           (jp-someday-org-file :regexp . "Projects"))
+          ((lambda () (member "MEETING" (org-get-tags)))
+           (jp-work-notes :regexp . "Meeting Notes")))))
 
 (use-package org-agenda
   :after (org)

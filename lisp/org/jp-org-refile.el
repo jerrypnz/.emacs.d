@@ -14,8 +14,9 @@
 (defvar jp-org-refile-contexts nil)
 
 (defun jp-org-refile--get-context-targets ()
-  (or (cdr (-first (-lambda ((func . _))
-                     (funcall func))
+  (or (cdr (-first (-lambda ((x))
+                     (when (functionp x)
+                       (funcall x)))
                    jp-org-refile-contexts))
       org-refile-targets))
 
