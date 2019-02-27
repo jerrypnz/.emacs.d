@@ -239,22 +239,5 @@
   (progn
     (jp-org-latex-class-activate)))
 
-(use-package deft
-  :straight t
-  :commands (deft)
-  :config
-  (progn
-    (setq deft-extensions '("org"))
-    (setq deft-default-extension "org")
-    (setq deft-directory jp-notes-dir)
-    (setq deft-org-mode-title-prefix t)
-    (setq deft-use-filter-string-for-filename t)
-    (setq deft-use-filename-as-title nil)
-    (setq deft-file-naming-rules
-          '((noslash . "-")
-            (nospace . "-")
-            (case-fn . downcase)))))
-
-
 (provide 'jp-org)
 ;;; jp-org.el ends here
