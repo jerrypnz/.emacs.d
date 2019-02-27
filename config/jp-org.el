@@ -47,12 +47,6 @@
 
     (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
 
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (jp-gtd-org-file :maxlevel . 3)
-                               (jp-someday-org-file :maxlevel . 3)
-                               (jp-work-notes :maxlevel . 4)
-                               (jp-study-notes :maxlevel . 4)))
-
     (setq org-startup-folded nil)
 
     (setq org-log-done 'time)
@@ -81,8 +75,24 @@
              "* TODO %?\n%u\n")
             ("m" "Meeting" entry (file org-default-notes-file)
              "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-            ("n" "Next Task" entry (file org-default-notes-file)
-             "** NEXT %? \nDEADLINE: %t")))))
+            ("p" "Project" entry (file org-default-notes-file)
+             "* %? [%] :PROJECT:\n%u\n")))))
+
+(use-package jp-org-refile
+  :after (org)
+  :config
+  (progn
+    (defun jp-org-refile--is-project ()
+      (member "PROJECT" (org-get-tags)))
+
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (jp-work-notes :maxlevel . 4)
+                               (jp-study-notes :maxlevel . 4)))
+
+    (setq jp-org-refile-contexts `((org-entry-is-todo-p . ((jp-gtd-org-file :maxlevel . 3)
+                                                           (jp-someday-org-file :maxlevel . 3)))
+                                   (jp-org-refile--is-project . ((jp-gtd-org-file :regexp . "Projects")
+                                                                 (jp-someday-org-file :regexp . "Projects")))))))
 
 (use-package org-agenda
   :after (org)
