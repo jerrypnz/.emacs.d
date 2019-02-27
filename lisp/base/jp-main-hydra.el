@@ -41,7 +41,6 @@
 (autoload 'eyebrowse-switch-to-window-config-8 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-9 "eyebrowse")
 
-(autoload 'deft "deft")
 (autoload 'org-capture "org-capture")
 (autoload 'jp-org-agenda/body "jp-org-agenda")
 
@@ -140,8 +139,7 @@
 
    "Org"
    (("c" org-capture "capture")
-    ("a" jp-org-agenda/body "agenda")
-    ("n" deft "deft"))
+    ("a" jp-org-agenda/body "agenda"))
 
    "Quick Layouts"
    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :width 20)
