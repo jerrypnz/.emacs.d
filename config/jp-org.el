@@ -143,7 +143,13 @@
             ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
              nil nil :ascent center)
             ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
-             nil nil :ascent center)))))
+             nil nil :ascent center)))
+
+    (setq org-agenda-sorting-strategy
+          '((agenda habit-down time-up priority-down category-keep)
+            (todo category-keep timestamp-down)
+            (tags category-keep timestamp-down)
+            (search category-keep)))))
 
 (use-package jp-org-agenda
   :commands (jp-org-agenda/body)
