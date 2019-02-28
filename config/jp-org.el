@@ -238,7 +238,7 @@
     (setq org-latex-minted-options '(("breaklines" "true")
                                      ("breakanywhere" "true")
                                      ("style" "tango")
-                                     ("frame" "lines")))
+                                     ("frame" "single")))
     (add-to-list 'org-latex-packages-alist '("newfloat" "minted"))))
 
 (use-package jp-org-latex-class
