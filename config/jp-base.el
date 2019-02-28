@@ -173,17 +173,13 @@
   :config
   (progn
     (setq major-mode-hydra-invisible-quit-key "q")
-    (setq major-mode-hydra-title-generator
-          '(lambda (mode)
-             (let ((icon (all-the-icons-icon-for-mode
-                          mode
-                          :v-adjust (if (eq mode 'emacs-lisp-mode)
-                                        -0.1
-                                      0.05))))
-               (s-concat
-                "\n "
-                (if (stringp icon) (s-append " " icon) "")
-                (symbol-name mode)))))))
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
+
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 
 ;; ispell
 (use-package ispell

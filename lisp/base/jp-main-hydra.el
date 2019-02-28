@@ -10,7 +10,7 @@
 
 (require 'pretty-hydra)
 (require 'major-mode-hydra)
-(require 'all-the-icons)
+(require 'jp-icons)
 (require 'jp-rect)
 (require 'jp-macro)
 (require 'jp-layouts)
@@ -43,15 +43,6 @@
 
 (autoload 'org-capture "org-capture")
 (autoload 'jp-org-agenda/body "jp-org-agenda")
-
-(defun with-faicon (icon str &optional height v-adjust)
-  (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
-
-(defun with-fileicon (icon str &optional height v-adjust)
-  (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
-
-(defun with-octicon (icon str &optional height v-adjust)
-  (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))

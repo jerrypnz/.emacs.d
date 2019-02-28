@@ -33,8 +33,7 @@
 
 (defvar jp-org-agenda--title)
 (setq jp-org-agenda--title
-  (s-concat (all-the-icons-faicon "calendar" :v-adjust 0.01 :height 1.1)
-            (propertize " Org Agenda\n" 'face '(:height 1.1 :weight bold))))
+      (with-faicon "calendar" (propertize "Org Agenda\n" 'face '(:height 1.1 :weight bold)) 1.1 0.01))
 
 (pretty-hydra-define jp-org-agenda
   (:hint nil :foreign-keys run :title jp-org-agenda--title :body-pre (jp-org-agenda-maybe-open) :quit-key "q")

@@ -12,6 +12,7 @@
 ;;; Code:
 
 (require 'all-the-icons)
+(require 'jp-icons)
 (require 's)
 (require 'moody)
 
@@ -120,9 +121,9 @@
 
    ;; vc info
    (:eval (when vc-mode
-            (format "%s %s"
-                    (all-the-icons-octicon "git-branch" :height 0.8 :v-adjust 0.05)
-                    (replace-regexp-in-string "^ Git[:-]" "" vc-mode))))
+            (with-octicon "git-branch"
+                          (replace-regexp-in-string "^ Git[:-]" "" vc-mode)
+                          0.8 0.05)))
 
    "   "
    (:eval (when (jp-modeline-long?)
@@ -137,19 +138,12 @@
                             (t (upcase (symbol-name (plist-get sys :name)))))))))
    "   "
    ;; major mode
-   (:eval (moody-tab (s-concat
-                      (let ((icon (all-the-icons-icon-for-mode
-                                   major-mode
-                                   :height 0.8
-                                   :v-adjust (if (eq major-mode 'emacs-lisp-mode)
-                                                 -0.1
-                                               0.05))))
-                        ;;TODO Use a default icon if there is none
-                        (when (not (symbolp icon))
-                          icon))
-                      " %["
-                      (format-mode-line mode-name)
-                      "%] ")
+   (:eval (moody-tab (with-mode-icon major-mode
+                                     (s-concat" %["
+                                              (format-mode-line mode-name)
+                                              "%] ")
+                                     0.8
+                                     t)
                      nil
                      'up))
    "   "
