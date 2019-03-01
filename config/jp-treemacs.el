@@ -19,7 +19,7 @@
   (progn
     (setq
      ;; Path to the file treemacs uses to persist its state
-     treemacs-persist-file (expand-file-name "treemacs-persist" user-emacs-directory)
+     treemacs-persist-file (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
 
      ;; Follow the currently selected file
      treemacs-follow-after-init t
