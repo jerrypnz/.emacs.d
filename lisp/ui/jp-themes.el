@@ -66,6 +66,7 @@
 (defun jp-themes-load ()
   (load-theme (jp-themes--get-current) t)
   (doom-themes-org-config)
+  (doom-themes-treemacs-config)
   (jp-themes--customize-faces))
 
 (defun jp-themes-toggle-light-dark ()

@@ -107,6 +107,7 @@ If argument INTERACTIVE-P is set, log additional information."
 (use-package jp-restclient)
 (use-package jp-yasnippet)
 (use-package jp-org)
+(use-package jp-treemacs)
 
 (use-package jp-docker)
 (use-package jp-yaml)

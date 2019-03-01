@@ -30,6 +30,7 @@
 (autoload 'magit-log-current "magit")
 (autoload 'magit-log-buffer-file "magit")
 (autoload 'git-timemachine "git-timemachine")
+(autoload 'treemacs "treemacs")
 
 (autoload 'eyebrowse-switch-to-window-config-1 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-2 "eyebrowse")
@@ -65,7 +66,10 @@
    "Coding"
    (("p" smartparens-mode "smartparens" :toggle t)
     ("P" smartparens-strict-mode "smartparens strict" :toggle t)
-    ("f" flycheck-mode "flycheck" :toggle t))))
+    ("f" flycheck-mode "flycheck" :toggle t))
+   "Emacs"
+   (("D" toggle-debug-on-error (pretty-hydra-toggle "debug on error" (default-value 'debug-on-error)))
+    ("X" toggle-debug-on-quit  (pretty-hydra-toggle "debug on quit" (default-value 'debug-on-quit))))))
 
 (defun jp-projects--title ()
   (let ((p (projectile-project-name)))
@@ -112,6 +116,7 @@
     ("f" jp-open-file "open file")
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
+    ("T" treemacs "treemacs")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
     ("F" jp-flycheck/body "flycheck")
