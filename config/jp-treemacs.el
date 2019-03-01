@@ -17,32 +17,25 @@
   :straight t
   :config
   (progn
-    (setq
-     ;; Path to the file treemacs uses to persist its state
-     treemacs-persist-file (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-
-     ;; Follow the currently selected file
-     treemacs-follow-after-init t
-
-     ;; Prevents treemacs from being selected with `other-window`
-     treemacs-is-never-other-window t)
+    (setq treemacs-follow-after-init t
+          treemacs-is-never-other-window t
+          treemacs-project-follow-cleanup t
+          treemacs-tag-follow-delay 0.2
+          treemacs-collapse-dirs 3
+          treemacs-width 40)
 
     (treemacs-follow-mode t)
+    (treemacs-tag-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
+    (treemacs-fringe-indicator-mode nil)
 
-    ;; Disable the indicator next to open files--hl-line is sufficient
-    (treemacs-fringe-indicator-mode t)
-
-    ;; Define custom key bindings
     (major-mode-hydra-bind treemacs-mode "Basic"
-      ("?" treemacs--helpful-hydra "helpful"))
-
+      ("?" treemacs-helpful-hydra/body "helpful"))
     (major-mode-hydra-bind treemacs-mode "Workspace"
-     ("wc" treemacs-create-workspace "create workspace")
-        ("wo" treemacs-switch-workspace "select workspace")
-        ("wD" treemacs-remove-workspace "remove workspace"))
-
+      ("wc" treemacs-create-workspace "create workspace")
+      ("wo" treemacs-switch-workspace "select workspace")
+      ("wD" treemacs-remove-workspace "remove workspace"))
     (major-mode-hydra-bind treemacs-mode"Project"
       ("pp" treemacs-projectile "add project")
       ("pd" treemacs-remove-project-from-workspace "remove project")
@@ -53,6 +46,10 @@
 (use-package treemacs-projectile
   :straight t
   :after (:and treemacs projectile))
+
+(use-package treemacs-magit
+  :straight t
+  :after (:and treemacs magit))
 
 (provide 'jp-treemacs)
 ;;; jp-treemacs.el ends here

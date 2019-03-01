@@ -116,7 +116,7 @@
     ("f" jp-open-file "open file")
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
-    ("T" treemacs "treemacs")
+    ("," treemacs "treemacs")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
     ("F" jp-flycheck/body "flycheck")
