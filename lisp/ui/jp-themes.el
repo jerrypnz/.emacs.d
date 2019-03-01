@@ -26,7 +26,8 @@
 (defun jp-themes--customize-faces ()
   ;; Customize faces
   (let ((theme (jp-themes--get-current))
-        (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken)))
+        (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
+        (status-fg (if jp-current-theme-dark-p 'fg 'bg)))
     (eval
      `(jp-themes--set-faces ',theme
         ;; mode-line
@@ -38,10 +39,10 @@
                             :foreground modeline-fg-alt
                             :overline (,color-fn modeline-bg 0.2)
                             :underline (,color-fn modeline-bg 0.2))
-        (mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground bg-alt)
+        (mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground ,status-fg)
         (mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
-        (mode-line-read-write-face :inherit 'mode-line :background magenta :foreground bg-alt)
-        (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground magenta)
+        (mode-line-read-write-face :inherit 'mode-line :background red :foreground ,status-fg)
+        (mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground red)
         (mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
         (mode-line-process-face :inherit 'mode-line :foreground green)
         (mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)

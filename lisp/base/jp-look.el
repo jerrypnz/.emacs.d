@@ -98,25 +98,35 @@
   "Set up default fonts."
   (cond
    ((eq system-type 'darwin)
-    (jp-maybe-set-default-font "Monaco-11" "Lucida Grande-11" "Monaco-11"))
+    (jp-maybe-set-default-font "Monaco-11"
+                               "Lucida Grande-11"
+                               "Monaco-11"))
    ((eq system-type 'gnu/linux)
-    (jp-maybe-set-default-font "DejaVu Sans Mono-10" "Liberation Sans-10" "DejaVu Sans Mono-10"))
+    (jp-maybe-set-default-font "DejaVu Sans Mono-10"
+                               "Liberation Sans-10"
+                               "DejaVu Sans Mono-10"))
    (t
-    (jp-maybe-set-default-font (face-font 'default) (face-font 'variable-pitch) (face-font 'fixed-pitch)))))
+    (jp-maybe-set-default-font (face-font 'default)
+                               (face-font 'variable-pitch)
+                               (face-font 'fixed-pitch)))))
+
+(defun jp-apply-fonts ()
+  (set-face-font 'default jp-default-font)
+  (set-face-font 'variable-pitch jp-variable-pitch-font)
+  (set-face-font 'fixed-pitch jp-fixed-pitch-font))
 
 (defun jp-look-startup-after-init ()
-  "Load defaults for the overall look -- to be called after loading the init file so as to pick up custom settings."
+  "Load defaults for the overall look -- to be called after
+loading the init file so as to pick up custom settings."
   (if window-system
       (progn
         (jp-set-geometry)
         (add-hook 'kill-emacs-hook 'jp-save-frame-geometry)
         (setq-default line-spacing 2)
         (jp-set-fonts)
+        (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
-        (set-face-font 'default jp-default-font)
-        (set-face-font 'variable-pitch jp-variable-pitch-font)
-        (set-face-font 'fixed-pitch jp-fixed-pitch-font)
-        (add-to-list 'default-frame-alist '(internal-border-width . 0))
+        (add-to-list 'default-frame-alist '(internal-border-width . 5))
         (set-fringe-mode 5))
     (when (not (eq system-type 'darwin))
       (menu-bar-mode -1))

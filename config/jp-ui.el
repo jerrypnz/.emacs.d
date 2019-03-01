@@ -38,9 +38,9 @@
 (use-package jp-look
   :config
   (progn
-    (setq jp-default-font "Iosevka Extralight-15")
-    (setq jp-variable-pitch-font "Lucida Grande-15")
-    (setq jp-fixed-pitch-font "Iosevka Extralight-15")))
+    (setq jp-default-font "Fira Code Light-14")
+    (setq jp-variable-pitch-font "Lucida Grande-14")
+    (setq jp-fixed-pitch-font "Fira Code Light-14")))
 
 (use-package all-the-icons
   :straight t)
