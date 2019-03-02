@@ -11,11 +11,13 @@
 (require 'dash)
 (require 's)
 
+(require 'ivy)
 (require 'cider-connection)
 (require 'cider-find)
 (require 'cider-client)
 (require 'cider-doc)
 (require 'cider-grimoire)
+(require 'cider-repl-history)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-cider-apropos
@@ -23,7 +25,7 @@
 (defun jp-counsel-cider--apropos-function (input)
   (if (not (cider-current-repl))
       (list "" "No linked CIDER session")
-    (or (counsel-more-chars)
+    (or (ivy-more-chars)
         (-if-let (results (ignore-errors (cider-sync-request:apropos input nil nil nil t)))
             (-map (lambda (result)
                     (nrepl-dbind-response result (name type doc)
