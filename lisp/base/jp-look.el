@@ -126,7 +126,7 @@ loading the init file so as to pick up custom settings."
         (jp-set-fonts)
         (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
-        (add-to-list 'default-frame-alist '(internal-border-width . 5))
+        (add-to-list 'default-frame-alist '(internal-border-width . 2))
         (set-fringe-mode 5))
     (when (not (eq system-type 'darwin))
       (menu-bar-mode -1))
