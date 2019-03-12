@@ -30,7 +30,7 @@
 (autoload 'magit-log-current "magit")
 (autoload 'magit-log-buffer-file "magit")
 (autoload 'git-timemachine "git-timemachine")
-(autoload 'treemacs "treemacs")
+(autoload 'treemacs-select-window "treemacs")
 
 (autoload 'eyebrowse-switch-to-window-config-1 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-2 "eyebrowse")
@@ -116,7 +116,7 @@
     ("f" jp-open-file "open file")
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
-    ("," treemacs "treemacs")
+    ("," treemacs-select-window "treemacs")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
     ("F" jp-flycheck/body "flycheck")
