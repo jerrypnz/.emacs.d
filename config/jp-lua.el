@@ -18,7 +18,11 @@
 
 (use-package fennel-mode
   :straight (:host gitlab :repo "technomancy/fennel-mode")
-  :mode ("\\.fnl\\'"))
+  :mode ("\\.fnl\\'")
+  :config
+  (progn
+    (put 'global 'fennel-indent-function 1)
+    (put 'if 'fennel-indent-function 1)))
 
 (provide 'jp-lua)
 ;;; jp-lua.el ends here
