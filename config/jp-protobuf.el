@@ -12,7 +12,7 @@
   (require 'use-package))
 
 (use-package protobuf-mode
-  :straight t
+  :straight (:host github :repo "emacsmirror/protobuf-mode")
   :mode ("\\.proto\\'"))
 
 (provide 'jp-protobuf)
