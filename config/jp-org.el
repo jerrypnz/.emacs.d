@@ -63,13 +63,14 @@
 
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((dot . t)))
+     '((dot . t)
+       (emacs-lisp . t)
+       (plantuml . t)))
 
     (defun jp-org-confirm-babel-evaluate (lang body)
       (not (string= lang "dot")))
 
     (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
-
 
 (use-package org-capture
   :after (org)
