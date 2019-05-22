@@ -161,7 +161,7 @@
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
-  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
+  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
   :init
   (progn
     (autoload 'pretty-hydra-define "pretty-hydra" nil nil 'macro)
