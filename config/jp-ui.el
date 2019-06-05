@@ -30,8 +30,8 @@
   :after (doom-themes)
   :config
   (progn
-    (setq jp-light-theme 'doom-opera-light
-          jp-dark-theme 'doom-opera
+    (setq jp-light-theme 'doom-nord-light
+          jp-dark-theme 'doom-nord
           jp-current-theme-dark-p t)
     (jp-themes-load)))
 
