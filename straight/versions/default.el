@@ -32,6 +32,7 @@
  ("f.el" . "8191672377816a1975414cc1f116fd3b94b30bd0")
  ("fennel-mode" . "17678a7fc073c64cb0ec78f913154df377a42575")
  ("flycheck" . "47174a12fd84a685f36019632838c73b4813b66d")
+ ("flycheck-clj-kondo" . "b0d5af10e045d4eeb824058c8dc87f94b376bf1c")
  ("flycheck-joker" . "51e99e697761ee8dab863930910abdba7607c1bd")
  ("flycheck-package" . "6d99248b45eea1e5236062f38e524230efdb1a84")
  ("flycheck-plantuml" . "183be89e1dbba0b38237dd198dff600e0790309d")
@@ -89,7 +90,6 @@
  ("s.el" . "03410e6a7a2b11e47e1fea3b7d9899c7df26435e")
  ("seq" . "095fb15a3baa082079799dd36b6caccdb062cb90")
  ("sesman" . "3df33018f1c42f09db21cebe39a25b389fe35f02")
- ("shut-up" . "081d6b01e3ba0e60326558e545c4019219e046ce")
  ("smartparens" . "046440700f292c90c4a992f959c8d6725aa9a3bc")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
@@ -106,4 +106,4 @@
  ("yasnippet" . "e45e3de357fbd4289fcfa3dd26aaa7be357fb0b8")
  ("yasnippet-snippets" . "15e4b08f7484c049d6b043263c5e09bc73846e32")
  ("zoom-frm" . "4695c088b767f8f268fe3fe8f6d6bff61b9b890f"))
-:saturn
+:neptune

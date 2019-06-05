@@ -25,6 +25,11 @@
       ("<" clojure-thread-last-all "thread-last")
       ("u" clojure-unwind-all "thread-unwind")
       (":" clojure-toggle-keyword-string "toggle keyword/string"))
+    (major-mode-hydra-bind clojurescript-mode "Refactor"
+      (">" clojure-thread-first-all "thread-first")
+      ("<" clojure-thread-last-all "thread-last")
+      ("u" clojure-unwind-all "thread-unwind")
+      (":" clojure-toggle-keyword-string "toggle keyword/string"))
     ;; If put in `define-clojure-indent', it will fail with a "wrong
     ;; type argument: listp, 1" error the first time a clj buffer is
     ;; opened.
@@ -163,11 +168,40 @@
 
 (use-package inf-clojure
   :straight t
+  :init (progn
+          (major-mode-hydra-bind clojurescript-mode "Connect"
+            ("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
+            ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
+            ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
+            ("Q" inf-clojure-quit "disconnect")))
   :commands (inf-clojure-minor-mode
-             inf-clojure))
+             inf-clojure-connect
+             inf-clojure)
+  :config (progn
+            (major-mode-hydra-bind clojurescript-mode "Load"
+              ("k" inf-clojure-eval-buffer "buffer")
+              ("l" inf-clojure-load-file "file")
+              ("g" inf-clojure-reload "reload"))
+            (major-mode-hydra-bind clojurescript-mode "Eval"
+              ("s" inf-clojure-set-ns "set-repl-ns")
+              ("e" inf-clojure-eval-last-sexp "eval-last")
+              ("f" inf-clojure-eval-defun "eval-defun"))
+            (major-mode-hydra-bind clojurescript-mode "Docs"
+              ("d" inf-clojure-show-var-documentation "doc")
+              ("a" inf-clojure-apropos "apropos"))
+            (major-mode-hydra-bind clojurescript-mode "Macros"
+              ("x" inf-clojure-macroexpand "expand"))))
 
 (use-package flycheck-joker
   :straight t)
+
+(use-package flycheck-clj-kondo
+  :straight t
+  :after (flycheck-joker)
+  :config (dolist (checkers '((clj-kondo-clj . clojure-joker)
+                              (clj-kondo-cljs . clojurescript-joker)
+                              (clj-kondo-cljc . clojure-joker)))
+            (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers)))))
 
 (use-package clj-refactor
   :straight t
