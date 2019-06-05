@@ -62,14 +62,14 @@
     ("x" highlight-sexp-mode "sexp" :toggle t)
     ("t" hl-todo-mode "todo" :toggle t))
    "UI"
-   (("d" jp-themes-toggle-light-dark (pretty-hydra-toggle "dark theme" jp-current-theme-dark-p)))
+   (("d" jp-themes-toggle-light-dark "dark theme" :toggle jp-current-theme-dark-p))
    "Coding"
    (("p" smartparens-mode "smartparens" :toggle t)
     ("P" smartparens-strict-mode "smartparens strict" :toggle t)
     ("f" flycheck-mode "flycheck" :toggle t))
    "Emacs"
-   (("D" toggle-debug-on-error (pretty-hydra-toggle "debug on error" (default-value 'debug-on-error)))
-    ("X" toggle-debug-on-quit  (pretty-hydra-toggle "debug on quit" (default-value 'debug-on-quit))))))
+   (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
+    ("X" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit)))))
 
 (defun jp-projects--title ()
   (let ((p (projectile-project-name)))
