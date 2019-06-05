@@ -161,6 +161,11 @@
       ("X" cider-macroexpand-all "expand-all")))
   :commands (cider-macroexpand-1 cider-macroexpand-all))
 
+(use-package inf-clojure
+  :straight t
+  :commands (inf-clojure-minor-mode
+             inf-clojure))
+
 (use-package flycheck-joker
   :straight t)
 

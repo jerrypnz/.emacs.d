@@ -50,6 +50,7 @@
  ("ibuffer-projectile" . "76496214144687cee0b5139be2e61b1e400cac87")
  ("iedit" . "e2c100cdd67b7d82835d281ac2cd1bf4f374bc8f")
  ("imenu-list" . "46008738f8fef578a763c308cf6695e5b4d4aa77")
+ ("inf-clojure" . "16455abd28933af7c7d6f22dd41414a3c3c66d63")
  ("jump.el" . "e4f1372cf22e811faca52fc86bdd5d817498a4d8")
  ("let-alist" . "33e71829e8814cf5f28b6e4291192aafef61b69e")
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
