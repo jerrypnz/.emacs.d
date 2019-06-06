@@ -10,8 +10,12 @@
 
 (require 'pretty-hydra)
 
+(defvar jp-rectangle--title)
+(setq jp-rectangle--title (with-material "grid_on" "Rectangle" 1 -0.1))
+
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Rectangle-Operations
 (pretty-hydra-define jp-rectangle (:body-pre (rectangle-mark-mode 1)
+                                             :title jp-rectangle--title
                                              :color pink
                                              :hint nil
                                              :post (deactivate-mark)
