@@ -15,11 +15,11 @@
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Rectangle-Operations
 (pretty-hydra-define jp-rectangle (:body-pre (rectangle-mark-mode 1)
-                                             :title jp-rectangle--title
-                                             :color pink
-                                             :hint nil
-                                             :post (deactivate-mark)
-                                             :foreign-keys warn)
+                                   :title jp-rectangle--title
+                                   :color pink
+                                   :hint nil
+                                   :post (deactivate-mark)
+                                   :foreign-keys warn)
   ("Select"
    (("k" rectangle-previous-line "↑")
     ("j" rectangle-next-line "↓")
