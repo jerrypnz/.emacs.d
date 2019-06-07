@@ -9,7 +9,8 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'use-package))
+  (require 'major-mode-hydra)
+  (require 'el-patch))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs Lisp programming settings (found here: http://www.sugarshark.com/elisp/init/lisp.el.html)
