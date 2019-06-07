@@ -8,6 +8,9 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'use-package))
+
 ;; ivy
 (use-package ivy
   :straight t
@@ -41,15 +44,16 @@
   :bind
   ("C-M-s" . jp-counsel-grep-or-swiper-symbol-at-pt))
 
-
 (use-package ivy-posframe
   :straight t
   :config
   (progn
     (defun jp-ivy-posframe-display (str)
-      (ivy-posframe--display str (lambda (info)
-                                   (cons (car (posframe-poshandler-frame-center info))
-                                         (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))
+      (ivy-posframe--display
+       str
+       (lambda (info)
+         (cons (car (posframe-poshandler-frame-center info))
+               (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))
 
     (setq ivy-posframe-display-functions-alist '((t . jp-ivy-posframe-display))
           ivy-posframe-border-width 20
@@ -59,6 +63,16 @@
           ivy-posframe-min-height 10
           ivy-posframe-parameters '((alpha 100 100)
                                     (max-width 120)))
+
+    ;; Get around the issue where the minibuffer's height changes
+    ;; after the posframe shows up. The cause of the issue is that
+    ;; `window-body-height' is slightly smaller than
+    ;; `window-text-pixel-size' even when there is only one line in
+    ;; the minibuffer. TODO find and fix the root cause.
+    (defun jp-ivy-posframe--resize-minibuffer (fn &rest args))
+    (add-to-list 'ivy-posframe-advice-alist
+                 '(ivy--resize-minibuffer-to-fit . jp-ivy-posframe--resize-minibuffer))
+
     (ivy-posframe-mode 1)))
 
 (provide 'jp-ivy)
