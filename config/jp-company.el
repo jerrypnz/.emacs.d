@@ -26,6 +26,13 @@
                               company-echo-metadata-frontend))
     (global-company-mode t)))
 
+(use-package company-box
+  :straight t
+  :defer t
+  :hook (company-mode . company-box-mode)
+  :config
+  (setq company-box-enable-icon nil))
+
 (use-package company-dabbrev
   :after (company)
   :config
