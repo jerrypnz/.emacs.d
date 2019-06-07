@@ -69,6 +69,37 @@
     (setq undo-tree-visualizer-timestamps t)
     (global-undo-tree-mode)))
 
+(use-package hydra
+  :straight t
+  :config
+  (progn
+    (setq hydra-hint-display-type 'posframe)
+    (setq hydra-posframe-show-params
+          '(:internal-border-width 20
+            :background-color "#242933"
+            :override-parameters ((alpha 100 100))
+            :poshandler (lambda (info)
+                          (cons (car (posframe-poshandler-frame-center info))
+                                (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))))
+
+;; Major mode keys managed by a pretty hydra
+(use-package major-mode-hydra
+  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
+  :demand t
+  :bind
+  (("C-M-SPC" . major-mode-hydra))
+
+  :config
+  (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
+
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
+
 (use-package jp-main-hydra
   :bind
   ("M-SPC" . jp-main-hydra/body))
@@ -158,41 +189,6 @@
   :after (move-border zoom-frm)
   :bind
   ("C-M-o" . jp-window/body))
-
-(use-package hydra
-  :straight t
-  :config
-  (progn
-    (setq hydra-hint-display-type 'posframe)
-    (setq hydra-posframe-show-params
-          '(:internal-border-width 20
-            :background-color "#242933"
-            :override-parameters ((alpha 100 100))
-            :poshandler (lambda (info)
-                          (cons (car (posframe-poshandler-frame-center info))
-                                (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))))
-
-;; Major mode keys managed by a pretty hydra
-(use-package major-mode-hydra
-  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
-  :init
-  (progn
-    (autoload 'pretty-hydra-define "pretty-hydra" nil nil 'macro)
-    (autoload 'major-mode-hydra-bind "major-mode-hydra" nil 'macro))
-
-  :bind
-  (("C-M-SPC" . major-mode-hydra))
-
-  :config
-  (progn
-    (setq major-mode-hydra-invisible-quit-key "q")
-    (defun jp-major-mode-hydra-title-generator (_)
-      `(with-mode-icon major-mode
-                       (propertize (s-concat (format-mode-line mode-name) " Commands")
-                                   'face '(:weight bold :height 1.1))
-                       1.1))
-
-    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 
 ;; ispell
 (use-package ispell
