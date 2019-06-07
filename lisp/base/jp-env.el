@@ -57,6 +57,7 @@
       mac-command-modifier 'meta
       mac-option-modifier 'super)
 
+
 ;; Smooth scroll
 (setq scroll-step            1
       scroll-conservatively  10000

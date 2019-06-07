@@ -15,7 +15,8 @@
   (progn
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")))
+    (setq ivy-count-format "(%d/%d) ")
+    (setq ivy-height 20)))
 
 (use-package ivy-hydra
   :straight t)
@@ -40,34 +41,25 @@
   :bind
   ("C-M-s" . jp-counsel-grep-or-swiper-symbol-at-pt))
 
-;; (use-package ivy-posframe
-;;   :straight t
-;;   :config
-;;   (progn
-;;     (push '(t . ivy-posframe-display-at-frame-center) ivy-display-functions-alist)
-;;     (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-;;     (setq ivy-posframe-hide-minibuffer t)
-;;     (setq ivy-posframe-parameters
-;;           '((no-accept-focus . t)
-;;             (no-focus-on-map . t)
-;;             (internal-border-width . 8)
-;;             (width  . 120)
-;;             (min-height  . 12)
-;;             (vertical-scroll-bars . nil)
-;;             (horizontal-scroll-bars . nil)
-;;             (left-fringe . 10)
-;;             (right-fringe . 10)
-;;             (menu-bar-lines . 0)
-;;             (tool-bar-lines . 0)
-;;             (line-spacing . 0)
-;;             (unsplittable . t)
-;;             (top . 100)
-;;             (mouse-wheel-frame . nil)
-;;             (no-other-frame . t)
-;;             (cursor-type . nil)
-;;             (drag-internal-border . t)
-;;             (no-special-glyphs . t))))
-;;   (ivy-posframe-enable))
+
+(use-package ivy-posframe
+  :straight t
+  :config
+  (progn
+    (defun jp-ivy-posframe-display (str)
+      (ivy-posframe--display str (lambda (info)
+                                   (cons (car (posframe-poshandler-frame-center info))
+                                         (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))
+
+    (setq ivy-posframe-display-functions-alist '((t . jp-ivy-posframe-display))
+          ivy-posframe-border-width 20
+          ivy-posframe-hide-minibuffer t
+          ivy-posframe-width 80
+          ivy-posframe-min-width 100
+          ivy-posframe-min-height 10
+          ivy-posframe-parameters '((alpha 100 100)
+                                    (max-width 120)))
+    (ivy-posframe-mode 1)))
 
 (provide 'jp-ivy)
 ;;; jp-ivy.el ends here

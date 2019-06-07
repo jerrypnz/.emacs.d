@@ -19,27 +19,6 @@
 (defvar jp-fixed-pitch-font nil
   "The font to use in the fixed-pitch face.")
 
-;; Work around Emacs frame sizing bug when line-spacing
-;; is non-zero, which impacts e.g. grizzl, and allow resizing when
-;; vertical modes are enabled or user has customized jp-resize-minibuffer
-(defvar jp-resize-minibuffer nil
-  "Whether the minibuffer should be resizable.")
-
-(defun jp-resize-minibuffer-p ()
-  (or (-any? 'featurep '(ivy grizzl ido-vertical-mode))
-      jp-resize-minibuffer))
-
-(defun jp-minibuffer-setup-hook ()
-  (if (jp-resize-minibuffer-p)
-      (set (make-local-variable 'line-spacing) 0)
-    (setq resize-mini-windows nil)))
-
-(add-hook 'minibuffer-setup-hook
-          'jp-minibuffer-setup-hook)
-
-(add-hook 'ido-minibuffer-setup-hook
-          'jp-minibuffer-setup-hook)
-
 (mapc (lambda (mode)
         (when (fboundp mode) (funcall mode -1)))
       '(scroll-bar-mode tool-bar-mode blink-cursor-mode))
