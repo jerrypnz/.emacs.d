@@ -101,7 +101,7 @@ loading the init file so as to pick up custom settings."
       (progn
         (jp-set-geometry)
         (add-hook 'kill-emacs-hook 'jp-save-frame-geometry)
-        (setq-default line-spacing 2)
+;        (setq-default line-spacing 2)
         (jp-set-fonts)
         (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))

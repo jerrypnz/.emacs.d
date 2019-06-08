@@ -62,16 +62,7 @@
           ivy-posframe-min-width 100
           ivy-posframe-min-height 10
           ivy-posframe-parameters '((alpha 100 100)
-                                    (max-width 120)))
-
-    ;; Get around the issue where the minibuffer's height changes
-    ;; after the posframe shows up. The cause of the issue is that
-    ;; `window-body-height' is slightly smaller than
-    ;; `window-text-pixel-size' even when there is only one line in
-    ;; the minibuffer. TODO find and fix the root cause.
-    (defun jp-ivy-posframe--resize-minibuffer (fn &rest args))
-    (add-to-list 'ivy-posframe-advice-alist
-                 '(ivy--resize-minibuffer-to-fit . jp-ivy-posframe--resize-minibuffer))
+                                    (max-width . 140)))
 
     (ivy-posframe-mode 1)))
 
