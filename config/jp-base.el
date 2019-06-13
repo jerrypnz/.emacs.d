@@ -53,7 +53,7 @@
 
 ;; highlight-sexp
 (use-package highlight-sexp
-  :straight (:host github :repo "jerrypnz/highlight-sexp")
+  :straight (:host github :type git :repo "jerrypnz/highlight-sexp")
   :config
   (progn
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
@@ -84,7 +84,7 @@
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
-  :straight (:host github :repo "jerrypnz/major-mode-hydra.el" :branch "master")
+  :straight (:host github :type git :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
   :demand t
   :bind
   (("C-M-SPC" . major-mode-hydra))
@@ -110,6 +110,11 @@
   :bind
   (("C-a" . mwim-beginning-of-code-or-line)
    ("C-e" . mwim-end-of-code-or-line)))
+
+(use-package easy-kill
+  :straight t
+  :config
+  (global-set-key [remap kill-ring-save] #'easy-kill))
 
 ;; iedit
 (use-package iedit
