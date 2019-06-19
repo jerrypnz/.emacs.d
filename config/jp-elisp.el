@@ -41,20 +41,19 @@ This checks in turn:
           ;; surrounding sexp for a function call.
           ((setq sym (function-at-point)) (describe-function sym)))))
 
-(major-mode-hydra-bind emacs-lisp-mode "Eval"
-  ("b" eval-buffer "buffer")
-  ("e" eval-defun "defun")
-  ("r" eval-region "region"))
-
-(major-mode-hydra-bind emacs-lisp-mode "Test"
-  ("t" ert "prompt")
-  ("T" (ert t) "all")
-  ("F" (ert :failed) "failed"))
-
-(major-mode-hydra-bind emacs-lisp-mode "Doc"
-  ("d" describe-foo-at-point "thing-at-pt")
-  ("f" describe-function)
-  ("v" describe-variable))
+(major-mode-hydra-define emacs-lisp-mode nil;
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
+   "Doc"
+   (("d" describe-foo-at-point "thing-at-pt")
+    ("f" describe-function)
+    ("v" describe-variable))))
 
 ;; Prefer xref-find than dump-jump for elisp
 (define-key emacs-lisp-mode-map (kbd "M-.") #'xref-find-definitions)

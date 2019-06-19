@@ -15,21 +15,21 @@
 
 (use-package clojure-mode
   :straight t
+  :init
+  (major-mode-hydra-define+ (clojure-mode clojurescript-mode clojurec-mode) nil
+    ("Edit"
+     ((">" clojure-thread-first-all "thread-first")
+      ("<" clojure-thread-last-all "thread-last")
+      ("u" clojure-unwind-all "thread-unwind")
+      (":" clojure-toggle-keyword-string "toggle keyword/string"))))
+
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
          ("\\.cljc\\'" . clojurec-mode))
+
   :config
   (progn
-    (major-mode-hydra-bind clojure-mode "Refactor"
-      (">" clojure-thread-first-all "thread-first")
-      ("<" clojure-thread-last-all "thread-last")
-      ("u" clojure-unwind-all "thread-unwind")
-      (":" clojure-toggle-keyword-string "toggle keyword/string"))
-    (major-mode-hydra-bind clojurescript-mode "Refactor"
-      (">" clojure-thread-first-all "thread-first")
-      ("<" clojure-thread-last-all "thread-last")
-      ("u" clojure-unwind-all "thread-unwind")
-      (":" clojure-toggle-keyword-string "toggle keyword/string"))
+
     ;; If put in `define-clojure-indent', it will fail with a "wrong
     ;; type argument: listp, 1" error the first time a clj buffer is
     ;; opened.
@@ -70,32 +70,49 @@
   :straight t
   :init
   (progn
-    (major-mode-hydra-bind clojure-mode "Connect"
-      ("j" cider-jack-in "jack-in")
-      ("J" cider-jack-in-clojurescript "jack-in-cljs")
-      ("c" cider-connect "connect")
-      ("R" cider-restart "restart")
-      ("Q" cider-quit "disconnect"))
-    (major-mode-hydra-bind clojure-mode "Load"
-      ("k" cider-load-buffer "buffer")
-      ("l" cider-load-file "file")
-      ("L" cider-load-all-project-ns "all-ns")
-      ("g" cider-ns-refresh "reload"))
-    (major-mode-hydra-bind clojure-mode "Eval"
-      ("s" cider-repl-set-ns "set-repl-ns")
-      ("e" cider-eval-last-sexp-to-repl "eval-last")
-      ("f" cider-eval-defun-at-point "eval-defun")
-      ("I" cider-inspect-last-result "inspect-last-result")
-      ("D" (cider-eval-defun-at-point t) "debug-defun")
-      ("i" cider-interrupt "interrupt"))
-    (major-mode-hydra-bind clojure-mode "Test"
-      ("t" cider-test-run-ns-tests "ns")
-      ("T" cider-test-run-loaded-tests "loaded")
-      ("F" cider-test-rerun-failed-tests "failed"))
-    (major-mode-hydra-bind clojure-mode "Find"
-      ("n" cider-find-ns "ns"))
-    (major-mode-hydra-bind clojure-mode "Docs"
-      ("d" cider-doc "doc")))
+    (major-mode-hydra-define+ clojure-mode nil
+      ("Connect"
+       (("j" cider-jack-in "jack-in")
+        ("J" cider-jack-in-clojurescript "jack-in-cljs")
+        ("c" cider-connect "connect")
+        ("R" cider-restart "restart")
+        ("Q" cider-quit "disconnect"))
+       "Load"
+       (("k" cider-load-buffer "buffer")
+        ("l" cider-load-file "file")
+        ("L" cider-load-all-project-ns "all-ns")
+        ("g" cider-ns-refresh "reload"))
+       "Eval"
+       (("s" cider-repl-set-ns "set-repl-ns")
+        ("e" cider-eval-last-sexp-to-repl "eval-last")
+        ("f" cider-eval-defun-at-point "eval-defun")
+        ("I" cider-inspect-last-result "inspect-last-result")
+        ("D" (cider-eval-defun-at-point t) "debug-defun")
+        ("i" cider-interrupt "interrupt"))
+       "Test"
+       (("t" cider-test-run-ns-tests "ns")
+        ("T" cider-test-run-loaded-tests "loaded")
+        ("F" cider-test-rerun-failed-tests "failed"))
+       "Find"
+       (("n" cider-find-ns "ns"))
+       "Docs"
+       (("d" cider-doc "doc"))))
+
+    (major-mode-hydra-define+ cider-repl-mode nil
+      ("Connect"
+       (("R" cider-restart "restart")
+        ("Q" cider-quit "disconnect")
+        ("q" nil "quit"))
+       "Load"
+       (("l" cider-load-file "file")
+        ("L" cider-load-all-project-ns "all-ns")
+        ("g" cider-ns-refresh "reload"))
+       "REPL"
+       (("s" cider-repl-set-ns "set-repl-ns")
+        ("i" cider-interrupt "interrupt")
+        ("c" cider-repl-clear-buffer "clear"))
+       "Docs"
+       (("d" cider-doc "doc")))))
 
   :commands (cider-jack-in
              cider-jack-in-clojurescript
@@ -123,74 +140,60 @@
     ;; smartparens mode for the REPL
     (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
-    (setq cider-show-error-buffer nil)
-
-    (major-mode-hydra-bind cider-repl-mode "Connect"
-      ("R" cider-restart "restart")
-      ("Q" cider-quit "disconnect")
-      ("q" nil "quit"))
-    (major-mode-hydra-bind cider-repl-mode "Load"
-      ("l" cider-load-file "file")
-      ("L" cider-load-all-project-ns "all-ns")
-      ("g" cider-ns-refresh "reload"))
-    (major-mode-hydra-bind cider-repl-mode "REPL"
-      ("s" cider-repl-set-ns "set-repl-ns")
-      ("i" cider-interrupt "interrupt")
-      ("c" cider-repl-clear-buffer "clear"))
-    (major-mode-hydra-bind cider-repl-mode "Docs"
-      ("d" cider-doc "doc"))))
+    (setq cider-show-error-buffer nil)))
 
 (use-package jp-counsel-cider
   :after (cider)
   :init
   (progn
-    (major-mode-hydra-bind clojure-mode "Docs"
-      ("a" jp-counsel-cider-apropos "apropos"))
-    (major-mode-hydra-bind cider-repl-mode "Docs"
-      ("a" jp-counsel-cider-apropos "apropos"))
-    (major-mode-hydra-bind cider-repl-mode "REPL"
-      ("h" jp-counsel-cider-repl-history "search-history")
-      ("H" cider-repl-history "show-history")))
+    (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
+      ("Docs"
+       (("a" jp-counsel-cider-apropos "apropos"))))
+
+    (major-mode-hydra-define+ cider-repl-mode nil
+      ("REPL"
+       (("h" jp-counsel-cider-repl-history "search-history")
+        ("H" cider-repl-history "show-history")))))
+
   :commands (jp-counsel-cider-apropos
              jp-counsel-cider-repl-history))
 
 (use-package cider-macroexpansion
   :after (cider)
   :init
-  (progn
-    (major-mode-hydra-bind clojure-mode "Macros"
-      ("x" cider-macroexpand-1 "expand-1")
-      ("X" cider-macroexpand-all "expand-all"))
-    (major-mode-hydra-bind cider-repl-mode "Macros"
-      ("x" cider-macroexpand-1 "expand-1")
-      ("X" cider-macroexpand-all "expand-all")))
+  (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
+    ("Macros"
+     (("x" cider-macroexpand-1 "expand-1")
+      ("X" cider-macroexpand-all "expand-all"))))
+
   :commands (cider-macroexpand-1 cider-macroexpand-all))
 
 (use-package inf-clojure
   :straight t
-  :init (progn
-          (major-mode-hydra-bind clojurescript-mode "Connect"
-            ("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
-            ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
-            ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
-            ("Q" inf-clojure-quit "disconnect")))
+  :init
+  (major-mode-hydra-define+ clojurescript-mode nil
+    ("Connect"
+     (("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
+      ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
+      ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
+      ("Q" inf-clojure-quit "disconnect"))
+     "Load"
+     (("k" inf-clojure-eval-buffer "buffer")
+      ("l" inf-clojure-load-file "file")
+      ("g" inf-clojure-reload "reload"))
+     "Eval"
+     (("s" inf-clojure-set-ns "set-repl-ns")
+      ("e" inf-clojure-eval-last-sexp "eval-last")
+      ("f" inf-clojure-eval-defun "eval-defun"))
+     "Docs"
+     (("d" inf-clojure-show-var-documentation "doc")
+      ("a" inf-clojure-apropos "apropos"))
+     "Macros"
+     (("x" inf-clojure-macroexpand "expand"))))
+
   :commands (inf-clojure-minor-mode
              inf-clojure-connect
-             inf-clojure)
-  :config (progn
-            (major-mode-hydra-bind clojurescript-mode "Load"
-              ("k" inf-clojure-eval-buffer "buffer")
-              ("l" inf-clojure-load-file "file")
-              ("g" inf-clojure-reload "reload"))
-            (major-mode-hydra-bind clojurescript-mode "Eval"
-              ("s" inf-clojure-set-ns "set-repl-ns")
-              ("e" inf-clojure-eval-last-sexp "eval-last")
-              ("f" inf-clojure-eval-defun "eval-defun"))
-            (major-mode-hydra-bind clojurescript-mode "Docs"
-              ("d" inf-clojure-show-var-documentation "doc")
-              ("a" inf-clojure-apropos "apropos"))
-            (major-mode-hydra-bind clojurescript-mode "Macros"
-              ("x" inf-clojure-macroexpand "expand"))))
+             inf-clojure))
 
 (use-package flycheck-joker
   :straight t)
@@ -203,24 +206,24 @@
                               (clj-kondo-cljc . clojure-joker)))
             (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers)))))
 
-(use-package clj-refactor
-  :straight t
-  :commands (hydra-cljr-cljr-menu/body
-             hydra-cljr-ns-menu/body
-             hydra-cljr-code-menu/body
-             hydra-cljr-project-menu/body
-             hydra-cljr-toplevel-form-menu/body)
-  :config
-  (progn
-    (add-hook 'cider-mode-hook (lambda ()
-                                 (clj-refactor-mode 1)))
+;; (use-package clj-refactor
+;;   :straight t
+;;   :commands (hydra-cljr-cljr-menu/body
+;;              hydra-cljr-ns-menu/body
+;;              hydra-cljr-code-menu/body
+;;              hydra-cljr-project-menu/body
+;;              hydra-cljr-toplevel-form-menu/body)
+;;   :config
+;;   (progn
+;;     (add-hook 'cider-mode-hook (lambda ()
+;;                                  (clj-refactor-mode 1)))
 
-    (major-mode-hydra-bind clojure-mode "Refactor"
-      ("rs" hydra-cljr-cljr-menu/body "refactor")
-      ("rn" hydra-cljr-ns-menu/body "namespaces")
-      ("rc" hydra-cljr-code-menu/body "code")
-      ("rp" hydra-cljr-project-menu/body "project")
-      ("rt" hydra-cljr-toplevel-form-menu/body "top level form"))))
+;;     (major-mode-hydra-bind clojure-mode "Refactor"
+;;       ("rs" hydra-cljr-cljr-menu/body "refactor")
+;;       ("rn" hydra-cljr-ns-menu/body "namespaces")
+;;       ("rc" hydra-cljr-code-menu/body "code")
+;;       ("rp" hydra-cljr-project-menu/body "project")
+;;       ("rt" hydra-cljr-toplevel-form-menu/body "top level form"))))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here
