@@ -43,7 +43,7 @@
 (autoload 'eyebrowse-switch-to-window-config-9 "eyebrowse")
 
 (autoload 'org-capture "org-capture")
-(autoload 'jp-org-agenda/body "jp-org-agenda")
+(autoload 'major-mode-hydras/org-agenda-mode/body "jp-org-agenda")
 
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
@@ -135,7 +135,7 @@
 
    "Org"
    (("c" org-capture "capture")
-    ("a" jp-org-agenda/body "agenda"))
+    ("a" major-mode-hydras/org-agenda-mode/body "agenda"))
 
    "Quick Layouts"
    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :width 20)

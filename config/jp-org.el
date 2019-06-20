@@ -155,12 +155,7 @@
             (search category-keep)))))
 
 (use-package jp-org-agenda
-  :commands (jp-org-agenda/body)
-  :config
-  (progn
-    (defvar major-mode-hydra--body-cache)
-    ;; TODO This is a hack - do it properly in major-mode-hydra package
-    (setf (alist-get 'org-agenda-mode major-mode-hydra--body-cache) #'jp-org-agenda/body)))
+  :commands (major-mode-hydras/org-agenda-mode/body))
 
 (use-package org-archive
   :after (org)

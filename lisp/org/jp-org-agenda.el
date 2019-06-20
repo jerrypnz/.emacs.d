@@ -8,7 +8,8 @@
 
 ;;; Code:
 
-(require 'pretty-hydra)
+(eval-when-compile
+  (require 'major-mode-hydra))
 (require 'dash)
 (require 'org-agenda)
 
@@ -35,8 +36,8 @@
 (setq jp-org-agenda--title
       (with-faicon "calendar" (propertize "Org Agenda\n" 'face '(:height 1.1 :weight bold)) 1.1 0.01))
 
-(pretty-hydra-define jp-org-agenda
-  (:hint nil :foreign-keys run :title jp-org-agenda--title :body-pre (jp-org-agenda-maybe-open) :quit-key "q")
+(major-mode-hydra-define org-agenda-mode
+  (:color pink :title jp-org-agenda--title :body-pre (jp-org-agenda-maybe-open))
   ("Actions"
    (("SPC" (org-agenda-show-and-scroll-up t) "preview")
     ("TAB" org-agenda-goto "goto" :exit t)
