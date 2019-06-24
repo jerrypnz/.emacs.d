@@ -230,5 +230,9 @@
   :straight t
   :commands (rainbow-mode))
 
+(use-package deadgrep
+  :straight t
+  :commands (deadgrep))
+
 (provide 'jp-base)
 ;;; jp-base.el ends here
