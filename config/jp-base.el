@@ -172,6 +172,23 @@
   :config
   (setq avy-background t))
 
+(use-package frog-menu
+  :straight t
+  :defer t
+  :config
+  (progn
+    (setf (alist-get 'avy-posframe frog-menu-display-option-alist)
+          'posframe-poshandler-window-center)))
+
+;; frog-jump-buffer
+(use-package frog-jump-buffer
+  :straight t
+  :bind (("M-i" . frog-jump-buffer))
+  :config
+  (progn
+    (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project
+          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project )))
+
 ;; ace-window
 (use-package ace-window
   :straight t
