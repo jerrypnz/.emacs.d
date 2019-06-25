@@ -44,6 +44,7 @@
 
 (autoload 'org-capture "org-capture")
 (autoload 'major-mode-hydras/org-agenda-mode/body "jp-org-agenda")
+(autoload 'deadgrep "deadgrep")
 
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
@@ -117,6 +118,8 @@
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
     ("," treemacs-select-window "treemacs")
+    ("i" counsel-imenu "imenu")
+    ("j" counsel-mark-ring "mark ring")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
     ("F" jp-flycheck/body "flycheck")

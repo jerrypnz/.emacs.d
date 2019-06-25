@@ -16,12 +16,47 @@
 (use-package clojure-mode
   :straight t
   :init
-  (major-mode-hydra-define+ (clojure-mode clojurescript-mode clojurec-mode) nil
-    ("Edit"
-     ((">" clojure-thread-first-all "thread-first")
-      ("<" clojure-thread-last-all "thread-last")
-      ("u" clojure-unwind-all "thread-unwind")
-      (":" clojure-toggle-keyword-string "toggle keyword/string"))))
+  (progn
+    (pretty-hydra-define jp-clojure-edit
+      (:hint nil :color teal :quite-key "q" :title "Edit Clojure Source")
+      ("Basic"
+       (("SPC" clojure-align "align")
+        ("p" clojure-cycle-privacy "cycle privacy")
+        ("f" clojure-cycle-if "cycle if/if-not")
+        ("w" clojure-cycle-when "cycle when/when-not")
+        (":" clojure-toggle-keyword-string "toggle keyword/string")
+        ("!" clojure-cycle-not "cycle not"))
+       "Let"
+       (("ll" (clojure-introduce-let 1) "introduce let")
+        ("lm" clojure-move-to-let "move to let")
+        ("lf" clojure-let-forward-slurp-sexp "forward slurp into")
+        ("lb" clojure-let-backward-slurp-sexp "backward slurp into"))
+       "Namespaces"
+       (("nn" clojure-insert-ns-form "insert ns form")
+        ("nh" clojure-insert-ns-form-at-point "insert ns form here")
+        ("np" clojure-update-ns "update ns form")
+        ("ns" clojure-sort-ns "sort ns"))
+       "Collections"
+       (("cl" clojure-convert-collection-to-list "to list")
+        ("cq" clojure-convert-collection-to-quoted-list "to quoted list")
+        ("cm" clojure-convert-collection-to-map "to map")
+        ("cv" clojure-convert-collection-to-vector "to vector")
+        ("cs" clojure-convert-collection-to-set "to set"))
+       "Threading"
+       (("tt" clojure-thread "thread once")
+        ("tf" clojure-thread-first-all "thread all ->")
+        ("tl" clojure-thread-last-all "thread all ->>")
+        ("tw" clojure-unwind "unwind once")
+        ("tu" clojure-unwind-all "unwind all"))))
+
+    (major-mode-hydra-define+ (clojure-mode clojurescript-mode clojurec-mode) nil
+      ("Clojure"
+       ((">" clojure-thread-first-all "thread-first")
+        ("<" clojure-thread-last-all "thread-last")
+        ("u" clojure-unwind-all "thread-unwind")
+        (":" clojure-toggle-keyword-string "toggle keyword/string")
+        ("SPC" clojure-align "align")
+        ("TAB" jp-clojure-edit/body "more...")))))
 
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
@@ -94,9 +129,8 @@
         ("T" cider-test-run-loaded-tests "loaded")
         ("F" cider-test-rerun-failed-tests "failed"))
        "Find"
-       (("n" cider-find-ns "ns"))
-       "Docs"
-       (("d" cider-doc "doc"))))
+       (("n" cider-find-ns "ns")
+        ("d" cider-doc "doc"))))
 
     (major-mode-hydra-define+ cider-repl-mode nil
       ("Connect"
@@ -111,7 +145,7 @@
        (("s" cider-repl-set-ns "set-repl-ns")
         ("i" cider-interrupt "interrupt")
         ("c" cider-repl-clear-buffer "clear"))
-       "Docs"
+       "Find"
        (("d" cider-doc "doc")))))
 
   :commands (cider-jack-in
@@ -147,7 +181,7 @@
   :init
   (progn
     (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
-      ("Docs"
+      ("Find"
        (("a" jp-counsel-cider-apropos "apropos"))))
 
     (major-mode-hydra-define+ cider-repl-mode nil
@@ -162,9 +196,9 @@
   :after (cider)
   :init
   (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
-    ("Macros"
-     (("x" cider-macroexpand-1 "expand-1")
-      ("X" cider-macroexpand-all "expand-all"))))
+    ("Eval"
+     (("x" cider-macroexpand-1 "macroexpand-1")
+      ("X" cider-macroexpand-all "macroexpand-all"))))
 
   :commands (cider-macroexpand-1 cider-macroexpand-all))
 
@@ -184,12 +218,11 @@
      "Eval"
      (("s" inf-clojure-set-ns "set-repl-ns")
       ("e" inf-clojure-eval-last-sexp "eval-last")
-      ("f" inf-clojure-eval-defun "eval-defun"))
-     "Docs"
+      ("f" inf-clojure-eval-defun "eval-defun")
+      ("x" inf-clojure-macroexpand "expand"))
+     "Find"
      (("d" inf-clojure-show-var-documentation "doc")
-      ("a" inf-clojure-apropos "apropos"))
-     "Macros"
-     (("x" inf-clojure-macroexpand "expand"))))
+      ("a" inf-clojure-apropos "apropos"))))
 
   :commands (inf-clojure-minor-mode
              inf-clojure-connect
