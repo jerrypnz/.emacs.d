@@ -178,7 +178,11 @@
   :config
   (progn
     (setf (alist-get 'avy-posframe frog-menu-display-option-alist)
-          'posframe-poshandler-window-center)))
+          'posframe-poshandler-window-center)
+    (setq frog-menu-avy-padding t)
+    (setq frog-menu-posframe-parameters
+          '((internal-border-width . 10)
+            (border-width . 2)))))
 
 ;; frog-jump-buffer
 (use-package frog-jump-buffer
@@ -187,7 +191,18 @@
   :config
   (progn
     (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project
-          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project )))
+          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project )
+
+    (defun jp-frog-jump-buffer (f &rest args)
+      (let* ((current-buffer-name (buffer-name (current-buffer)))
+             ;; ignore current buffer
+             (frog-jump-buffer-ignore-buffers (cons (rx-to-string current-buffer-name)
+                                                    frog-jump-buffer-ignore-buffers))
+             ;; no background dimming
+             (avy-background nil))
+        (apply f args)))
+
+    (advice-add #'frog-jump-buffer :around #'jp-frog-jump-buffer)))
 
 ;; ace-window
 (use-package ace-window
