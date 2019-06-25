@@ -62,7 +62,7 @@
       '(frog-menu-prompt-face :foreground fg-alt)
       '(frog-menu-candidates-face :foreground fg)
       '(frog-menu-actions-face :foreground blue)
-      '(frog-menu-action-keybinding-face :foreground red))))
+      '(frog-menu-action-keybinding-face :foreground orange))))
 
 (defun jp-themes-load ()
   (load-theme (jp-themes--get-current) t)
