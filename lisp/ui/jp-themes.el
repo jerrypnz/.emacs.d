@@ -67,6 +67,8 @@
 (defun jp-themes-load ()
   (load-theme (jp-themes--get-current) t)
   (doom-themes-org-config)
+  ;; Disabled for now, see https://github.com/hlissner/emacs-doom-themes/issues/288
+  (custom-set-variables '(doom-treemacs-use-generic-icons nil))
   (doom-themes-treemacs-config)
   (jp-themes--customize-faces))
 

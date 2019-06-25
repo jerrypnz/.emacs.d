@@ -29,6 +29,8 @@
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
     (treemacs-fringe-indicator-mode nil)
+    (treemacs-resize-icons 16)
+    ;(add-hook 'treemacs-mode-hook '(lambda () (setq mode-line-format nil)))
 
     (major-mode-hydra-bind treemacs-mode "Basic"
       ("?" treemacs-helpful-hydra/body "helpful"))
