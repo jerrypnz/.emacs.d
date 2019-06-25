@@ -40,7 +40,7 @@
  ("flycheck-pos-tip" . "909113977d37739387c7f099d74a724cfe6efcec")
  ("frame-cmds" . "28b6804e9ff6d18a4d84eab2f82173146c20d285")
  ("frame-fns" . "b675ee568c0133709c2c39a125395486cdf1c610")
- ("frog-jump-buffer" . "20e7393f07dfe2f4671c93912c8b3374b9bea678")
+ ("frog-jump-buffer" . "b3e85789dfa9734c27a6e5036afa5a08702babe1")
  ("frog-menu" . "5343f5b7c2d3fda8badca922a57c4fa0bef63758")
  ("git-timemachine" . "b97f93d66cffcd69281346845d3a1e32197eda29")
  ("git.el" . "a3396a7027a7d986598c6a2d6d5599bac918f3da")

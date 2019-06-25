@@ -191,15 +191,11 @@
   :config
   (progn
     (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project
-          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project )
+          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project
+          frog-jump-buffer-include-current-buffer nil)
 
     (defun jp-frog-jump-buffer (f &rest args)
-      (let* ((current-buffer-name (buffer-name (current-buffer)))
-             ;; ignore current buffer
-             (frog-jump-buffer-ignore-buffers (cons (rx-to-string current-buffer-name)
-                                                    frog-jump-buffer-ignore-buffers))
-             ;; no background dimming
-             (avy-background nil))
+      (let* ((avy-background nil)) ;; no background dimming
         (apply f args)))
 
     (advice-add #'frog-jump-buffer :around #'jp-frog-jump-buffer)))
