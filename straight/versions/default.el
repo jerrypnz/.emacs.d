@@ -98,7 +98,7 @@
  ("swiper" . "895906e0a70d1191babae43fc26de3fbf8e88bf8")
  ("symbol-overlay" . "e40a7c407f24158c45eaa5f54ed41f5e416a51dc")
  ("transient" . "2eff8d57e851ec7403e5e042147ad2644b336633")
- ("treemacs" . "5fc7405141a8c257cd6b348f164424a285d3cdfa")
+ ("treemacs" . "5763f7cb43c4feb03c4b707ddd9abd0f98947979")
  ("undo-tree" . "d54ef13e3c69655e39f977b8bf75399a6d2b5e42")
  ("use-package" . "4aa14a4fcd5ca52b3f1bfcf5ab294173f7bbe390")
  ("whitespace-cleanup-mode" . "72427144b054b0238a86e1348c45d986b8830d9d")
