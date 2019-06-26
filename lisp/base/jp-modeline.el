@@ -105,7 +105,16 @@
                           (t 'mode-line)))))
 
    (:eval (when (jp-modeline-long?)
-            " %6p"))
+            (concat " %6p "
+                    (pcase (coding-system-eol-type buffer-file-coding-system)
+                      (0 "LF ")
+                      (1 "CRLF ")
+                      (2 "CR "))
+                    (let ((sys (coding-system-plist buffer-file-coding-system)))
+                      (cond ((memq (plist-get sys :category)
+                                   '(coding-category-undecided coding-category-utf-8))
+                             "UTF-8")
+                            (t (upcase (symbol-name (plist-get sys :name)))))))))
    "   "
    ;; directory and buffer/file name
    (:eval (moody-tab (s-concat (when (buffer-file-name)
@@ -125,17 +134,6 @@
                           (replace-regexp-in-string "^ Git[:-]" "" vc-mode)
                           0.8 0.05)))
 
-   "   "
-   (:eval (when (jp-modeline-long?)
-            (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-                      (0 "LF  ")
-                      (1 "CRLF  ")
-                      (2 "CR  "))
-                    (let ((sys (coding-system-plist buffer-file-coding-system)))
-                      (cond ((memq (plist-get sys :category)
-                                   '(coding-category-undecided coding-category-utf-8))
-                             "UTF-8")
-                            (t (upcase (symbol-name (plist-get sys :name)))))))))
    "   "
    ;; major mode
    (:eval (moody-tab (with-mode-icon major-mode
