@@ -38,7 +38,8 @@
   :config
   (progn
     (setq counsel-grep-base-command
-          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")))
+          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+    (setq counsel-outline-face-style 'org)))
 
 (use-package jp-ivy-utils
   :bind
