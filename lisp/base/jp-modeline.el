@@ -19,7 +19,7 @@
 (defvar jp-modeline-active-window nil)
 (defvar jp-modeline-width-threshold 110)
 
-(defun jp-modeline-set-active-window (windows)
+(defun jp-modeline-set-active-window (_)
   (when (not (minibuffer-window-active-p (frame-selected-window)))
     (setq jp-modeline-active-window (selected-window))))
 
@@ -35,7 +35,7 @@
                  (if active 'mode-line-read-write-face 'mode-line-read-write-inactive-face)))
          (icon (cond (buffer-read-only    "lock")
                      ((buffer-modified-p) "plus-circle")
-                     (t                   "check-circle"))))
+                     (t                   "minus-circle"))))
     (s-concat (propertize " " 'face face)
               (all-the-icons-faicon icon :height 0.8 :v-adjust 0.05 :face face)
               (propertize " " 'face face))))
