@@ -147,12 +147,13 @@ RIGHT, aligned respectively."
         (pcase status
           ('finished (if flycheck-current-errors
                          (let-alist (flycheck-count-errors flycheck-current-errors)
-                           (let ((sum (+ (or .error 0) (or .warning 0))))
+                           (let ((sum (+ (or .error 0) (or .warning 0) (or .info 0))))
                              (propertize (with-faicon "question-circle"
                                                       (number-to-string sum))
-                                         'face (if .error
-                                                   'mode-line-error-face
-                                                 'mode-line-warning-face))))
+                                         'face (cond
+                                                (.error 'mode-line-error-face)
+                                                (.warning 'mode-line-warning-face)
+                                                (t 'mode-line-info-face)))))
                        (propertize (with-faicon "check-circle" "")
                                    'face 'mode-line-success-face)))
           ('running (propertize (with-faicon "stumbleupon-circle" "")
