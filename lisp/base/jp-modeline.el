@@ -201,7 +201,9 @@ RIGHT, aligned respectively."
                                (if (jp-modeline-active-p)
                                    'mode-line-filename-face
                                  'mode-line-filename-inactive-face)))))
-    (moody-tab (with-mode-icon major-mode filename 0.8 nil) nil 'down)))
+    `(" "
+      ,(moody-tab (with-mode-icon major-mode filename 0.8 nil) nil 'down)
+      " ")))
 
 (defun jp-modeline-position ()
   `("%4l:"
@@ -212,7 +214,7 @@ RIGHT, aligned respectively."
                           ((>= (current-column) 80) 'mode-line-80col-face)
                           (t 'mode-line)))))))
 
-(defun jp-modeline-vcinfo ()
+(defun jp-modeline-vc ()
   (when vc-mode
     (s-concat
      " "
@@ -221,10 +223,10 @@ RIGHT, aligned respectively."
                    0.8 0.05)
      " ")))
 
-(defun jp-modeline-major-mode-info ()
+(defun jp-modeline-major-mode ()
   (s-concat" %[" (format-mode-line mode-name) "%] "))
 
-(defun jp-modeline-process-info ()
+(defun jp-modeline-process ()
   (when mode-line-process
     (s-concat
      " "
@@ -234,13 +236,13 @@ RIGHT, aligned respectively."
                    'mode-line-inactive))
      "  ")))
 
-(defun jp-modeline-narrow-info ()
+(defun jp-modeline-narrow ()
   (when (buffer-narrowed-p)
     (with-octicon "search" "" 0.8)))
 
-(defun jp-modeline-flycheck-info ()
+(defun jp-modeline-flycheck ()
   (when jp-modeline--flycheck-text
-    (let ((x (s-pad-right 4 " " jp-modeline--flycheck-text)))
+    (let ((x (s-pad-right 5 " " jp-modeline--flycheck-text)))
       (if (jp-modeline-active-p)
           x
         (propertize x 'face 'mode-line-inactive)))))
@@ -256,18 +258,14 @@ RIGHT, aligned respectively."
                    (jp-modeline-format
                     ;; Left
                     '((:eval (jp-modeline-status))
-                      ;; Position, including warning for 80 columns
                       (:eval (jp-modeline-position))
-                      " "
                       (:eval (jp-modeline-filename))
-                      " "
-                      (:eval (jp-modeline-major-mode-info))
-                      (:eval (jp-modeline-vcinfo)))
+                      (:eval (jp-modeline-major-mode))
+                      (:eval (jp-modeline-vc)))
                     ;; Right
-                    '((:eval (jp-modeline-flycheck-info))
-                      "  "
-                      (:eval (jp-modeline-narrow-info))
-                      (:eval (jp-modeline-process-info))
+                    '((:eval (jp-modeline-flycheck))
+                      (:eval (jp-modeline-narrow))
+                      (:eval (jp-modeline-process))
                       (:eval (jp-modeline-encoding))))))))
 
 (provide 'jp-modeline)
