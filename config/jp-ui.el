@@ -52,7 +52,9 @@
     (setq x-underline-at-descent-line t)
     (setq moody-slant-function #'moody-slant-apple-rgb)))
 
-(use-package jp-modeline)
+(use-package jp-modeline
+  :config
+  (jp-modeline-setup))
 
 (provide 'jp-ui)
 ;;; jp-ui.el ends here

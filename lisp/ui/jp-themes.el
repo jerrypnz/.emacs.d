@@ -47,6 +47,10 @@
       '(mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
       '(mode-line-process-face :inherit 'mode-line :foreground green)
       '(mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
+      '(mode-line-success-face :inherit 'mode-line :foreground green)
+      '(mode-line-warning-face :inherit 'mode-line :foreground yellow)
+      '(mode-line-error-face :inherit 'mode-line :foreground red)
+      '(mode-line-info-face :inherit 'mode-line :foreground blue)
       ;; vertical border
       `(vertical-border :background (,color-fn modeline-bg 0.2)
                         :foreground (,color-fn modeline-bg 0.2))

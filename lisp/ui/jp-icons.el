@@ -23,7 +23,7 @@
   (s-concat (all-the-icons-material icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
 (defun with-mode-icon (mode str &optional height nospace)
-  (let* ((v-adjust (if (eq major-mode 'emacs-lisp-mode) -0.1 0.05))
+  (let* ((v-adjust (if (eq major-mode 'emacs-lisp-mode) 0.0 0.05))
          (icon     (all-the-icons-icon-for-mode mode
                                                 :height (or height 1)
                                                 :v-adjust v-adjust))
