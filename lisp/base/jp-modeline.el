@@ -59,7 +59,7 @@
 
 (defface mode-line-info-face
   '((t (:inherit 'mode-line)))
-  "Face for flycheck warnings"
+  "Face for flycheck info"
   :group 'jp-modeline)
 
 (defface mode-line-warning-face
@@ -130,7 +130,7 @@ RIGHT, aligned respectively."
      " "
      (propertize  " "
                   'display `((space :align-to (- (+ right right-fringe right-margin)
-                                                 ,(+ reserve 1)))))
+                                                 ,(+ reserve 2)))))
      right)))
 
 ;; Flycheck update function
@@ -190,8 +190,7 @@ RIGHT, aligned respectively."
        (cond ((memq (plist-get sys :category)
                     '(coding-category-undecided coding-category-utf-8))
               "UTF-8")
-             (t (upcase (symbol-name (plist-get sys :name))))))
-     " ")))
+             (t (upcase (symbol-name (plist-get sys :name)))))))))
 
 (defun jp-modeline-filename ()
   (let ((filename (s-concat
@@ -200,13 +199,14 @@ RIGHT, aligned respectively."
                    (propertize (jp-buffer-filename) 'face
                                (if (jp-modeline-active-p)
                                    'mode-line-filename-face
-                                 'mode-line-filename-inactive-face)))))
+                                 'mode-line-filename-inactive-face))))
+        (icon-size 0.8))
     `(" "
-      ,(moody-tab (with-mode-icon major-mode filename 0.8 nil) nil 'down)
+      ,(moody-tab (with-mode-icon major-mode filename icon-size nil) nil 'down)
       " ")))
 
 (defun jp-modeline-position ()
-  `("%4l:"
+  `(" %3l:"
     (3 ,(s-concat
             (propertize "%c" 'face
                          (cond
