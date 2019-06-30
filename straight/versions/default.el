@@ -12,6 +12,7 @@
  ("counsel-projectile" . "fb19569c9799e3edac7504d21a5ecf49231e9500")
  ("dash.el" . "77f3bf40c9c85386a50f2dab3dc950513f6f88bd")
  ("deadgrep" . "caeb37b8d6ab83f0eba353d6bbb29678190d4419")
+ ("diff-hl" . "84a5fe1900af2e5cc522f02749804f0d9f094bbf")
  ("dockerfile-mode" . "ed73e82dcc636dad00d1a8c3b32a49136d25ee60")
  ("dumb-jump" . "6988b21a08b53fbfeaa6e0b0f182524257dec1e4")
  ("easy-kill" . "2a6309d98aa6b71df6bbbcdf15cab3187c521a6b")

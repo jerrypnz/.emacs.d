@@ -42,5 +42,13 @@
   :straight t
   :commands (git-timemachine))
 
+;; diff-hl
+(use-package diff-hl
+  :straight t
+  :config
+  (progn
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    (global-diff-hl-mode)))
+
 (provide 'jp-magit)
 ;;; jp-magit.el ends here
