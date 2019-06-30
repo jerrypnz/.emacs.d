@@ -29,64 +29,6 @@
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
     (treemacs-fringe-indicator-mode nil)
-    (treemacs-resize-icons 16)
-
-    (treemacs-create-theme "all-the-icons"
-      :config
-      (progn
-        (treemacs-create-icon
-         :icon (concat " " (all-the-icons-octicon
-                            "repo"
-                            :height 1.1
-                            :v-adjust 0
-                            :face '(:inherit font-lock-doc-face :slant normal))
-                       " ")
-         :extensions (root))
-        (treemacs-create-icon
-         :icon (concat (all-the-icons-octicon
-                        "chevron-right"
-                        :height 0.75
-                        :face '(:inherit font-lock-doc-face :slant normal))
-                       " "
-                       (all-the-icons-octicon
-                        "file-directory"
-                        :v-adjust 0
-                        :face '(:inherit font-lock-doc-face :slant normal))
-                       " ")
-         :extensions (dir-closed))
-        (treemacs-create-icon
-         :icon (concat (all-the-icons-octicon
-                        "chevron-down"
-                        :height 0.75
-                        :face '(:inherit font-lock-doc-face :slant normal))
-                       " "
-                       (all-the-icons-octicon
-                        "file-directory"
-                        :v-adjust 0
-                        :face '(:inherit font-lock-doc-face :slant normal))
-                       " ")
-         :extensions (dir-open))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-text" :v-adjust 0) " ")
-         :extensions (fallback))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-binary" :v-adjust 0) " ")
-         :extensions ("exe" "so" "class" "elc" "doc" "docx" "xls" "xlsx" "pst"))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-zip" :v-adjust 0) " ")
-         :extensions ("tar" "zip" "gz" "bz2" "xz" "7z" "jar"))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-media" :v-adjust 0) " ")
-         :extensions ("jpg" "jpeg" "png" "svg" "bmp"))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-pdf" :v-adjust 0) " ")
-         :extensions ("pdf"))
-        (treemacs-create-icon
-         :icon (concat "  " (all-the-icons-octicon "file-code" :v-adjust 0) " ")
-         :extensions ("yaml" "yml" "json" "xml" "html" "htm" "toml" "ini" "clj" "cljs" "cljc" "edn" "js" "c" "cpp" "c++"
-                      "lisp" "el" "tpl" "proto" "java" "scala" "go" "lua" "conf" ))))
-
-    (treemacs-load-theme "all-the-icons")
 
     (major-mode-hydra-bind treemacs-mode "Basic"
       ("?" treemacs-helpful-hydra/body "helpful"))

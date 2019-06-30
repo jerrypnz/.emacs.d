@@ -18,7 +18,7 @@
  ("el-patch" . "178111f98564551e18948b1f0dc4c539dbda5342")
  ("elisp-refs" . "0a254e6a4dc7fa12857f8334fe6eefa72e49d1c9")
  ("emacs-async" . "bd68cc1ab1ac6af890e250bdaa12ffb1cb9649be")
- ("emacs-doom-themes" . "55c49c8fd6152ebb748e75197c064b6ae7db1a57")
+ ("emacs-doom-themes" . "facec00bd5ac4e2633419a85b5cb551aad954f3b")
  ("emacs-go-eldoc" . "cbbd2ea1e94a36004432a9ac61414cb5a95a39bd")
  ("emacs-memoize" . "9a561268ffb550b257a08710489a95cd087998b6")
  ("emacs-noflet" . "7ae84dc3257637af7334101456dafe1759c6b68a")
