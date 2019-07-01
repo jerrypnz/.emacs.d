@@ -73,14 +73,22 @@
   :straight t
   :config
   (progn
+    (defvar jp-current-theme-dark-p)
     (setq hydra-hint-display-type 'posframe)
-    (setq hydra-posframe-show-params
-          '(:internal-border-width 2
-            :background-color "#242933"
-            :override-parameters ((alpha 100 100))
-            :poshandler (lambda (info)
-                          (cons (car (posframe-poshandler-frame-center info))
-                                (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))))
+
+    (let* ((bg (doom-color 'modeline-bg))
+           (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
+           (border (funcall color-fn bg 0.2)))
+      (setq hydra-posframe-show-params
+            `(:background-color ,bg
+              :internal-border-width 1
+              :internal-border-color ,border
+              :override-parameters ((alpha 100 100)
+                                    (left-fringe . 10)
+                                    (right-fringe . 10))
+              :poshandler (lambda (info)
+                            (cons (car (posframe-poshandler-frame-center info))
+                                  (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10))))))))
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
