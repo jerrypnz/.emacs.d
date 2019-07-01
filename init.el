@@ -39,7 +39,7 @@
 
 (with-no-warnings
   (setq straight-cache-autoloads t)
-  (setq straight-check-for-modifications 'live))4
+  (setq straight-check-for-modifications 'live))
 
 (require 'straight bootstrap-file t)
 
