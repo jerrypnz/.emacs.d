@@ -66,21 +66,23 @@
       '(symbol-overlay-face-8 :background cyan :foreground bg-alt)
       ;; parens
       `(show-paren-match :background (,color-fn bg-alt 0.3))
+      ;; ivy
+      '(ivy-posframe :inherit 'default :background modeline-bg)
+      `(ivy-posframe-border :inherit 'default :background (,color-fn modeline-bg 0.2))
       ;; s-exp
       `(hl-sexp-face :background (,color-fn bg 0.03))
       ;; frog-menu
       `(frog-menu-border :background (,color-fn modeline-bg 0.2))
       `(frog-menu-posframe-background-face :background bg-alt)
       '(frog-menu-prompt-face :foreground fg-alt)
-      '(frog-menu-candidates-face :foreground fg)
+      '(frog-menu-candidates-fqace :foreground fg)
       '(frog-menu-actions-face :foreground blue)
       '(frog-menu-action-keybinding-face :foreground orange))))
 
 (defun jp-themes-load ()
-  (load-theme (jp-themes--get-current) t)
-  (doom-themes-org-config)
-  (doom-themes-treemacs-config)
-  (jp-themes--customize-faces))
+  (load-theme (jp-themes--get-current) t nil)
+  (jp-themes--customize-faces)
+  (enable-theme (jp-themes--get-current)))
 
 (defun jp-themes-toggle-light-dark ()
   (interactive)

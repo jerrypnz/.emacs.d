@@ -26,7 +26,7 @@
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
-  (setq ns-use-thin-smoothing t)
+  (setq ns-use-thin-smoothing nil)
   (setq frame-title-format ""))
 
 (defvar jp-geometry-file
@@ -101,11 +101,11 @@ loading the init file so as to pick up custom settings."
       (progn
         (jp-set-geometry)
         (add-hook 'kill-emacs-hook 'jp-save-frame-geometry)
-;        (setq-default line-spacing 2)
+        (setq-default line-spacing 0)
         (jp-set-fonts)
         (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
-        (add-to-list 'default-frame-alist '(internal-border-width . 2))
+        (add-to-list 'default-frame-alist '(internal-border-width . 1))
         (set-fringe-mode 5))
     (when (not (eq system-type 'darwin))
       (menu-bar-mode -1))

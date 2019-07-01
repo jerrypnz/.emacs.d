@@ -23,6 +23,8 @@
           doom-themes-enable-italic t) ; if nil, italics is universally disabled
     ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
     ;; may have their own settings.
+    (doom-themes-org-config)
+    (doom-themes-treemacs-config)
     (setq doom-nord-padded-modeline 2)))
 
 ;; Load doom theme through jp-doom-themes

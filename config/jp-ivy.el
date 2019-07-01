@@ -57,13 +57,14 @@
                (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))
 
     (setq ivy-posframe-display-functions-alist '((t . jp-ivy-posframe-display))
-          ivy-posframe-border-width 20
+          ivy-posframe-border-width 1
           ivy-posframe-hide-minibuffer t
-          ivy-posframe-width 80
           ivy-posframe-min-width 100
           ivy-posframe-min-height 10
           ivy-posframe-parameters '((alpha 100 100)
-                                    (max-width . 140)))
+                                    (max-width . 140)
+                                    (left-fringe . 10)
+                                    (right-fringe . 10)))
 
     (ivy-posframe-mode 1)))
 

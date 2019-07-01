@@ -47,6 +47,8 @@
   :straight t
   :config
   (progn
+    (add-hook 'iedit-mode-hook #'config-git--diff-hl-mode-on)
+    (add-hook 'iedit-mode-end-hook #'config-git--diff-hl-mode-off)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
     (global-diff-hl-mode)))
 

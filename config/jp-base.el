@@ -75,7 +75,7 @@
   (progn
     (setq hydra-hint-display-type 'posframe)
     (setq hydra-posframe-show-params
-          '(:internal-border-width 20
+          '(:internal-border-width 2
             :background-color "#242933"
             :override-parameters ((alpha 100 100))
             :poshandler (lambda (info)
