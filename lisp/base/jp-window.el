@@ -56,7 +56,8 @@
     ("j" move-border-down "↓")
     ("k" move-border-up "↑")
     ("l" move-border-right "→")
-    ("n" balance-windows "balance"))
+    ("n" balance-windows "balance")
+    ("f" toggle-frame-fullscreen "toggle fullscreen"))
 
    ;; split
    "Split"
