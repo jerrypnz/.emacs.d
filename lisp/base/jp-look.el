@@ -105,7 +105,10 @@ loading the init file so as to pick up custom settings."
         (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
         (add-to-list 'default-frame-alist '(internal-border-width . 1))
-        (set-fringe-mode 5))
+        (set-fringe-mode 5)
+        (setq window-divider-default-places 'right-only)
+        (setq window-divider-default-right-width 1)
+        (window-divider-mode 1))
     (when (not (eq system-type 'darwin))
       (menu-bar-mode -1))
     ;; Menu bar always off in text mode
