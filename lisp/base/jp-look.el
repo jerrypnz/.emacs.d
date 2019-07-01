@@ -26,7 +26,7 @@
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
-  (setq ns-use-thin-smoothing nil)
+  ;(setq ns-use-thin-smoothing nil)
   (setq frame-title-format ""))
 
 (defvar jp-geometry-file
