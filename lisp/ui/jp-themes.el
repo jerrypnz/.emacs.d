@@ -21,7 +21,6 @@
   ;; Customize faces
   (let ((theme (jp-themes--get-current))
         (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
-        (rev-color-fn (if jp-current-theme-dark-p 'doom-darken 'doom-lighten))
         (status-fg (if jp-current-theme-dark-p 'fg 'bg)))
     (doom-themes-set-faces theme
       ;; mode-line
@@ -56,9 +55,9 @@
       `(vertical-border :background (,color-fn modeline-bg 0.2)
                         :foreground (,color-fn modeline-bg 0.2))
       ;; diff-hl
-      `(diff-hl-insert :foreground green :background (,rev-color-fn green 0.5))
-      `(diff-hl-delete :foreground red :background (,rev-color-fn red 0.5))
-      `(diff-hl-change :foreground blue :background (,rev-color-fn blue 0.5))
+      `(diff-hl-insert :foreground green :background (doom-darken green 0.4))
+      `(diff-hl-delete :foreground red :background (doom-darken red 0.4))
+      `(diff-hl-change :foreground blue :background (doom-darken blue 0.4))
       ;; highlight
       `(symbol-overlay-default-face :background (,color-fn bg 0.1))
       '(symbol-overlay-face-1 :background blue :foreground bg-alt)

@@ -19,6 +19,8 @@
 (defvar jp-fixed-pitch-font nil
   "The font to use in the fixed-pitch face.")
 
+(setq-default line-spacing 0)
+
 (mapc (lambda (mode)
         (when (fboundp mode) (funcall mode -1)))
       '(scroll-bar-mode tool-bar-mode blink-cursor-mode))
@@ -100,7 +102,6 @@ loading the init file so as to pick up custom settings."
       (progn
         (jp-set-geometry)
         (add-hook 'kill-emacs-hook 'jp-save-frame-geometry)
-        (setq-default line-spacing 0)
         (jp-set-fonts)
         (jp-apply-fonts)
         (add-to-list 'default-frame-alist `(font . ,jp-default-font))
