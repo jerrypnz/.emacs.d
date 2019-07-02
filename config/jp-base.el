@@ -189,8 +189,9 @@
           'posframe-poshandler-window-center)
     (setq frog-menu-avy-padding t)
     (setq frog-menu-posframe-parameters
-          '((internal-border-width . 10)
-            (border-width . 2)))))
+          '((internal-border-width . 1)
+            (left-fringe . 10)
+            (right-fringe . 10)))))
 
 ;; frog-jump-buffer
 (use-package frog-jump-buffer
