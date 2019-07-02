@@ -65,20 +65,11 @@
 (require 'subr-x)
 
 (defun jp-init/init-load-path (&optional interactive-p)
-  "Add select subdirs of `user-emacs-directory' to the `load-path'.
-
-If argument INTERACTIVE-P is set, log additional information."
   (interactive "p")
   (let* ((before load-path)
          (lisp-dir (expand-file-name "lisp" user-emacs-directory))
-         (config-dir (expand-file-name "config" user-emacs-directory))
-         (git-subtrees
-          (seq-filter #'file-directory-p
-                      (directory-files lisp-dir t "^[^.]")))
-         (config-subtrees
-          (seq-filter #'file-directory-p
-                      (directory-files config-dir t "^[^.]"))))
-    (dolist (path (append (list lisp-dir config-dir) config-subtrees git-subtrees))
+         (config-dir (expand-file-name "config" user-emacs-directory)))
+    (dolist (path (list lisp-dir config-dir))
       (add-to-list 'load-path path)
       (add-to-list 'Info-default-directory-list path))
 
