@@ -193,16 +193,15 @@ RIGHT, aligned respectively."
              (t (upcase (symbol-name (plist-get sys :name)))))))))
 
 (defun jp-modeline-filename ()
-  (let ((filename (s-concat
+  (let* ((face (if (jp-modeline-active-p) 'mode-line-filename-face 'mode-line-filename-inactive-face))
+         (icon-face (unless (jp-modeline-active-p) 'mode-line-inactive))
+         (filename (s-concat
                    (when (buffer-file-name)
                      (shorten-directory default-directory 10))
-                   (propertize (jp-buffer-filename) 'face
-                               (if (jp-modeline-active-p)
-                                   'mode-line-filename-face
-                                 'mode-line-filename-inactive-face))))
+                   (propertize (jp-buffer-filename) 'face face)))
         (icon-size 0.8))
     `(" "
-      ,(moody-tab (with-mode-icon major-mode filename icon-size nil) nil 'down)
+      ,(moody-tab (with-mode-icon major-mode filename icon-size nil icon-face) nil 'down)
       " ")))
 
 (defun jp-modeline-position ()
