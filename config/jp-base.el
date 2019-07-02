@@ -47,11 +47,8 @@
 ;; highlight-sexp
 (use-package highlight-sexp
   :straight (:host github :type git :repo "jerrypnz/highlight-sexp")
-  :config
-  (progn
-    (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
-    (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
-    (add-hook 'clojure-mode-hook 'highlight-sexp-mode)))
+  :hook
+  ((lisp-mode emacs-lisp clojure-mode) . highlight-sexp-mode))
 
 ;; undo-tree
 (use-package undo-tree
