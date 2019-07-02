@@ -34,15 +34,10 @@
   (progn
     (setq jp-light-theme 'doom-nord-light
           jp-dark-theme 'doom-nord
-          jp-current-theme-dark-p t)
+          jp-current-theme-dark-p t
+          jp-default-font "Fira Code Light-14"
+          jp-variable-pitch-font "Lucida Grande-14")
     (jp-themes-load)))
-
-(use-package jp-look
-  :config
-  (progn
-    (setq jp-default-font "Fira Code Light-14")
-    (setq jp-variable-pitch-font "Lucida Grande-14")
-    (setq jp-fixed-pitch-font "Fira Code Light-14")))
 
 (use-package all-the-icons
   :straight t)

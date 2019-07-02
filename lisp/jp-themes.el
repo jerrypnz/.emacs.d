@@ -13,9 +13,18 @@
 (defvar jp-current-theme-dark-p t)
 (defvar jp-light-theme 'doom-one-light)
 (defvar jp-dark-theme 'doom-one)
+(defvar jp-default-font nil)
+(defvar jp-variable-pitch-font nil)
 
 (defun jp-themes--get-current ()
   (if jp-current-theme-dark-p jp-dark-theme jp-light-theme))
+
+(defun jp-themes--set-font ()
+  (when jp-default-font
+    (set-face-font 'default jp-default-font)
+    (set-face-font 'fixed-pitch jp-default-font))
+  (when jp-variable-pitch-font
+    (set-face-font 'variable-pitch jp-variable-pitch-font)))
 
 (defun jp-themes--customize-faces ()
   ;; Customize faces
@@ -85,6 +94,7 @@
 
 (defun jp-themes-load ()
   (load-theme (jp-themes--get-current) t nil)
+  (jp-themes--set-font)
   (jp-themes--customize-faces)
   (enable-theme (jp-themes--get-current)))
 

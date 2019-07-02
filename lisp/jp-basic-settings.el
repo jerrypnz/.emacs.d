@@ -18,6 +18,11 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; remove scroll bar, tool bar, blinking cursor
+(mapc (lambda (mode)
+        (when (fboundp mode) (funcall mode -1)))
+      '(scroll-bar-mode tool-bar-mode menu-bar-mode blink-cursor-mode))
+
 ;; better defaults
 (setq save-interprogram-paste-before-kill t
       mouse-yank-at-point t
@@ -42,10 +47,8 @@
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-;; OS X stuff
-;;; I prefer cmd key for meta
-(setq mac-command-modifier 'meta
-      mac-option-modifier 'super)
+;; line spacing
+(setq-default line-spacing 0)
 
 ;; Smooth scroll
 (setq scroll-step            1
@@ -88,6 +91,21 @@
 (delete-selection-mode t)
 ;; Soft-wrap lines
 ;;(global-visual-line-mode t)
+
+;; OS X stuff
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta
+        mac-option-modifier 'super
+        icon-title-format nil
+        frame-title-format nil)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . 'nil)))
+
+(when window-system
+  (set-fringe-mode 5)
+  (setq window-divider-default-places 'right-only)
+  (setq window-divider-default-right-width 1)
+  (window-divider-mode 1))
 
 (provide 'jp-basic-settings)
 
