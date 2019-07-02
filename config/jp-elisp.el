@@ -41,24 +41,6 @@ This checks in turn:
           ;; surrounding sexp for a function call.
           ((setq sym (function-at-point)) (describe-function sym)))))
 
-(major-mode-hydra-define emacs-lisp-mode nil;
-  ("Eval"
-   (("b" eval-buffer "buffer")
-    ("e" eval-defun "defun")
-    ("r" eval-region "region"))
-   "Test"
-   (("t" ert "prompt")
-    ("T" (ert t) "all")
-    ("F" (ert :failed) "failed"))
-   "Doc"
-   (("d" describe-foo-at-point "thing-at-pt")
-    ("f" describe-function)
-    ("v" describe-variable))))
-
-;; Prefer xref-find than dump-jump for elisp
-(define-key emacs-lisp-mode-map (kbd "M-.") #'xref-find-definitions)
-(define-key emacs-lisp-mode-map (kbd "C-M-.") #'xref-find-apropos)
-
 ;; Found in Fuco1's config here: https://github.com/Fuco1/.emacs.d/blob/af82072196564fa57726bdbabf97f1d35c43b7f7/site-lisp/redef.el#L20-L94
 (defun jp-lisp-indent-function (indent-point state)
   "This function is the normal value of the variable `lisp-indent-function'.
@@ -134,6 +116,24 @@ Lisp function does not specify a special indentation."
           (lambda ()
             (setq-local lisp-indent-function
                         #'jp-lisp-indent-function)))
+
+(major-mode-hydra-define emacs-lisp-mode nil
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
+   "Doc"
+   (("d" describe-foo-at-point "thing-at-pt")
+    ("f" describe-function)
+    ("v" describe-variable))))
+
+;; Prefer xref-find than dump-jump for elisp
+(define-key emacs-lisp-mode-map (kbd "M-.") #'xref-find-definitions)
+(define-key emacs-lisp-mode-map (kbd "C-M-.") #'xref-find-apropos)
 
 (provide 'jp-elisp)
 ;;; jp-elisp.el ends here
