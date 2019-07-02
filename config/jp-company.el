@@ -16,7 +16,6 @@
   :straight t
   :config
   (progn
-    (define-key company-active-map (kbd "RET") nil)
     (setq company-idle-delay 0.125
           company-minimum-prefix-length 1
           company-require-match nil

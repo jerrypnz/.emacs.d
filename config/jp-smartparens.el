@@ -16,14 +16,32 @@
   :straight t
   :bind
   (:map smartparens-mode-map
-        ("M-<right>" . sp-forward-slurp-sexp)
-        ("M-<left>" . sp-forward-barf-sexp)
-        ("M-S-<right>" . sp-backward-slurp-sexp)
-        ("M-S-<left>" . sp-backward-slurp-sexp)
-        ("M-<up>" . sp-raise-sexp)
-        ("C-k" . sp-kill-hybrid-sexp)
-        ("C-M-f" . sp-forward-sexp)
-        ("C-M-b" . sp-backward-sexp))
+   ("M-<right>" . sp-forward-slurp-sexp)
+   ("M-<left>" . sp-forward-barf-sexp)
+   ("M-S-<right>" . sp-backward-slurp-sexp)
+   ("M-S-<left>" . sp-backward-slurp-sexp)
+   ("M-<up>" . sp-raise-sexp)
+   ("C-k" . sp-kill-hybrid-sexp)
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+   :map prog-mode-map
+   ("C-M-q" . sp-indent-defun))
+
+  :hook
+  ((prog-mode
+    css-mode
+    sgml-mode
+    html-mode
+    inferior-emacs-lisp-mode
+    lisp-interaction-mode) . smartparens-mode)
+
+  :hook
+  ((prog-mode
+    css-mode
+    sgml-mode
+    html-mode
+    inferior-emacs-lisp-mode
+    lisp-interaction-mode) . show-smartparens-mode)
 
   :config
   (progn
@@ -51,7 +69,20 @@
                    :unless '(sp-in-string-p)
                    :actions '(insert wrap))
 
-    (setq sp-highlight-pair-overlay nil)))
+    (setq blink-matching-paren nil)
+    (setq sp-highlight-pair-overlay nil
+          sp-show-pair-delay 0)))
+
+;; rainbow delimiters
+(use-package rainbow-delimiters
+  :straight t
+  :hook
+  ((prog-mode
+    css-mode
+    sgml-mode
+    html-mode
+    inferior-emacs-lisp-mode
+    lisp-interaction-mode) . rainbow-delimiters-mode))
 
 (provide 'jp-smartparens)
 ;;; jp-smartparens.el ends here

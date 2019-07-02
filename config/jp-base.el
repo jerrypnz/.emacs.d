@@ -20,9 +20,6 @@
     (add-to-list 'exec-path-from-shell-variables "GOPATH")
     (exec-path-from-shell-initialize)))
 
-(use-package jp-env)
-(use-package jp-programming)
-
 ;; some useful global commands
 (use-package jp-commands
   :commands (xml-pretty-print rename-file-and-buffer macroexpand-point)
@@ -46,10 +43,6 @@
   :straight t
   :defer t
   :init (setq-default smex-history-length 32))
-
-;; rainbow delimiters
-(use-package rainbow-delimiters
-  :straight t)
 
 ;; highlight-sexp
 (use-package highlight-sexp
@@ -145,15 +138,22 @@
 ;; symbol-overlay
 (use-package symbol-overlay
   :straight t
-  :defer nil
+
+  :hook
+  ((prog-mode
+    css-mode
+    sgml-mode
+    html-mode) . symbol-overlay-mode)
+
   :bind
   (("M-s" . symbol-overlay-put))
+
   :config
   (progn
     ;; TODO add a hydra
     ;;(setq symbol-overlay-map nil)
     (setq symbol-overlay-idle-time 0.1)
-    (add-hook 'jp-prog-mode-hook #'symbol-overlay-mode)
+
     (eval-after-load "swiper"
       '(defadvice swiper (before jp-swiper-remove-highlight activate)
          ;; If the search string happens to be the symbol being
@@ -239,9 +239,27 @@
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t)))
 
-;; TODO configuration
-(use-package imenu-list
-  :straight t)
+;; ediff
+(use-package ediff
+  :defer t
+  :config
+  (progn
+    (defvar jp-ediff-last-windows nil)
+
+    (defun jp-store-pre-ediff-winconfig ()
+      (setq jp-ediff-last-windows (current-window-configuration)))
+
+    (defun jp-restore-pre-ediff-winconfig ()
+      (set-window-configuration jp-ediff-last-windows))
+
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    (add-hook 'ediff-before-setup-hook #'jp-store-pre-ediff-winconfig)
+    (add-hook 'ediff-quit-hook #'jp-restore-pre-ediff-winconfig)))
+
+(use-package apropos
+  :defer t
+  :config
+  (setq apropos-do-all t))
 
 (use-package helpful
   :straight t
@@ -261,7 +279,7 @@
 
 (use-package whitespace-cleanup-mode
   :straight t
-  :commands (whitespace-cleanup-mode))
+  :config (global-whitespace-cleanup-mode))
 
 (use-package rainbow-mode
   :straight t

@@ -86,6 +86,7 @@
 (require 'org-version)
 
 ;; Load features.
+(use-package jp-basic-settings)
 (use-package jp-ui)
 (use-package jp-base)
 (use-package jp-smartparens)

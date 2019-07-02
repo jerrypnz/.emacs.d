@@ -15,7 +15,15 @@
 (use-package flycheck
   :straight t
   :defer 1
-  :commands (flycheck-mode global-flycheck-mode)
+
+  :hook
+  ((prog-mode
+    css-mode
+    sgml-mode
+    html-mode
+    inferior-emacs-lisp-mode
+    lisp-interaction-mode) . flycheck-mode)
+
   :config
   (progn
     (setq flycheck-highlighting-mode 'symbols
