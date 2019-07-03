@@ -16,6 +16,7 @@
   :if (memq window-system '(mac ns x))
   :config
   (progn
+    (setq exec-path-from-shell-shell-name "/usr/local/bin/zsh")
     (setq exec-path-from-shell-arguments '("-l"))
     (add-to-list 'exec-path-from-shell-variables "GOPATH")
     (exec-path-from-shell-initialize)))
@@ -229,35 +230,6 @@
   :bind
   ("C-M-o" . jp-window/body))
 
-;; ispell
-(use-package ispell
-  :config
-  (progn
-    (setq-default ispell-program-name "hunspell")
-    (setq ispell-really-hunspell t)))
-
-;; ediff
-(use-package ediff
-  :defer t
-  :config
-  (progn
-    (defvar jp-ediff-last-windows nil)
-
-    (defun jp-store-pre-ediff-winconfig ()
-      (setq jp-ediff-last-windows (current-window-configuration)))
-
-    (defun jp-restore-pre-ediff-winconfig ()
-      (set-window-configuration jp-ediff-last-windows))
-
-    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-    (add-hook 'ediff-before-setup-hook #'jp-store-pre-ediff-winconfig)
-    (add-hook 'ediff-quit-hook #'jp-restore-pre-ediff-winconfig)))
-
-(use-package apropos
-  :defer t
-  :config
-  (setq apropos-do-all t))
-
 (use-package helpful
   :straight t
   :commands (helpful-callable
@@ -272,7 +244,7 @@
 
 (use-package page-break-lines
   :straight t
-  :commands (page-break-lines-mode))
+  :hook (prog-mode . page-break-lines-mode))
 
 (use-package whitespace-cleanup-mode
   :straight t
