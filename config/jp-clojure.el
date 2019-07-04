@@ -236,7 +236,8 @@
   :after (flycheck-joker)
   :config (dolist (checkers '((clj-kondo-clj . clojure-joker)
                               (clj-kondo-cljs . clojurescript-joker)
-                              (clj-kondo-cljc . clojure-joker)))
+                              (clj-kondo-cljc . clojure-joker)
+                              (clj-kondo-edn . edn-joker)))
             (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers)))))
 
 ;; (use-package clj-refactor
