@@ -68,7 +68,7 @@
        (plantuml . t)))
 
     (defun jp-org-confirm-babel-evaluate (lang body)
-      (not (string= lang "dot")))
+      (not (member lang '("dot" "plantuml"))))
 
     (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
 
