@@ -85,7 +85,7 @@
 ;; os x stuff
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta
-        mac-option-modifier 'super
+        mac-option-modifier 'nil
         icon-title-format nil
         frame-title-format nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
