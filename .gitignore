@@ -12,10 +12,10 @@ projectile-bookmarks.eld
 .cask
 /recentf
 *~
-
 /straight/*
 !/straight/versions/
 !/straight/versions/*
 /custom.el
 /tramp
 /transient
+/places
