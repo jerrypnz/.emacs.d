@@ -29,6 +29,10 @@
 
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
+(use-package hl-todo
+  :straight t
+  :hook (prog-mode . hl-todo-mode))
+
 (use-package magit-todos
   :straight t
   :after (magit)
