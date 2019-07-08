@@ -178,34 +178,34 @@
   :config
   (setq avy-background t))
 
-(use-package frog-menu
-  :straight t
-  :defer t
-  :config
-  (progn
-    (setf (alist-get 'avy-posframe frog-menu-display-option-alist)
-          'posframe-poshandler-window-center)
-    (setq frog-menu-avy-padding t)
-    (setq frog-menu-posframe-parameters
-          '((internal-border-width . 1)
-            (left-fringe . 10)
-            (right-fringe . 10)))))
+;; (use-package frog-menu
+;;   :straight t
+;;   :defer t
+;;   :config
+;;   (progn
+;;     (setf (alist-get 'avy-posframe frog-menu-display-option-alist)
+;;           'posframe-poshandler-window-center)
+;;     (setq frog-menu-avy-padding t)
+;;     (setq frog-menu-posframe-parameters
+;;           '((internal-border-width . 1)
+;;             (left-fringe . 10)
+;;             (right-fringe . 10)))))
 
 ;; frog-jump-buffer
-(use-package frog-jump-buffer
-  :straight t
-  :bind (("M-i" . frog-jump-buffer))
-  :config
-  (progn
-    (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project
-          frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project
-          frog-jump-buffer-include-current-buffer nil)
+;; (use-package frog-jump-buffer
+;;   :straight t
+;;   :bind (("M-i" . frog-jump-buffer))
+;;   :config
+;;   (progn
+;;     (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project
+;;           frog-jump-buffer-current-filter-function 'frog-jump-buffer-filter-same-project
+;;           frog-jump-buffer-include-current-buffer nil)
 
-    (defun jp-frog-jump-buffer (f &rest args)
-      (let* ((avy-background nil)) ;; no background dimming
-        (apply f args)))
+;;     (defun jp-frog-jump-buffer (f &rest args)
+;;       (let* ((avy-background nil)) ;; no background dimming
+;;         (apply f args)))
 
-    (advice-add #'frog-jump-buffer :around #'jp-frog-jump-buffer)))
+;;     (advice-add #'frog-jump-buffer :around #'jp-frog-jump-buffer)))
 
 ;; ace-window
 (use-package ace-window

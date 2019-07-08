@@ -50,7 +50,8 @@
 (use-package jp-projectile-utils
   :after (counsel-projectile)
   :bind
-  (("C-x b" . jp-switch-buffer)))
+  (("C-x b" . jp-switch-buffer)
+   ("M-i" . jp-switch-buffer)))
 
 (use-package ibuffer-projectile
   :straight t
