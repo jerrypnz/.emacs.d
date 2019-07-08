@@ -32,10 +32,10 @@
   :after (doom-themes)
   :config
   (progn
-    (setq jp-light-theme 'doom-nord-light
-          jp-dark-theme 'doom-nord
+    (setq jp-light-theme 'doom-one-light
+          jp-dark-theme 'doom-dracula
           jp-current-theme-dark-p t
-          jp-default-font "Fira Code Light-14"
+          jp-default-font "Fira Code-14"
           jp-variable-pitch-font "Lucida Grande-14")
     (jp-themes-load)))
 
