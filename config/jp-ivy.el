@@ -31,7 +31,7 @@
   :straight t
   :pretty-hydra
   (helpful-hydra
-   nil
+   (:color teal :quit-key "q" :hint nil)
    (""
     (("F" counsel-faces "faces")
      ("a" counsel-apropos "apropos")
