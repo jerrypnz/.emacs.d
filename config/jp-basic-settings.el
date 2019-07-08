@@ -82,16 +82,16 @@
 ;; soft-wrap lines
 ;;(global-visual-line-mode t)
 
-;; os x stuff
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta
-        mac-option-modifier 'nil
-        icon-title-format nil
-        frame-title-format nil)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . 'nil)))
-
 (when window-system
+  ;; os x stuff
+  (when (eq system-type 'darwin)
+    (setq mac-command-modifier 'meta
+          mac-option-modifier 'nil
+          icon-title-format nil
+          frame-title-format nil)
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . 'nil)))
+
   ;; window divier
   (setq
    window-divider-default-places 'right-only
