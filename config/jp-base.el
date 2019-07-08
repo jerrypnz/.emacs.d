@@ -232,15 +232,17 @@
 
 (use-package helpful
   :straight t
-  :commands (helpful-callable
-             helpful-variable
-             helpful-key
-             helpful-at-point
-             helpful-command))
 
-(use-package jp-help
-  :init (global-set-key (kbd "C-h") 'jp-help/body)
-  :commands (jp-help/body))
+  :pretty-hydra
+  ((:color teal :quit-key "q" :hint nil)
+   ("Helpful"
+    (("f" helpful-callable "callable")
+     ("v" helpful-variable "variable")
+     ("k" helpful-key "key")
+     ("c" helpful-command "command")
+     ("d" helpful-at-point "thing at point"))))
+
+  :bind ("C-h" . helpful-hydra/body))
 
 (use-package page-break-lines
   :straight t

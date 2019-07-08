@@ -29,6 +29,14 @@
 
 (use-package counsel
   :straight t
+  :pretty-hydra
+  (helpful-hydra
+   nil
+   (""
+    (("F" counsel-faces "faces")
+     ("a" counsel-apropos "apropos")
+     ("i" counsel-info-lookup-symbol "info lookup"))))
+
   :bind
   (("M-x"     . counsel-M-x)
    ("M-y"     . counsel-yank-pop)
