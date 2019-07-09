@@ -15,48 +15,6 @@
 
 (use-package clojure-mode
   :straight t
-  :init
-  (progn
-    (pretty-hydra-define jp-clojure-edit
-      (:hint nil :color teal :quite-key "q" :title "Edit Clojure Source")
-      ("Basic"
-       (("SPC" clojure-align "align")
-        ("p" clojure-cycle-privacy "cycle privacy")
-        ("f" clojure-cycle-if "cycle if/if-not")
-        ("w" clojure-cycle-when "cycle when/when-not")
-        (":" clojure-toggle-keyword-string "toggle keyword/string")
-        ("!" clojure-cycle-not "cycle not"))
-       "Let"
-       (("ll" (clojure-introduce-let 1) "introduce let")
-        ("lm" clojure-move-to-let "move to let")
-        ("lf" clojure-let-forward-slurp-sexp "forward slurp into")
-        ("lb" clojure-let-backward-slurp-sexp "backward slurp into"))
-       "Namespaces"
-       (("nn" clojure-insert-ns-form "insert ns form")
-        ("nh" clojure-insert-ns-form-at-point "insert ns form here")
-        ("np" clojure-update-ns "update ns form")
-        ("ns" clojure-sort-ns "sort ns"))
-       "Collections"
-       (("cl" clojure-convert-collection-to-list "to list")
-        ("cq" clojure-convert-collection-to-quoted-list "to quoted list")
-        ("cm" clojure-convert-collection-to-map "to map")
-        ("cv" clojure-convert-collection-to-vector "to vector")
-        ("cs" clojure-convert-collection-to-set "to set"))
-       "Threading"
-       (("tt" clojure-thread "thread once")
-        ("tf" clojure-thread-first-all "thread all ->")
-        ("tl" clojure-thread-last-all "thread all ->>")
-        ("tw" clojure-unwind "unwind once")
-        ("tu" clojure-unwind-all "unwind all"))))
-
-    (major-mode-hydra-define+ (clojure-mode clojurescript-mode clojurec-mode) nil
-      ("Clojure"
-       ((">" clojure-thread-first-all "thread-first")
-        ("<" clojure-thread-last-all "thread-last")
-        ("u" clojure-unwind-all "thread-unwind")
-        (":" clojure-toggle-keyword-string "toggle keyword/string")
-        ("SPC" clojure-align "align")
-        ("TAB" jp-clojure-edit/body "more...")))))
 
   :mode (("\\.clj\\'"  . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)
@@ -99,58 +57,52 @@
       (with-logging-context 1)
       ;; hiccup
       (xhtml 1)
-      (html5 1))))
+      (html5 1)))
+
+  :pretty-hydra
+  ((:color teal :quite-key "q" :title "Edit Clojure Source")
+   ("Basic"
+    (("SPC" clojure-align "align")
+     ("p" clojure-cycle-privacy "cycle privacy")
+     ("f" clojure-cycle-if "cycle if/if-not")
+     ("w" clojure-cycle-when "cycle when/when-not")
+     (":" clojure-toggle-keyword-string "toggle keyword/string")
+     ("!" clojure-cycle-not "cycle not"))
+    "Let"
+    (("ll" (clojure-introduce-let 1) "introduce let")
+     ("lm" clojure-move-to-let "move to let")
+     ("lf" clojure-let-forward-slurp-sexp "forward slurp into")
+     ("lb" clojure-let-backward-slurp-sexp "backward slurp into"))
+    "Namespaces"
+    (("nn" clojure-insert-ns-form "insert ns form")
+     ("nh" clojure-insert-ns-form-at-point "insert ns form here")
+     ("np" clojure-update-ns "update ns form")
+     ("ns" clojure-sort-ns "sort ns"))
+    "Collections"
+    (("cl" clojure-convert-collection-to-list "to list")
+     ("cq" clojure-convert-collection-to-quoted-list "to quoted list")
+     ("cm" clojure-convert-collection-to-map "to map")
+     ("cv" clojure-convert-collection-to-vector "to vector")
+     ("cs" clojure-convert-collection-to-set "to set"))
+    "Threading"
+    (("tt" clojure-thread "thread once")
+     ("tf" clojure-thread-first-all "thread all ->")
+     ("tl" clojure-thread-last-all "thread all ->>")
+     ("tw" clojure-unwind "unwind once")
+     ("tu" clojure-unwind-all "unwind all"))))
+
+  :mode-hydra
+  ((clojure-mode clojurescript-mode clojurec-mode)
+   ("Clojure"
+    ((">" clojure-thread-first-all "thread-first")
+     ("<" clojure-thread-last-all "thread-last")
+     ("u" clojure-unwind-all "thread-unwind")
+     (":" clojure-toggle-keyword-string "toggle keyword/string")
+     ("SPC" clojure-align "align")
+     ("TAB" clojure-mode-hydra/body "more...")))))
 
 (use-package cider
   :straight t
-  :init
-  (progn
-    (major-mode-hydra-define+ clojure-mode nil
-      ("Connect"
-       (("j" cider-jack-in "jack-in")
-        ("J" cider-jack-in-clojurescript "jack-in-cljs")
-        ("c" cider-connect "connect")
-        ("R" cider-restart "restart")
-        ("Q" cider-quit "disconnect"))
-       "Load"
-       (("k" cider-load-buffer "buffer")
-        ("l" cider-load-file "file")
-        ("L" cider-load-all-project-ns "all-ns")
-        ("g" cider-ns-refresh "reload"))
-       "Eval"
-       (("s" cider-repl-set-ns "set-repl-ns")
-        ("e" cider-eval-last-sexp-to-repl "eval-last")
-        ("f" cider-eval-defun-at-point "eval-defun")
-        ("I" cider-inspect-last-result "inspect-last-result")
-        ("D" (cider-eval-defun-at-point t) "debug-defun")
-        ("i" cider-interrupt "interrupt"))
-       "Test"
-       (("t" cider-test-run-ns-tests "ns")
-        ("T" cider-test-run-loaded-tests "loaded")
-        ("F" cider-test-rerun-failed-tests "failed"))
-       "Find"
-       (("n" cider-find-ns "ns")
-        ("d" cider-doc "doc"))))
-
-    (major-mode-hydra-define+ cider-repl-mode nil
-      ("Connect"
-       (("R" cider-restart "restart")
-        ("Q" cider-quit "disconnect")
-        ("q" nil "quit"))
-       "Load"
-       (("l" cider-load-file "file")
-        ("L" cider-load-all-project-ns "all-ns")
-        ("g" cider-ns-refresh "reload"))
-       "REPL"
-       (("s" cider-repl-set-ns "set-repl-ns")
-        ("i" cider-interrupt "interrupt")
-        ("c" cider-repl-clear-buffer "clear"))
-       "Find"
-       (("d" cider-doc "doc")))))
-
-  :commands (cider-jack-in
-             cider-jack-in-clojurescript
-             cider-connect)
 
   :config
   (progn
@@ -174,59 +126,98 @@
     ;; smartparens mode for the REPL
     (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
-    (setq cider-show-error-buffer nil)))
+    (setq cider-show-error-buffer nil))
+
+  :mode-hydra
+  (clojure-mode
+   ("Connect"
+    (("j" cider-jack-in "jack-in")
+     ("J" cider-jack-in-clojurescript "jack-in-cljs")
+     ("c" cider-connect "connect")
+     ("R" cider-restart "restart")
+     ("Q" cider-quit "disconnect"))
+    "Load"
+    (("k" cider-load-buffer "buffer")
+     ("l" cider-load-file "file")
+     ("L" cider-load-all-project-ns "all-ns")
+     ("g" cider-ns-refresh "reload"))
+    "Eval"
+    (("s" cider-repl-set-ns "set-repl-ns")
+     ("e" cider-eval-last-sexp-to-repl "eval-last")
+     ("f" cider-eval-defun-at-point "eval-defun")
+     ("I" cider-inspect-last-result "inspect-last-result")
+     ("D" (cider-eval-defun-at-point t) "debug-defun")
+     ("i" cider-interrupt "interrupt"))
+    "Test"
+    (("t" cider-test-run-ns-tests "ns")
+     ("T" cider-test-run-loaded-tests "loaded")
+     ("F" cider-test-rerun-failed-tests "failed"))
+    "Find"
+    (("n" cider-find-ns "ns")
+     ("d" cider-doc "doc"))))
+
+  :mode-hydra
+  (cider-repl-mode
+   ("Connect"
+    (("R" cider-restart "restart")
+     ("Q" cider-quit "disconnect")
+     ("q" nil "quit"))
+    "Load"
+    (("l" cider-load-file "file")
+     ("L" cider-load-all-project-ns "all-ns")
+     ("g" cider-ns-refresh "reload"))
+    "REPL"
+    (("s" cider-repl-set-ns "set-repl-ns")
+     ("i" cider-interrupt "interrupt")
+     ("c" cider-repl-clear-buffer "clear"))
+    "Find"
+    (("d" cider-doc "doc")))))
 
 (use-package jp-counsel-cider
   :after (cider)
-  :init
-  (progn
-    (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
-      ("Find"
-       (("a" jp-counsel-cider-apropos "apropos"))))
 
-    (major-mode-hydra-define+ cider-repl-mode nil
-      ("REPL"
-       (("h" jp-counsel-cider-repl-history "search-history")
-        ("H" cider-repl-history "show-history")))))
+  :mode-hydra
+  ((clojure-mode cider-repl-mode)
+   ("Find"
+    (("a" jp-counsel-cider-apropos "apropos"))))
 
-  :commands (jp-counsel-cider-apropos
-             jp-counsel-cider-repl-history))
+  :mode-hydra
+  (cider-repl-mode
+   ("REPL"
+    (("h" jp-counsel-cider-repl-history "search-history")
+     ("H" cider-repl-history "show-history")))))
 
 (use-package cider-macroexpansion
   :after (cider)
-  :init
-  (major-mode-hydra-define+ (clojure-mode cider-repl-mode) nil
-    ("Eval"
-     (("x" cider-macroexpand-1 "macroexpand-1")
-      ("X" cider-macroexpand-all "macroexpand-all"))))
 
-  :commands (cider-macroexpand-1 cider-macroexpand-all))
+  :mode-hydra
+  ((clojure-mode cider-repl-mode)
+   ("Eval"
+    (("x" cider-macroexpand-1 "macroexpand-1")
+     ("X" cider-macroexpand-all "macroexpand-all")))))
 
 (use-package inf-clojure
   :straight t
-  :init
-  (major-mode-hydra-define+ clojurescript-mode nil
-    ("Connect"
-     (("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
-      ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
-      ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
-      ("Q" inf-clojure-quit "disconnect"))
-     "Load"
-     (("k" inf-clojure-eval-buffer "buffer")
-      ("l" inf-clojure-load-file "file")
-      ("g" inf-clojure-reload "reload"))
-     "Eval"
-     (("s" inf-clojure-set-ns "set-repl-ns")
-      ("e" inf-clojure-eval-last-sexp "eval-last")
-      ("f" inf-clojure-eval-defun "eval-defun")
-      ("x" inf-clojure-macroexpand "expand"))
-     "Find"
-     (("d" inf-clojure-show-var-documentation "doc")
-      ("a" inf-clojure-apropos "apropos"))))
 
-  :commands (inf-clojure-minor-mode
-             inf-clojure-connect
-             inf-clojure))
+  :mode-hydra
+  (clojurescript-mode
+   ("Connect"
+    (("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
+     ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
+     ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
+     ("Q" inf-clojure-quit "disconnect"))
+    "Load"
+    (("k" inf-clojure-eval-buffer "buffer")
+     ("l" inf-clojure-load-file "file")
+     ("g" inf-clojure-reload "reload"))
+    "Eval"
+    (("s" inf-clojure-set-ns "set-repl-ns")
+     ("e" inf-clojure-eval-last-sexp "eval-last")
+     ("f" inf-clojure-eval-defun "eval-defun")
+     ("x" inf-clojure-macroexpand "expand"))
+    "Find"
+    (("d" inf-clojure-show-var-documentation "doc")
+     ("a" inf-clojure-apropos "apropos")))))
 
 (use-package flycheck-joker
   :straight t)
