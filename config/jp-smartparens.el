@@ -32,7 +32,7 @@
     css-mode
     sgml-mode
     html-mode
-    inferior-emacs-lisp-mode
+    ielm-mode
     lisp-interaction-mode) . smartparens-mode)
 
   :hook
@@ -40,7 +40,7 @@
     css-mode
     sgml-mode
     html-mode
-    inferior-emacs-lisp-mode
+    ielm-mode
     lisp-interaction-mode) . show-smartparens-mode)
 
   :config
