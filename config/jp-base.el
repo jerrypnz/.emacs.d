@@ -260,5 +260,16 @@
   :straight t
   :commands (deadgrep))
 
+(use-package dash-at-point
+  :straight t
+
+  :config
+  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure,java,javadoc"))
+
+  :pretty-hydra
+  ("Dash"
+   (("d" dash-at-point "at point")
+    ("e" dash-at-point-with-docset "with docset"))))
+
 (provide 'jp-base)
 ;;; jp-base.el ends here
