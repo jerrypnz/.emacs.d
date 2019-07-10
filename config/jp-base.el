@@ -61,25 +61,15 @@
     (global-undo-tree-mode)))
 
 (use-package hydra
-  :straight t
-  :config
-  (progn
-    (defvar jp-current-theme-dark-p)
-    (setq hydra-hint-display-type 'posframe)
+  :straight t)
 
-    (let* ((bg (doom-color 'modeline-bg))
-           (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
-           (border (funcall color-fn bg 0.2)))
-      (setq hydra-posframe-show-params
-            `(:background-color ,bg
-              :internal-border-width 1
-              :internal-border-color ,border
-              :override-parameters ((alpha 100 100)
+(use-package hydra-posframe
+  :straight (:host github :repo "Ladicle/hydra-posframe")
+  :hook (after-init . hydra-posframe-enable)
+  :config
+  (setq hydra-posframe-parameters '((alpha 95 95)
                                     (left-fringe . 10)
-                                    (right-fringe . 10))
-              :poshandler (lambda (info)
-                            (cons (car (posframe-poshandler-frame-center info))
-                                  (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10))))))))
+                                    (right-fringe . 10))))
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
@@ -234,7 +224,7 @@
   :straight t
 
   :pretty-hydra
-  ((:color teal :quit-key "q" :hint nil)
+  ((:color teal :quit-key "q")
    ("Helpful"
     (("f" helpful-callable "callable")
      ("v" helpful-variable "variable")
