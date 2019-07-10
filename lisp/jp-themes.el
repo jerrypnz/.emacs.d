@@ -41,17 +41,9 @@
                            :foreground modeline-fg-alt
                            :overline (,color-fn modeline-bg 0.2)
                            :underline (,color-fn modeline-bg 0.2))
-      `(mode-line-read-only-face :inherit 'mode-line
-                                 :background dark-blue
-                                 :overline dark-blue
-                                 :underline dark-blue
-                                 :foreground ,status-fg)
+      `(mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground ,status-fg)
       '(mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
-      `(mode-line-read-write-face :inherit 'mode-line
-                                  :background red
-                                  :overline red
-                                  :underline red
-                                  :foreground ,status-fg)
+      `(mode-line-read-write-face :inherit 'mode-line :background red :foreground ,status-fg)
       '(mode-line-read-write-inactive-face :inherit 'mode-line-inactive :foreground red)
       '(mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
       '(mode-line-process-face :inherit 'mode-line :foreground green)
@@ -82,6 +74,8 @@
       ;; ivy
       '(ivy-posframe :inherit 'default :background modeline-bg)
       `(ivy-posframe-border :inherit 'default :background (,color-fn modeline-bg 0.2))
+      ;; hydra-posframe
+      `(hydra-posframe-border-face :inherit 'default :background (,color-fn modeline-bg 0.2))
       ;; s-exp
       `(hl-sexp-face :background (,color-fn bg 0.03))
       ;; frog-menu
