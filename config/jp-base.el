@@ -263,7 +263,7 @@
   :straight t
 
   :config
-  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure,java,javadoc"))
+  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure,java,javadoc,cljdoc"))
 
   :pretty-hydra
   ((:color teal :quit-key "q")
