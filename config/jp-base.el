@@ -63,10 +63,19 @@
 (use-package hydra
   :straight t)
 
+(use-package posframe
+  :straight t
+  :config
+  (defun jp-frame-bottom-poshandler (info)
+    (cons (car (posframe-poshandler-frame-center info))
+          (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 50))))
+
 (use-package hydra-posframe
-  :straight (:host github :repo "Ladicle/hydra-posframe")
+  :straight (:host github :repo "Ladicle/hydra-posframe"
+             :fork (:host github :repo "jerrypnz/hydra-posframe"))
   :hook (after-init . hydra-posframe-enable)
   :config
+  (setq hydra-posframe-poshandler 'jp-frame-bottom-poshandler)
   (setq hydra-posframe-parameters '((alpha 95 95)
                                     (left-fringe . 10)
                                     (right-fringe . 10))))
@@ -257,9 +266,10 @@
   (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure,java,javadoc"))
 
   :pretty-hydra
-  ("Dash"
-   (("d" dash-at-point "at point")
-    ("e" dash-at-point-with-docset "with docset"))))
+  ((:color teal :quit-key "q")
+   ("Dash"
+    (("d" dash-at-point "at point")
+     ("e" dash-at-point-with-docset "with docset")))))
 
 (provide 'jp-base)
 ;;; jp-base.el ends here

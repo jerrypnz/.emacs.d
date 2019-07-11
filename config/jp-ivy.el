@@ -57,11 +57,7 @@
   :config
   (progn
     (defun jp-ivy-posframe-display (str)
-      (ivy-posframe--display
-       str
-       (lambda (info)
-         (cons (car (posframe-poshandler-frame-center info))
-               (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 10)))))
+      (ivy-posframe--display str #'jp-frame-bottom-poshandler))
 
     (setq ivy-posframe-display-functions-alist '((t . jp-ivy-posframe-display))
           ivy-posframe-border-width 1
