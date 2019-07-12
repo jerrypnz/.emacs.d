@@ -17,17 +17,16 @@
 (autoload 'flycheck-first-error "flycheck")
 
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Flycheck
-(defhydra jp-flycheck
-  (:hint nil :foreign-keys warn
-         :body-pre (flycheck-list-errors)
-         :post (quit-windows-on "*Flycheck errors*"))
-  "Errors"
+(defhydra jp-flycheck (:foreign-keys warn
+                       :body-pre (flycheck-list-errors)
+                       :post (quit-windows-on "*Flycheck errors*"))
+  "\n\nErrors "
   ("f"  flycheck-error-list-set-filter                            "filter")
   ("n"  flycheck-next-error                                       "next")
   ("p"  flycheck-previous-error                                   "previous")
   ("<"  flycheck-first-error                                      "first")
   (">"  (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
-  ("q"  nil))
+  ("q"  nil nil))
 
 (provide 'jp-flycheck-hydra)
 ;;; jp-flycheck-hydra.el ends here

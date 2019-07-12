@@ -38,7 +38,7 @@
 (defvar jp-layout--title)
 (setq jp-layout--title (with-faicon "windows" "Window Layouts" 1 -0.05))
 
-(pretty-hydra-define jp-layouts (:hint nil :foreign-keys warn :quit-key "q" :title jp-layout--title)
+(pretty-hydra-define jp-layouts (:foreign-keys warn :quit-key "q" :title jp-layout--title)
   ("Actions"
    (("TAB" eyebrowse-last-window-config   "last")
     ("n" eyebrowse-next-window-config   "next")

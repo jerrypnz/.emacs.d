@@ -17,7 +17,6 @@
 (pretty-hydra-define jp-rectangle (:body-pre (rectangle-mark-mode 1)
                                    :title jp-rectangle--title
                                    :color pink
-                                   :hint nil
                                    :post (deactivate-mark)
                                    :foreign-keys warn)
   ("Select"

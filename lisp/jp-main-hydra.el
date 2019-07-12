@@ -50,7 +50,7 @@
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
 
 (pretty-hydra-define jp-toggles
-  (:hint nil :color amaranth :quit-key "q" :title jp-toggles--title)
+  (:color amaranth :quit-key "q" :title jp-toggles--title)
   ("Basic"
    (("n" linum-mode "line number" :toggle t)
     ("w" whitespace-mode "whitespace" :toggle t)
@@ -81,7 +81,7 @@
                     (s-concat "Projects (current: " p ")")))))
 
 (pretty-hydra-define jp-projects
-  (:hint nil :color teal :quit-key "q" :title (jp-projects--title))
+  (:color teal :quit-key "q" :title (jp-projects--title))
   ("Current Project"
    (("f" counsel-projectile "open file/buffer")
     ("b" counsel-projectile-switch-to-buffe "switch to buffer")
@@ -97,7 +97,7 @@
 (setq jp-git--title (with-octicon "git-compare" "Git"))
 
 (pretty-hydra-define jp-git
-  (:hint nil :color teal :quit-key "q" :title jp-git--title)
+  (:color teal :quit-key "q" :title jp-git--title)
   ("Actions"
    (("s" magit-status "magit status")
     ("l" magit-log-buffer-file "commit log (current file)")
@@ -111,7 +111,7 @@
                    1.1 0.01))
 
 (pretty-hydra-define jp-main-hydra
-  (:hint nil :color teal :quit-key "q" :title jp-main-hydra--title)
+  (:color teal :quit-key ("q" "M-SPC") :title jp-main-hydra--title)
   ("Actions"
    (("TAB" jp-switch-to-previous-buffer "prev buffer")
     ("SPC" counsel-M-x "M-x")
@@ -124,9 +124,7 @@
     ("," treemacs-select-window "treemacs")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
-    ("F" jp-flycheck/body "flycheck")
-    ;; The hydra is bound to M-SPC, pressing it again closes it.
-    ("M-SPC" nil nil))
+    ("F" jp-flycheck/body "flycheck"))
 
    "Menus"
    (("p" jp-projects/body "projects...")

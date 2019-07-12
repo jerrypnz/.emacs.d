@@ -40,7 +40,7 @@
 (defvar jp-window--title)
 (setq jp-window--title (with-faicon "windows" "Window Management" 1 -0.05))
 
-(pretty-hydra-define jp-window (:hint nil :foreign-keys warn :title jp-window--title)
+(pretty-hydra-define jp-window (:foreign-keys warn :title jp-window--title)
   (;; general window management commands
    "Actions"
    (("TAB" other-window "switch")

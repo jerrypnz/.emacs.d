@@ -10,10 +10,12 @@
 
 (require 'hydra)
 
-(defhydra hydra-macro (:hint nil :color pink :pre
-                             (when defining-kbd-macro
-                               (kmacro-end-macro 1)))
+(defhydra hydra-macro (:color pink
+                       :hint nil
+                       :pre (when defining-kbd-macro
+                              (kmacro-end-macro 1)))
   "
+
   ^^Create-Cycle^^   ^Basic^          ^Insert^        ^Save^         ^Edit^
 ╭─────────────────────────────────────────────────────────────────────────╯
      ^_i_^           [_e_] execute    [_n_] insert    [_b_] name      [_'_] previous
