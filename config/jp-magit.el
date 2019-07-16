@@ -74,7 +74,8 @@
     (add-hook 'iedit-mode-hook #'config-git--diff-hl-mode-on)
     (add-hook 'iedit-mode-end-hook #'config-git--diff-hl-mode-off)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-    (global-diff-hl-mode)))
+    (global-diff-hl-mode)
+    (diff-hl-flydiff-mode)))
 
 (provide 'jp-magit)
 ;;; jp-magit.el ends here
