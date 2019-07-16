@@ -111,6 +111,8 @@
 (use-package jp-scala)
 (use-package jp-elisp)
 (use-package jp-lua)
+(use-package jp-lsp)
+(use-package jp-rust)
 (use-package jp-go)
 (use-package jp-php)
 (use-package jp-puppet)
