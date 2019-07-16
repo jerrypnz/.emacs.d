@@ -51,6 +51,11 @@
   :hook
   ((lisp-mode emacs-lisp clojure-mode) . highlight-sexp-mode))
 
+;; highlight todo
+(use-package hl-todo
+  :straight t
+  :hook (prog-mode . hl-todo-mode))
+
 ;; undo-tree
 (use-package undo-tree
   :straight t

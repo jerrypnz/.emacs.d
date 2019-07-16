@@ -93,18 +93,6 @@
    (("p" jp-eyebrowse-switch-project "switch")
     ("r" jp-refresh-projectile-projects "refresh project list"))))
 
-(defvar jp-git--title)
-(setq jp-git--title (with-octicon "git-compare" "Git"))
-
-(pretty-hydra-define jp-git
-  (:color teal :quit-key "q" :title jp-git--title)
-  ("Actions"
-   (("s" magit-status "magit status")
-    ("l" magit-log-buffer-file "commit log (current file)")
-    ("L" magit-log-current "commit log (project)")
-    ("b" magit-blame-addition "blame")
-    ("t" git-timemachine "time machine"))))
-
 (defvar jp-main-hydra--title)
 (setq jp-main-hydra--title
       (with-faicon "keyboard-o" (propertize "Main Dispatcher\n" 'face '(:weight bold :height 1.1))
