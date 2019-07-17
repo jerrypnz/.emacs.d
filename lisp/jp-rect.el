@@ -13,11 +13,20 @@
 (defvar jp-rectangle--title)
 (setq jp-rectangle--title (with-material "grid_on" "Rectangle" 1 -0.1))
 
+(defvar-local jp-rectangle--highlight-disabled nil)
+
 ;; Taken from https://github.com/abo-abo/hydra/wiki/Rectangle-Operations
-(pretty-hydra-define jp-rectangle (:body-pre (rectangle-mark-mode 1)
+(pretty-hydra-define jp-rectangle (:body-pre (progn
+                                               (when (bound-and-true-p symbol-overlay-mode)
+                                                 (symbol-overlay-mode -1)
+                                                 (setq-local jp-rectangle--highlight-disabled t))
+                                               (rectangle-mark-mode 1))
                                    :title jp-rectangle--title
                                    :color pink
-                                   :post (deactivate-mark)
+                                   :post (progn
+                                           (deactivate-mark)
+                                           (when jp-rectangle--highlight-disabled
+                                             (symbol-overlay-mode +1)))
                                    :foreign-keys warn)
   ("Select"
    (("k" rectangle-previous-line "↑")
