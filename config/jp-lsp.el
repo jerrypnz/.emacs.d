@@ -13,7 +13,6 @@
 
 (use-package lsp-mode
   :straight t
-  :demand t
   :preface
   (progn
     (defvar jp-lsp-hydra--title)
@@ -24,26 +23,30 @@
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
    ("Connection"
-    (("c" lsp "start")
-     ("R" lsp-restart-workspace "restart")
-     ("D" lsp-describe-session "describe session")
-     ("Q" lsp-disconnect "disconnect"))
-    "Navigation"
+    (("cc" lsp "start")
+     ("cr" lsp-restart-workspace "restart")
+     ("cd" lsp-describe-session "describe session")
+     ("cq" lsp-disconnect "disconnect"))
+    "Find & Goto"
     (("d" lsp-describe-thing-at-point "describe symbol")
-     ("R" lsp-find-references "references")
-     ("j" lsp-find-definition "definition")
-     ("t" lsp-goto-type-definition "goto type def")
-     ("i" lsp-goto-implementation "goto impl"))
+     ("gr" lsp-find-references "references")
+     ("gd" lsp-find-definition "definition")
+     ("gt" lsp-goto-type-definition "goto type def")
+     ("gi" lsp-goto-implementation "goto impl"))
     "Refactor"
-    (("r" lsp-rename "rename")
-     ("f" lsp-format-buffer "format"))
+    (("rr" lsp-rename "rename")
+     ("rf" lsp-format-buffer "format"))
     "Toggles"
-    (("l" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
+    (("tl" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
 
-  :bind
-  (:map lsp-mode-map
-   ("C-M-SPC" . lsp-mode-hydra/body)
-   ("M-." . lsp-find-definition))
+  :mode-hydra
+  ((rust-mode go-mode java-mode)
+   (:color teal :quit-key "q" :title jp-lsp-hydra--title)
+   ("LSP"
+    (("d" lsp-describe-thing-at-point "describe")
+     ("R" lsp-rename "rename")
+     ("F" lsp-format-buffer "format")
+     ("l" lsp-mode-hydra/body "more..."))))
 
   :config
   (require 'lsp-clients)
@@ -52,11 +55,21 @@
 
 (use-package lsp-ui
   :straight t
-  :after (lsp-mode)
+  :hook (lsp-mode . lsp-ui-mode)
+
+  :bind
+  (:map lsp-ui-mode-map
+   ("M-." . lsp-ui-peek-find-definitions)
+   ("M-?" . lsp-ui-peek-find-references))
+
   :pretty-hydra
   (lsp-mode-hydra
    ("Toggles"
-    (("u" lsp-ui-mode "toggle ui" :toggle t :exit nil)))))
+    (("td" lsp-ui-doc-mode "toggle hover doc" :toggle t :exit nil))))
+
+  :config
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-enable nil))
 
 (use-package lsp-java
   :straight t
