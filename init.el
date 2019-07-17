@@ -101,22 +101,18 @@
 (use-package jp-org)
 (use-package jp-treemacs)
 
-(use-package jp-docker)
-(use-package jp-yaml)
-(use-package jp-markdown)
-(use-package jp-plantuml)
-
 ;; Programming language support
 (use-package jp-clojure)
 (use-package jp-scala)
 (use-package jp-elisp)
-(use-package jp-lua)
 (use-package jp-lsp)
 (use-package jp-rust)
 (use-package jp-go)
-(use-package jp-php)
-(use-package jp-puppet)
-(use-package jp-protobuf)
+
+;; Other major modes
+(use-package jp-markdown)
+(use-package jp-plantuml)
+(use-package jp-other-major-modes)
 
 ;;; Print overall startup time.
 
