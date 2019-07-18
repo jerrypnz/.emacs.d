@@ -38,11 +38,13 @@
                    (side            . bottom)
                    (window-height   . 0.25)))))
 
-(use-package flycheck-pos-tip
+(use-package flycheck-posframe
   :straight t
-  :after (flycheck)
+  :after flycheck
+  :hook (flycheck-mode . flycheck-posframe-mode)
   :config
-  (flycheck-pos-tip-mode))
+  (flycheck-posframe-configure-pretty-defaults)
+  (setq flycheck-posframe-border-width 5))
 
 (use-package flycheck-package
   :straight t
