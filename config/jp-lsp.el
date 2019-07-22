@@ -69,7 +69,8 @@
 
   :config
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-enable nil))
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-flycheck-enable t))
 
 (use-package lsp-java
   :straight t

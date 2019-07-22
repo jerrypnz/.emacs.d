@@ -53,5 +53,9 @@
      ("T" cargo-process-test "test all")
      ("c" cargo-hydra/body "more...")))))
 
+(use-package flycheck-rust
+  :straight t
+  :hook (flycheck-mode . flycheck-rust-setup))
+
 (provide 'jp-rust)
 ;;; jp-rust.el ends here
