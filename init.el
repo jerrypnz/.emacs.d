@@ -83,10 +83,9 @@
 
 (jp-init/init-load-path)
 
-(require 'org-version)
-
 ;; Load features.
 (use-package jp-basic-settings)
+(use-package jp-org)
 (use-package jp-ui)
 (use-package jp-base)
 (use-package jp-smartparens)
@@ -98,7 +97,6 @@
 (use-package jp-magit)
 (use-package jp-restclient)
 (use-package jp-yasnippet)
-(use-package jp-org)
 (use-package jp-treemacs)
 
 ;; Programming language support

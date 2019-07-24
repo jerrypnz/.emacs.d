@@ -18,7 +18,6 @@
 (defconst jp-work-notes "~/org/work-notes.org")
 (defconst jp-study-notes "~/org/study-notes.org")
 
-
 (use-package org
   :straight org-plus-contrib
   :defer t
