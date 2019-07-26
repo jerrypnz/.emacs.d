@@ -219,17 +219,11 @@
     (("d" inf-clojure-show-var-documentation "doc")
      ("a" inf-clojure-apropos "apropos")))))
 
-(use-package flycheck-joker
-  :straight t)
-
 (use-package flycheck-clj-kondo
   :straight t
-  :after (flycheck-joker)
-  :config (dolist (checkers '((clj-kondo-clj . clojure-joker)
-                              (clj-kondo-cljs . clojurescript-joker)
-                              (clj-kondo-cljc . clojure-joker)
-                              (clj-kondo-edn . edn-joker)))
-            (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers)))))
+  :after (clojure-mode)
+  :config
+  (require 'flycheck-clj-kondo))
 
 ;; (use-package clj-refactor
 ;;   :straight t
