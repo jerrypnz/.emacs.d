@@ -39,11 +39,10 @@
   (("C-=" . er/expand-region)
    ("C--" . er/contract-region)))
 
-;; smex
-(use-package smex
+;; amx
+(use-package amx
   :straight t
-  :defer t
-  :init (setq-default smex-history-length 32))
+  :init (setq amx-history-length 32))
 
 ;; highlight-sexp
 (use-package highlight-sexp
