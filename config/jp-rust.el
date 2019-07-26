@@ -27,6 +27,15 @@
     (setq cargo-hydra--title (with-octicon "package" "Cargo")))
   :straight t
 
+  :config
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*Cargo")
+                 (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+                 (reusable-frames . visible)
+                 (side            . bottom)
+                 (window-height   . 0.25)))
+
   :pretty-hydra
   ((:title cargo-hydra--title :quit-key "q")
    ("Packages"
