@@ -47,7 +47,7 @@
   (progn
     (require 'smartparens-config)
 
-    (defun jp--sp-pair-on-newline (id action context)
+    (defun jp--sp-pair-on-newline (_id _action _context)
       "Put trailing pair on newline and return to point."
       (save-excursion
         (newline)

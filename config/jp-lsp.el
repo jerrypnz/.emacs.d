@@ -24,7 +24,7 @@
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
    ("Connection"
     (("cc" lsp "start")
-     ("cr" lsp-restart-workspace "restart")
+     ("cr" lsp-workspace-restart "restart")
      ("cd" lsp-describe-session "describe session")
      ("cq" lsp-disconnect "disconnect"))
     "Find & Goto"
