@@ -95,6 +95,15 @@ buffers."
        "tidy -utf8 -xml -i -w 76 --indent-attributes true 2>/dev/null")
      (buffer-name) t)))
 
+(defun edn-pretty-print ()
+  (interactive)
+  (save-excursion
+    (shell-command-on-region
+     (mark)
+     (point)
+     "jet --from edn --to edn --pretty"
+     (buffer-name) t)))
+
 ;;; line numbering
 (defun toggle-linum ()
   (interactive)
