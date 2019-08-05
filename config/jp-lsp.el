@@ -18,7 +18,7 @@
     (defvar jp-lsp-hydra--title)
     (setq jp-lsp-hydra--title  (with-octicon "server" "Language Server Commands")))
 
-  :hook ((go-mode rust-mode) . lsp-deferred)
+  :hook ((go-mode rust-mode java-mode) . lsp-deferred)
 
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
@@ -75,10 +75,9 @@
 (use-package lsp-java
   :straight t
   :after (lsp-mode)
-  :hook (java-mode . lsp-deferred)
   :config
-  (setq lsp-java-server-install-dir "~/.jdt.ls/"
-        lsp-java-workspace-dir "~/.jdt-workspace/"
+  (setq lsp-java-server-install-dir (expand-file-name "~/.jdt.ls/")
+        lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
         lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir)
         lsp-java-maven-download-sources t))
 
