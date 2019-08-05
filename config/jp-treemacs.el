@@ -25,7 +25,6 @@
           treemacs-width 40)
 
     (treemacs-follow-mode t)
-    (treemacs-tag-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
     (treemacs-fringe-indicator-mode nil)

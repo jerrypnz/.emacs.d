@@ -56,10 +56,10 @@
   :straight t
   :config
   (progn
-    (defun jp-ivy-posframe-display (str)
+    (defun ivy-posframe-display--jp-custom (str)
       (ivy-posframe--display str #'jp-frame-bottom-poshandler))
 
-    (setq ivy-posframe-display-functions-alist '((t . jp-ivy-posframe-display))
+    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display--jp-custom))
           ivy-posframe-border-width 1
           ivy-posframe-hide-minibuffer t
           ivy-posframe-min-width 100
