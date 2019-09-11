@@ -19,6 +19,13 @@
   :straight t
   :mode "\\.rs\\'")
 
+;;;; TODO Not ready yet, check it out later
+;; (use-package ra-emacs-lsp
+;;   :straight (:host github
+;;              :repo "rust-analyzer/rust-analyzer"
+;;              :branch "master"
+;;              :files ("editors/emacs/*.el")))
+
 ;; Add keybindings for interacting with Cargo
 (use-package cargo
   :preface
