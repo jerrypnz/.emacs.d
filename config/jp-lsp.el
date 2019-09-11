@@ -81,6 +81,20 @@
         lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir)
         lsp-java-maven-download-sources t))
 
+(use-package lsp-ivy
+  :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
+  :after (lsp-mode)
+
+  :pretty-hydra
+  (lsp-mode-hydra
+   ("Find"
+    (("gf" lsp-ivy-workspace-symbol "workspace symbol"))))
+
+  :mode-hydra
+  ((rust-mode go-mode java-mode) nil
+   ("LSP"
+    (("a" lsp-ivy-workspace-symbol "workspace symbol")))))
+
 (use-package company-lsp
   :straight t
   :after (lsp-mode company)
