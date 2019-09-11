@@ -99,7 +99,10 @@
   :straight t
   :after (lsp-mode company)
   :config
-  (add-to-list 'company-backends 'company-lsp))
+  (add-to-list 'company-backends 'company-lsp)
+  (add-hook 'rust-mode-hook
+            (lambda () (setq company-backends
+                             (delete 'company-capf company-backends)))))
 
 (provide 'jp-lsp)
 ;;; jp-lsp.el ends here
