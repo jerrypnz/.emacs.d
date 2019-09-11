@@ -80,7 +80,7 @@
   :hook (after-init . hydra-posframe-enable)
   :config
   (setq hydra-posframe-poshandler 'jp-frame-bottom-poshandler)
-  (setq hydra-posframe-parameters '((alpha 95 95)
+  (setq hydra-posframe-parameters '((alpha 100 100)
                                     (left-fringe . 10)
                                     (right-fringe . 10))))
 
