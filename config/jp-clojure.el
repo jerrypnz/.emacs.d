@@ -45,6 +45,7 @@
       (go?>x 1)
       (go?> 1)
       (go-loop? 1)
+      (go-handle 1)
       (thread? 0)
       (thread?> 1)
       (thread?>x 1)
@@ -223,26 +224,19 @@
   :straight t
   :after (clojure-mode)
   :config
-  (require 'flycheck-clj-kondo))
+  (require 'flycheck-clj-kondo)
 
-;; (use-package clj-refactor
-;;   :straight t
-;;   :commands (hydra-cljr-cljr-menu/body
-;;              hydra-cljr-ns-menu/body
-;;              hydra-cljr-code-menu/body
-;;              hydra-cljr-project-menu/body
-;;              hydra-cljr-toplevel-form-menu/body)
-;;   :config
-;;   (progn
-;;     (add-hook 'cider-mode-hook (lambda ()
-;;                                  (clj-refactor-mode 1)))
-
-;;     (major-mode-hydra-bind clojure-mode "Refactor"
-;;       ("rs" hydra-cljr-cljr-menu/body "refactor")
-;;       ("rn" hydra-cljr-ns-menu/body "namespaces")
-;;       ("rc" hydra-cljr-code-menu/body "code")
-;;       ("rp" hydra-cljr-project-menu/body "project")
-;;       ("rt" hydra-cljr-toplevel-form-menu/body "top level form"))))
+  (defun jp-clj-kondo-lint-all ()
+    (interactive)
+    (let* ((proj-root (projectile-project-root))
+           (proj-file (expand-file-name "project.clj" proj-root))
+           (clj-kondo-dir (expand-file-name ".clj-kondo" proj-root)))
+      (if (not (file-exists-p proj-file))
+          (user-error "Not a leiningen project: %s" proj-root)
+        (make-directory clj-kondo-dir t)
+        (message "Running 'lein classpath' to get classpath")
+        (let ((classpath (shell-command-to-string "lein classpath 2>/dev/null")))
+          (compile (format "clj-kondo --lint %s --cache" (s-trim classpath))))))))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here
