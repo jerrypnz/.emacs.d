@@ -98,11 +98,7 @@
 (use-package company-lsp
   :straight t
   :after (lsp-mode company)
-  :config
-  (add-to-list 'company-backends 'company-lsp)
-  (add-hook 'rust-mode-hook
-            (lambda () (setq company-backends
-                             (delete 'company-capf company-backends)))))
+  (add-to-list 'company-backends 'company-lsp))
 
 (provide 'jp-lsp)
 ;;; jp-lsp.el ends here
