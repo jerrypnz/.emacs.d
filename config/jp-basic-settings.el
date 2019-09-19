@@ -99,7 +99,11 @@
   (window-divider-mode 1)
 
   ;; set fringe width
-  (set-fringe-mode 5))
+  (set-fringe-mode 5)
+
+  ;; ligature support
+  (when (fboundp 'mac-auto-operator-composition-mode)
+    (mac-auto-operator-composition-mode t)))
 
 
 

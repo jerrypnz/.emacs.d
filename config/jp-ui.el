@@ -35,8 +35,8 @@
     (setq jp-light-theme 'doom-one-light
           jp-dark-theme 'doom-dracula
           jp-current-theme-dark-p t
-          jp-default-font "Fira Code-14"
-          jp-variable-pitch-font "Lucida Grande-14")
+          jp-default-font "Fira Code Retina-13"
+          jp-variable-pitch-font "Lucida Grande-13")
     (jp-themes-load)))
 
 (use-package all-the-icons
