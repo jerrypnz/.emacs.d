@@ -98,7 +98,12 @@
 (use-package company-lsp
   :straight t
   :after (lsp-mode company)
-  (add-to-list 'company-backends 'company-lsp))
+  :config
+  (add-hook 'lsp-mode-hook
+            '(lambda ()
+               (setq-local company-backends
+                           (cons 'company-lsp
+                                 (remove 'company-capf company-backends))))))
 
 (provide 'jp-lsp)
 ;;; jp-lsp.el ends here
