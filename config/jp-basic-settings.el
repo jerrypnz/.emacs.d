@@ -89,6 +89,8 @@
           mac-option-modifier 'nil
           icon-title-format nil
           frame-title-format nil)
+    (setq ns-use-native-fullscreen nil)
+    (setq ns-use-fullscreen-animation nil)
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     ;; ligature support
