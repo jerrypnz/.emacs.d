@@ -48,7 +48,9 @@
   :config
   (progn
     (setq x-underline-at-descent-line t)
-    (setq moody-slant-function #'moody-slant)))
+    (setq moody-slant-function (if (eq window-system 'ns)
+                                   #'moody-slant-apple-rgb
+                                 #'moody-slant))))
 
 (use-package jp-modeline
   :config
