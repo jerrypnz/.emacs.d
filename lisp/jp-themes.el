@@ -75,6 +75,7 @@
       '(ivy-posframe :inherit 'default :background modeline-bg)
       `(ivy-posframe-border :inherit 'default :background (,color-fn modeline-bg 0.2))
       ;; hydra-posframe
+      '(hydra-posframe-face :inherit 'default :background modeline-bg)
       `(hydra-posframe-border-face :inherit 'default :background (,color-fn modeline-bg 0.2))
       ;; s-exp
       `(hl-sexp-face :background (,color-fn bg 0.03))
