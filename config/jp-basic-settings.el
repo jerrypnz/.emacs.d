@@ -90,7 +90,10 @@
           icon-title-format nil
           frame-title-format nil)
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-    (add-to-list 'default-frame-alist '(ns-appearance . 'nil)))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    ;; ligature support
+    (when (fboundp 'mac-auto-operator-composition-mode)
+      (mac-auto-operator-composition-mode t)))
 
   ;; window divier
   (setq
@@ -99,12 +102,7 @@
   (window-divider-mode 1)
 
   ;; set fringe width
-  (set-fringe-mode 5)
-
-  ;; ligature support
-  (when (fboundp 'mac-auto-operator-composition-mode)
-    (mac-auto-operator-composition-mode t)))
-
+  (set-fringe-mode 5))
 
 
 ;; Configuration for Emacs builtin packages
