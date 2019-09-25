@@ -30,9 +30,13 @@
  auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
  ;; smooth scrolling
  scroll-step            1
- scroll-conservatively  10000
+ scroll-conservatively  101
  scroll-margin          5
  scroll-preserve-screen-position t
+ ;; mouse scrolling
+ mouse-wheel-follow-mouse 't
+ mouse-wheel-progressive-speed nil
+ mouse-wheel-scroll-amount '(2 ((shift) . 4) ((control) . 6))
  ;; no ring bell
  ring-bell-function 'ignore
  ;; prefer splitting windows horizontally
@@ -56,13 +60,12 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; better scrolling with mouse wheel/trackpad.
-(unless (and (boundp 'mac-mouse-wheel-smooth-scroll) mac-mouse-wheel-smooth-scroll)
-  (global-set-key [wheel-down] (lambda () (interactive) (scroll-up-command 1)))
-  (global-set-key [wheel-up] (lambda () (interactive) (scroll-down-command 1)))
-  (global-set-key [double-wheel-down] (lambda () (interactive) (scroll-up-command 2)))
-  (global-set-key [double-wheel-up] (lambda () (interactive) (scroll-down-command 2)))
-  (global-set-key [triple-wheel-down] (lambda () (interactive) (scroll-up-command 4)))
-  (global-set-key [triple-wheel-up] (lambda () (interactive) (scroll-down-command 4))))
+(global-set-key [wheel-down] (lambda () (interactive) (scroll-up-command 1)))
+(global-set-key [wheel-up] (lambda () (interactive) (scroll-down-command 1)))
+(global-set-key [double-wheel-down] (lambda () (interactive) (scroll-up-command 2)))
+(global-set-key [double-wheel-up] (lambda () (interactive) (scroll-down-command 2)))
+(global-set-key [triple-wheel-down] (lambda () (interactive) (scroll-up-command 4)))
+(global-set-key [triple-wheel-up] (lambda () (interactive) (scroll-down-command 4)))
 
 ;; character encodings default to utf-8.
 (prefer-coding-system 'utf-8)
@@ -88,11 +91,13 @@
     (setq mac-command-modifier 'meta
           mac-option-modifier 'nil
           icon-title-format nil
-          frame-title-format nil)
-    (setq ns-use-native-fullscreen nil)
-    (setq ns-use-fullscreen-animation nil)
+          frame-title-format nil
+          ns-use-native-fullscreen nil
+          ns-use-fullscreen-animation nil
+          )
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
+
     ;; ligature support
     (when (fboundp 'mac-auto-operator-composition-mode)
       (mac-auto-operator-composition-mode t)))
