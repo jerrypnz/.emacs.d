@@ -16,7 +16,6 @@
 (require 'cider-find)
 (require 'cider-client)
 (require 'cider-doc)
-(require 'cider-grimoire)
 (require 'cider-repl-history)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -42,14 +41,10 @@
 (defun jp-counsel-cider-apropos--action-doc (candidate)
   (cider-doc-lookup (jp-counsel-cider--get-symbol candidate)))
 
-(defun jp-counsel-cider-apropos--action-grimoire (candidate)
-  (cider-grimoire-lookup (jp-counsel-cider--get-symbol candidate)))
-
 (defvar jp-counsel-cider-apropos--actions
   '(1
     ("o" jp-counsel-cider-apropos--action-find "find")
-    ("d" jp-counsel-cider-apropos--action-doc "doc")
-    ("g" jp-counsel-cider-apropos--action-grimoire "grimoire")))
+    ("d" jp-counsel-cider-apropos--action-doc "doc")))
 
 (defun jp-counsel-cider-apropos--transformer (str)
   (if (not (s-contains? "/" str))
