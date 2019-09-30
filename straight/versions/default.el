@@ -67,7 +67,7 @@
  ("lsp-ui" . "c8fa40c0f9c65877d1cabe1739e5f787adb24898")
  ("lua-mode" . "95c64bb5634035630e8c59d10d4a1d1003265743")
  ("magit" . "5c424142704d481faafce7b834af67c1aca98e68")
- ("major-mode-hydra.el" . "dcd8e48fb2368ff2838db820af06823fe20befdf")
+ ("major-mode-hydra.el" . "c85ed3be0a6209d37deade25ab4057f91e78dc2f")
  ("markdown-mode" . "f3c54e34cc5228001af36a5301883325319f21d4")
  ("melpa" . "c756ccbae044bc23131060355532261aa9a12409")
  ("moody" . "ac17d739075a571a086756fcaed482814888bf5c")
