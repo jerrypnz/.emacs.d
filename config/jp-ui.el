@@ -33,7 +33,7 @@
   :config
   (progn
     (setq jp-light-theme 'doom-one-light
-          jp-dark-theme 'doom-molokai
+          jp-dark-theme 'doom-palenight
           jp-current-theme-dark-p t
           ;;jp-default-font "Fira Code Retina-13"
           jp-default-font "Cascadia Code-13"

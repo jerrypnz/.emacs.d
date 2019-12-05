@@ -37,7 +37,8 @@
                   :foreground modeline-fg
                   :overline (,color-fn modeline-bg 0.2)
                   :underline (,color-fn modeline-bg 0.2))
-      `(mode-line-inactive :background modeline-bg-inactive
+      `(fringe :inherit 'default)
+      `(mode-line-inactive :background modeline-bg
                            :foreground modeline-fg-alt
                            :overline (,color-fn modeline-bg 0.2)
                            :underline (,color-fn modeline-bg 0.2))
