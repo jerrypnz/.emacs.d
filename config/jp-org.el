@@ -145,6 +145,8 @@
             ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
              nil nil :ascent center)
             ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Reading" ,(list (all-the-icons-faicon "book" :height 0.95 :v-adjust 0.05))
              nil nil :ascent center)))
 
     (setq org-agenda-sorting-strategy
