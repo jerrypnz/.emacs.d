@@ -44,11 +44,11 @@
 
 (use-package treemacs-projectile
   :straight t
-  :after (:and treemacs projectile))
+  :after treemacs projectile)
 
 (use-package treemacs-magit
   :straight t
-  :after (:and treemacs magit))
+  :after treemacs magit)
 
 (provide 'jp-treemacs)
 ;;; jp-treemacs.el ends here
