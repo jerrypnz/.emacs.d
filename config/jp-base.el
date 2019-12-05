@@ -177,7 +177,7 @@
   (("M-g c" . avy-goto-char)
    ("M-g g" . avy-goto-line)
    ("M-g w" . avy-goto-word-1)
-   ("C-M-g" . avy-goto-word-1))
+   ("C-M-g" . avy-goto-char-timer))
   :config
   (setq avy-background t))
 
