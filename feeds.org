@@ -1,6 +1,7 @@
 * Feeds                                                              :elfeed:
 ** Clojure                                                          :clojure:
 *** http://insideclojure.org/feed.xml
-** Emacs                                                              :emacs:clojure:
+** Emacs                                                      :emacs:clojure:
 *** https://metaredux.com/feed.xml
-*** https://nullprogram.com/feed/
+** Programming                                                  :programming:
+*** https://randomascii.wordpress.com/feed/

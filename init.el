@@ -112,6 +112,9 @@
 (use-package jp-plantuml)
 (use-package jp-other-major-modes)
 
+;; Tools
+(use-package jp-elfeed)
+
 ;;; Print overall startup time.
 
 (unless noninteractive
