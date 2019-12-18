@@ -48,5 +48,17 @@
     (put 'global 'fennel-indent-function 1)
     (put 'if 'fennel-indent-function 1)))
 
+(use-package mmm-jinja2
+  :straight t
+  :config
+  (progn
+    (setq mmm-global-mode 'maybe)
+    (dolist (x '(("edn" . clojure-mode)
+                 ("yaml" . yaml-mode)
+                 ("sh" . sh-mode)))
+      (let ((pattern (concat "\\." (car x) "\\.j2\\'")))
+        (add-to-list 'auto-mode-alist `(,pattern . ,(cdr x)))
+        (mmm-add-mode-ext-class (cdr x) pattern 'jinja2)))))
+
 (provide 'jp-other-major-modes)
 ;;; jp-other-major-modes.el ends here
