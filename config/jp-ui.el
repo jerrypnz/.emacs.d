@@ -37,7 +37,7 @@
           jp-current-theme-dark-p t
           ;;jp-default-font "Fira Code Retina-13"
           jp-default-font "Cascadia Code-13"
-          jp-variable-pitch-font "Lucida Grande-13")
+          jp-variable-pitch-font "Lucida Grande-14")
     (jp-themes-load)))
 
 (use-package all-the-icons
