@@ -94,6 +94,12 @@
    (("p" jp-eyebrowse-switch-project "switch")
     ("r" jp-refresh-projectile-projects "refresh project list"))))
 
+(pretty-hydra-define jp-emacs-profiler
+  (:color pink :quite-key "q" :title (with-faicon "tachometer" "Emacs Profiler" 1 -0.05))
+  ("Actions"
+   (("C-M-s" profiler-start "start")
+    ("C-M-t" (progn (profiler-report) (profiler-stop)) "stop & report" :exit t))))
+
 (defvar jp-main-hydra--title)
 (setq jp-main-hydra--title
       (with-faicon "keyboard-o" (propertize "Main Dispatcher\n" 'face '(:weight bold :height 1.1))
@@ -123,7 +129,8 @@
     ("M" hydra-macro/body "macros...")
     ("w" jp-window/body "windows...")
     ("l" jp-layouts/body "layouts...")
-    ("t" jp-toggles/body "toggles..."))
+    ("t" jp-toggles/body "toggles...")
+    ("P" jp-emacs-profiler/body "profiler..."))
 
    "Org"
    (("c" org-capture "capture")
