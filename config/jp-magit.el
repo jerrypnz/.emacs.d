@@ -62,6 +62,7 @@
 ;; diff-hl
 (use-package diff-hl
   :straight t
+  :defer nil
   :pretty-hydra
   (jp-git
    ("Diff"
