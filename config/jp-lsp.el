@@ -35,6 +35,7 @@
      ("gi" lsp-goto-implementation "goto impl"))
     "Refactor"
     (("rr" lsp-rename "rename")
+     ("ra" lsp-execute-code-action "code action")
      ("rf" lsp-format-buffer "format"))
     "Toggles"
     (("tl" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
@@ -45,6 +46,7 @@
    ("LSP"
     (("d" lsp-describe-thing-at-point "describe")
      ("R" lsp-rename "rename")
+     ("A" lsp-execute-code-action "code action")
      ("F" lsp-format-buffer "format")
      ("l" lsp-mode-hydra/body "more..."))))
 
@@ -54,6 +56,7 @@
   (setq lsp-rust-analyzer-server-display-inlay-hints t)
   (setq lsp-rust-analyzer-max-inlay-hint-length 16)
   (setq lsp-rust-analyzer-use-client-watching t)
+  (setq lsp-rust-analyzer-cargo-watch-enable t)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
   (require 'lsp-clients)
   (setq lsp-prefer-flymake nil)
@@ -71,7 +74,8 @@
   :pretty-hydra
   (lsp-mode-hydra
    ("Toggles"
-    (("td" lsp-ui-doc-mode "toggle hover doc" :toggle t :exit nil))))
+    (("td" lsp-ui-doc-mode "toggle hover doc" :toggle t :exit nil)
+     ("ts" lsp-ui-sideline-mode "toggle sideline" :toggle t :exit nil))))
 
   :config
   (setq lsp-ui-sideline-enable nil)
@@ -89,7 +93,6 @@
 
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
-  :after (lsp-mode)
 
   :pretty-hydra
   (lsp-mode-hydra
