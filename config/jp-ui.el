@@ -24,6 +24,9 @@
     ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
     ;; may have their own settings.
     (doom-themes-org-config)
+    ;; Lead star hiding does not play well with ligatures
+    (setq org-hide-leading-stars nil
+          org-hide-leading-stars-before-indent-mode nil)
     (doom-themes-treemacs-config)
     (setq doom-nord-padded-modeline 2)))
 
