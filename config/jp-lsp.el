@@ -51,16 +51,12 @@
      ("l" lsp-mode-hydra/body "more..."))))
 
   :config
-  ;;TODO move this to a different place
-  (setq lsp-rust-server 'rust-analyzer)
-  (setq lsp-rust-analyzer-server-display-inlay-hints t)
-  (setq lsp-rust-analyzer-max-inlay-hint-length 16)
-  (setq lsp-rust-analyzer-use-client-watching t)
-  (setq lsp-rust-analyzer-cargo-watch-enable t)
-  (setq lsp-rust-analyzer-cargo-watch-command "clippy")
-  (require 'lsp-clients)
   (setq lsp-prefer-flymake nil)
+  (setq lsp-auto-execute-action nil)
   (setq lsp-auto-configure nil))
+
+(use-package lsp-clients
+  :after (lsp-mode))
 
 (use-package lsp-ui
   :straight t
@@ -90,6 +86,21 @@
         lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
         lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir)
         lsp-java-maven-download-sources t))
+
+(use-package lsp-rust
+  :defer t
+  :preface
+  (progn
+    (defvar lsp-rust-analyzer-server-display-inlay-hints)
+    (setq lsp-rust-analyzer-server-display-inlay-hints t)
+    (defvar lsp-rust-server)
+    (setq lsp-rust-server 'rust-analyzer))
+  :config
+  (progn
+    (setq lsp-rust-analyzer-max-inlay-hint-length 16)
+    (setq lsp-rust-analyzer-use-client-watching t)
+    (setq lsp-rust-analyzer-cargo-watch-enable t)
+    (setq lsp-rust-analyzer-cargo-watch-command "clippy")))
 
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
