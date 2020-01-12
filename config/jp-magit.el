@@ -40,7 +40,9 @@
           ("~/dev/personal/"    . 2)
           ("~/dev/open-source/" . 2)))
 
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+
+  (transient-bind-q-to-quit))
 
 ;; (use-package magit-todos
 ;;   :straight t
