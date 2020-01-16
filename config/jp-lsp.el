@@ -89,7 +89,7 @@
 
 (use-package lsp-rust
   :defer t
-  :preface
+  :init
   (progn
     (defvar lsp-rust-analyzer-server-display-inlay-hints)
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
