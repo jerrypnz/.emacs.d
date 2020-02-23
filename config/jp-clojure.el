@@ -115,8 +115,6 @@
     (setq cider-repl-use-pretty-printing t)
     ;; nicer font lock in REPL
     (setq cider-repl-use-clojure-font-lock t)
-    ;; result prefix for the REPL
-    (setq cider-repl-result-prefix ";; => ")
     ;; never ending REPL history
     (setq cider-repl-wrap-history t)
     ;; looong history
@@ -127,7 +125,8 @@
     ;; smartparens mode for the REPL
     (add-hook 'cider-repl-mode-hook #'smartparens-mode)
     ;; error buffer not popping up
-    (setq cider-show-error-buffer nil))
+    (setq cider-show-error-buffer nil)
+    (setq cider-print-fn 'fipp))
 
   :mode-hydra
   (clojure-mode

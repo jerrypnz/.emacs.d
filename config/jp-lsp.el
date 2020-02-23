@@ -24,7 +24,7 @@
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
    ("Connection"
     (("cc" lsp "start")
-     ("cr" lsp-workspace-restart "restart")
+     ("cr" lsp-restart-workspace "restart")
      ("cd" lsp-describe-session "describe session")
      ("cq" lsp-disconnect "disconnect"))
     "Find & Goto"
@@ -79,8 +79,32 @@
   (setq lsp-ui-flycheck-enable t))
 
 (use-package lsp-java
+  :preface
+  (progn
+    (defvar jp-java-hydra--title)
+    (setq jp-java-hydra--title  (with-octicon "server" "Java Language Server Commands")))
   :straight t
   :after (lsp-mode)
+  :mode-hydra
+  ((java-mode)
+   (:color teal :quit-key "q" :title jp-java-hydra--title)
+   ("Action"
+    (("b" lsp-java-build-project "build")
+     ("o" lsp-java-organize-imports "organize imports")
+     ("U" lsp-java-update-project-configuration "update project config"))
+    "Generate"
+    (("gs" lsp-generate-to-string "generate toString")
+     ("ge" lsp-java-generate-equals-and-hash-code "generate equals/hashCode")
+     ("go" lsp-java-generate-overrides "generate overrides")
+     ("gg" lsp-java-generate-getters-and-setters "generate getters/setters"))
+    "Refactoring"
+    (("re" lsp-java-extract-to-constant "extract constant")
+     ("rm" lsp-java-extract-method "extract method")
+     ("ri" lsp-java-add-import  "add import")
+     ("ru" lsp-java-add-unimplemented-methods "add unimplemented methods")
+     ("rp" lsp-java-create-parameter "introduce parameter")
+     ("rf" lsp-java-create-field "introduce field")
+     ("rl" lsp-java-create-local "introduce local variable"))))
   :config
   (setq lsp-java-server-install-dir (expand-file-name "~/.jdt.ls/")
         lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
