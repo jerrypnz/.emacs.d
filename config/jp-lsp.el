@@ -78,6 +78,20 @@
   (setq lsp-ui-doc-enable nil)
   (setq lsp-ui-flycheck-enable t))
 
+(use-package dap-mode
+  :straight t
+  :after (lsp-mode)
+  :hook ((lsp-mode . dap-mode)
+         (lsp-mode . dap-ui-mode))
+  :config
+  (progn
+    (require 'ansi-color)
+    (defun colorize-compilation-buffer ()
+      (toggle-read-only)
+      (ansi-color-apply-on-region compilation-filter-start (point))
+      (toggle-read-only))
+    (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)))
+
 (use-package lsp-java
   :preface
   (progn
@@ -110,6 +124,17 @@
         lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
         lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir)
         lsp-java-maven-download-sources t))
+
+(use-package dap-java
+  :after (dap-mode)
+  :mode-hydra
+  ((java-mode)
+   nil
+   ("Run/Debug"
+    (("t" dap-java-run-test-class "run test class")
+     ("T" dap-java-debug-test-class "debug test class"))))
+  :config
+  (setq dap-java-test-runner (expand-file-name "~/.jdt.ls/test-runner/junit-platform-console-standalone.jar")))
 
 (use-package lsp-rust
   :defer t
