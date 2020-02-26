@@ -28,11 +28,7 @@
      ("cd" lsp-describe-session "describe session")
      ("cq" lsp-disconnect "disconnect"))
     "Find & Goto"
-    (("d" lsp-describe-thing-at-point "describe symbol")
-     ("gr" lsp-find-references "references")
-     ("gd" lsp-find-definition "definition")
-     ("gt" lsp-goto-type-definition "goto type def")
-     ("gi" lsp-goto-implementation "goto impl"))
+    (("d" lsp-describe-thing-at-point "describe symbol"))
     "Refactor"
     (("rr" lsp-rename "rename")
      ("ra" lsp-execute-code-action "code action")
@@ -51,9 +47,7 @@
      ("l" lsp-mode-hydra/body "more..."))))
 
   :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-auto-execute-action nil)
-  (setq lsp-auto-configure nil))
+  (setq lsp-auto-execute-action nil))
 
 (use-package lsp-clients
   :after (lsp-mode))
@@ -71,12 +65,14 @@
   (lsp-mode-hydra
    ("Toggles"
     (("td" lsp-ui-doc-mode "toggle hover doc" :toggle t :exit nil)
-     ("ts" lsp-ui-sideline-mode "toggle sideline" :toggle t :exit nil))))
+     ("ts" lsp-ui-sideline-mode "toggle sideline" :toggle t :exit nil))
+    "Find & Goto"
+    (("gr" lsp-ui-peek-find-references "references")
+     ("gd" lsp-ui-peek-find-definitions "definitions"))))
 
   :config
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-flycheck-enable t))
+  (setq lsp-ui-doc-enable nil))
 
 (use-package dap-mode
   :straight t
@@ -137,7 +133,7 @@
   (setq dap-java-test-runner (expand-file-name "~/.jdt.ls/test-runner/junit-platform-console-standalone.jar")))
 
 (use-package lsp-rust
-  :defer t
+  :after (lsp-mode)
   :init
   (progn
     (defvar lsp-rust-analyzer-server-display-inlay-hints)
