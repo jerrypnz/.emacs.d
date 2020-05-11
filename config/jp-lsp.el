@@ -18,7 +18,7 @@
     (defvar jp-lsp-hydra--title)
     (setq jp-lsp-hydra--title  (with-octicon "server" "Language Server Commands")))
 
-  :hook ((go-mode rust-mode java-mode) . lsp-deferred)
+  :hook ((go-mode rust-mode java-mode scala-mode) . lsp-deferred)
 
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
@@ -37,7 +37,7 @@
     (("tl" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
 
   :mode-hydra
-  ((rust-mode go-mode java-mode)
+  ((rust-mode go-mode java-mode scala-mode)
    (:color teal :quit-key "q" :title jp-lsp-hydra--title)
    ("LSP"
     (("d" lsp-describe-thing-at-point "describe")
@@ -147,6 +147,9 @@
     (setq lsp-rust-analyzer-cargo-watch-enable t)
     (setq lsp-rust-analyzer-cargo-watch-command "clippy")))
 
+(use-package lsp-metals
+  :after (lsp-mode))
+
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
 
@@ -159,16 +162,6 @@
   ((rust-mode go-mode java-mode) nil
    ("LSP"
     (("a" lsp-ivy-workspace-symbol "workspace symbol")))))
-
-(use-package company-lsp
-  :straight t
-  :after (lsp-mode company)
-  :config
-  (add-hook 'lsp-mode-hook
-            '(lambda ()
-               (setq-local company-backends
-                           (cons 'company-lsp
-                                 (remove 'company-capf company-backends))))))
 
 (provide 'jp-lsp)
 ;;; jp-lsp.el ends here

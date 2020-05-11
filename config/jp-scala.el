@@ -40,19 +40,17 @@
           scala-indent:operator-strategy)))
 
 (use-package sbt-mode
-  :straight t)
-
-(use-package ensime
-  ;; Have to do this to get around https://github.com/raxod502/straight.el/issues/279
-  :straight (:host github :repo "ensime/ensime-emacs" :branch "2.0")
-  :commands (ensime)
+  :straight t
+  :commands (sbt-start sbt-command)
   :config
-  (progn
-    ;; Disable startup notification
-    (setq ensime-startup-notification nil)
-    ;; Enable Expand Region integration from Ensime.  Ignore load errors to
-    ;; handle older Ensime versions gracefully.
-    (require 'ensime-expand-region nil 'noerror)))
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+  ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+  (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 (provide 'jp-scala)
 ;;; jp-scala.el ends here
