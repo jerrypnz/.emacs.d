@@ -52,5 +52,20 @@
   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
   (setq sbt:program-options '("-Dsbt.supershell=false")))
 
+(use-package bloop
+  :preface
+  (progn
+    (defvar jp-scala-hydra--title)
+    (setq jp-scala-hydra--title  (with-octicon "server" "Scala Language Server Commands")))
+  :straight (:host github :type git :repo "tarao/emacs-bloop")
+  :after (lsp-mode)
+  :mode-hydra
+  (scala-mode
+   (:color teal :quit-key "q" :title jp-scala-hydra--title)
+   ("Build & Test"
+    (("t" bloop-test-only "test")
+     ("T" bloop-test "rename")
+     ("b" bloop-compile "compile")))))
+
 (provide 'jp-scala)
 ;;; jp-scala.el ends here
