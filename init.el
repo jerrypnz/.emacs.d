@@ -114,6 +114,7 @@
 
 ;; Tools
 (use-package jp-elfeed)
+(use-package jp-org-roam)
 
 ;;; Print overall startup time.
 

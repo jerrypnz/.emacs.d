@@ -14,7 +14,6 @@
 (defconst jp-gtd-org-file "~/org/gtd.org")
 (defconst jp-inbox-org-file "~/org/inbox.org")
 (defconst jp-someday-org-file "~/org/someday.org")
-(defconst jp-notes-dir "~/org/notes")
 (defconst jp-work-notes "~/org/work-notes.org")
 (defconst jp-study-notes "~/org/study-notes.org")
 
