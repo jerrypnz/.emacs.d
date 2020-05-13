@@ -67,5 +67,8 @@
      ("T" bloop-test "rename")
      ("b" bloop-compile "compile")))))
 
+(use-package ob-spark-shell
+  :straight (:host github :type git :repo "jerrypnz/ob-spark-shell"))
+
 (provide 'jp-scala)
 ;;; jp-scala.el ends here
