@@ -35,11 +35,12 @@
   :after (doom-themes)
   :config
   (progn
-    (setq jp-light-theme 'doom-one-light
-          jp-dark-theme 'doom-palenight
-          jp-current-theme-dark-p t
+    (setq jp-light-theme 'doom-tomorrow-day
+          jp-dark-theme 'doom-tomorrow-night
+          jp-current-theme-dark-p nil
           ;;jp-default-font "Fira Code Retina-13"
-          jp-default-font "JetBrains Mono Medium-14"
+          ;;jp-default-font "JetBrains Mono Medium-14"
+          jp-default-font "Cascadia Code-14"
           jp-variable-pitch-font "Lucida Grande-14")
     (jp-themes-load)))
 
