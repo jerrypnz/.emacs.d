@@ -67,8 +67,15 @@
      ("T" bloop-test "rename")
      ("b" bloop-compile "compile")))))
 
-(use-package ob-spark-shell
-  :straight (:host github :type git :repo "jerrypnz/ob-spark-shell"))
+(use-package ammonite-term-repl
+  :straight t
+  :commands (run-ammonite)
+  :custom
+  (ammonite-term-repl-auto-detect-predef-file nil)
+  (ammonite-term-repl-program-args '("--class-based")))
+
+(use-package ob-ammonite
+  :straight t)
 
 (provide 'jp-scala)
 ;;; jp-scala.el ends here
