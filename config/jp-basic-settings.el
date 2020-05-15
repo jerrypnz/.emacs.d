@@ -14,7 +14,7 @@
 ;; remove scroll bar, tool bar, blinking cursor
 (mapc (lambda (mode)
         (when (fboundp mode) (funcall mode -1)))
-      '(scroll-bar-mode tool-bar-mode menu-bar-mode blink-cursor-mode))
+      '(scroll-bar-mode tool-bar-mode menu-bar-mode blink-cursor-mode window-divider-mode))
 
 (setq
  ;; better defaults
@@ -105,8 +105,6 @@
   ;; (setq
   ;;  window-divider-default-places 'right-only
   ;;  window-divider-default-right-width 1)
-
-  (window-divider-mode -1)
 
   (add-to-list 'default-frame-alist '(internal-border-width . 15))
 
