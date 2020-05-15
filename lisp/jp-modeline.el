@@ -130,7 +130,8 @@ RIGHT, aligned respectively."
      " "
      (propertize  " "
                   'display `((space :align-to (- (+ right right-fringe right-margin)
-                                                 ,(+ reserve 2)))))
+                                                 ,reserve)
+                                    :ascent 50)))
      right)))
 
 ;; Flycheck update function
@@ -204,6 +205,12 @@ RIGHT, aligned respectively."
       ,(moody-tab (with-mode-icon major-mode filename icon-size nil icon-face) nil 'down)
       " ")))
 
+(defun jp-headline-filename ()
+  `("☰" ,(jp-buffer-filename) " "))
+
+(defun jp-headline-position ()
+  `(" %3l:" (3 "%c")))
+
 (defun jp-modeline-position ()
   `(" %3l:"
     (3 ,(s-concat
@@ -246,26 +253,45 @@ RIGHT, aligned respectively."
           x
         (propertize x 'face 'mode-line-inactive)))))
 
+(defvar jp-modeline-enabled-p nil)
+
+(defun jp-modeline-activate ()
+  (if jp-modeline-enabled-p
+      (progn
+        (setq-default mode-line-format
+                      '((:eval
+                         (jp-modeline-format
+                          ;; Left
+                          '((:eval (jp-modeline-status))
+                            (:eval (jp-modeline-position))
+                            (:eval (jp-modeline-filename))
+                            (:eval (jp-modeline-major-mode))
+                            (:eval (jp-modeline-vc)))
+                          ;; Right
+                          '((:eval (jp-modeline-flycheck))
+                            (:eval (jp-modeline-narrow))
+                            (:eval (jp-modeline-process))
+                            (:eval (jp-modeline-encoding)))))))
+        (setq-default header-line-format nil))
+    (progn
+      (set-frame-parameter (selected-frame)
+                           'internal-border-width 10)
+      (setq x-underline-at-descent-line t)
+      (setq-default mode-line-format '(""))
+      (setq-default header-line-format
+                    '((:eval
+                       (jp-modeline-format
+                        ;; Left
+                        '((:eval (jp-headline-filename)))
+                        ;; Right
+                        '((:eval (jp-headline-position))))))))))
+
 ;; Mode line setup
 (defun jp-modeline-setup ()
   ;; Setup flycheck hooks
   (add-hook 'flycheck-status-changed-functions #'jp-modeline--update-flycheck-segment)
   (add-hook 'flycheck-mode-hook #'jp-modeline--update-flycheck-segment)
-
-  (setq-default mode-line-format
-                '((:eval
-                   (jp-modeline-format
-                    ;; Left
-                    '((:eval (jp-modeline-status))
-                      (:eval (jp-modeline-position))
-                      (:eval (jp-modeline-filename))
-                      (:eval (jp-modeline-major-mode))
-                      (:eval (jp-modeline-vc)))
-                    ;; Right
-                    '((:eval (jp-modeline-flycheck))
-                      (:eval (jp-modeline-narrow))
-                      (:eval (jp-modeline-process))
-                      (:eval (jp-modeline-encoding))))))))
+  (jp-modeline-activate))
 
 (provide 'jp-modeline)
 ;;; jp-modeline.el ends here

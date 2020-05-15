@@ -32,16 +32,30 @@
         (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
         (status-fg (if jp-current-theme-dark-p 'fg 'bg)))
     (doom-themes-set-faces theme
-      ;; mode-line
-      `(mode-line :background modeline-bg
-                  :foreground modeline-fg
-                  :overline (,color-fn modeline-bg 0.2)
-                  :underline (,color-fn modeline-bg 0.2))
       `(fringe :inherit 'default)
-      `(mode-line-inactive :background modeline-bg
-                           :foreground modeline-fg-alt
-                           :overline (,color-fn modeline-bg 0.2)
-                           :underline (,color-fn modeline-bg 0.2))
+      ;; header-line
+      `(header-line :background bg
+                    :foreground fg
+                    :underline fg
+                    :box nil)
+      ;; mode-line
+      `(mode-line :background bg
+                  :foreground bg
+                  :height 10
+                  :underline fg)
+      `(mode-line-inactive :background bg
+                           :foreground bg
+                           :height 10
+                           :underline fg)
+      ;; mode-line
+      ;; `(mode-line :background modeline-bg;
+      ;;             :foreground modeline-fg
+      ;;             :overline (,color-fn modeline-bg 0.2)
+      ;;             :underline (,color-fn modeline-bg 0.2))
+      ;; `(mode-line-inactive :background modeline-bg
+      ;;                      :foreground modeline-fg-alt
+      ;;                      :overline (,color-fn modeline-bg 0.2)
+      ;;                      :underline (,color-fn modeline-bg 0.2))
       `(mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground ,status-fg)
       '(mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
       `(mode-line-read-write-face :inherit 'mode-line :background red :foreground ,status-fg)
@@ -54,8 +68,8 @@
       '(mode-line-error-face :inherit 'mode-line :foreground red)
       '(mode-line-info-face :inherit 'mode-line :foreground blue)
       ;; vertical border
-      `(vertical-border :background (,color-fn modeline-bg 0.2)
-                        :foreground (,color-fn modeline-bg 0.2))
+      `(vertical-border :background fg
+                        :foreground fg)
       ;; diff-hl
       `(diff-hl-insert :foreground green :background (doom-darken green 0.4))
       `(diff-hl-delete :foreground red :background (doom-darken red 0.4))
