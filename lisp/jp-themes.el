@@ -38,6 +38,8 @@
                     :foreground fg
                     :underline fg
                     :box nil)
+      `(header-line-dimmed-face :inherit 'header-line
+                                :foreground modeline-fg-alt)
       ;; mode-line
       `(mode-line :background bg
                   :foreground bg
@@ -63,10 +65,11 @@
       '(mode-line-filename-face :inherit 'mode-line :foreground blue :weight 'bold)
       '(mode-line-process-face :inherit 'mode-line :foreground green)
       '(mode-line-80col-face :inherit 'mode-line :foreground base0 :background yellow)
-      '(mode-line-success-face :inherit 'mode-line :foreground green)
-      '(mode-line-warning-face :inherit 'mode-line :foreground yellow)
-      '(mode-line-error-face :inherit 'mode-line :foreground red)
-      '(mode-line-info-face :inherit 'mode-line :foreground blue)
+
+      '(mode-line-success-face :inherit 'header-line :foreground green)
+      '(mode-line-warning-face :inherit 'header-line :foreground yellow)
+      '(mode-line-error-face :inherit 'header-line :foreground red)
+      '(mode-line-info-face :inherit 'header-line :foreground blue)
       ;; vertical border
       `(vertical-border :background fg
                         :foreground fg)

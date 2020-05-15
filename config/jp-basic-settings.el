@@ -103,10 +103,12 @@
       (mac-auto-operator-composition-mode t)))
 
   ;; window divier
-  (setq
-   window-divider-default-places 'right-only
-   window-divider-default-right-width 1)
-  (window-divider-mode 1)
+  ;; (setq
+  ;;  window-divider-default-places 'right-only
+  ;;  window-divider-default-right-width 1)
+  ;; (window-divider-mode -1)
+
+  (add-to-list 'default-frame-alist '(internal-border-width . 10))
 
   ;; set fringe width
   (set-fringe-mode 5))

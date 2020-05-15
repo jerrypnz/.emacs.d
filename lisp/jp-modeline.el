@@ -77,7 +77,10 @@
   "Face for flycheck success"
   :group 'jp-modeline)
 
-
+(defface header-line-dimmed-face
+  '((t (:inherit 'header-line)))
+  "Face for flycheck success"
+  :group 'jp-modeline)
 
 (defvar jp-modeline-active-window nil)
 (defvar jp-modeline-width-threshold 90)
@@ -148,23 +151,16 @@ RIGHT, aligned respectively."
         (pcase status
           ('finished (if flycheck-current-errors
                          (let-alist (flycheck-count-errors flycheck-current-errors)
-                           (let ((sum (+ (or .error 0) (or .warning 0) (or .info 0))))
-                             (propertize (with-faicon "question-circle"
-                                                      (number-to-string sum))
-                                         'face (cond
-                                                (.error 'mode-line-error-face)
-                                                (.warning 'mode-line-warning-face)
-                                                (t 'mode-line-info-face)))))
-                       (propertize (with-faicon "check-circle" "")
-                                   'face 'mode-line-success-face)))
-          ('running (propertize (with-faicon "stumbleupon-circle" "")
-                                'face 'mode-line-info-face))
+                           (let ((sum (number-to-string (+ (or .error 0) (or .warning 0) (or .info 0)))))
+                             (cond
+                              (.error (propertize (s-concat sum " ✗") 'face 'mode-line-error-face))
+                              (.warning (propertize (s-concat sum " ✗") 'face 'mode-line-warning-face))
+                              (t (propertize (s-concat sum " ⓘ") 'mode-line-info-face)))))
+                       (propertize "✓" 'face 'mode-line-success-face)))
+          ('running (propertize "…" 'face 'mode-line-info-face))
           ('no-checker "")
-          ('errored (propertize (with-faicon "exclamation-circle" "")
-                                'face 'mode-line-error-face))
-          ('interrupted  (propertize (with-faicon "pause-circle" "")
-                                     'face 'mode-line-info-face)))))
-
+          ('errored (propertize "⚠" 'face 'mode-line-error-face))
+          ('interrupted  (propertize "⚠" 'face 'mode-line-warning-face)))))
 
 ;; Mode-line segments
 
@@ -204,12 +200,6 @@ RIGHT, aligned respectively."
     `(" "
       ,(moody-tab (with-mode-icon major-mode filename icon-size nil icon-face) nil 'down)
       " ")))
-
-(defun jp-headline-filename ()
-  `("☰" ,(jp-buffer-filename) " "))
-
-(defun jp-headline-position ()
-  `(" %3l:" (3 "%c")))
 
 (defun jp-modeline-position ()
   `(" %3l:"
@@ -253,6 +243,27 @@ RIGHT, aligned respectively."
           x
         (propertize x 'face 'mode-line-inactive)))))
 
+(defun jp-headline-filename ()
+  (propertize
+   (s-concat "☰" (jp-buffer-filename) " ")
+   'face
+   (if (jp-modeline-active-p)
+       'header-line
+     'header-line-dimmed-face)))
+
+(defun jp-headline-position ()
+  `(,(propertize " %3l:" 'face 'header-line-dimmed-face)
+    (3 ,(propertize "%c" 'face 'header-line-dimmed-face))))
+
+(defun jp-headline-status ()
+  (propertize "%*" 'face 'header-line-dimmed-face))
+
+(defun jp-headline-flycheck ()
+  (when jp-modeline--flycheck-text
+    (if (jp-modeline-active-p)
+        jp-modeline--flycheck-text
+      (propertize jp-modeline--flycheck-text 'face 'header-line-dimmed-face))))
+
 (defvar jp-modeline-enabled-p nil)
 
 (defun jp-modeline-activate ()
@@ -282,9 +293,11 @@ RIGHT, aligned respectively."
                     '((:eval
                        (jp-modeline-format
                         ;; Left
-                        '((:eval (jp-headline-filename)))
+                        '((:eval (jp-headline-filename))
+                          (:eval (jp-headline-status)))
                         ;; Right
-                        '((:eval (jp-headline-position))))))))))
+                        '((:eval (jp-headline-flycheck))
+                          (:eval (jp-headline-position))))))))))
 
 ;; Mode line setup
 (defun jp-modeline-setup ()
