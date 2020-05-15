@@ -285,8 +285,6 @@ RIGHT, aligned respectively."
                             (:eval (jp-modeline-encoding)))))))
         (setq-default header-line-format nil))
     (progn
-      (set-frame-parameter (selected-frame)
-                           'internal-border-width 10)
       (setq x-underline-at-descent-line t)
       (setq-default mode-line-format '(""))
       (setq-default header-line-format
