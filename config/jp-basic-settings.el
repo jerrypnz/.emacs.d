@@ -93,8 +93,7 @@
           icon-title-format nil
           frame-title-format nil
           ns-use-native-fullscreen nil
-          ns-use-fullscreen-animation nil
-          )
+          ns-use-fullscreen-animation nil)
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
@@ -106,9 +105,10 @@
   ;; (setq
   ;;  window-divider-default-places 'right-only
   ;;  window-divider-default-right-width 1)
-  ;; (window-divider-mode -1)
 
-  (add-to-list 'default-frame-alist '(internal-border-width . 10))
+  (window-divider-mode -1)
+
+  (add-to-list 'default-frame-alist '(internal-border-width . 15))
 
   ;; set fringe width
   (set-fringe-mode 5))
