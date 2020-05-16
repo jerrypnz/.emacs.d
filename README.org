@@ -1,82 +1,26 @@
-* New Emacs Config
+* My Emacs Config
 
-  My personal Emacs config structured using =use-package= and git
-  subtrees.
+  My personal emacs config using [[https://github.com/raxod502/straight.el][straight.el]] to manage packages and
+  =use-package= to structure configuration.
 
-** Screenshot
+   [[./screenshots/main.png]]
 
-   [[./screenshot.png]]
+  You really shouldn't use it as is but you may find somethings below
+  interesting or useful:
 
-** TODO
+  - [[lisp/jp-main-hydra.el][Main hydra]]: I use hydra for a leader key system similar to
+    Spacemacs' =SPC= leader key but looks a bit prettier thanks to
+    [[https://github.com/jerrypnz/major-mode-hydra.el#pretty-hydra][pretty-hydra]] and [[https://github.com/domtronn/all-the-icons.el][all-the-icons]].
 
-*** Language support
+    [[./screenshots/main-hydra.png]]
 
-    - generic symbol/function search
-      - each language can have a specific impl, and defaults to gtags
-    - +go+
-    - +scala+
-    - +clojure+
-    - =Haskell=
-    - =Scheme / Racket=
-    - =Python=
-    - +PHP+
-    - +Yaml+
-    - +Markdown+
-    - =JavaScript / JSON / ES6=
-    - +Puppet+
-    - =web-mode=
+  - [[lisp/jp-modeline.el][Mode/header line]]: The current header line is inspired by
+    [[https://github.com/rougier/elegant-emacs][elegant-emacs]] but the customization is based on
+    [[https://github.com/hlissner/emacs-doom-themes][doom-emacs-themes]]. My customization can be found in
+    [[lisp/jp-themes.el][lisp/jp-themes.el]].
 
-*** Coding
-
-    - +make company and yasnippet work better+ (`company-yasnippet` is bound to `C-M-y` now)
-    - +hight things under the cursor+
-    - make flycheck nicer
-      - change keybindings (hydra)
-      - change flycheck tmp file location
-      - automaticially display errors for current line
-    - +gtags for certain modes (PHP)+ (don't care about PHP anymore)
-
-*** Look and feel
-
-    - +Better way of managing themes+ (=use-package= seems perfectly fine ;-)
-    - +Mode line+
-      - +Better project/branch info+
-
-*** Tools
-
-    - +restclient-mode+
-      - =edn= support in restclient mode
-    - +better way of managing git subtrees+
-    - =tiny=
-
-*** Editing
-
-    - find a solution for file templates
-      - [[https://github.com/mineo/yatemplate][yatemplate]]?
-    - +wgrep+
-    - +iedit+
-
-*** Org
-
-    - +deft+
-    - +Port my org config from my old repo+
-    - GTD using org
-    - Remove org-agenda =M-m= keybinding
-
-*** Misc
-
-    - +undo-tree+
-    - ivy / counsel / swiper
-      - ability to preview without exiting it
-    - create some useful =hydra=.
-      - search/replace?
-      - record / use keyboard macros?
-      - profiling
-      - hydra for org agenda
-      - +press =C-M-m= for a major mode specific hydra?+ (https://github.com/jerrypnz/major-mode-hydra.el)
-      - +window resize/zooming (or =ace-window=)+
-      - +window layout management+
-    - +better projectile discovery+
-      - +configurable root directory for projects, where it detects projects automaticially+
-      - +discover projects in those root directories whenever it switches project+
-    - clean up =jp-base=
+  - [[lisp/jp-layouts.el][Workspace layouts]]: This is a simple project based workspace system
+    based on [[https://github.com/bbatsov/projectile][projectile]], [[https://github.com/wasamasa/eyebrowse][eyebrowse]] and a hydra for the user
+    interface. I use this feature a lot so I added part of this hydra
+    to my main dispatcher for quickly switching between project
+    layouts.
