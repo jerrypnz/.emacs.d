@@ -125,7 +125,7 @@
 RIGHT, aligned respectively."
   (let* ((left (format-mode-line left))
          (right (format-mode-line right))
-         (reserve (length right)))
+         (reserve (+ 2 (length right))))
     (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
       (setq reserve (- reserve 3)))
     (concat
