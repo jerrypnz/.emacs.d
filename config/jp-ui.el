@@ -35,8 +35,8 @@
   :after (doom-themes)
   :config
   (progn
-    (setq jp-light-theme 'doom-tomorrow-day
-          jp-dark-theme 'doom-tomorrow-night
+    (setq jp-light-theme 'doom-nord-light
+          jp-dark-theme 'doom-nord
           jp-current-theme-dark-p nil
           ;;jp-default-font "Fira Code Retina-13"
           ;;jp-default-font "JetBrains Mono Medium-14"

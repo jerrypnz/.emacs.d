@@ -71,12 +71,11 @@
       '(mode-line-error-face :inherit 'header-line :foreground red)
       '(mode-line-info-face :inherit 'header-line :foreground blue)
       ;; vertical border
-      `(vertical-border :background fg
-                        :foreground fg)
+      `(vertical-border :background fg :foreground fg)
       ;; diff-hl
-      `(diff-hl-insert :foreground green :background (doom-darken green 0.4))
-      `(diff-hl-delete :foreground red :background (doom-darken red 0.4))
-      `(diff-hl-change :foreground blue :background (doom-darken blue 0.4))
+      `(diff-hl-insert :foreground (doom-lighten green 0.4) :background (doom-lighten green 0.4))
+      `(diff-hl-delete :foreground (doom-lighten red 0.4) :background (doom-lighten red 0.4))
+      `(diff-hl-change :foreground (doom-lighten blue 0.4) :background (doom-lighten blue 0.4))
       ;; highlight
       `(symbol-overlay-default-face :background (,color-fn bg 0.1))
       '(symbol-overlay-face-1 :background blue :foreground bg-alt)
