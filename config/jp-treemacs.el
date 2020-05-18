@@ -23,24 +23,10 @@
           treemacs-tag-follow-delay 0.2
           treemacs-collapse-dirs 3
           treemacs-width 40)
-
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
-    (treemacs-fringe-indicator-mode nil)
-
-    (major-mode-hydra-bind treemacs-mode "Basic"
-      ("?" treemacs-helpful-hydra/body "helpful"))
-    (major-mode-hydra-bind treemacs-mode "Workspace"
-      ("wc" treemacs-create-workspace "create workspace")
-      ("wo" treemacs-switch-workspace "select workspace")
-      ("wD" treemacs-remove-workspace "remove workspace"))
-    (major-mode-hydra-bind treemacs-mode"Project"
-      ("pp" treemacs-projectile "add project")
-      ("pd" treemacs-remove-project-from-workspace "remove project")
-      ("pr" treemacs-rename-project "rename project")
-      ("pc" treemacs-collapse-project "collapse project")
-      ("pC" treemacs-collapse-all-projects "collapse all projects"))))
+    (treemacs-fringe-indicator-mode t)))
 
 (use-package treemacs-projectile
   :straight t

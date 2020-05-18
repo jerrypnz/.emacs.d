@@ -31,6 +31,7 @@
 (autoload 'magit-log-buffer-file "magit")
 (autoload 'git-timemachine "git-timemachine")
 (autoload 'treemacs-select-window "treemacs")
+(autoload 'treemacs "treemacs")
 
 (autoload 'eyebrowse-switch-to-window-config-1 "eyebrowse")
 (autoload 'eyebrowse-switch-to-window-config-2 "eyebrowse")
@@ -116,7 +117,8 @@
     ("i" counsel-imenu "imenu")
     ("j" counsel-mark-ring "mark ring")
     ("d" dash-at-point-hydra/body "dash")
-    ("," treemacs-select-window "treemacs")
+    ("," treemacs "toggle treemacs")
+    ("." treemacs-select-window "select treemacs")
     ("/" jp-search "search")
     ("*" jp-search-symbol-at-pt "search symbol at pt")
     ("F" jp-flycheck/body "flycheck"))
