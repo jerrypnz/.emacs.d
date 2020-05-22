@@ -16,12 +16,13 @@
 
 (use-package plantuml-mode
   :straight t
+  :custom
+  (plantuml-default-exec-mode 'jar)
   :config
   (progn
     (if homebrew-plantuml-jar-path
         (setq plantuml-jar-path homebrew-plantuml-jar-path)
       (message "PlantUML jar not found. Preview will not work."))
-    (setq plantuml-output-type "png")
 
     (eval-after-load "org-src"
       '(add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
