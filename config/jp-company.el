@@ -30,7 +30,13 @@
   :defer t
   :hook (company-mode . company-box-mode)
   :config
-  (setq company-box-enable-icon nil))
+  (setq company-box-enable-icon nil)
+  ;; Remove once https://github.com/sebastiencs/company-box/pull/91 is merged
+  (defun jp-company-box--render (f &rest args)
+    (let ((x (apply f args)))
+      (with-current-buffer (company-box--get-buffer)
+        (setq header-line-format nil))))
+  (advice-add #'company-box--render-buffer :around #'jp-company-box--render))
 
 (use-package company-dabbrev
   :after (company)
