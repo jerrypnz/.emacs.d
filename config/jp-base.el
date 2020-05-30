@@ -16,8 +16,8 @@
   :if (memq window-system '(mac ns x))
   :config
   (progn
-    (setq exec-path-from-shell-shell-name "/usr/local/bin/zsh")
-    (setq exec-path-from-shell-arguments '("-l"))
+    ;(setq exec-path-from-shell-shell-name "/usr/local/bin/zsh")
+    ;(setq exec-path-from-shell-arguments '("-l"))
     (add-to-list 'exec-path-from-shell-variables "GOPATH")
     (exec-path-from-shell-initialize)))
 
