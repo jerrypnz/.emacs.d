@@ -79,7 +79,7 @@
              :fork (:host github :repo "jerrypnz/hydra-posframe"))
   :hook (after-init . hydra-posframe-enable)
   :config
-  (setq hydra-posframe-poshandler 'jp-frame-bottom-poshandler)
+  (setq hydra-posframe-poshandler 'posframe-poshandler-frame-center)
   (setq hydra-posframe-parameters '((alpha 100 100)
                                     (left-fringe . 10)
                                     (right-fringe . 10))))
