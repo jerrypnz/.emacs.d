@@ -148,7 +148,9 @@
     (setq lsp-rust-analyzer-cargo-watch-command "clippy")))
 
 (use-package lsp-metals
-  :after (lsp-mode))
+  :after (lsp-mode)
+  :custom
+  (lsp-metals-maven-script "/usr/bin/mvn"))
 
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
