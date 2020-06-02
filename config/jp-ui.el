@@ -38,10 +38,8 @@
     (setq jp-light-theme 'doom-nord-light
           jp-dark-theme 'doom-nord
           jp-current-theme-dark-p nil
-          ;;jp-default-font "Fira Code Retina-13"
-          ;;jp-default-font "JetBrains Mono Medium-14"
-          jp-default-font "Cascadia Code-14"
-          jp-variable-pitch-font "Lucida Grande-14")
+          jp-default-font "Cascadia Code-10"
+          jp-variable-pitch-font "Ubuntu-10")
     (jp-themes-load)))
 
 (use-package all-the-icons

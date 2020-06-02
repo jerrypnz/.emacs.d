@@ -33,6 +33,7 @@
         (status-fg (if jp-current-theme-dark-p 'fg 'bg)))
     (doom-themes-set-faces theme
       `(fringe :inherit 'default)
+      `(internal-border :background bg :foreground fg)
       ;; header-line
       `(header-line :background bg
                     :foreground fg
