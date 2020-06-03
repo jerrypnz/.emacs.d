@@ -37,9 +37,15 @@
   (progn
     (setq jp-light-theme 'doom-nord-light
           jp-dark-theme 'doom-nord
-          jp-current-theme-dark-p nil
-          jp-default-font "Cascadia Code-10"
-          jp-variable-pitch-font "Ubuntu-10")
+          jp-current-theme-dark-p nil)
+
+    ;; TODO implement better per-system config
+    (cond
+     ((eq window-system 'ns) (setq jp-default-font "Cascadia Code-13"
+                                   jp-variable-pitch-font "Lucida Grande-13"))
+     ((eq window-system 'x)  (setq jp-default-font "Cascadia Code-10"
+                                   jp-variable-pitch-font "Ubuntu-10")))
+
     (jp-themes-load)))
 
 (use-package all-the-icons
