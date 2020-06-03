@@ -18,7 +18,11 @@
   (progn
     ;(setq exec-path-from-shell-shell-name "/usr/local/bin/zsh")
     ;(setq exec-path-from-shell-arguments '("-l"))
-    (add-to-list 'exec-path-from-shell-variables "GOPATH")
+    (setq exec-path-from-shell-variables (append exec-path-from-shell-variables
+                                                 '("GOPATH"
+                                                   "JAVA_OPTS"
+                                                   "HTTP_PROXY"
+                                                   "HTTPS_PROXY")))
     (exec-path-from-shell-initialize)))
 
 ;; some useful global commands
