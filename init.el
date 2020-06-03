@@ -98,6 +98,7 @@
 (use-package jp-restclient)
 (use-package jp-yasnippet)
 (use-package jp-treemacs)
+(use-package jp-bufler)
 
 ;; Programming language support
 (use-package jp-clojure)

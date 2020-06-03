@@ -41,7 +41,7 @@
  ring-bell-function 'ignore
  ;; prefer splitting windows horizontally
  split-height-threshold nil
- split-width-threshold 200)
+ split-width-threshold 160)
 
 ;; shorten yes/no answers to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -121,9 +121,6 @@
 
 (use-package hippie-expand
   :bind ("M-/" . hippie-expand))
-
-(use-package ibuffer
-  :bind ("C-x C-b" . ibuffer))
 
 (use-package apropos
   :defer t

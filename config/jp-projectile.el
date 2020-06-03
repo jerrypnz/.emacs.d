@@ -48,21 +48,7 @@
     (all-the-icons-ivy-setup)))
 
 (use-package jp-projectile-utils
-  :after (counsel-projectile)
-  :bind
-  (("C-x b" . jp-switch-buffer)
-   ("M-i" . jp-switch-buffer)))
-
-(use-package ibuffer-projectile
-  :straight t
-  :config
-  (progn
-    (setq ibuffer-projectile-prefix "Project: ")
-    (add-hook 'ibuffer-hook
-              (lambda ()
-                (ibuffer-projectile-set-filter-groups)
-                (unless (eq ibuffer-sorting-mode 'alphabetic)
-                  (ibuffer-do-sort-by-alphabetic))))))
+  :after (counsel-projectile))
 
 (provide 'jp-projectile)
 ;;; jp-projectile.el ends here
