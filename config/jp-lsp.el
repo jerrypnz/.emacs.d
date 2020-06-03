@@ -18,7 +18,7 @@
     (defvar jp-lsp-hydra--title)
     (setq jp-lsp-hydra--title  (with-octicon "server" "Language Server Commands")))
 
-  :hook ((go-mode rust-mode java-mode scala-mode) . lsp-deferred)
+  :hook ((go-mode python-mode rust-mode java-mode scala-mode) . lsp-deferred)
 
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
@@ -37,7 +37,7 @@
     (("tl" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
 
   :mode-hydra
-  ((rust-mode go-mode java-mode scala-mode)
+  ((rust-mode go-mode python-mode java-mode scala-mode)
    (:color teal :quit-key "q" :title jp-lsp-hydra--title)
    ("LSP"
     (("d" lsp-describe-thing-at-point "describe")
@@ -151,6 +151,12 @@
   :after (lsp-mode)
   :custom
   (lsp-metals-maven-script "/usr/bin/mvn"))
+
+(use-package lsp-python-ms
+  :straight t
+  :after (lsp-mode)
+  :config
+  (setq lsp-python-ms-auto-install-server t))
 
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
