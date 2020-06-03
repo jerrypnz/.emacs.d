@@ -87,6 +87,10 @@
       '(symbol-overlay-face-6 :background magenta :foreground bg-alt)
       '(symbol-overlay-face-7 :background violet :foreground bg-alt)
       '(symbol-overlay-face-8 :background cyan :foreground bg-alt)
+      ;; LSP
+      `(lsp-face-highlight-read :background (,color-fn bg 0.1))
+      `(lsp-face-highlight-write :background (,color-fn bg 0.1))
+      `(lsp-face-highlight-textual :background (,color-fn bg 0.1))
       ;; parens
       `(show-paren-match :background (,color-fn bg-alt 0.3))
       ;; ivy
