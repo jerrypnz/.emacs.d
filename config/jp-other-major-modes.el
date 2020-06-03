@@ -23,6 +23,10 @@
   :straight t
   :mode (("\\.pp\\'"  . puppet-mode)))
 
+(use-package hcl-mode
+  :straight t
+  :mode (("\\.hcl\\'"  . hcl-mode)))
+
 (use-package php-mode
   :straight t
   :mode ("\\.php\\'"))
