@@ -137,7 +137,8 @@
    "Org"
    (("c" org-capture "capture")
     ("a" major-mode-hydras/org-agenda-mode/body "agenda")
-    ("o" org-roam-hydra/body "roam"))
+    ("o" org-roam-hydra/body "roam")
+    ("J" org-journal-hydra/body "journal"))
 
    "Quick Layouts"
    (("1" eyebrowse-switch-to-window-config-1 (jp-eyebrowse-layout-tag 1) :width 20)

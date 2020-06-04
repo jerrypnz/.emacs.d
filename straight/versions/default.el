@@ -84,6 +84,7 @@
  ("mwim.el" . "b4f3edb4c0fb8f8b71cecbf8095c2c25a8ffbf85")
  ("ob-ammonite" . "39937dff395e70aff76a4224fa49cf2ec6c57cca")
  ("org" . "2ab68c7c35dcd8d74aec18a0e100506c18c1e03f")
+ ("org-journal" . "0bcefa5c371b2a344729c56efc012c08ff82c168")
  ("org-roam" . "b2594b84aef131ab24dd477a4bd7b2d1a6ca7621")
  ("ox-gfm" . "99f93011b069e02b37c9660b8fcb45dab086a07f")
  ("package-lint" . "495da67557d35acb146ec1f38f7576126aec6bfc")

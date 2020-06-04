@@ -16,7 +16,7 @@
   :preface
   (progn
     (defvar jp-org-roam-hydra--title)
-    (setq jp-org-roam-hydra--title  (with-material "event_note" "Org-roam")))
+    (setq jp-org-roam-hydra--title  (with-material "event_note" "Org Roam")))
 
   :custom
   (org-roam-directory "~/org/roam")
