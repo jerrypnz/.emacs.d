@@ -48,7 +48,9 @@
     (all-the-icons-ivy-setup)))
 
 (use-package jp-projectile-utils
-  :after (counsel-projectile))
+  :after (counsel-projectile)
+  :bind (("C-x b" . jp-switch-buffer)
+         ("M-i" . jp-switch-buffer)))
 
 (provide 'jp-projectile)
 ;;; jp-projectile.el ends here

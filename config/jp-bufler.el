@@ -13,9 +13,7 @@
 
 (use-package bufler
   :straight t
-  :bind (("M-i" . bufler-switch-buffer)
-         ("C-x b" . bufler-switch-buffer)
-         ("C-x C-b" . bufler))
+  :bind (("C-x C-b" . bufler))
   :config
   (setq bufler-groups
         (bufler-defgroups
