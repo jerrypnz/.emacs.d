@@ -16,7 +16,7 @@
   :preface
   (progn
     (defvar jp-org-journal-hydra--title)
-    (setq jp-org-journal-hydra--title  (with-material "event_note" "Org Journal")))
+    (setq jp-org-journal-hydra--title  (with-faicon "calendar" "Org Journal")))
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-org-journal-hydra--title)
    ("Journal Entries"
@@ -25,6 +25,7 @@
      ("p" org-journal-open-previous-entry "previous entry")
      ("s" org-journal-search "search"))))
   :custom
+  (org-journal-file-type 'weekly)
   (org-journal-file-format "%Y-%m-%d.org")
   (org-journal-dir "~/org/roam/journal/")
   (org-journal-date-format "%A, %d %B %Y")
