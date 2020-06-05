@@ -21,7 +21,7 @@
 (require 'jp-themes)
 
 (autoload 'counsel-projectile "counsel-projectile")
-(autoload 'counsel-projectile "counsel-projectile")
+(autoload 'counsel-projectile-find-file "counsel-projectile")
 (autoload 'counsel-projectile-find-dir "counsel-projectile")
 (autoload 'projectile-ibuffer "projectile")
 
@@ -85,8 +85,8 @@
 (pretty-hydra-define jp-projects
   (:color teal :quit-key "q" :title (jp-projects--title))
   ("Current Project"
-   (("f" counsel-projectile "open file/buffer")
-    ("b" counsel-projectile-switch-to-buffe "switch to buffer")
+   (("f" counsel-projectile-find-file "open file")
+    ("b" counsel-projectile-switch-to-buffer "switch to buffer")
     ("d" counsel-projectile-find-dir "open directory")
     ("i" projectile-ibuffer "ibuffer")
     ("k" projectile-kill-buffers "kill buffers")

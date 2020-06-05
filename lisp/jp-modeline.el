@@ -249,7 +249,6 @@ RIGHT, aligned respectively."
                         'header-line
                       'header-line-dimmed-face)
               'help-echo "Show major mode menu"
-              'mouse-face 'mode-line-highlight
               'local-map   mode-line-major-mode-keymap))
 
 (defun jp-headline-filename ()

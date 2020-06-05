@@ -48,6 +48,26 @@
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
     (setq counsel-outline-face-style 'org)))
 
+(use-package ivy-rich
+  :straight t
+  :config (ivy-rich-mode 1))
+
+(use-package all-the-icons-ivy-rich
+  :straight t
+  :after (ivy-rich counsel-projectile)
+  :config
+  (setq all-the-icons-ivy-rich-icon-size 0.8)
+  (plist-put all-the-icons-ivy-rich-display-transformers-list
+             'counsel-projectile-switch-to-buffer
+             '(:columns
+               ((all-the-icons-ivy-rich-buffer-icon)
+                (ivy-rich-candidate (:width 30))
+                (ivy-rich-switch-buffer-size (:width 7))
+                (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+                (ivy-rich-switch-buffer-major-mode (:width 12 :face warning)))
+               :delimiter "\t"))
+  (all-the-icons-ivy-rich-mode 1))
+
 (use-package jp-ivy-utils
   :bind
   ("C-M-s" . jp-counsel-grep-or-swiper-symbol-at-pt))
