@@ -76,14 +76,14 @@
   :config
   (defun jp-frame-bottom-poshandler (info)
     (cons (car (posframe-poshandler-frame-center info))
-          (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 50))))
+          (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 60))))
 
 (use-package hydra-posframe
   :straight (:host github :repo "Ladicle/hydra-posframe"
              :fork (:host github :repo "jerrypnz/hydra-posframe"))
   :hook (after-init . hydra-posframe-enable)
   :config
-  (setq hydra-posframe-poshandler 'posframe-poshandler-frame-center)
+  (setq hydra-posframe-poshandler 'jp-frame-bottom-poshandler)
   (setq hydra-posframe-parameters '((alpha 100 100)
                                     (left-fringe . 10)
                                     (right-fringe . 10))))

@@ -57,7 +57,7 @@
   :config
   (progn
     (defun ivy-posframe-display--jp-custom (str)
-      (ivy-posframe--display str #'posframe-poshandler-frame-center))
+      (ivy-posframe--display str #'jp-frame-bottom-poshandler))
 
     (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display--jp-custom))
           ivy-posframe-border-width 1
