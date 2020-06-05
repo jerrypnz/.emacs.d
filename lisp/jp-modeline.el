@@ -243,9 +243,18 @@ RIGHT, aligned respectively."
           x
         (propertize x 'face 'mode-line-inactive)))))
 
+(defun jp-headline-mode-icon ()
+  (propertize " ☰ "
+              'face (if (jp-modeline-active-p)
+                        'header-line
+                      'header-line-dimmed-face)
+              'help-echo "Show major mode menu"
+              'mouse-face 'mode-line-highlight
+              'local-map   mode-line-major-mode-keymap))
+
 (defun jp-headline-filename ()
   (propertize
-   (s-concat "☰" (jp-buffer-filename) " ")
+   (s-concat (jp-buffer-filename) " ")
    'face
    (if (jp-modeline-active-p)
        'header-line
@@ -287,11 +296,14 @@ RIGHT, aligned respectively."
     (progn
       (setq x-underline-at-descent-line t)
       (setq-default mode-line-format '(""))
+      (define-key mode-line-major-mode-keymap [header-line]
+        (lookup-key mode-line-major-mode-keymap [mode-line]))
       (setq-default header-line-format
                     '((:eval
                        (jp-modeline-format
                         ;; Left
-                        '((:eval (jp-headline-filename))
+                        '((:eval (jp-headline-mode-icon))
+                          (:eval (jp-headline-filename))
                           (:eval (jp-headline-status)))
                         ;; Right
                         '((:eval (jp-headline-flycheck))
