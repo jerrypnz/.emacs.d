@@ -29,15 +29,14 @@
                 (add-hook 'post-command-hook 'jp-scala-insert-margin-befor-ending-parens t t)))
 
     (define-key scala-mode-map (kbd "RET") 'jp-scala-newline-and-indent-with-pipe)
-    (define-key scala-mode-map (kbd ">") 'jp-scala-gt)
-    (define-key scala-mode-map (kbd "-") 'jp-scala-hyphen)
+    ;;(define-key scala-mode-map (kbd ">") 'jp-scala-gt)
+    ;;(define-key scala-mode-map (kbd "-") 'jp-scala-hyphen)
     (define-key scala-mode-map (kbd "M-j") 'jp-scala-join-line)
 
     ;; Compatibility with `aggressive-indent'
-    (setq scala-indent:align-forms t
-          scala-indent:align-parameters t
-          scala-indent:default-run-on-strategy
-          scala-indent:operator-strategy)))
+    (setq scala-indent:align-forms nil
+          scala-indent:align-parameters nil
+          scala-indent:default-run-on-strategy scala-indent:operator-strategy)))
 
 (use-package sbt-mode
   :straight t
