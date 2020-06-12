@@ -57,7 +57,10 @@
 ;; highlight todo
 (use-package hl-todo
   :straight t
-  :hook (prog-mode . hl-todo-mode))
+  :hook (prog-mode . hl-todo-mode)
+  :config
+  (setq hl-todo-keyword-faces (--filter (member (car it) '("TODO" "FIXME" "NOTE"))
+                                        hl-todo-keyword-faces)))
 
 ;; undo-tree
 (use-package undo-tree
