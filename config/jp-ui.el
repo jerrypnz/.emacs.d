@@ -37,7 +37,7 @@
   (progn
     (setq jp-light-theme 'doom-nord-light
           jp-dark-theme 'doom-nord
-          jp-current-theme-dark-p nil)
+          jp-current-theme-dark-p t)
 
     ;; TODO implement better per-system config
     (cond
