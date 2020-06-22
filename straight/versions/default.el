@@ -55,6 +55,7 @@
  ("git-timemachine" . "391eb61050de321101e631fcf373fc70ec6e7700")
  ("gnu-elpa-mirror" . "9f672decd664cadd402bbff651d7031b7b3570b2")
  ("go-mode.el" . "734d5232455ffde088021ea5908849ac570e890f")
+ ("groovy-emacs-modes" . "cafdd98e06a3bbff213f3ccb163de2c42d412b66")
  ("helpful" . "c0662aa07266fe204f4e6d72ccaa6af089400556")
  ("highlight-sexp" . "53888ddba7e8fbce098b2363eb7ba32c901a5b8f")
  ("hl-todo" . "3bba4591c54951d2abab113ec5e58a6319808ca9")

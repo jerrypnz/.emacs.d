@@ -52,6 +52,11 @@
     (put 'global 'fennel-indent-function 1)
     (put 'if 'fennel-indent-function 1)))
 
+(use-package groovy-mode
+  :straight t
+  :mode ("\\.g\\(?:ant\\|roovy\\|radle\\)\\'" "Jenkinsfile")
+  :interpreter "groovy")
+
 (use-package mmm-jinja2
   :straight t
   :config
