@@ -150,7 +150,8 @@
 (use-package lsp-metals
   :after (lsp-mode)
   :custom
-  (lsp-metals-maven-script "/usr/bin/mvn"))
+  (lsp-metals-maven-script "/usr/bin/mvn")
+  (lsp-metals-sbt-script "/usr/bin/sbt"))
 
 (use-package lsp-python-ms
   :straight t
