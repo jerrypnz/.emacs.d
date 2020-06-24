@@ -151,7 +151,13 @@
   :after (lsp-mode)
   :custom
   (lsp-metals-maven-script "/usr/bin/mvn")
-  (lsp-metals-sbt-script "/usr/bin/sbt"))
+  (lsp-metals-sbt-script "/usr/bin/sbt")
+  (lsp-metals-bloop-version "1.4.2")
+
+  :config
+  (defun jp-lsp-metals-build-restart ()
+    (interactive)
+    (lsp-send-execute-command "build-restart" ())))
 
 (use-package lsp-python-ms
   :straight t
