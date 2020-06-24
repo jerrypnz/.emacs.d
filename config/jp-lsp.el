@@ -13,39 +13,7 @@
 
 (use-package lsp-mode
   :straight t
-  :preface
-  (progn
-    (defvar jp-lsp-hydra--title)
-    (setq jp-lsp-hydra--title  (with-octicon "server" "Language Server Commands")))
-
   :hook ((go-mode python-mode rust-mode java-mode scala-mode) . lsp-deferred)
-
-  :pretty-hydra
-  ((:color teal :quit-key "q" :title jp-lsp-hydra--title)
-   ("Connection"
-    (("cc" lsp "start")
-     ("cr" lsp-restart-workspace "restart")
-     ("cd" lsp-describe-session "describe session")
-     ("cq" lsp-disconnect "disconnect"))
-    "Find & Goto"
-    (("d" lsp-describe-thing-at-point "describe symbol"))
-    "Refactor"
-    (("rr" lsp-rename "rename")
-     ("ra" lsp-execute-code-action "code action")
-     ("rf" lsp-format-buffer "format"))
-    "Toggles"
-    (("tl" lsp-lens-mode "toggle lens" :toggle t :exit nil))))
-
-  :mode-hydra
-  ((rust-mode go-mode python-mode java-mode scala-mode)
-   (:color teal :quit-key "q" :title jp-lsp-hydra--title)
-   ("LSP"
-    (("d" lsp-describe-thing-at-point "describe")
-     ("R" lsp-rename "rename")
-     ("A" lsp-execute-code-action "code action")
-     ("F" lsp-format-buffer "format")
-     ("l" lsp-mode-hydra/body "more..."))))
-
   :config
   (setq lsp-auto-execute-action nil))
 
@@ -60,15 +28,6 @@
   (:map lsp-ui-mode-map
    ("M-." . lsp-ui-peek-find-definitions)
    ("M-?" . lsp-ui-peek-find-references))
-
-  :pretty-hydra
-  (lsp-mode-hydra
-   ("Toggles"
-    (("td" lsp-ui-doc-mode "toggle hover doc" :toggle t :exit nil)
-     ("ts" lsp-ui-sideline-mode "toggle sideline" :toggle t :exit nil))
-    "Find & Goto"
-    (("gr" lsp-ui-peek-find-references "references")
-     ("gd" lsp-ui-peek-find-definitions "definitions"))))
 
   :config
   (setq lsp-ui-sideline-enable nil)
@@ -89,32 +48,8 @@
     (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)))
 
 (use-package lsp-java
-  :preface
-  (progn
-    (defvar jp-java-hydra--title)
-    (setq jp-java-hydra--title  (with-octicon "server" "Java Language Server Commands")))
   :straight t
   :after (lsp-mode)
-  :mode-hydra
-  ((java-mode)
-   (:color teal :quit-key "q" :title jp-java-hydra--title)
-   ("Action"
-    (("b" lsp-java-build-project "build")
-     ("o" lsp-java-organize-imports "organize imports")
-     ("U" lsp-java-update-project-configuration "update project config"))
-    "Generate"
-    (("gs" lsp-generate-to-string "generate toString")
-     ("ge" lsp-java-generate-equals-and-hash-code "generate equals/hashCode")
-     ("go" lsp-java-generate-overrides "generate overrides")
-     ("gg" lsp-java-generate-getters-and-setters "generate getters/setters"))
-    "Refactoring"
-    (("re" lsp-java-extract-to-constant "extract constant")
-     ("rm" lsp-java-extract-method "extract method")
-     ("ri" lsp-java-add-import  "add import")
-     ("ru" lsp-java-add-unimplemented-methods "add unimplemented methods")
-     ("rp" lsp-java-create-parameter "introduce parameter")
-     ("rf" lsp-java-create-field "introduce field")
-     ("rl" lsp-java-create-local "introduce local variable"))))
   :config
   (setq lsp-java-server-install-dir (expand-file-name "~/.jdt.ls/")
         lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
@@ -123,12 +58,6 @@
 
 (use-package dap-java
   :after (dap-mode)
-  :mode-hydra
-  ((java-mode)
-   nil
-   ("Run/Debug"
-    (("t" dap-java-run-test-class "run test class")
-     ("T" dap-java-debug-test-class "debug test class"))))
   :config
   (setq dap-java-test-runner (expand-file-name "~/.jdt.ls/test-runner/junit-platform-console-standalone.jar")))
 
@@ -152,12 +81,7 @@
   :custom
   (lsp-metals-maven-script "/usr/bin/mvn")
   (lsp-metals-sbt-script "/usr/bin/sbt")
-  (lsp-metals-bloop-version "1.4.2")
-
-  :config
-  (defun jp-lsp-metals-build-restart ()
-    (interactive)
-    (lsp-send-execute-command "build-restart" ())))
+  (lsp-metals-bloop-version "1.4.2"))
 
 (use-package lsp-python-ms
   :straight t
@@ -166,17 +90,9 @@
   (setq lsp-python-ms-auto-install-server t))
 
 (use-package lsp-ivy
-  :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master")
+  :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master"))
 
-  :pretty-hydra
-  (lsp-mode-hydra
-   ("Find"
-    (("gf" lsp-ivy-workspace-symbol "workspace symbol"))))
-
-  :mode-hydra
-  ((rust-mode go-mode java-mode) nil
-   ("LSP"
-    (("a" lsp-ivy-workspace-symbol "workspace symbol")))))
+(use-package jp-lsp-hydra)
 
 (provide 'jp-lsp)
 ;;; jp-lsp.el ends here

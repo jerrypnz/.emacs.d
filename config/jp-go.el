@@ -18,12 +18,12 @@
 (use-package jp-go-tests
   :after (go-mode)
   :mode-hydra
-  (go-mode nil
-           ("Test"
-            (("tt" jp-go-run-test-current-function "current function")
-             ("ts" jp-go-run-test-current-suite "current suite")
-             ("tp" jp-go-run-package-tests "package")
-             ("tP" jp-go-run-package-tests-nested "package nested")))))
+  (go-mode
+   ("Test"
+    (("tt" jp-go-run-test-current-function "current function")
+     ("ts" jp-go-run-test-current-suite "current suite")
+     ("tp" jp-go-run-package-tests "package")
+     ("tP" jp-go-run-package-tests-nested "package nested")))))
 
 (use-package jp-go-play
   :commands (go-play))

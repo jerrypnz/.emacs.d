@@ -55,12 +55,12 @@
 
   :mode-hydra
   (rust-mode
-   ("Cargo"
+   ("Quick Action"
     (("b" cargo-process-build "build")
-     ("r" cargo-process-run "run")
      ("t" cargo-process-current-file-tests "test")
      ("T" cargo-process-test "test all")
-     ("c" cargo-hydra/body "more...")))))
+     ("R" cargo-process-run "run")
+     ("C" cargo-hydra/body "cargo...")))))
 
 (provide 'jp-rust)
 ;;; jp-rust.el ends here
