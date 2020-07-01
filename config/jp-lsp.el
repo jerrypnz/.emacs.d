@@ -77,6 +77,7 @@
     (setq lsp-rust-analyzer-cargo-watch-command "clippy")))
 
 (use-package lsp-metals
+  :straight t
   :after (lsp-mode)
   :custom
   (lsp-metals-maven-script "/usr/bin/mvn")
