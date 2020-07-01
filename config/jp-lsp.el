@@ -82,7 +82,8 @@
   :custom
   (lsp-metals-maven-script "/usr/bin/mvn")
   (lsp-metals-sbt-script "/usr/bin/sbt")
-  (lsp-metals-bloop-version "1.4.2"))
+  ;;(lsp-metals-bloop-version "1.4.2")
+  )
 
 (use-package lsp-python-ms
   :straight t
