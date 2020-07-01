@@ -30,6 +30,11 @@
           flycheck-indication-mode nil
           flycheck-emacs-lisp-load-path 'inherit)
 
+    ;; Disable some checkers for certain modes
+    (add-hook 'rust-mode-hook
+              (lambda ()
+                (setq flycheck-disabled-checkers '(rust-cargo rust-clippy))))
+
     (add-to-list 'display-buffer-alist
                  `(,(rx bos "*Flycheck errors*" eos)
                    (display-buffer-reuse-window
