@@ -66,16 +66,14 @@
   :after (lsp-mode)
   :init
   (progn
-    (defvar lsp-rust-analyzer-server-display-inlay-hints)
-    (setq lsp-rust-analyzer-server-display-inlay-hints t)
     (defvar lsp-rust-server)
     (setq lsp-rust-server 'rust-analyzer))
-  :config
-  (progn
-    (setq lsp-rust-analyzer-max-inlay-hint-length 16)
-    (setq lsp-rust-analyzer-use-client-watching t)
-    (setq lsp-rust-analyzer-cargo-watch-enable t)
-    (setq lsp-rust-analyzer-cargo-watch-command "clippy")))
+  :custom
+  (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-rust-analyzer-max-inlay-hint-length 16)
+  (lsp-rust-analyzer-use-client-watching t)
+  (lsp-rust-analyzer-cargo-watch-enable t)
+  (lsp-rust-analyzer-cargo-watch-command "clippy"))
 
 (use-package lsp-metals
   :straight t
