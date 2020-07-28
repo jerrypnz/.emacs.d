@@ -41,7 +41,10 @@
  ring-bell-function 'ignore
  ;; prefer splitting windows horizontally
  split-height-threshold nil
- split-width-threshold 160)
+ split-width-threshold 160
+ ;; 1MB process read buffer
+ read-process-output-max (* 1024 1024)
+ )
 
 ;; shorten yes/no answers to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
