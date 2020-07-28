@@ -14,7 +14,8 @@
 (use-package lsp-mode
   :straight (:host github :repo "emacs-lsp/lsp-mode"
              :fork (:host github :repo "jerrypnz/lsp-mode"))
-  :hook ((go-mode python-mode rust-mode java-mode scala-mode) . lsp-deferred)
+  :hook (((go-mode python-mode rust-mode java-mode scala-mode) . lsp-deferred)
+         (lsp-mode . lsp-lens-mode))
   :config
   (setq lsp-auto-execute-action nil))
 
