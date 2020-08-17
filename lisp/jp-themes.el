@@ -41,6 +41,8 @@
                     :box nil)
       `(header-line-dimmed-face :inherit 'header-line
                                 :foreground modeline-fg-alt)
+      `(magit-header-line :inherit 'header-line
+                          :foreground blue)
       ;; mode-line
       `(mode-line :background bg
                   :foreground bg
