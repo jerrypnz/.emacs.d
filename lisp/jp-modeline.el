@@ -155,11 +155,11 @@ RIGHT, aligned respectively."
                              (cond
                               (.error (propertize (s-concat sum " ✗") 'face 'mode-line-error-face))
                               (.warning (propertize (s-concat sum " ✗") 'face 'mode-line-warning-face))
-                              (t (propertize (s-concat sum " !") 'face 'mode-line-info-face)))))
+                              (t (propertize "✓" 'face 'mode-line-info-face)))))
                        (propertize "✓" 'face 'mode-line-success-face)))
           ('running (propertize "…" 'face 'mode-line-info-face))
           ('no-checker "")
-          ('errored (propertize "!" 'face 'mode-line-error-face))
+          ('errored (propertize "✗" 'face 'mode-line-error-face))
           ('interrupted  (propertize "!" 'face 'mode-line-warning-face)))))
 
 ;; Mode-line segments
