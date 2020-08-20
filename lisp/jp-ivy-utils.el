@@ -17,5 +17,10 @@
   (let ((sym (thing-at-point 'symbol t)))
     (counsel-grep-or-swiper sym)))
 
+(defun jp-swiper-symbol-at-pt ()
+  (interactive)
+  (let ((sym (thing-at-point 'symbol t)))
+    (swiper sym)))
+
 (provide 'jp-ivy-utils)
 ;;; jp-ivy-utils.el ends here

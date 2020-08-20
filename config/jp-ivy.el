@@ -39,7 +39,7 @@
   :bind
   (("M-x"     . counsel-M-x)
    ("M-y"     . counsel-yank-pop)
-   ("C-s"     . counsel-grep-or-swiper)
+   ("C-s"     . swiper)
    ("C-x C-f" . counsel-find-file))
 
   :config
@@ -70,7 +70,7 @@
 
 (use-package jp-ivy-utils
   :bind
-  ("C-M-s" . jp-counsel-grep-or-swiper-symbol-at-pt))
+  ("C-M-s" . jp-swiper-symbol-at-pt))
 
 (use-package ivy-posframe
   :straight t
