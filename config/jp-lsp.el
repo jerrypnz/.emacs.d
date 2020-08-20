@@ -85,11 +85,15 @@
   ;;(lsp-metals-bloop-version "1.4.2")
   )
 
-(use-package lsp-python-ms
+;; (use-package lsp-python-ms
+;;   :straight t
+;;   :after (lsp-mode)
+;;   :config
+;;   (setq lsp-python-ms-auto-install-server t))
+
+(use-package lsp-pyright
   :straight t
-  :after (lsp-mode)
-  :config
-  (setq lsp-python-ms-auto-install-server t))
+  :after (lsp-mode))
 
 (use-package lsp-ivy
   :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master"))
