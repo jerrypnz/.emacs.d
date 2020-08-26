@@ -78,8 +78,8 @@
   :straight t
   :config
   (defun jp-frame-bottom-poshandler (info)
-    (cons (car (posframe-poshandler-frame-center info))
-          (- (cdr (posframe-poshandler-frame-bottom-left-corner info)) 60))))
+    (let ((pos (posframe-poshandler-frame-center info)))
+      (cons (car pos) (+ (cdr pos) 100)))))
 
 (use-package hydra-posframe
   :straight (:host github :repo "Ladicle/hydra-posframe"
