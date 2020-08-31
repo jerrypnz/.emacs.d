@@ -129,7 +129,7 @@
     (setq cider-print-fn 'fipp))
 
   :mode-hydra
-  (clojure-mode
+  ((clojure-mode clojurec-mode clojurescript-mode)
    ("Connect"
     (("j" cider-jack-in "jack-in")
      ("J" cider-jack-in-clojurescript "jack-in-cljs")
@@ -177,7 +177,7 @@
   :after (cider)
 
   :mode-hydra
-  ((clojure-mode cider-repl-mode)
+  ((clojure-mode cider-repl-mode clojurec-mode)
    ("Find"
     (("a" jp-counsel-cider-apropos "apropos"))))
 
