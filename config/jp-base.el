@@ -91,24 +91,6 @@
                                     (left-fringe . 10)
                                     (right-fringe . 10))))
 
-;; Major mode keys managed by a pretty hydra
-(use-package major-mode-hydra
-  :straight (:host github :type git :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
-  :demand t
-  :bind
-  (("C-M-SPC" . major-mode-hydra))
-
-  :config
-  (progn
-    (setq major-mode-hydra-invisible-quit-key "q")
-    (defun jp-major-mode-hydra-title-generator (_)
-      `(with-mode-icon major-mode
-                       (propertize (s-concat (format-mode-line mode-name) " Commands")
-                                   'face '(:weight bold :height 1.1))
-                       1.1))
-
-    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
-
 (use-package jp-main-hydra
   :bind
   ("M-SPC" . jp-main-hydra/body))

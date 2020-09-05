@@ -25,6 +25,14 @@
    org-mode-map
    ("RET" . org-return-indent))
 
+  :mode-hydra
+  (org-mode
+   ("Navigation"
+    (("n" outline-next-visible-heading "next heading" :exit nil)
+     ("p" outline-previous-visible-heading "previous heading" :exit nil)
+     ("u" outline-up-heading "up level")
+     ("g" org-goto "goto"))))
+
   :config
   (progn
     (setq org-directory "~/org")
@@ -242,6 +250,16 @@
   :config
   (progn
     (jp-org-latex-class-activate)))
+
+(use-package verb
+  :straight t
+  :after (org)
+  :mode-hydra
+  (org-mode
+   ("Verb Requests"
+    (("rr" verb-send-request-on-point-other-window "send")
+     ("re" verb-export-request-on-point-curl "export")
+     ("rs" verb-set-var "set var")))))
 
 (provide 'jp-org)
 ;;; jp-org.el ends here

@@ -85,6 +85,7 @@
 
 ;; Load features.
 (use-package jp-basic-settings)
+(use-package jp-hydra)
 (use-package jp-org)
 (use-package jp-ui)
 (use-package jp-base)
