@@ -60,7 +60,13 @@
                                    #'moody-slant-apple-rgb
                                  #'moody-slant))))
 
+(use-package mini-modeline
+  :straight t
+  :config
+  (mini-modeline-mode t))
+
 (use-package jp-modeline
+  :after (mini-modeline)
   :config
   (jp-modeline-setup))
 

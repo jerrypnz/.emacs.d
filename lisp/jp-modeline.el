@@ -219,8 +219,13 @@ RIGHT, aligned respectively."
                    0.8 0.05)
      " ")))
 
-(defun jp-modeline-major-mode ()
+(defun jp-modeline-major-mode-no-icon ()
   (s-concat" %[" (format-mode-line mode-name) "%] "))
+
+(defun jp-modeline-major-mode ()
+  (s-concat" %["
+           (with-mode-icon major-mode (format-mode-line mode-name) 0.8 nil nil)
+           "%] "))
 
 (defun jp-modeline-process ()
   (when mode-line-process
@@ -274,45 +279,58 @@ RIGHT, aligned respectively."
 
 (defvar jp-modeline-enabled-p nil)
 
+(defvar jp-modeline-format
+  '((:eval
+     (jp-modeline-format
+      ;; Left
+      '((:eval (jp-modeline-status))
+        (:eval (jp-modeline-position))
+        (:eval (jp-modeline-filename))
+        (:eval (jp-modeline-major-mode-no-icon))
+        (:eval (jp-modeline-vc)))
+      ;; Right
+      '((:eval (jp-modeline-flycheck))
+        (:eval (jp-modeline-narrow))
+        (:eval (jp-modeline-process))
+        (:eval (jp-modeline-encoding)))))))
+
+(defvar jp-headline-format
+  '((:eval
+     (jp-modeline-format
+      ;; Left
+      '((:eval (jp-headline-mode-icon))
+        (:eval (jp-headline-filename))
+        (:eval (jp-headline-status)))
+      ;; Right
+      '((:eval (jp-headline-flycheck))
+        (:eval (jp-headline-position)))))))
+
+(defvar jp-mini-modeline-r-format
+  '((:eval (jp-modeline-process))
+    (:eval (jp-modeline-narrow))
+    (:eval (jp-modeline-major-mode))
+    (:eval (jp-modeline-vc))
+    (:eval (jp-modeline-encoding))))
+
 (defun jp-modeline-activate ()
   (if jp-modeline-enabled-p
       (progn
-        (setq-default mode-line-format
-                      '((:eval
-                         (jp-modeline-format
-                          ;; Left
-                          '((:eval (jp-modeline-status))
-                            (:eval (jp-modeline-position))
-                            (:eval (jp-modeline-filename))
-                            (:eval (jp-modeline-major-mode))
-                            (:eval (jp-modeline-vc)))
-                          ;; Right
-                          '((:eval (jp-modeline-flycheck))
-                            (:eval (jp-modeline-narrow))
-                            (:eval (jp-modeline-process))
-                            (:eval (jp-modeline-encoding)))))))
+        (setq-default mode-line-format jp-modeline-format)
         (setq-default header-line-format nil))
     (progn
       (setq x-underline-at-descent-line t)
+      (defvar mini-modeline-r-format)
+      (setq mini-modeline-r-format jp-mini-modeline-r-format)
       (setq-default mode-line-format '(""))
-      (define-key mode-line-major-mode-keymap [header-line]
-        (lookup-key mode-line-major-mode-keymap [mode-line]))
-      (setq-default header-line-format
-                    '((:eval
-                       (jp-modeline-format
-                        ;; Left
-                        '((:eval (jp-headline-mode-icon))
-                          (:eval (jp-headline-filename))
-                          (:eval (jp-headline-status)))
-                        ;; Right
-                        '((:eval (jp-headline-flycheck))
-                          (:eval (jp-headline-position))))))))))
+      (setq-default header-line-format jp-headline-format))))
 
 ;; Mode line setup
 (defun jp-modeline-setup ()
   ;; Setup flycheck hooks
   (add-hook 'flycheck-status-changed-functions #'jp-modeline--update-flycheck-segment)
   (add-hook 'flycheck-mode-hook #'jp-modeline--update-flycheck-segment)
+  (define-key mode-line-major-mode-keymap [header-line]
+    (lookup-key mode-line-major-mode-keymap [mode-line]))
   (jp-modeline-activate))
 
 (provide 'jp-modeline)

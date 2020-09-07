@@ -73,6 +73,9 @@
       '(mode-line-warning-face :inherit 'header-line :foreground yellow)
       '(mode-line-error-face :inherit 'header-line :foreground red)
       '(mode-line-info-face :inherit 'header-line :foreground blue)
+
+      '(mini-modeline-mode-line :inherit 'mode-line)
+      '(mini-modeline-mode-line-inactive :inherit 'mode-line-inactive)
       ;; vertical border
       `(vertical-border :background fg :foreground fg)
       ;; diff-hl

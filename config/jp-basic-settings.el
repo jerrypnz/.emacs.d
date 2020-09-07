@@ -109,7 +109,7 @@
   ;;  window-divider-default-places 'right-only
   ;;  window-divider-default-right-width 1)
 
-  (add-to-list 'default-frame-alist '(internal-border-width . 15))
+  (add-to-list 'default-frame-alist '(internal-border-width . 5))
 
   ;; set fringe width
   (set-fringe-mode 5))
