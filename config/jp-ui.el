@@ -35,9 +35,9 @@
   :after (doom-themes)
   :config
   (progn
-    (setq jp-light-theme 'doom-nord-light
-          jp-dark-theme 'doom-nord
-          jp-current-theme-dark-p nil)
+    (setq jp-light-theme 'doom-one-light
+          jp-dark-theme 'doom-one
+          jp-current-theme-dark-p t)
 
     ;; TODO implement better per-system config
     (cond
