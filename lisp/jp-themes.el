@@ -29,7 +29,8 @@
 (defun jp-themes--customize-faces ()
   ;; Customize faces
   (let ((theme (jp-themes--get-current))
-        (color-fn (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
+        (more-contrast (if jp-current-theme-dark-p 'doom-lighten 'doom-darken))
+        (less-contrast (if jp-current-theme-dark-p 'doom-darken 'doom-lighten))
         (status-fg (if jp-current-theme-dark-p 'fg 'bg)))
     (doom-themes-set-faces theme
       `(fringe :inherit 'default)
@@ -40,7 +41,7 @@
                     :underline fg
                     :box nil)
       `(header-line-dimmed-face :inherit 'header-line
-                                :foreground modeline-fg-alt)
+                                :foreground (,less-contrast fg 0.4))
       `(magit-header-line :inherit 'header-line
                           :foreground blue)
       ;; mode-line
@@ -55,12 +56,12 @@
       ;; mode-line
       ;; `(mode-line :background modeline-bg;
       ;;             :foreground modeline-fg
-      ;;             :overline (,color-fn modeline-bg 0.2)
-      ;;             :underline (,color-fn modeline-bg 0.2))
+      ;;             :overline (,more-contrast modeline-bg 0.2)
+      ;;             :underline (,more-contrast modeline-bg 0.2))
       ;; `(mode-line-inactive :background modeline-bg
       ;;                      :foreground modeline-fg-alt
-      ;;                      :overline (,color-fn modeline-bg 0.2)
-      ;;                      :underline (,color-fn modeline-bg 0.2))
+      ;;                      :overline (,more-contrast modeline-bg 0.2)
+      ;;                      :underline (,more-contrast modeline-bg 0.2))
       `(mode-line-read-only-face :inherit 'mode-line :background dark-blue :foreground ,status-fg)
       '(mode-line-read-only-inactive-face :inherit 'mode-line-inactive :foreground dark-blue)
       `(mode-line-read-write-face :inherit 'mode-line :background red :foreground ,status-fg)
@@ -83,7 +84,7 @@
       `(diff-hl-delete :foreground (doom-lighten red 0.4) :background (doom-lighten red 0.4))
       `(diff-hl-change :foreground (doom-lighten blue 0.4) :background (doom-lighten blue 0.4))
       ;; highlight
-      `(symbol-overlay-default-face :background (,color-fn bg 0.1))
+      `(symbol-overlay-default-face :background (,more-contrast bg 0.1))
       '(symbol-overlay-face-1 :background blue :foreground bg-alt)
       '(symbol-overlay-face-2 :background orange :foreground bg-alt)
       '(symbol-overlay-face-3 :background yellow :foreground bg-alt)
@@ -93,21 +94,21 @@
       '(symbol-overlay-face-7 :background violet :foreground bg-alt)
       '(symbol-overlay-face-8 :background cyan :foreground bg-alt)
       ;; LSP
-      `(lsp-face-highlight-read :background (,color-fn bg 0.1))
-      `(lsp-face-highlight-write :background (,color-fn bg 0.1))
-      `(lsp-face-highlight-textual :background (,color-fn bg 0.1))
+      `(lsp-face-highlight-read :background (,more-contrast bg 0.1))
+      `(lsp-face-highlight-write :background (,more-contrast bg 0.1))
+      `(lsp-face-highlight-textual :background (,more-contrast bg 0.1))
       ;; parens
-      `(show-paren-match :background (,color-fn bg-alt 0.3))
+      `(show-paren-match :background (,more-contrast bg-alt 0.3))
       ;; ivy
       '(ivy-posframe :inherit 'default :background modeline-bg)
-      `(ivy-posframe-border :inherit 'default :background (,color-fn modeline-bg 0.2))
+      `(ivy-posframe-border :inherit 'default :background (,more-contrast modeline-bg 0.2))
       ;; hydra-posframe
       '(hydra-posframe-face :inherit 'default :background modeline-bg)
-      `(hydra-posframe-border-face :inherit 'default :background (,color-fn modeline-bg 0.2))
+      `(hydra-posframe-border-face :inherit 'default :background (,more-contrast modeline-bg 0.2))
       ;; s-exp
-      `(hl-sexp-face :background (,color-fn bg 0.03))
+      `(hl-sexp-face :background (,more-contrast bg 0.03))
       ;; frog-menu
-      `(frog-menu-border :background (,color-fn modeline-bg 0.2))
+      `(frog-menu-border :background (,more-contrast modeline-bg 0.2))
       `(frog-menu-posframe-background-face :background bg-alt)
       '(frog-menu-prompt-face :foreground fg-alt)
       '(frog-menu-candidates-fqace :foreground fg)
