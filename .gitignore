@@ -27,3 +27,4 @@ projectile-bookmarks.eld
 /session.*
 /.org-id-locations
 /request/
+/org-roam.db
