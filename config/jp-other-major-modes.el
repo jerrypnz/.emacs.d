@@ -69,5 +69,8 @@
         (add-to-list 'auto-mode-alist `(,pattern . ,(cdr x)))
         (mmm-add-mode-ext-class (cdr x) pattern 'jinja2)))))
 
+(use-package ess
+  :straight t)
+
 (provide 'jp-other-major-modes)
 ;;; jp-other-major-modes.el ends here
