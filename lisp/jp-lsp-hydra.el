@@ -21,7 +21,8 @@
   ("Quick Action"
    (("d" lsp-describe-thing-at-point "describe symbol")
     ("a" lsp-execute-code-action "code action")
-    ("f" lsp-format-buffer "format"))
+    ("f" lsp-format-buffer "format")
+    ("O" lsp-organize-imports "organize imports"))
    "Find & Goto"
    (("gr" lsp-ui-peek-find-references "references")
     ("gd" lsp-ui-peek-find-definitions "definitions")
@@ -41,7 +42,6 @@
    (("b" lsp-java-build-project "build")
     ("t" dap-java-run-test-class "test")
     ("T" dap-java-debug-test-class "debug test")
-    ("O" lsp-java-organize-imports "organize imports")
     ("U" lsp-java-update-project-configuration "update project config"))
    "Generate"
    (("gs" lsp-generate-to-string "generate toString")
