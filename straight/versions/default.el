@@ -33,7 +33,7 @@
  ("emacs-doom-themes" . "3761dfce75144e49789b6576e187acd82e2731ee")
  ("emacs-hcl-mode" . "e12b1df2ca28d2b06c471cd709c038a2dc0bcdbd")
  ("emacs-memoize" . "51b075935ca7070f62fae1d69fe0ff7d8fa56fdd")
- ("emacs-mini-modeline" . "a4455fb70c6b4062c63ce61af09d2af99683b492")
+ ("emacs-mini-modeline" . "7dcd0ab81bb7c298377708061176f5c5a50f77db")
  ("emacs-noflet" . "7ae84dc3257637af7334101456dafe1759c6b68a")
  ("emacs-request" . "0183da84cb45eb94da996cd2eab714ef0d7504cc")
  ("emacs-sbt-mode" . "7b121fce50430a44bd743583c87d7645bf157be2")
