@@ -51,6 +51,8 @@
 (use-package all-the-icons
   :straight t)
 
+(use-package jp-icons)
+
 (use-package moody
   :straight t
   :config
