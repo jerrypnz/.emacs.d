@@ -37,7 +37,7 @@
   (progn
     (setq jp-light-theme 'doom-one-light
           jp-dark-theme 'doom-spacegrey
-          jp-current-theme-dark-p t)
+          jp-current-theme-dark-p nil)
 
     ;; TODO implement better per-system config
     (cond
@@ -59,11 +59,6 @@
     (setq moody-slant-function (if (eq window-system 'ns)
                                    #'moody-slant-apple-rgb
                                  #'moody-slant))))
-
-(use-package mini-modeline
-  :straight t
-  :config
-  (mini-modeline-mode t))
 
 (use-package jp-modeline
   :after (mini-modeline)
