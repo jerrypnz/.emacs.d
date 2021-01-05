@@ -63,7 +63,6 @@
                                  #'moody-slant))))
 
 (use-package jp-modeline
-  :after (mini-modeline)
   :config
   (jp-modeline-setup))
 
