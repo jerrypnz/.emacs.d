@@ -56,7 +56,9 @@
   (setq lsp-java-server-install-dir (expand-file-name "~/.jdt.ls/")
         lsp-java-workspace-dir (expand-file-name "~/.jdt-workspace/")
         lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir)
-        lsp-java-maven-download-sources t))
+        lsp-java-maven-download-sources t
+        lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+        lsp-java-format-settings-profile "GoogleStyle"))
 
 (use-package dap-java
   :after (dap-mode)
