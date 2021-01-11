@@ -16,7 +16,7 @@
                               'face '(:weight bold :height 1.1))
                   1.1))
 
-(major-mode-hydra-define+ (rust-mode go-mode python-mode java-mode scala-mode)
+(major-mode-hydra-define+ (rust-mode go-mode python-mode java-mode scala-mode clojure-mode)
   (:color teal :quit-key "q" :title (jp-lsp-hydra--title))
   ("Quick Action"
    (("d" lsp-describe-thing-at-point "describe symbol")
@@ -44,18 +44,18 @@
     ("T" dap-java-debug-test-class "debug test")
     ("U" lsp-java-update-project-configuration "update project config"))
    "Generate"
-   (("gs" lsp-generate-to-string "generate toString")
-    ("ge" lsp-java-generate-equals-and-hash-code "generate equals/hashCode")
-    ("go" lsp-java-generate-overrides "generate overrides")
-    ("gg" lsp-java-generate-getters-and-setters "generate getters/setters"))
+   (("gs" lsp-java-generate-to-string "toString")
+    ("ge" lsp-java-generate-equals-and-hash-code "equals/hashCode")
+    ("go" lsp-java-generate-overrides "overrides")
+    ("gg" lsp-java-generate-getters-and-setters "getters/setters"))
    "Refactoring"
    (("re" lsp-java-extract-to-constant "extract constant")
     ("rm" lsp-java-extract-method "extract method")
     ("ri" lsp-java-add-import  "add import")
-    ("ru" lsp-java-add-unimplemented-methods "add unimplemented methods")
-    ("rp" lsp-java-create-parameter "introduce parameter")
+    ("ru" lsp-java-add-unimplemented-methods "add unimplemented")
+    ("rp" lsp-java-create-parameter "introduce param")
     ("rf" lsp-java-create-field "introduce field")
-    ("rl" lsp-java-create-local "introduce local variable"))))
+    ("rl" lsp-java-create-local "introduce local var"))))
 
 (defun jp-lsp-metals-build-restart ()
   (interactive)

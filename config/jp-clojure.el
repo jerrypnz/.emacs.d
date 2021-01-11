@@ -107,6 +107,11 @@
 
   :config
   (progn
+    ;; We want the clojure-lsp version of these
+    (define-key cider-mode-map (kbd "M-.") nil)
+    (define-key cider-mode-map (kbd "M-,") nil)
+    (define-key cider-mode-map (kbd "M-TAB") nil)
+
     ;; REPL history file
     (setq cider-repl-history-file "~/.emacs.d/cider-history")
     ;; Don't prompt for symbol by default
@@ -130,42 +135,40 @@
 
   :mode-hydra
   ((clojure-mode clojurec-mode clojurescript-mode)
-   ("Connect"
-    (("j" cider-jack-in "jack-in")
-     ("J" cider-jack-in-clojurescript "jack-in-cljs")
-     ("c" cider-connect "connect")
-     ("R" cider-restart "restart")
-     ("Q" cider-quit "disconnect"))
-    "Load"
-    (("k" cider-load-buffer "buffer")
-     ("l" cider-load-file "file")
-     ("L" cider-load-all-project-ns "all-ns")
-     ("g" cider-ns-refresh "reload"))
-    "Eval"
-    (("s" cider-repl-set-ns "set-repl-ns")
-     ("e" cider-eval-last-sexp-to-repl "eval-last")
-     ("f" cider-eval-defun-at-point "eval-defun")
-     ("I" cider-inspect-last-result "inspect-last-result")
-     ("D" (cider-eval-defun-at-point t) "debug-defun")
-     ("i" cider-interrupt "interrupt"))
-    "Test"
+   ("Quick Action"
     (("t" cider-test-run-ns-tests "ns")
      ("T" cider-test-run-loaded-tests "loaded")
      ("F" cider-test-rerun-failed-tests "failed"))
-    "Find"
+    "Find & Goto"
     (("n" cider-find-ns "ns")
-     ("d" cider-doc "doc"))))
+     ("D" cider-doc "doc"))
+    "Connection"
+    (("j" cider-jack-in "cider jack in")
+     ("J" cider-jack-in-clojurescript "cider jack in cljs")
+     ("C" cider-connect "cider connect")
+     ("R" cider-restart "cider restart")
+     ("Q" cider-quit "cider disconnect"))
+    "Load & Eval"
+    (("ll" cider-load-buffer "load buffer")
+     ("lf" cider-load-file "load file")
+     ("la" cider-load-all-project-ns "load all ns")
+     ("lr" cider-ns-refresh "reload")
+     ("es" cider-repl-set-ns "set repl ns")
+     ("ee" cider-eval-last-sexp-to-repl "eval last")
+     ("ef" cider-eval-defun-at-point "eval defun")
+     ("ei" cider-inspect-last-result "inspect last result")
+     ("ed" (cider-eval-defun-at-point t) "debug defun")
+     ("ei" cider-interrupt "interrupt"))))
 
   :mode-hydra
   (cider-repl-mode
-   ("Connect"
+   ("Connection"
     (("R" cider-restart "restart")
-     ("Q" cider-quit "disconnect")
-     ("q" nil "quit"))
-    "Load"
-    (("l" cider-load-file "file")
-     ("L" cider-load-all-project-ns "all-ns")
-     ("g" cider-ns-refresh "reload"))
+     ("Q" cider-quit "disconnect"))
+    "Load & Eval"
+    (("f" cider-load-file "load file")
+     ("a" cider-load-all-project-ns "load all ns")
+     ("r" cider-ns-refresh "reload"))
     "REPL"
     (("s" cider-repl-set-ns "set-repl-ns")
      ("i" cider-interrupt "interrupt")
@@ -178,8 +181,8 @@
 
   :mode-hydra
   ((clojure-mode cider-repl-mode clojurec-mode)
-   ("Find"
-    (("a" jp-counsel-cider-apropos "apropos"))))
+   ("Find & Goto"
+    (("ga" jp-counsel-cider-apropos "apropos"))))
 
   :mode-hydra
   (cider-repl-mode
@@ -192,50 +195,49 @@
 
   :mode-hydra
   ((clojure-mode cider-repl-mode)
-   ("Eval"
-    (("x" cider-macroexpand-1 "macroexpand-1")
-     ("X" cider-macroexpand-all "macroexpand-all")))))
+   ("Load & Eval"
+    (("ex" cider-macroexpand-1 "macroexpand-1")
+     ("eX" cider-macroexpand-all "macroexpand-all")))))
 
 (use-package inf-clojure
   :straight t
 
   :mode-hydra
   (clojurescript-mode
-   ("Connect"
-    (("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "jack in")
+   ("Connection"
+    (("j" (progn (inf-clojure) (inf-clojure-minor-mode +1)) "inf-clj jack in")
      ("J" (progn (inf-clojure "planck -d") (inf-clojure-minor-mode +1)) "jack in (planck)")
-     ("c" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "connect")
-     ("Q" inf-clojure-quit "disconnect"))
-    "Load"
-    (("k" inf-clojure-eval-buffer "buffer")
-     ("l" inf-clojure-load-file "file")
-     ("g" inf-clojure-reload "reload"))
-    "Eval"
-    (("s" inf-clojure-set-ns "set-repl-ns")
-     ("e" inf-clojure-eval-last-sexp "eval-last")
-     ("f" inf-clojure-eval-defun "eval-defun")
-     ("x" inf-clojure-macroexpand "expand"))
-    "Find"
+     ("C" (progn (inf-clojure-connect) (inf-clojure-minor-mode +1)) "inf-clj connect")
+     ("Q" inf-clojure-quit "inf-clj disconnect"))
+    "Load & Eval"
+    (("ll" inf-clojure-eval-buffer "load buffer")
+     ("lf" inf-clojure-load-file "load file")
+     ("lr" inf-clojure-reload "reload")
+     ("es" inf-clojure-set-ns "set repl ns")
+     ("ee" inf-clojure-eval-last-sexp "eval last")
+     ("ef" inf-clojure-eval-defun "eval defun")
+     ("ex" inf-clojure-macroexpand "macroexpand"))
+    "Find & Goto"
     (("d" inf-clojure-show-var-documentation "doc")
-     ("a" inf-clojure-apropos "apropos")))))
+     ("ga" inf-clojure-apropos "apropos")))))
 
-(use-package flycheck-clj-kondo
-  :straight t
-  :after (clojure-mode)
-  :config
-  (require 'flycheck-clj-kondo)
+;; (use-package flycheck-clj-kondo
+;;   :straight t
+;;   :after (clojure-mode)
+;;   :config
+;;   (require 'flycheck-clj-kondo)
 
-  (defun jp-clj-kondo-lint-all ()
-    (interactive)
-    (let* ((proj-root (projectile-project-root))
-           (proj-file (expand-file-name "project.clj" proj-root))
-           (clj-kondo-dir (expand-file-name ".clj-kondo" proj-root)))
-      (if (not (file-exists-p proj-file))
-          (user-error "Not a leiningen project: %s" proj-root)
-        (make-directory clj-kondo-dir t)
-        (message "Running 'lein classpath' to get classpath")
-        (let ((classpath (shell-command-to-string "lein classpath 2>/dev/null")))
-          (compile (format "clj-kondo --lint %s --cache" (s-trim classpath))))))))
+;;   (defun jp-clj-kondo-lint-all ()
+;;     (interactive)
+;;     (let* ((proj-root (projectile-project-root))
+;;            (proj-file (expand-file-name "project.clj" proj-root))
+;;            (clj-kondo-dir (expand-file-name ".clj-kondo" proj-root)))
+;;       (if (not (file-exists-p proj-file))
+;;           (user-error "Not a leiningen project: %s" proj-root)
+;;         (make-directory clj-kondo-dir t)
+;;         (message "Running 'lein classpath' to get classpath")
+;;         (let ((classpath (shell-command-to-string "lein classpath 2>/dev/null")))
+;;           (compile (format "clj-kondo --lint %s --cache" (s-trim classpath))))))))
 
 (provide 'jp-clojure)
 ;;; jp-clojure.el ends here
