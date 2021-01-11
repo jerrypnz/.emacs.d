@@ -17,6 +17,11 @@
   :straight t
   :hook (((go-mode python-mode rust-mode java-mode scala-mode clojure-mode) . lsp-deferred)
          (lsp-mode . lsp-lens-mode))
+
+  :bind
+  (:map lsp-mode-map
+   ("M-." . lsp-find-definition))
+
   :config
   (setq lsp-auto-execute-action nil)
   (setq lsp-headerline-breadcrumb-enable nil))
@@ -24,12 +29,6 @@
 (use-package lsp-ui
   :straight t
   :hook (lsp-mode . lsp-ui-mode)
-
-  :bind
-  (:map lsp-ui-mode-map
-   ("M-." . lsp-ui-peek-find-definitions)
-   ("M-?" . lsp-ui-peek-find-references))
-
   :config
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-enable nil))
