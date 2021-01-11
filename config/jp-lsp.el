@@ -12,15 +12,14 @@
   (require 'use-package))
 
 (use-package lsp-mode
-  :straight (:host github :repo "emacs-lsp/lsp-mode"
-             :fork (:host github :repo "jerrypnz/lsp-mode"))
+  ;; :straight (:host github :repo "emacs-lsp/lsp-mode"
+  ;;            :fork (:host github :repo "jerrypnz/lsp-mode"))
+  :straight t
   :hook (((go-mode python-mode rust-mode java-mode scala-mode clojure-mode) . lsp-deferred)
          (lsp-mode . lsp-lens-mode))
   :config
-  (setq lsp-auto-execute-action nil))
-
-(use-package lsp-clients
-  :after (lsp-mode))
+  (setq lsp-auto-execute-action nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui
   :straight t
