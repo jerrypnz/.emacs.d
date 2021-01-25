@@ -16,6 +16,7 @@
 
 (use-package plantuml-mode
   :straight t
+  :mode ("\\.puml\\'")
   :custom
   (plantuml-default-exec-mode 'jar)
   :config
