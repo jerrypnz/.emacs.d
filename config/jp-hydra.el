@@ -13,7 +13,7 @@
 
 ;; Major mode keys managed by a pretty hydra
 (use-package major-mode-hydra
-  :straight (:host github :type git :repo "jerrypnz/major-mode-hydra.el" :branch "develop")
+  :straight t
   :demand t
   :bind
   (("C-M-SPC" . major-mode-hydra))
