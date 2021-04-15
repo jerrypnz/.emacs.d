@@ -23,30 +23,26 @@
 (unless noninteractive
   (message "Loading %s..." load-file-name))
 
+(when (boundp 'comp-deferred-compilation)
+  (setq comp-deferred-compilation nil))
+
 ;; Bootstrap straight.el package manager.
-
-(eval-and-compile
-  (defvar bootstrap-version 3)
-  (defvar bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el")))
-
-(unless (file-exists-p bootstrap-file)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-       'silent 'inhibit-cookies)
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(with-no-warnings
-  (setq straight-cache-autoloads t)
-  (setq straight-check-for-modifications 'live))
-
-(require 'straight bootstrap-file t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;; Install some basic packages
 
 (straight-use-package 'dash)
-(straight-use-package 'dash-functional)
 (straight-use-package 'f)
 (straight-use-package 's)
 (straight-use-package 'noflet)
