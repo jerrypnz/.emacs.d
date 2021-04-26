@@ -53,7 +53,6 @@
 
 (use-package bloop
   :straight (:host github :type git :repo "tarao/emacs-bloop")
-  :after (lsp-mode)
   :mode-hydra
   (scala-mode
    ("Quick Action"
