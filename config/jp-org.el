@@ -18,7 +18,7 @@
 (defconst jp-study-notes "~/org/study-notes.org")
 
 (use-package org
-  :straight org-plus-contrib
+  :straight t
   :defer t
   :bind
   (:map
@@ -77,6 +77,10 @@
       (not (member lang '("dot" "plantuml" "spark-shell" "amm" "elisp"))))
 
     (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
+
+(use-package org-contrib
+  :straight t
+  :after (org))
 
 (use-package org-capture
   :after (org)
