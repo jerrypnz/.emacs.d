@@ -72,5 +72,13 @@
 (use-package ess
   :straight t)
 
+(use-package graphviz-dot-mode
+  :straight t
+  :mode ("\\.dot\\'")
+  :config (setq graphviz-dot-indent-width 2))
+
+(use-package company-graphviz-dot
+  :after (company graphviz-dot-mode))
+
 (provide 'jp-other-major-modes)
 ;;; jp-other-major-modes.el ends here
