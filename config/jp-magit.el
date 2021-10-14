@@ -41,6 +41,7 @@
           ("~/dev/open-source/" . 2)))
 
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (setq magit-bury-buffer-function #'magit-restore-window-configuration)
 
   (transient-bind-q-to-quit))
 
