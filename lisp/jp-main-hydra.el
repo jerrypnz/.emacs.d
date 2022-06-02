@@ -20,9 +20,10 @@
 (require 'jp-commands)
 (require 'jp-themes)
 
-(autoload 'counsel-projectile "counsel-projectile")
-(autoload 'counsel-projectile-find-file "counsel-projectile")
-(autoload 'counsel-projectile-find-dir "counsel-projectile")
+(autoload 'consult-imenu "consult")
+
+(autoload 'projectile-find-file "projectile")
+(autoload 'projectile-find-dir "projectile")
 (autoload 'projectile-ibuffer "projectile")
 
 (autoload 'magit-status "magit")
@@ -85,9 +86,9 @@
 (pretty-hydra-define jp-projects
   (:color teal :quit-key "q" :title (jp-projects--title))
   ("Current Project"
-   (("f" counsel-projectile-find-file "open file")
-    ("b" counsel-projectile-switch-to-buffer "switch to buffer")
-    ("d" counsel-projectile-find-dir "open directory")
+   (("f" projectile-find-file "open file")
+    ("b" projectile-switch-to-buffer "switch to buffer")
+    ("d" projectile-find-dir "open directory")
     ("i" projectile-ibuffer "ibuffer")
     ("k" projectile-kill-buffers "kill buffers")
     ("I" projectile-invalidate-cache "invalidate cache"))
@@ -110,11 +111,11 @@
   (:color teal :quit-key ("q" "M-SPC") :title jp-main-hydra--title)
   ("Actions"
    (("TAB" jp-switch-to-previous-buffer "prev buffer")
-    ("SPC" counsel-M-x "M-x")
+    ("SPC" execute-extended-command "M-x")
     ("f" jp-open-file "open file")
     ("b" jp-switch-buffer "switch buffers")
     ("r" ivy-resume "ivy resume")
-    ("i" counsel-imenu "imenu")
+    ("i" consult-imenu "imenu")
     ("d" dash-at-point-hydra/body "dash")
     ("," treemacs "toggle treemacs")
     ("." treemacs-select-window "select treemacs")

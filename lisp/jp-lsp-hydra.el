@@ -25,8 +25,7 @@
     ("O" lsp-organize-imports "organize imports"))
    "Find & Goto"
    (("gr" lsp-ui-peek-find-references "references")
-    ("gd" lsp-ui-peek-find-definitions "definitions")
-    ("gf" lsp-ivy-workspace-symbol "workspace symbol"))
+    ("gd" lsp-ui-peek-find-definitions "definitions"))
    "Connection"
    (("cc" lsp "start")
     ("cr" lsp-restart-workspace "restart")

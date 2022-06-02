@@ -104,9 +104,6 @@
   :straight t
   :after (lsp-mode))
 
-(use-package lsp-ivy
-  :straight (:host github :repo "emacs-lsp/lsp-ivy" :branch "master"))
-
 (use-package jp-lsp-hydra)
 
 (provide 'jp-lsp)

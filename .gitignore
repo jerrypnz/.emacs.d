@@ -29,3 +29,5 @@ projectile-bookmarks.eld
 /request/
 /org-roam.db
 eln-cache/
+/workspace/
+/projects

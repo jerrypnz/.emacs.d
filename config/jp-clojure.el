@@ -176,19 +176,19 @@
     "Find"
     (("d" cider-doc "doc")))))
 
-(use-package jp-counsel-cider
-  :after (cider)
-
-  :mode-hydra
-  ((clojure-mode cider-repl-mode clojurec-mode)
-   ("Find & Goto"
-    (("ga" jp-counsel-cider-apropos "apropos"))))
-
-  :mode-hydra
-  (cider-repl-mode
-   ("REPL"
-    (("h" jp-counsel-cider-repl-history "search-history")
-     ("H" cider-repl-history "show-history")))))
+;;(use-package jp-counsel-cider
+;;  :after (cider)
+;;
+;;  :mode-hydra
+;;  ((clojure-mode cider-repl-mode clojurec-mode)
+;;   ("Find & Goto"
+;;    (("ga" jp-counsel-cider-apropos "apropos"))))
+;;
+;;  :mode-hydra
+;;  (cider-repl-mode
+;;   ("REPL"
+;;    (("h" jp-counsel-cider-repl-history "search-history")
+;;     ("H" cider-repl-history "show-history")))))
 
 (use-package cider-macroexpansion
   :after (cider)
