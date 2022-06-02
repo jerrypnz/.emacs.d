@@ -40,6 +40,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(setq straight-disable-native-compile nil)
+
 ;; Install some basic packages
 
 (straight-use-package 'dash)
