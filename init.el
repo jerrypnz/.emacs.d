@@ -26,10 +26,24 @@
 (when (boundp 'comp-deferred-compilation)
   (setq comp-deferred-compilation nil))
 
+(defvar jp-emacs-cache-dir (expand-file-name ".emacs.d.cache/" "~/"))
+(defvar jp-emacs-eln-cache-dir (expand-file-name "eln-cache" jp-emacs-cache-dir))
+(make-directory jp-emacs-eln-cache-dir t)
+
+(defvar jp-straight-profile (expand-file-name "straight-pkgs.el" user-emacs-directory))
+
+(defvar straight-base-dir)
+(defvar straight-profiles)
+(setq straight-base-dir jp-emacs-cache-dir)
+(setq straight-profiles `((nil . ,jp-straight-profile)))
+
+(defvar native-comp-eln-load-path)
+(setq native-comp-eln-load-path (cons jp-emacs-eln-cache-dir (cdr native-comp-eln-load-path)))
+
 ;; Bootstrap straight.el package manager.
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" jp-emacs-cache-dir))
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
