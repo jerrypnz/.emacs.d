@@ -11,7 +11,7 @@
 (require 'pretty-hydra)
 (require 'eyebrowse)
 
-(autoload 'projectile-switch-project "projectile")
+(autoload 'consult-projectile-switch-project "consult-projectile")
 (autoload 'projectile-project-name "projectile")
 
 ;; Switch to a project and use its name as the tag of
@@ -19,7 +19,7 @@
 (defun jp-eyebrowse-switch-project ()
   (interactive)
   (let ((project-name (progn
-                        (projectile-switch-project)
+                        (consult-projectile-switch-project)
                         (projectile-project-name))))
     (when (> (length project-name) 0)
       (eyebrowse-rename-window-config

@@ -8,21 +8,25 @@
 
 ;;; Code:
 
-(require 'consult)
-(require 'projectile)
+(autoload 'consult-projectile "consult-projectile")
+(autoload 'consult-projectile-switch-to-buffer "consult-projectile")
+(autoload 'projectile-project-p "projectile")
+(autoload 'projectile-project-root "projectile")
+(autoload 'projectile-cleanup-known-projects "projectile")
+(autoload 'projectile-add-known-project "projectile")
 
 (defun jp-open-file (current-dir-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not current-dir-p))
-      (call-interactively #'projectile-find-file)
+      (call-interactively #'consult-projectile)
     (call-interactively #'find-file)))
 
 (defun jp-switch-buffer (global-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not global-p))
-      (call-interactively #'projectile-switch-to-buffer)
+      (call-interactively #'consult-projectile-switch-to-buffer)
     (call-interactively #'consult-buffer)))
 
 (defun jp-search (current-dir-p)

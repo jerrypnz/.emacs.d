@@ -22,8 +22,10 @@
 
 (autoload 'consult-imenu "consult")
 
-(autoload 'projectile-find-file "projectile")
-(autoload 'projectile-find-dir "projectile")
+(autoload 'consult-projectile "consult-projectile")
+(autoload 'consult-projectile-find-file "consult-projectile")
+(autoload 'consult-projectile-find-dir "consult-projectile")
+(autoload 'consult-projectile-switch-to-buffer "consult-projectile")
 (autoload 'projectile-ibuffer "projectile")
 
 (autoload 'magit-status "magit")
@@ -86,9 +88,9 @@
 (pretty-hydra-define jp-projects
   (:color teal :quit-key "q" :title (jp-projects--title))
   ("Current Project"
-   (("f" projectile-find-file "open file")
-    ("b" projectile-switch-to-buffer "switch to buffer")
-    ("d" projectile-find-dir "open directory")
+   (("f" consult-projectile "open file")
+    ("b" consult-projectile-switch-to-buffer "switch to buffer")
+    ("d" consult-projectile-find-dir "open directory")
     ("i" projectile-ibuffer "ibuffer")
     ("k" projectile-kill-buffers "kill buffers")
     ("I" projectile-invalidate-cache "invalidate cache"))

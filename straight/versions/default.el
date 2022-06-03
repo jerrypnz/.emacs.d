@@ -16,6 +16,7 @@
  ("company-mode" . "d5145006b948f93e673f439a766da01f636d39fc")
  ("compat" . "81378ce2549e6c6df5141d459036438cb98b9ad3")
  ("consult" . "b76f7fb0856ecf03a6f539ccb4d4a0fd627acd87")
+ ("consult-projectile" . "130ba9d3879bc293d81b1aa9fbfd0dffae3b5579")
  ("cql-mode" . "d400c046850d3cf404778b2c47d6be4ff84ca04b")
  ("dap-mode" . "67fd9e5d4e157e72b09ab34daca67619cb98c673")
  ("dash-at-point" . "fba1a6f42ea51d05110e12c62bdced664059eb55")

@@ -15,13 +15,13 @@
 (use-package projectile
   :straight t
   :defer nil
-  :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
-
   :config
   (progn
     (setq projectile-track-known-projects-automatically nil)
     (projectile-mode)))
+
+(use-package consult-projectile
+  :straight t)
 
 (use-package jp-projectile-utils
   :after (projectile)
