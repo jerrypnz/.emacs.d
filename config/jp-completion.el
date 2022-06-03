@@ -43,6 +43,9 @@
   (("M-y"     . consult-yank-pop)
    ("C-s"     . consult-line)))
 
+(use-package jp-completion-utils
+  :bind (("C-M-s" . jp-consult-line-symbol-at-point)))
+
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
   :straight t
