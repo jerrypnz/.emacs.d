@@ -11,13 +11,16 @@
 (require 'pretty-hydra)
 (require 'eyebrowse)
 
-(autoload 'counsel-projectile-switch-project "counsel-projectile")
+(autoload 'consult-projectile-switch-project "consult-projectile")
+(autoload 'projectile-project-name "projectile")
 
 ;; Switch to a project and use its name as the tag of
 ;; the window config
 (defun jp-eyebrowse-switch-project ()
   (interactive)
-  (let ((project-name (counsel-projectile-switch-project)))
+  (let ((project-name (progn
+                        (consult-projectile-switch-project)
+                        (projectile-project-name))))
     (when (> (length project-name) 0)
       (eyebrowse-rename-window-config
        (eyebrowse--get 'current-slot)

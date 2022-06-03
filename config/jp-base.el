@@ -122,7 +122,6 @@
    ("C-M-." . dumb-jump-go-other-window))
   :config
   (progn
-    (setq dumb-jump-selector 'ivy)
     (setq dumb-jump-prefer-searcher 'rg)))
 
 ;; symbol-overlay

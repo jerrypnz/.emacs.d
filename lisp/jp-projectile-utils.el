@@ -8,41 +8,40 @@
 
 ;;; Code:
 
-(autoload 'counsel-rg "counsel")
-(autoload 'counsel-projectile-switch-to-buffer "counsel-projectile")
+(autoload 'consult-projectile "consult-projectile")
+(autoload 'consult-projectile-switch-to-buffer "consult-projectile")
 (autoload 'projectile-project-p "projectile")
+(autoload 'projectile-project-root "projectile")
+(autoload 'projectile-cleanup-known-projects "projectile")
+(autoload 'projectile-add-known-project "projectile")
 
 (defun jp-open-file (current-dir-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not current-dir-p))
-      (counsel-projectile-find-file)
-    (counsel-find-file)))
+      (call-interactively #'consult-projectile)
+    (call-interactively #'find-file)))
 
 (defun jp-switch-buffer (global-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not global-p))
-      (counsel-projectile-switch-to-buffer)
-    (ivy-switch-buffer)))
+      (call-interactively #'consult-projectile-switch-to-buffer)
+    (call-interactively #'consult-buffer)))
 
 (defun jp-search (current-dir-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not current-dir-p))
-      (counsel-projectile-rg)
-    (counsel-rg "" default-directory "" (format "[%s] rg" default-directory))))
-
-(defvar counsel-projectile-rg-initial-input nil) ;; defined in counsel-projectile.el
+      (consult-ripgrep (projectile-project-root))
+    (consult-ripgrep default-directory)))
 
 (defun jp-search-symbol-at-pt (current-dir-p)
   (interactive "P")
   (if (and (projectile-project-p)
            (not current-dir-p))
-      (let ((counsel-projectile-rg-initial-input '(thing-at-point 'symbol t)))
-        (counsel-projectile-rg))
-    (let ((sym (thing-at-point 'symbol t)))
-      (counsel-rg sym default-directory "" (format "[%s] rg" default-directory)))))
+      (consult-ripgrep (projectile-project-root) (thing-at-point 'symbol t))
+    (consult-ripgrep default-directory (thing-at-point 'symbol t))))
 
 (defun jp-refresh-projectile-projects ()
   (interactive)

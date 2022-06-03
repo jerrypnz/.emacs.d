@@ -20,7 +20,6 @@
 
   :custom
   (org-roam-directory "~/org/roam")
-  (org-roam-completion-system 'ivy)
 
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-org-roam-hydra--title)
