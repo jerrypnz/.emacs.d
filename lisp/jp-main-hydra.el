@@ -20,7 +20,7 @@
 (require 'jp-commands)
 (require 'jp-themes)
 
-(autoload 'consult-imenu "consult")
+(autoload 'consult-imenu "consult-imenu")
 
 (autoload 'consult-projectile "consult-projectile")
 (autoload 'consult-projectile-find-file "consult-projectile")
