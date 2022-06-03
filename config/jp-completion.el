@@ -34,10 +34,7 @@
   :pretty-hydra
   (helpful-hydra
    (""
-    (("a" consult-apropos "apropos")
-     ;;("F" counsel-faces "faces")
-     ;;("i" counsel-info-lookup-symbol "info lookup")
-     )))
+    (("a" consult-apropos "apropos"))))
 
   :bind
   (("M-y"     . consult-yank-pop)
