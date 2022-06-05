@@ -97,48 +97,48 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-;;(use-package jp-ivy-utils
-;;  :bind
-;;  ("C-M-s" . jp-swiper-symbol-at-pt))
-
-;; company
-(use-package company
+(use-package corfu
   :straight t
-  :config
-  (progn
-    (setq company-idle-delay 0.125
-          company-minimum-prefix-length 1
-          company-require-match nil
-          company-transformers '(company-sort-by-occurrence)
-          company-frontends '(company-pseudo-tooltip-unless-just-one-frontend
-                              company-preview-frontend
-                              company-echo-metadata-frontend))
-    (global-company-mode t)))
+  :custom
+  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  ;; (corfu-separator ?\s)          ;; Orderless field separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
 
-(use-package company-box
+  ;; Enable Corfu only for certain modes.
+  ;; :hook ((prog-mode . corfu-mode)
+  ;;        (shell-mode . corfu-mode)
+  ;;        (eshell-mode . corfu-mode))
+
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since Dabbrev can be used globally (M-/).
+  ;; See also `corfu-excluded-modes'.
+  :init
+  (global-corfu-mode))
+
+(use-package corfu-doc
   :straight t
-  :defer t
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-box-enable-icon nil)
-  ;; Remove once https://github.com/sebastiencs/company-box/pull/91 is merged
-  (defun jp-company-box--render (f &rest args)
-    (let ((x (apply f args)))
-      (with-current-buffer (company-box--get-buffer)
-        (setq header-line-format nil))))
-  (advice-add #'company-box--render-buffer :around #'jp-company-box--render))
+  :after (corfu)
+  :hook (corfu-mode . corfu-doc-mode)
+  :bind (:map corfu-map
+         ("M-p" . corfu-doc-scroll-down)
+         ("M-n" . corfu-doc-scroll-up)
+         ("M-d" . corfu-doc-toggle))
+  :custom (corfu-doc-delay 0))
 
-(use-package company-dabbrev
-  :after (company)
+(use-package kind-icon
+  :straight t
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
   :config
-  (progn
-    (setq company-dabbrev-ignore-case nil
-          company-dabbrev-downcase nil)))
-
-(use-package company-yasnippet
-  :after (company)
-  :bind
-  ("C-M-y" . company-yasnippet))
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (provide 'jp-completion)
 ;;; jp-completion.el ends here
