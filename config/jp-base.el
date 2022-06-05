@@ -67,6 +67,7 @@
   :straight t
   :config
   (progn
+    (setq undo-tree-history-directory-alist `(("." . ,jp-emacs-undo-history-dir)))
     (setq undo-tree-visualizer-diff t)
     (setq undo-tree-visualizer-timestamps t)
     (global-undo-tree-mode)))

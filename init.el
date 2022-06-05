@@ -28,7 +28,9 @@
 
 (defvar jp-emacs-cache-dir (expand-file-name ".emacs.d.cache/" "~/"))
 (defvar jp-emacs-eln-cache-dir (expand-file-name "eln-cache" jp-emacs-cache-dir))
+(defvar jp-emacs-undo-history-dir (expand-file-name "undo" jp-emacs-cache-dir))
 (make-directory jp-emacs-eln-cache-dir t)
+(make-directory jp-emacs-undo-history-dir t)
 
 (defvar jp-straight-profile (expand-file-name "straight-pkgs.el" user-emacs-directory))
 
