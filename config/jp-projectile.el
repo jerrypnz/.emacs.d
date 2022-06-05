@@ -18,7 +18,7 @@
   :config
   (progn
     (setq projectile-enable-caching t)
-    (setq projectile-enable-idle-timer t)
+    (setq projectile-enable-idle-timer nil)
     (setq projectile-track-known-projects-automatically nil)
     (projectile-mode)))
 
