@@ -21,15 +21,16 @@
   :custom
   (org-roam-directory "~/org/roam")
 
+  :config
+  (org-roam-db-autosync-mode)
+
   :pretty-hydra
   ((:color teal :quit-key "q" :title jp-org-roam-hydra--title)
    ("Navigation"
     (("l" org-roam "roam")
-     ("f" org-roam-find-file "find file")
-     ("j" org-roam-jump-to-index "jump to index")
-     ("b" org-roam-switch-to-buffer "switch to buffer")
-     ("g" org-roam-graph "show graph"))
+     ("c" org-roam-capture "capture")
+     ("f" org-roam-node-find "find"))
     "Edit"
-    (("i" org-roam-insert "insert")))))
+    (("i" org-roam-node-insert "insert")))))
 
 (provide 'jp-org-roam)
