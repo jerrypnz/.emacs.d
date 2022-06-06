@@ -113,7 +113,7 @@
     (define-key cider-mode-map (kbd "M-TAB") nil)
 
     ;; REPL history file
-    (setq cider-repl-history-file "~/.emacs.d/cider-history")
+    (setq cider-repl-history-file "~/.emacs.d.cache/cider-history")
     ;; Don't prompt for symbol by default
     (setq cider-prompt-for-symbol nil)
     ;; nice pretty printing
