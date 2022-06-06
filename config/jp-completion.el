@@ -15,7 +15,18 @@
   :straight t)
 
 (use-package vertico
-  :straight t
+  :straight (vertico :files (:defaults "extensions/*")
+                     :includes (;;vertico-indexed
+                                ;;vertico-flat
+                                ;;vertico-grid
+                                ;;vertico-quick
+                                ;;vertico-buffer
+                                vertico-repeat
+                                ;;vertico-reverse
+                                ;;vertico-directory
+                                ;;vertico-multiform
+                                ;;vertico-unobtrusive
+                                ))
   :init
   (vertico-mode)
 

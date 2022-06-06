@@ -77,6 +77,9 @@
 (set-terminal-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+;; Enable recursive minibuffers
+(setq enable-recursive-minibuffers t)
+
 ;; automatically update buffers when files change
 (global-auto-revert-mode t)
 ;; apply syntax highlighting to all buffers
@@ -153,6 +156,12 @@
     (setq ediff-window-setup-function 'ediff-setup-windows-plain)
     (add-hook 'ediff-before-setup-hook #'jp-store-pre-ediff-winconfig)
     (add-hook 'ediff-quit-hook #'jp-restore-pre-ediff-winconfig)))
+
+(use-package savehist
+  :init
+  (savehist-mode)
+  :custom
+  (savehist-file (expand-file-name "savehist" jp-emacs-cache-dir)))
 
 (provide 'jp-basic-settings)
 

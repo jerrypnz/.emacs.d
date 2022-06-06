@@ -116,7 +116,7 @@
     ("SPC" execute-extended-command "M-x")
     ("f" jp-open-file "open file")
     ("b" jp-switch-buffer "switch buffers")
-    ("r" ivy-resume "ivy resume")
+    ;; ("r" vertico-repeat "vertico resume")
     ("i" consult-imenu "imenu")
     ("d" dash-at-point-hydra/body "dash")
     ("," treemacs "toggle treemacs")
