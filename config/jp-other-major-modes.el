@@ -77,6 +77,10 @@
   :mode ("\\.dot\\'")
   :config (setq graphviz-dot-indent-width 2))
 
+(use-package typescript-mode
+  :straight t
+  :mode ("\\.ts\\'"))
+
 (use-package company-graphviz-dot
   :after (company graphviz-dot-mode))
 

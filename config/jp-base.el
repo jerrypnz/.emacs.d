@@ -231,6 +231,10 @@
   :straight t
   :config (global-whitespace-cleanup-mode))
 
+(use-package editorconfig
+  :straight t
+  :config (editorconfig-mode 1))
+
 (use-package rainbow-mode
   :straight t
   :commands (rainbow-mode))
