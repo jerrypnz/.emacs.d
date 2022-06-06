@@ -80,9 +80,9 @@
       ;; vertical border
       `(vertical-border :background fg :foreground fg)
       ;; diff-hl
-      `(diff-hl-insert :foreground (doom-lighten green 0.4) :background (doom-lighten green 0.4))
-      `(diff-hl-delete :foreground (doom-lighten red 0.4) :background (doom-lighten red 0.4))
-      `(diff-hl-change :foreground (doom-lighten blue 0.4) :background (doom-lighten blue 0.4))
+      ;; `(diff-hl-insert :foreground (doom-lighten green 0.4))
+      ;; `(diff-hl-delete :foreground (doom-lighten red 0.4))
+      ;; `(diff-hl-change :foreground (doom-lighten blue 0.4))
       ;; highlight
       `(symbol-overlay-default-face :background (,more-contrast bg 0.1))
       '(symbol-overlay-face-1 :background blue :foreground bg-alt)

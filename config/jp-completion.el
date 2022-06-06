@@ -34,7 +34,8 @@
   :pretty-hydra
   (helpful-hydra
    (""
-    (("a" consult-apropos "apropos"))))
+    (("a" consult-apropos "apropos")
+     ("F" describe-face "faces"))))
 
   :bind
   (("M-y"     . consult-yank-pop)

@@ -109,10 +109,10 @@
   ;;  window-divider-default-places 'right-only
   ;;  window-divider-default-right-width 1)
 
-  (add-to-list 'default-frame-alist '(internal-border-width . 5))
+  (add-to-list 'default-frame-alist '(internal-border-width . 3))
 
   ;; set fringe width
-  (set-fringe-mode 5))
+  (set-fringe-mode 3))
 
 
 ;; Configuration for Emacs builtin packages
