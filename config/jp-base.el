@@ -122,8 +122,7 @@
   (("M-."   . dumb-jump-go)
    ("C-M-." . dumb-jump-go-other-window))
   :config
-  (progn
-    (setq dumb-jump-prefer-searcher 'rg)))
+  (setq dumb-jump-prefer-searcher 'rg))
 
 ;; symbol-overlay
 (use-package symbol-overlay
@@ -139,19 +138,7 @@
   (("M-s" . symbol-overlay-put))
 
   :config
-  (progn
-    ;; TODO add a hydra
-    ;;(setq symbol-overlay-map nil)
-    (setq symbol-overlay-idle-time 0.1)
-
-    (eval-after-load "swiper"
-      '(defadvice swiper (before jp-swiper-remove-highlight activate)
-         ;; If the search string happens to be the symbol being
-         ;; highlighted by `highlight-thing', the overlays it applies
-         ;; should be removed, because `swiper' applies its own
-         ;; overlays. Otherwise it can flicker between the two faces
-         ;; as you move between candidates.
-         (symbol-overlay-remove-temp)))))
+  (setq symbol-overlay-idle-time 0.1))
 
 ;; rectangle
 (use-package jp-rect
