@@ -16,7 +16,7 @@
                               'face '(:weight bold :height 1.1))
                   1.1))
 
-(major-mode-hydra-define+ (rust-mode go-mode python-mode java-mode scala-mode clojure-mode)
+(major-mode-hydra-define+ (rust-mode go-mode python-mode java-mode scala-mode clojure-mode typescript-mode)
   (:color teal :quit-key "q" :title (jp-lsp-hydra--title))
   ("Quick Action"
    (("d" lsp-describe-thing-at-point "describe symbol")
