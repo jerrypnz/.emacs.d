@@ -126,6 +126,13 @@
   (setq jp-current-theme-dark-p (not jp-current-theme-dark-p))
   (jp-themes-load))
 
+(defun jp-themes-ns-system-change-function (appearance)
+  (setq jp-current-theme-dark-p
+        (pcase appearance
+          ('light nil)
+          ('dark t)))
+  (jp-themes-load))
+
 (provide 'jp-themes)
 
 ;;; jp-themes.el ends here
