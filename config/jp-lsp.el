@@ -15,7 +15,15 @@
   ;; :straight (:host github :repo "emacs-lsp/lsp-mode"
   ;;            :fork (:host github :repo "jerrypnz/lsp-mode"))
   :straight t
-  :hook (((go-mode python-mode rust-mode java-mode scala-mode clojure-mode typescript-mode) . lsp-deferred)
+  :hook (((go-mode
+           python-mode
+           rust-mode
+           java-mode
+           scala-mode
+           clojure-mode
+           clojurescript-mode
+           typescript-mode
+           ) . lsp-deferred)
          (lsp-mode . lsp-lens-mode))
 
   :bind
