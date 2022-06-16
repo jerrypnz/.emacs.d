@@ -40,8 +40,8 @@
           jp-current-theme-dark-p nil)
     ;; TODO implement better per-system config
     (cond
-     ((eq window-system 'ns) (setq jp-default-font "Cascadia Code-12"
-                                   jp-variable-pitch-font "Lucida Grande-12"))
+     ((eq window-system 'ns) (setq jp-default-font "Cascadia Code-13"
+                                   jp-variable-pitch-font "Lucida Grande-13"))
      ((eq window-system 'x)  (setq jp-default-font "Cascadia Code-10"
                                    jp-variable-pitch-font "Ubuntu-10")))
 
