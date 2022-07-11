@@ -113,19 +113,10 @@
 (use-package jp-yasnippet)
 (use-package jp-treemacs)
 (use-package jp-bufler)
+(use-package jp-elisp)
 
 ;; Programming language support
-(use-package jp-clojure)
-(use-package jp-scala)
-(use-package jp-elisp)
-(use-package jp-lsp)
-(use-package jp-rust)
-(use-package jp-go)
-
-;; Other major modes
-(use-package jp-markdown)
-(use-package jp-plantuml)
-(use-package jp-other-major-modes)
+(use-package jp-prog)
 
 ;; Tools
 (use-package jp-elfeed)
