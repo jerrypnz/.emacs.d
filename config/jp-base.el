@@ -25,6 +25,10 @@
                                                    "HTTPS_PROXY")))
     (exec-path-from-shell-initialize)))
 
+(use-package envrc
+  :straight t
+  :hook (after-init . envrc-global-mode))
+
 ;; some useful global commands
 (use-package jp-commands
   :commands (xml-pretty-print rename-file-and-buffer macroexpand-point)
