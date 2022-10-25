@@ -499,12 +499,6 @@
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-enable nil))
 
-(use-package lsp-treemacs
-  :straight t
-  :after (lsp-mode)
-  :config
-  (lsp-treemacs-sync-mode 1))
-
 (use-package lsp-clojure
   :after (lsp-mode))
 
@@ -551,14 +545,14 @@
   (lsp-rust-analyzer-cargo-watch-enable t)
   (lsp-rust-analyzer-cargo-watch-command "clippy"))
 
-(use-package lsp-metals
-  :straight t
-  :after (lsp-mode)
-  :custom
-  (lsp-metals-maven-script "/usr/bin/mvn")
-  (lsp-metals-sbt-script "/usr/bin/sbt")
-  ;;(lsp-metals-bloop-version "1.4.2")
-  )
+;; (use-package lsp-metals
+;;   :straight t
+;;   :after (lsp-mode)
+;;   :custom
+;;   (lsp-metals-maven-script "/usr/bin/mvn")
+;;   (lsp-metals-sbt-script "/usr/bin/sbt")
+;;   ;;(lsp-metals-bloop-version "1.4.2")
+;;   )
 
 ;; (use-package lsp-python-ms
 ;;   :straight t
