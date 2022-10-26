@@ -470,8 +470,6 @@
 
 
 (use-package lsp-mode
-  ;; :straight (:host github :repo "emacs-lsp/lsp-mode"
-  ;;            :fork (:host github :repo "jerrypnz/lsp-mode"))
   :straight t
   :hook (((go-mode
            python-mode

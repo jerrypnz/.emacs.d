@@ -55,7 +55,7 @@
 
 ;; git-timemachine
 (use-package git-timemachine
-  :straight t
+  :straight (:host github :repo "emacsmirror/git-timemachine")
   :pretty-hydra
   (jp-git
    ("Other"
