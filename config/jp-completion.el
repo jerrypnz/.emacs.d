@@ -110,7 +110,9 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package corfu
-  :straight t
+  :straight (corfu :files (:defaults "extensions/*")
+                   :includes (corfu-popupinfo))
+  :hook (corfu-mode . corfu-popupinfo-mode)
   :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion
@@ -133,16 +135,6 @@
   ;; See also `corfu-excluded-modes'.
   :init
   (global-corfu-mode))
-
-(use-package corfu-doc
-  :straight t
-  :after (corfu)
-  :hook (corfu-mode . corfu-doc-mode)
-  :bind (:map corfu-map
-         ("M-p" . corfu-doc-scroll-down)
-         ("M-n" . corfu-doc-scroll-up)
-         ("M-d" . corfu-doc-toggle))
-  :custom (corfu-doc-delay 0))
 
 (use-package kind-icon
   :straight t
