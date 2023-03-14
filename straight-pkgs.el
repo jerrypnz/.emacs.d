@@ -78,7 +78,7 @@
  ("lsp-treemacs" . "a48763ba5d1c024426e237ce65926db849d3ae6f")
  ("lsp-ui" . "295d8984da06a745b0a36c56e28ce915bc389adb")
  ("lua-mode" . "ad639c62e38a110d8d822c4f914af3e20b40ccc4")
- ("magit" . "87e68e0a8ea7803f0ffbc412b8a10f1fd2f75581")
+ ("magit" . "f55be50f1416830df20d11565f4ed790821525ff")
  ("major-mode-hydra.el" . "84c1929a5153be169ca5c36737439d51dffde505")
  ("map" . "a0e501aede34f183a8baa5d3d41610a3ffa1728e")
  ("marginalia" . "ec2e99f8a12a818ddac2f7db8438477725a1a067")
