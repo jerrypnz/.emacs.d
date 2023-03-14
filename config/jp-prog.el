@@ -487,8 +487,11 @@
    ("M-." . lsp-find-definition))
 
   :config
+  (setq lsp-completion-provider :none)
   (setq lsp-auto-execute-action nil)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]cdk\\.out\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'"))
 
 (use-package lsp-ui
   :straight t
