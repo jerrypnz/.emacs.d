@@ -569,6 +569,22 @@
 
 
 
+;;; Copilot
+
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+         ("TAB" . jp-copilot-accept-or-indent))
+  :config
+  (defun jp-copilot-accept-or-indent ()
+    (interactive)
+    (or (call-interactively #'copilot-accept-completion)
+        (call-interactively #'indent-for-tab-command))))
+
+
 ;;; Markdown
 
 
