@@ -77,7 +77,8 @@
   (progn
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
     (global-diff-hl-mode)
-    (diff-hl-flydiff-mode)))
+    ;;(diff-hl-flydiff-mode) ;; It makes magit really slow
+    ))
 
 (provide 'jp-magit)
 ;;; jp-magit.el ends here
