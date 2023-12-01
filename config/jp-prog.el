@@ -577,7 +577,7 @@
   :ensure t
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
-         ("TAB" . jp-copilot-accept-or-indent))
+         ("C-<tab>" . jp-copilot-accept-or-indent))
   :config
   (defun jp-copilot-accept-or-indent ()
     (interactive)
