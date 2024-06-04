@@ -37,7 +37,7 @@
   (progn
     (setq jp-light-theme 'doom-earl-grey
           jp-dark-theme 'doom-spacegrey
-          jp-current-theme-dark-p nil)
+          jp-current-theme-dark-p t)
     ;; TODO implement better per-system config
     (cond
      ((eq window-system 'ns) (setq jp-default-font "Cascadia Code-13"
@@ -45,9 +45,11 @@
      ((eq window-system 'x)  (setq jp-default-font "Cascadia Code-10"
                                    jp-variable-pitch-font "Ubuntu-10")))
 
-    (if (boundp 'ns-system-appearance-change-functions)
-        (add-hook 'ns-system-appearance-change-functions #'jp-themes-ns-system-change-function)
-      (jp-themes-load))))
+    (jp-themes-load)
+
+    ;;(if (boundp 'ns-system-appearance-change-functions)
+    ;;     (add-hook 'ns-system-appearance-change-functions #'jp-themes-ns-system-change-function))
+    ))
 
 (use-package all-the-icons
   :straight t)

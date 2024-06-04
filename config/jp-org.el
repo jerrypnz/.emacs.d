@@ -71,10 +71,11 @@
      'org-babel-load-languages
      '((dot . t)
        (emacs-lisp . t)
+       (python . t)
        (plantuml . t)))
 
     (defun jp-org-confirm-babel-evaluate (lang body)
-      (not (member lang '("dot" "plantuml" "spark-shell" "amm" "elisp"))))
+      (not (member lang '("dot" "plantuml" "spark-shell" "amm" "elisp" "python"))))
 
     (setq org-confirm-babel-evaluate #'jp-org-confirm-babel-evaluate)))
 
