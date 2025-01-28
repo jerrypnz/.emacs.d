@@ -118,6 +118,9 @@
 ;; Programming language support
 (use-package jp-prog)
 
+;; LLM
+(use-package jp-llm)
+
 ;; Tools
 (use-package jp-elfeed)
 (use-package jp-org-roam)
