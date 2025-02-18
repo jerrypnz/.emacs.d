@@ -584,6 +584,17 @@
     (or (call-interactively #'copilot-accept-completion)
         (call-interactively #'indent-for-tab-command))))
 
+(use-package copilot-chat
+  :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+  :after (request org markdown-mode)
+  :config
+  (setq copilot-chat-model "claude-3.5-sonnet"))
+
+(use-package aidermacs
+  :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
+  :config
+  (setq aidermacs-backend 'comint))
+
 
 ;;; Markdown
 
