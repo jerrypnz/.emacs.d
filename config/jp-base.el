@@ -276,5 +276,7 @@
     (("d" dash-at-point "at point")
      ("e" dash-at-point-with-docset "with docset")))))
 
+(use-package vterm :straight t)
+
 (provide 'jp-base)
 ;;; jp-base.el ends here

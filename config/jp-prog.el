@@ -590,10 +590,20 @@
   :config
   (setq copilot-chat-model "claude-3.5-sonnet"))
 
+(use-package password-store
+  :straight t)
+
 (use-package aidermacs
   :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
   :config
-  (setq aidermacs-backend 'comint))
+  (setq aidermacs-backend 'vterm)
+  (setq aidermacs-show-diff-after-change t)
+  (add-hook 'aidermacs-before-run-backend-hook
+            (lambda ()
+              (setenv "OPENAI_API_KEY" (password-store-get "aider-openai-key"))
+              (setenv "ANTHROPIC_API_KEY" (password-store-get "aider-claude-key"))
+              (setenv "DEEPSEEK_API_KEY" (password-store-get "aider-deepseek-key"))
+              (setenv "GEMINI_API_KEY" (password-store-get "aider-gemini-key")))))
 
 
 ;;; Markdown
