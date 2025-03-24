@@ -113,6 +113,7 @@
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("plantuml-mode" . "ea45a13707abd2a70df183f1aec6447197fc9ccc")
  ("polymode" . "74ba75d4bcfbea959ccc9080a95ab9ef759849f2")
+ ("popper" . "49f4904480cf4ca5c6db83fcfa9e6ea8d4567d96")
  ("popup-el" . "47ce4bca22b66bd3f49e40af8a359e8cc28146de")
  ("posframe" . "12f540c9ad5da09673b2bca1132b41f94c134e82")
  ("projectile" . "55db082cdf7b849335ccf24b7ba5aa2607d6fe93")
