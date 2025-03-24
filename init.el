@@ -57,6 +57,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (setq straight-disable-native-compile nil)
+(setq native-comp-enable-subr-trampolines nil)
 
 ;; Install some basic packages
 
