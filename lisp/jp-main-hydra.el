@@ -120,7 +120,7 @@
     ("b" jp-switch-buffer "switch buffers")
     ;; ("r" vertico-repeat "vertico resume")
     ("i" consult-imenu "imenu")
-    ("d" aidermacs-transient-menu "aider")
+    ("d" aidermacs-hydra/body "aider")
     ("," treemacs "toggle treemacs")
     ("." treemacs-select-window "select treemacs")
     ("/" jp-search "search")

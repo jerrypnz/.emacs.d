@@ -58,6 +58,7 @@
 
 (setq straight-disable-native-compile nil)
 (setq native-comp-enable-subr-trampolines nil)
+(setq native-comp-async-report-warnings-errors 'silent)
 
 ;; Install some basic packages
 
