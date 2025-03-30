@@ -629,19 +629,22 @@
                    ("t" aidermacs-write-unit-test "Write Test")
                    ("T" aidermacs-fix-failing-test-under-cursor "Fix Test")
                    ("!" aidermacs-debug-exception "Debug Exception"))))
-  :config
-  (setq aidermacs-backend 'vterm)
-  (setq aidermacs-show-diff-after-change t)
-  (setq aidermacs-use-architect-mode t)
-  (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
-  (setq aidermacs-default-model "sonnet")
-  (setq aidermacs-architect-model "r1")
-  (setq aidermacs-editor-model "sonnet")
-  (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore"))
+
+  :init
   (setenv "OPENAI_API_KEY" (password-store-get "aider-openai-key"))
   (setenv "ANTHROPIC_API_KEY" (password-store-get "aider-claude-key"))
   (setenv "DEEPSEEK_API_KEY" (password-store-get "aider-deepseek-key"))
-  (setenv "GEMINI_API_KEY" (password-store-get "aider-gemini-key")))
+  (setenv "GEMINI_API_KEY" (password-store-get "aider-gemini-key"))
+
+  :config
+  (setq aidermacs-backend 'vterm)
+  (setq aidermacs-show-diff-after-change nil)
+  (setq aidermacs-use-architect-mode nil)
+  (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
+  (setq aidermacs-default-model "gemini")
+  (setq aidermacs-architect-model "r1")
+  (setq aidermacs-editor-model "sonnet")
+  (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore")))
 
 
 ;;; Markdown
