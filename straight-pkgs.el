@@ -71,7 +71,7 @@
  ("hl-todo" . "0ce21c329b686802121df45bf4ae15ae201137bf")
  ("ht.el" . "1c49aad1c820c86f7ee35bf9fff8429502f60fef")
  ("hydra" . "59a2a45a35027948476d1d7751b0f0215b1e61aa")
- ("hydra-posframe" . "ec55440615228fcc7fcb04187bb77a20e6cfd5df")
+ ("hydra-posframe" . "949a403ba8318eebed44f0e8b827f80b0d3783a8")
  ("iedit" . "27c61866b1b9b8d77629ac702e5f48e67dfe0d3b")
  ("inf-clojure" . "9aea5012bf9047781a21a3b62cea134b126f7709")
  ("inheritenv" . "b9e67cc20c069539698a9ac54d0e6cc11e616c6f")
