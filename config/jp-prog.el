@@ -641,7 +641,7 @@
   (setq aidermacs-show-diff-after-change nil)
   (setq aidermacs-use-architect-mode nil)
   (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
-  (setq aidermacs-default-model "gemini")
+  (setq aidermacs-default-model "gemini/gemini-2.5-pro-exp-03-25")
   (setq aidermacs-architect-model "r1")
   (setq aidermacs-editor-model "sonnet")
   (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore")))
