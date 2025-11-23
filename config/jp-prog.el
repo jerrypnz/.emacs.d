@@ -411,6 +411,10 @@
   :straight t
   :mode ("\\.php\\'"))
 
+(use-package actionscript-mode
+  :straight (:host github :repo "austinhaas/actionscript-mode")
+  :mode ("\\.as\\'"))
+
 (use-package yaml-mode
   :straight t
   :mode ("\\.yaml\\'" "\\.yml\\'"))
@@ -641,7 +645,7 @@
   (setq aidermacs-show-diff-after-change nil)
   (setq aidermacs-use-architect-mode nil)
   (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
-  (setq aidermacs-default-model "gemini/gemini-2.5-pro-exp-03-25")
+  (setq aidermacs-default-model "gemini/gemini-2.5-pro-preview-05-06")
   (setq aidermacs-architect-model "r1")
   (setq aidermacs-editor-model "sonnet")
   (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore")))
