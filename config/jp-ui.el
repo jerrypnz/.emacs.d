@@ -54,6 +54,9 @@
 (use-package all-the-icons
   :straight t)
 
+(use-package nerd-icons
+  :straight t)
+
 (use-package jp-icons)
 
 (use-package moody
