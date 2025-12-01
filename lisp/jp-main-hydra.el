@@ -50,7 +50,7 @@
 (autoload 'major-mode-hydras/org-agenda-mode/body "jp-org-agenda")
 (autoload 'deadgrep "deadgrep")
 
-(autoload 'aidermacs-transient-menu "aidermacs")
+(autoload 'claude-code-transient "claude-code")
 
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
@@ -120,7 +120,7 @@
     ("b" jp-switch-buffer "switch buffers")
     ;; ("r" vertico-repeat "vertico resume")
     ("i" consult-imenu "imenu")
-    ("d" aidermacs-hydra/body "aider")
+    ("c" claude-code-transient  "claude code")
     ("," treemacs "toggle treemacs")
     ("." treemacs-select-window "select treemacs")
     ("/" jp-search "search")
@@ -139,7 +139,7 @@
     ("P" jp-emacs-profiler/body "profiler..."))
 
    "Org"
-   (("c" org-capture "capture")
+   (("C" org-capture "capture")
     ("a" major-mode-hydras/org-agenda-mode/body "agenda")
     ("o" org-roam-hydra/body "roam")
     ("j" org-journal-new-entry "new journal entry")

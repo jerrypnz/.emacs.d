@@ -480,6 +480,7 @@
            rust-mode
            java-mode
            scala-mode
+           csharp-mode
            clojure-mode
            clojurescript-mode
            typescript-mode
@@ -573,7 +574,7 @@
 
 
 
-;;; Copilot
+;;; AI coding tools
 
 
 (use-package copilot
@@ -597,58 +598,64 @@
 (use-package password-store
   :straight t)
 
-(use-package aidermacs
-  :preface (progn
-             (defvar aidermacs-hydra--title)
-             (setq aidermacs-hydra--title (with-octicon "gear" "Aidermacs")))
+;; (use-package aidermacs
+;;   :preface (progn
+;;              (defvar aidermacs-hydra--title)
+;;              (setq aidermacs-hydra--title (with-octicon "gear" "Aidermacs")))
 
-  :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
-  :pretty-hydra ((:color teal :quite-key "q" :title aidermacs-hydra--title)
-                 ("Session"
-                  (("a" aidermacs-run "Start/Open Session")
-                   ("." aidermacs-run-in-current-dir "Start in Current Dir")
-                   ("l" aidermacs-clear-chat-history "Clear Chat History")
-                   ("s" aidermacs-reset "Reset Session")
-                   ("x" aidermacs-exit "Exit Session"))
-                  "Files"
-                  (("f" aidermacs-add-file "Add File")
-                   ("F" aidermacs-add-current-file "Add Current File")
-                   ("d" aidermacs-add-same-type-files-under-dir "Add From Directory (same type)")
-                   ("w" aidermacs-add-files-in-current-window "Add From Window")
-                   ("m" aidermacs-batch-add-dired-marked-files "Add From Dired (marked)")
-                   ("j" aidermacs-drop-file "Drop File")
-                   ("J" aidermacs-drop-current-file "Drop Current File")
-                   ("k" aidermacs-batch-drop-dired-marked-files "Drop From Dired (marked)")
-                   ("K" aidermacs-drop-all-files "Drop All Files"))
-                  "Code"
-                  (("c" aidermacs-direct-change "Code Change")
-                   ("e" aidermacs-question-code "Question Code")
-                   ("r" aidermacs-architect-this-code "Architect Change"))
-                  "Question"
-                  (("Q" aidermacs-question-general "General Question")
-                   ("p" aidermacs-question-this-symbol "Question This Symbol")
-                   ("g" aidermacs-accept-change "Accept Proposed Changes"))
-                  "Misc."
-                  (("i" aidermacs-implement-todo "Implement TODO")
-                   ("t" aidermacs-write-unit-test "Write Test")
-                   ("T" aidermacs-fix-failing-test-under-cursor "Fix Test")
-                   ("!" aidermacs-debug-exception "Debug Exception"))))
+;;   :straight (:host github :repo "MatthewZMD/aidermacs" :files ("*.el"))
+;;   :pretty-hydra ((:color teal :quite-key "q" :title aidermacs-hydra--title)
+;;                  ("Session"
+;;                   (("a" aidermacs-run "Start/Open Session")
+;;                    ("." aidermacs-run-in-current-dir "Start in Current Dir")
+;;                    ("l" aidermacs-clear-chat-history "Clear Chat History")
+;;                    ("s" aidermacs-reset "Reset Session")
+;;                    ("x" aidermacs-exit "Exit Session"))
+;;                   "Files"
+;;                   (("f" aidermacs-add-file "Add File")
+;;                    ("F" aidermacs-add-current-file "Add Current File")
+;;                    ("d" aidermacs-add-same-type-files-under-dir "Add From Directory (same type)")
+;;                    ("w" aidermacs-add-files-in-current-window "Add From Window")
+;;                    ("m" aidermacs-batch-add-dired-marked-files "Add From Dired (marked)")
+;;                    ("j" aidermacs-drop-file "Drop File")
+;;                    ("J" aidermacs-drop-current-file "Drop Current File")
+;;                    ("k" aidermacs-batch-drop-dired-marked-files "Drop From Dired (marked)")
+;;                    ("K" aidermacs-drop-all-files "Drop All Files"))
+;;                   "Code"
+;;                   (("c" aidermacs-direct-change "Code Change")
+;;                    ("e" aidermacs-question-code "Question Code")
+;;                    ("r" aidermacs-architect-this-code "Architect Change"))
+;;                   "Question"
+;;                   (("Q" aidermacs-question-general "General Question")
+;;                    ("p" aidermacs-question-this-symbol "Question This Symbol")
+;;                    ("g" aidermacs-accept-change "Accept Proposed Changes"))
+;;                   "Misc."
+;;                   (("i" aidermacs-implement-todo "Implement TODO")
+;;                    ("t" aidermacs-write-unit-test "Write Test")
+;;                    ("T" aidermacs-fix-failing-test-under-cursor "Fix Test")
+;;                    ("!" aidermacs-debug-exception "Debug Exception"))))
 
-  :init
-  (setenv "OPENAI_API_KEY" (password-store-get "aider-openai-key"))
-  (setenv "ANTHROPIC_API_KEY" (password-store-get "aider-claude-key"))
-  (setenv "DEEPSEEK_API_KEY" (password-store-get "aider-deepseek-key"))
-  (setenv "GEMINI_API_KEY" (password-store-get "aider-gemini-key"))
+;;   :init
+;;   (setenv "OPENAI_API_KEY" (password-store-get "aider-openai-key"))
+;;   (setenv "ANTHROPIC_API_KEY" (password-store-get "aider-claude-key"))
+;;   (setenv "DEEPSEEK_API_KEY" (password-store-get "aider-deepseek-key"))
+;;   (setenv "GEMINI_API_KEY" (password-store-get "aider-gemini-key"))
 
+;;   :config
+;;   (setq aidermacs-backend 'vterm)
+;;   (setq aidermacs-show-diff-after-change nil)
+;;   (setq aidermacs-use-architect-mode nil)
+;;   (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
+;;   (setq aidermacs-default-model "gemini/gemini-2.5-pro-preview-05-06")
+;;   (setq aidermacs-architect-model "r1")
+;;   (setq aidermacs-editor-model "sonnet")
+;;   (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore")))
+
+(use-package claude-code
+  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
+                   :files ("*.el" (:exclude "images/*")))
   :config
-  (setq aidermacs-backend 'vterm)
-  (setq aidermacs-show-diff-after-change nil)
-  (setq aidermacs-use-architect-mode nil)
-  (setq aidermacs-architect-model "deepseek/deepseek-reasoner")
-  (setq aidermacs-default-model "gemini/gemini-2.5-pro-preview-05-06")
-  (setq aidermacs-architect-model "r1")
-  (setq aidermacs-editor-model "sonnet")
-  (setq aidermacs-extra-args '("--cache-prompts" "--no-gitignore")))
+  (claude-code-mode))
 
 
 ;;; Markdown

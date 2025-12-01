@@ -21,6 +21,7 @@
                            python-mode
                            java-mode
                            scala-mode
+                           csharp-mode
                            clojure-mode
                            clojurescript-mode
                            typescript-mode)
