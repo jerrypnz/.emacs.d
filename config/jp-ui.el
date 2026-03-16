@@ -36,8 +36,8 @@
   :config
   (progn
     (setq jp-light-theme 'doom-earl-grey
-          jp-dark-theme 'doom-spacegrey
-          jp-current-theme-dark-p nil)
+          jp-dark-theme 'doom-palenight
+          jp-current-theme-dark-p t)
     ;; TODO implement better per-system config
     (cond
      ((eq window-system 'ns) (setq jp-default-font "Cascadia Code-13"
