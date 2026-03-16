@@ -50,7 +50,7 @@
 (autoload 'major-mode-hydras/org-agenda-mode/body "jp-org-agenda")
 (autoload 'deadgrep "deadgrep")
 
-(autoload 'claude-code-transient "claude-code")
+(autoload 'agent-shell "agent-shell")
 
 (defvar jp-toggles--title)
 (setq jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
@@ -120,7 +120,7 @@
     ("b" jp-switch-buffer "switch buffers")
     ;; ("r" vertico-repeat "vertico resume")
     ("i" consult-imenu "imenu")
-    ("c" claude-code-transient  "claude code")
+    ("c" agent-shell  "claude code")
     ("," treemacs "toggle treemacs")
     ("." treemacs-select-window "select treemacs")
     ("/" jp-search "search")
